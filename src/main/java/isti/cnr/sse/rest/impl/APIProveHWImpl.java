@@ -50,8 +50,8 @@ public class APIProveHWImpl {
 	public EsitoOperazioneType putListMisuratoriFiscale(DatiCorrispettiviType Corrispettivi){
 		
 		
-		
-		log.info("received");
+		String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(new Date());
+		log.info("received: "+timeStamp);
 		int x = (int)Math.random() * 10;
 		EsitoOperazioneType esito = new EsitoOperazioneType();
 		esito.setIdOperazione(String.valueOf(x));
