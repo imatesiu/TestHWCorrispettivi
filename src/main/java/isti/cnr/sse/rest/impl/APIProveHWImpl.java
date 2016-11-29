@@ -2,6 +2,7 @@ package isti.cnr.sse.rest.impl;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -73,6 +74,12 @@ public class APIProveHWImpl {
 			marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			//marshaller.marshal(annotatedCollaborativeContentAnalysis, System.out);
 			String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(new Date());
+			File theDir = new File("received");
+
+			// if the directory does not exist, create it
+			if (!theDir.exists()) {
+				theDir.mkdir();
+			}
 			
 			OutputStream os = new FileOutputStream( "received/MT"+timeStamp+"_"+num+".xml" );
 			num++;
