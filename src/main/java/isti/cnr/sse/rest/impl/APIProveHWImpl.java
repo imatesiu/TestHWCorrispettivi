@@ -38,10 +38,11 @@ public class APIProveHWImpl {
 	//@Inject 
 	//TokenPersistence em;
 
-	private static Map<String,String> map = new HashMap<String,String>();
+	private static Integer num = 0;
 
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(APIProveHWImpl.class);
 
+	
 
 
 	@Path("/")
@@ -55,7 +56,7 @@ public class APIProveHWImpl {
 		EsitoOperazioneType esito = new EsitoOperazioneType();
 		esito.setIdOperazione(String.valueOf(x));
 		esito.setVersione("1.0");
-		
+		writeTo(Corrispettivi);
 		
 		return esito;
 	}
@@ -73,7 +74,8 @@ public class APIProveHWImpl {
 			//marshaller.marshal(annotatedCollaborativeContentAnalysis, System.out);
 			String timeStamp = new SimpleDateFormat("dd-MM-yyyy_HH:mm:ss").format(new Date());
 			
-			OutputStream os = new FileOutputStream( "MT"+timeStamp+".xml" );
+			OutputStream os = new FileOutputStream( "MT"+timeStamp+"_"+num+".xml" );
+			num++;
 			marshaller.marshal( DCT, os );
 			
 		} catch (JAXBException | FileNotFoundException  e) {
