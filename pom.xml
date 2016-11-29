@@ -16,27 +16,30 @@
 			<name>Giorgio Spagnolo</name>
 		</developer>
 	</developers>
+	
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		
+
+		<tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
+
+		<java.version>1.8</java.version>
+
+		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+		<jetty-maven-plugin.version>9.4.0.M0</jetty-maven-plugin.version>
+	</properties>
+	
   <dependencies>
+ 
   <dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-json-jackson</artifactId>
 			<version>2.19</version>
 		</dependency>
-<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>eclipselink</artifactId>
-			<version>2.6.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.191</version>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2-mvstore</artifactId>
-			<version>1.4.191</version>
-		</dependency>
+
 
 		<dependency>
 			<groupId>org.glassfish.jersey.containers.glassfish</groupId>
@@ -54,27 +57,7 @@
 			<artifactId>javax.transaction-api</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<dependency>
-			<groupId>org.jboss.weld.servlet</groupId>
-			<artifactId>weld-servlet</artifactId>
-			<version>2.3.3.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.weld</groupId>
-			<artifactId>weld-core</artifactId>
-			<version>2.3.3.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.weld.se</groupId>
-			<artifactId>weld-se-core</artifactId>
-			<version>2.3.3.Final</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jboss</groupId>
-			<artifactId>jandex</artifactId>
-			<version>2.0.2.Final</version>
-		</dependency>
+	
 
 
 		<dependency>
@@ -110,11 +93,7 @@
 			<version>1.2.17</version>
 		</dependency>
 
-<dependency>
-    <groupId>com.google.code.gson</groupId>
-    <artifactId>gson</artifactId>
-    <version>2.6.2</version>
-</dependency>
+
 
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
@@ -127,6 +106,12 @@
 			<artifactId>jersey-server</artifactId>
 			<version>2.19</version>
 		</dependency>
+		<dependency>
+   <groupId>javax.servlet</groupId>
+   <artifactId>servlet-api</artifactId>
+   <version>2.5</version>
+   <scope>provided</scope>
+</dependency>
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-servlet</artifactId>
@@ -146,10 +131,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 			<plugin>
