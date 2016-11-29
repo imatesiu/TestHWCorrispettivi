@@ -6,6 +6,8 @@
 	targetNamespace="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0"
 	version="1.0">
 
+	 <xs:import namespace="http://www.w3.org/2000/09/xmldsig#"
+             schemaLocation="xmldsig-core-schema.xsd"/>
 
 	<!-- =================================================================== -->
 	<!-- ELEMENTO PER TRASMISSIONE DATI CORRISPETTIVI						 -->
@@ -30,7 +32,7 @@
 			</xs:choice>
 			<xs:element name="InterventoTecnico" type="InterventoTecnicoType" minOccurs="0" maxOccurs="50" />
 			<xs:element name="Segnalazione" type="SegnalazioneType" minOccurs="0" maxOccurs="50" />
-			
+			<xs:element ref="ds:Signature" />
 		</xs:sequence>
 		<xs:attribute name="versione" type="FormatoTrasmissioneType" use="required" />
 	</xs:complexType>

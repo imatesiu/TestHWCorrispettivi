@@ -6,7 +6,8 @@
 	targetNamespace="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0"
 	version="1.0">
 
-	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="./xmldsig-core-schema.xsd" />
+	 <xs:import namespace="http://www.w3.org/2000/09/xmldsig#"
+             schemaLocation="xmldsig-core-schema.xsd"/>
 
 	<!-- =================================================================== -->
 	<!-- ELEMENTI PER MESSAGGI DEI DISPOSITIVI								 -->
@@ -49,7 +50,7 @@
 			<xs:element name="Csr" type="xs:base64Binary"/>
 			<xs:element name="Dispositivo" type="CensimentoDispositivoType" />
 			<xs:element name="TecnicoVerificatore" type="TecnicoVerificatoreType" />
-			
+			<xs:element ref="ds:Signature" />
 		</xs:sequence>
 		<xs:attribute name="versione" type="VersioneType" use="required" fixed="1.0" />
 	</xs:complexType>
@@ -61,7 +62,7 @@
 				<xs:element name="Certificato" type="xs:base64Binary" />
 				<xs:element name="Errori" type="ErroriType" />
 			</xs:choice>
-			
+			<xs:element ref="ds:Signature" />
 		</xs:sequence>
 		<xs:attribute name="versione" type="VersioneType" use="required" fixed="1.0" />
 	</xs:complexType>
@@ -72,7 +73,7 @@
 			<xs:element name="TecnicoVerificatore" type="TecnicoVerificatoreType" />
 			<xs:element name="GeoLocalizzazione" type="GeoLocType" minOccurs="0" />
 			<xs:element name="InformazioniAddizionali" type="InformazioniAddizionaliType" minOccurs="0" />
-			
+			<xs:element ref="ds:Signature" />
 		</xs:sequence>
 		<xs:attribute name="versione" type="VersioneType" use="required" fixed="1.0" />
 	</xs:complexType>
@@ -81,7 +82,7 @@
 		<xs:sequence>
 			<xs:element name="IdOperazione" type="xs:string" />
 			<xs:element name="Errori" type="ErroriType" minOccurs="0" />
-			
+			<xs:element ref="ds:Signature" />
 		</xs:sequence>
 		<xs:attribute name="versione" type="VersioneType" use="required" fixed="1.0" />
 	</xs:complexType>
@@ -91,7 +92,7 @@
 			<xs:element name="Evento" type="xs:string" />
 			<xs:element name="DataOra" type="xs:dateTime" />
 			<xs:element name="Dettaglio" type="DettaglioEventoDispositivoType" />
-			
+			<xs:element ref="ds:Signature" />
 		</xs:sequence>
 		<xs:attribute name="versione" type="VersioneType" use="required" fixed="1.0" />
 	</xs:complexType>
