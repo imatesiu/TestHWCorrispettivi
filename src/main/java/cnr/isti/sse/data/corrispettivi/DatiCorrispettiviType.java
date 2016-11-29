@@ -10,10 +10,12 @@ package cnr.isti.sse.data.corrispettivi;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -57,6 +59,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "interventoTecnico",
     "segnalazione"
 })
+@XmlRootElement(name = "DatiCorrispettivi")
 public class DatiCorrispettiviType {
 
     @XmlElement(name = "Trasmissione", required = true)
