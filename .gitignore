@@ -63,3 +63,5 @@ $RECYCLE.BIN/
 *.lnk
 target
 .settings
+received
+logs

@@ -72,16 +72,16 @@ public class APIProveHWImpl {
 			marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_ENCODING, "UTF-8"); //NOI18N
 			marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			//marshaller.marshal(annotatedCollaborativeContentAnalysis, System.out);
-			String timeStamp = new SimpleDateFormat("dd-MM-yyyy_HH:mm:ss").format(new Date());
+			String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(new Date());
 			
-			OutputStream os = new FileOutputStream( "MT"+timeStamp+"_"+num+".xml" );
+			OutputStream os = new FileOutputStream( "received/MT"+timeStamp+"_"+num+".xml" );
 			num++;
 			marshaller.marshal( DCT, os );
 			
 		} catch (JAXBException | FileNotFoundException  e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			assertTrue(false);
+			
 		}
 	}
 	
