@@ -6,6 +6,7 @@ import java.io.InputStream;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBContext;
@@ -23,6 +24,7 @@ import org.glassfish.jersey.test.spi.TestContainerFactory;
 import org.junit.Test;
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
+import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
 
 public class APIProveHWImplTest extends JerseyTest{
 
@@ -62,7 +64,10 @@ public class APIProveHWImplTest extends JerseyTest{
 		Entity<DatiCorrispettiviType> entity = Entity.entity(collaborativeContentInput,MediaType.APPLICATION_XML);
 		Response response =  target("/dispositivi/corrispettivi").request(MediaType.APPLICATION_XML).post(entity);
 
-		String id = response.readEntity(String.class);
+		//String id = response.readEntity(String.class);
+		
+		EsitoOperazioneType res =	response.readEntity(new GenericType<EsitoOperazioneType>() {});
+
 
 		assertNotNull(response);
 		
