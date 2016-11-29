@@ -39,7 +39,7 @@ public class APIProveHWImpl {
 	//@Inject 
 	//TokenPersistence em;
 
-	private static Integer num = 0;
+	private static Integer num = 1;
 
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(APIProveHWImpl.class);
 
