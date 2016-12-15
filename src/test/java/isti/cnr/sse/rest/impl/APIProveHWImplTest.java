@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.glassfish.jersey.server.ResourceConfig;
@@ -69,6 +70,14 @@ public class APIProveHWImplTest extends JerseyTest{
 		EsitoOperazioneType res =	response.readEntity(new GenericType<EsitoOperazioneType>() {});
 
 
+		JAXBContext jaxbCtx = javax.xml.bind.JAXBContext.newInstance(EsitoOperazioneType.class);
+
+		Marshaller marshaller = jaxbCtx.createMarshaller();
+		marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_ENCODING, "UTF-8"); //NOI18N
+		marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		
+		marshaller.marshal( res, System.out );
+		
 		assertNotNull(response);
 		
 		

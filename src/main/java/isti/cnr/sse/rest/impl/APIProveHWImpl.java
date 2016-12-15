@@ -2,23 +2,20 @@ package isti.cnr.sse.rest.impl;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 
 
-
-
-
-//import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
+
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -62,6 +59,23 @@ public class APIProveHWImpl {
 		return esito;
 	}
 	
+/*	@Path("/")
+	@POST
+	public String putListMisuratoriFiscale(String Corrispettivi){
+		
+		
+		String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(new Date());
+		log.info("received: "+timeStamp);
+		int x = (int)Math.random() * 10;
+		EsitoOperazioneType esito = new EsitoOperazioneType();
+		esito.setIdOperazione(String.valueOf(x));
+		esito.setVersione("1.0");
+		writeTo(Corrispettivi);
+		//
+		return "<ns2:EsitoOperazione xmlns:ns2=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\" versione=\"1.0\"><IdOperazione>0</IdOperazione></ns2:EsitoOperazione>"; 
+		//"<EsitoOperazione versione=\"1.0\"><IdOperazione>0</IdOperazione></EsitoOperazione>";
+	}
+	*/
 	
 	
 	private void writeTo(DatiCorrispettiviType DCT){
@@ -86,6 +100,33 @@ public class APIProveHWImpl {
 			marshaller.marshal( DCT, os );
 			
 		} catch (JAXBException | FileNotFoundException  e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+	}
+	
+	private void writeTo(String DCT){
+		
+		try {
+			
+
+			String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(new Date());
+			File theDir = new File("received");
+
+			// if the directory does not exist, create it
+			if (!theDir.exists()) {
+				theDir.mkdir();
+			}
+			
+			String FILENAME = "received/MT"+timeStamp+"_"+num+".xml";
+			BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME));
+			num++;
+			
+			bw.write(DCT);
+
+			
+		} catch (  IOException  e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
