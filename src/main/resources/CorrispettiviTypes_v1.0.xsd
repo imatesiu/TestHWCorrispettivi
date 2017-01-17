@@ -2,12 +2,11 @@
 <xs:schema
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-	xmlns="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0"
-	targetNamespace="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0"
+	xmlns="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0"
+	targetNamespace="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0"
 	version="1.0">
 
-	 <xs:import namespace="http://www.w3.org/2000/09/xmldsig#"
-             schemaLocation="xmldsig-core-schema.xsd"/>
+	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="./xmldsig-core-schema.xsd" />
 
 	<!-- =================================================================== -->
 	<!-- ELEMENTO PER TRASMISSIONE DATI CORRISPETTIVI						 -->
@@ -23,15 +22,15 @@
 	<!-- =================================================================== -->
 	<xs:complexType name="DatiCorrispettiviType">
 		<xs:sequence>
-			<xs:element name="Trasmissione" type="DatiTrasmissioneType" />
-			<xs:element name="PeriodoInattivo" type="PeriodoInattivoType" minOccurs="0" />
-			<xs:element name="DataOraRilevazione" type="xs:dateTime" />
+			<xs:element name="Trasmissione"       type="DatiTrasmissioneType"              />
+			<xs:element name="PeriodoInattivo"    type="PeriodoInattivoType" minOccurs="0" />
+			<xs:element name="DataOraRilevazione" type="xs:dateTime"                       />
 			<xs:choice>
-				<xs:element name="DatiRT" type="ElencoCorrispettiviType" />	
-				<xs:element name="DatiDA" type="DatiDistributoriAutomaticiType" />
+				<xs:element name="DatiRT"         type="ElencoCorrispettiviType"        />	
+				<xs:element name="DatiDA"         type="DatiDistributoriAutomaticiType" />
 			</xs:choice>
 			<xs:element name="InterventoTecnico" type="InterventoTecnicoType" minOccurs="0" maxOccurs="50" />
-			<xs:element name="Segnalazione" type="SegnalazioneType" minOccurs="0" maxOccurs="50" />
+			<xs:element name="Segnalazione"      type="SegnalazioneType"      minOccurs="0" maxOccurs="50" />
 			<xs:element ref="ds:Signature" />
 		</xs:sequence>
 		<xs:attribute name="versione" type="FormatoTrasmissioneType" use="required" />
@@ -42,17 +41,17 @@
 			<xs:documentation>Blocco con informazioni su tipo di trasmissione e soggetto trasmittente</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Progressivo" type="Integer15Type" />
-			<xs:element name="Formato" type="FormatoTrasmissioneType" />
-			<xs:element name="Dispositivo" type="DispositivoType" minOccurs="0" />
+			<xs:element name="Progressivo" type="Integer15Type"                         />
+			<xs:element name="Formato"     type="FormatoTrasmissioneType"               />
+			<xs:element name="Dispositivo" type="DispositivoType"         minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 	
 	<xs:complexType name="DispositivoType">
 		<xs:sequence>
-			<xs:element name="Tipo" type="TipoDispositivoType" />
-			<xs:element name="IdDispositivo" type="IdDispositivoType" />
-			<xs:element name="GeoLocalizzazione" type="GeoLocType" minOccurs="0" />
+			<xs:element name="Tipo"              type="TipoDispositivoType"              />
+			<xs:element name="IdDispositivo"     type="IdDispositivoType"                />
+			<xs:element name="GeoLocalizzazione" type="GeoLocType"         minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 	
@@ -75,7 +74,7 @@
 	
 	<xs:complexType name="GeoLocType">
 		<xs:sequence>
-			<xs:element name="Lat" type="GeoType" />
+			<xs:element name="Lat"  type="GeoType" />
 			<xs:element name="Long" type="GeoType" />
 		</xs:sequence>
 	</xs:complexType>
@@ -92,10 +91,16 @@
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Dal" type="xs:dateTime" />
-			<xs:element name="Al" type="xs:dateTime" />
+			<xs:element name="Al"  type="xs:dateTime" />
 		</xs:sequence>
 	</xs:complexType>
 
+	
+	
+	
+	
+	
+	
 	<xs:complexType name="ElencoCorrispettiviType">
 		<xs:sequence>
 			<xs:element name="Riepilogo" type="DatiRegistratoriTelematiciType" maxOccurs="20" />
@@ -104,16 +109,41 @@
 
 	<xs:complexType name="DatiRegistratoriTelematiciType">
 		<xs:sequence>
-			<xs:element name="AliquotaIVA" type="RateType" />
-			<xs:element name="Natura" type="NaturaType" minOccurs="0" />
-			<xs:element name="Ammontare" type="Amount2DecimalType" />
-			<xs:element name="Imposta" type="Amount2DecimalType" />
-			<xs:element name="RifNormativo" type="String100LatinType" minOccurs="0" />
-			<xs:element name="VentilazioneIVA" type="VentilazioneIVAType" minOccurs="0" />
-			<xs:element name="TotaleAmmontareResi" type="Amount2DecimalType" minOccurs="0" />
+			
+			
+			
+			
+			
+			<xs:choice>
+				<xs:element name="IVA"                type="IVAType"             />
+				<xs:element name="Natura"             type="NaturaType"          />
+				<xs:element name="VentilazioneIVA"    type="VentilazioneIVAType" />
+			</xs:choice>
+			
+			
+			
+			
+			<xs:element name="Ammontare"              type="Amount2DecimalType"               />
+			<xs:element name="RifNormativo"           type="String100LatinType" minOccurs="0" />
+			<xs:element name="TotaleAmmontareResi"    type="Amount2DecimalType" minOccurs="0" />
 			<xs:element name="TotaleAmmontareAnnulli" type="Amount2DecimalType" minOccurs="0" />
 		</xs:sequence>
+	</xs:complexType>	
+	
+	
+	
+	
+	
+	<xs:complexType name="IVAType">
+		<xs:sequence>
+			<xs:element name="AliquotaIVA" type="RateType"           />
+			<xs:element name="Imposta"     type="Amount2DecimalType" />
+		</xs:sequence>
 	</xs:complexType>
+	
+	
+	
+	
 
 	<xs:simpleType name="NaturaType">
 		<xs:restriction base="xs:string">
@@ -177,39 +207,39 @@
 
 	<xs:complexType name="DatiDistributoriAutomaticiType">
 		<xs:choice>
-			<xs:element name="Periodo" type="PeriodoType" />
+			<xs:element name="Periodo"  type="PeriodoType"  />
 			<xs:element name="Cumulato" type="CumulatoType" />
 		</xs:choice>
 	</xs:complexType>
 
 	<xs:complexType name="PeriodoType">
 		<xs:sequence>
-			<xs:element name="Venduto" type="Amount2DecimalType" />
-			<xs:element name="VendutoContante" type="Amount2DecimalType" />
-			<xs:element name="VendutoNoContante" type="Amount2DecimalType" />
-			<xs:element name="Incassato" type="Amount2DecimalType" />
-			<xs:element name="IncassatoRicarica" type="Amount2DecimalType" />
-			<xs:element name="IncassatoVendita" type="Amount2DecimalType" />
-			<xs:element name="TotaleResoTubiResto" type="Amount2DecimalType" />
-			<xs:element name="TotaleCaricatoTubiResto" type="Amount2DecimalType" />
-			<xs:element name="TotaleResoManualeTubiResto" type="Amount2DecimalType" />
+			<xs:element name="Venduto"                        type="Amount2DecimalType" />
+			<xs:element name="VendutoContante"                type="Amount2DecimalType" />
+			<xs:element name="VendutoNoContante"              type="Amount2DecimalType" />
+			<xs:element name="Incassato"                      type="Amount2DecimalType" />
+			<xs:element name="IncassatoRicarica"              type="Amount2DecimalType" />
+			<xs:element name="IncassatoVendita"               type="Amount2DecimalType" />
+			<xs:element name="TotaleResoTubiResto"            type="Amount2DecimalType" />
+			<xs:element name="TotaleCaricatoTubiResto"        type="Amount2DecimalType" />
+			<xs:element name="TotaleResoManualeTubiResto"     type="Amount2DecimalType" />
 			<xs:element name="TotaleCaricatoManualeTubiResto" type="Amount2DecimalType" />
-			<xs:element name="DataOraPrelievoPrec" type="xs:dateTime" />
-			<xs:element name="ProgressivoPrelievo" type="Integer15Type" />
+			<xs:element name="DataOraPrelievoPrec"            type="xs:dateTime"        />
+			<xs:element name="ProgressivoPrelievo"            type="Integer15Type"      />
 		</xs:sequence>
 	</xs:complexType>
 	
 	<xs:complexType name="CumulatoType">
 		<xs:sequence>
-			<xs:element name="Venduto" type="Amount2DecimalType" />
-			<xs:element name="VendutoContante" type="Amount2DecimalType" />
-			<xs:element name="VendutoNoContante" type="Amount2DecimalType" />
-			<xs:element name="Incassato" type="Amount2DecimalType" />
-			<xs:element name="IncassatoRicarica" type="Amount2DecimalType" />
-			<xs:element name="IncassatoVendita" type="Amount2DecimalType" />
-			<xs:element name="TotaleResoTubiResto" type="Amount2DecimalType" />
-			<xs:element name="TotaleCaricatoTubiResto" type="Amount2DecimalType" />
-			<xs:element name="TotaleResoManualeTubiResto" type="Amount2DecimalType" />
+			<xs:element name="Venduto"                        type="Amount2DecimalType" />
+			<xs:element name="VendutoContante"                type="Amount2DecimalType" />
+			<xs:element name="VendutoNoContante"              type="Amount2DecimalType" />
+			<xs:element name="Incassato"                      type="Amount2DecimalType" />
+			<xs:element name="IncassatoRicarica"              type="Amount2DecimalType" />
+			<xs:element name="IncassatoVendita"               type="Amount2DecimalType" />
+			<xs:element name="TotaleResoTubiResto"            type="Amount2DecimalType" />
+			<xs:element name="TotaleCaricatoTubiResto"        type="Amount2DecimalType" />
+			<xs:element name="TotaleResoManualeTubiResto"     type="Amount2DecimalType" />
 			<xs:element name="TotaleCaricatoManualeTubiResto" type="Amount2DecimalType" />
 		</xs:sequence>
 	</xs:complexType>
@@ -219,10 +249,11 @@
 			<xs:documentation>Blocco da valorizzare se si devono riportare informazioni relative ad intervento tecnico effettuato sul dispositivo</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="CFTecnico" type="CodiceFiscaleType" />
-			<xs:element name="DataOra" type="xs:dateTime" />
-			<xs:element name="Codice" type="xs:normalizedString" />
-			<xs:element name="Note" type="String1000LatinType" minOccurs="0" />
+			<xs:element name="CFTecnico"        type="CodiceFiscaleType"                 />
+			<xs:element name="IdIVALaboratorio" type="IdFiscaleType"                     />
+			<xs:element name="DataOra"          type="xs:dateTime"                       />
+			<xs:element name="Codice"           type="xs:normalizedString"               />
+			<xs:element name="Note"             type="String1000LatinType" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 	
@@ -232,15 +263,35 @@
 		</xs:restriction>
 	</xs:simpleType>
 	
+	<xs:complexType name="IdFiscaleType">
+		<xs:sequence>
+			<xs:element name="IdPaese"  type="NazioneType"  />
+			<xs:element name="IdCodice" type="IdCodiceType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType name="NazioneType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z]{2}" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="IdCodiceType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="28" />
+		</xs:restriction>
+	</xs:simpleType>
+	
 	<xs:complexType name="SegnalazioneType">
 		<xs:annotation>
 			<xs:documentation>Blocco da valorizzare in caso di segnalazioni al Sistema AE</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Matricola" type="xs:normalizedString" />
-			<xs:element name="DataOra" type="xs:dateTime" />
-			<xs:element name="Codice" type="xs:normalizedString" />
-			<xs:element name="Note" type="String1000LatinType" minOccurs="0" />
+			<xs:element name="Matricola" type="xs:normalizedString"               />
+			<xs:element name="DataOra"   type="xs:dateTime"                       />
+			<xs:element name="Codice"    type="xs:normalizedString"               />
+			<xs:element name="Note"      type="String1000LatinType" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 	
