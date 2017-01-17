@@ -1,8 +1,8 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2016.11.29 alle 12:44:43 AM CET 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
+// Generato il: 2017.01.17 alle 08:19:27 PM CET 
 //
 
 
@@ -25,16 +25,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Venduto" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType"/>
- *         &lt;element name="VendutoContante" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType"/>
- *         &lt;element name="VendutoNoContante" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType"/>
- *         &lt;element name="Incassato" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType"/>
- *         &lt;element name="IncassatoRicarica" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType"/>
- *         &lt;element name="IncassatoVendita" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType"/>
- *         &lt;element name="TotaleResoTubiResto" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType"/>
- *         &lt;element name="TotaleCaricatoTubiResto" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType"/>
- *         &lt;element name="TotaleResoManualeTubiResto" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType"/>
- *         &lt;element name="TotaleCaricatoManualeTubiResto" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType"/>
+ *         &lt;element name="Venduto" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType"/>
+ *         &lt;element name="VendutoContante" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType"/>
+ *         &lt;element name="VendutoNoContante" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType"/>
+ *         &lt;element name="Incassato" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType"/>
+ *         &lt;element name="IncassatoRicarica" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType"/>
+ *         &lt;element name="IncassatoVendita" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType"/>
+ *         &lt;element name="TotaleResoTubiResto" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType"/>
+ *         &lt;element name="TotaleCaricatoTubiResto" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType"/>
+ *         &lt;element name="TotaleResoManualeTubiResto" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType"/>
+ *         &lt;element name="TotaleCaricatoManualeTubiResto" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -80,7 +80,7 @@ public class CumulatoType {
     protected BigDecimal totaleCaricatoManualeTubiResto;
 
     /**
-     * Recupera il valore della proprietà venduto.
+     * Recupera il valore della proprietï¿½ venduto.
      * 
      * @return
      *     possible object is
@@ -92,7 +92,7 @@ public class CumulatoType {
     }
 
     /**
-     * Imposta il valore della proprietà venduto.
+     * Imposta il valore della proprietï¿½ venduto.
      * 
      * @param value
      *     allowed object is
@@ -104,7 +104,7 @@ public class CumulatoType {
     }
 
     /**
-     * Recupera il valore della proprietà vendutoContante.
+     * Recupera il valore della proprietï¿½ vendutoContante.
      * 
      * @return
      *     possible object is
@@ -116,7 +116,7 @@ public class CumulatoType {
     }
 
     /**
-     * Imposta il valore della proprietà vendutoContante.
+     * Imposta il valore della proprietï¿½ vendutoContante.
      * 
      * @param value
      *     allowed object is
@@ -128,7 +128,7 @@ public class CumulatoType {
     }
 
     /**
-     * Recupera il valore della proprietà vendutoNoContante.
+     * Recupera il valore della proprietï¿½ vendutoNoContante.
      * 
      * @return
      *     possible object is
@@ -140,7 +140,7 @@ public class CumulatoType {
     }
 
     /**
-     * Imposta il valore della proprietà vendutoNoContante.
+     * Imposta il valore della proprietï¿½ vendutoNoContante.
      * 
      * @param value
      *     allowed object is
@@ -152,7 +152,7 @@ public class CumulatoType {
     }
 
     /**
-     * Recupera il valore della proprietà incassato.
+     * Recupera il valore della proprietï¿½ incassato.
      * 
      * @return
      *     possible object is
@@ -164,7 +164,7 @@ public class CumulatoType {
     }
 
     /**
-     * Imposta il valore della proprietà incassato.
+     * Imposta il valore della proprietï¿½ incassato.
      * 
      * @param value
      *     allowed object is
@@ -176,7 +176,7 @@ public class CumulatoType {
     }
 
     /**
-     * Recupera il valore della proprietà incassatoRicarica.
+     * Recupera il valore della proprietï¿½ incassatoRicarica.
      * 
      * @return
      *     possible object is
@@ -188,7 +188,7 @@ public class CumulatoType {
     }
 
     /**
-     * Imposta il valore della proprietà incassatoRicarica.
+     * Imposta il valore della proprietï¿½ incassatoRicarica.
      * 
      * @param value
      *     allowed object is
@@ -200,7 +200,7 @@ public class CumulatoType {
     }
 
     /**
-     * Recupera il valore della proprietà incassatoVendita.
+     * Recupera il valore della proprietï¿½ incassatoVendita.
      * 
      * @return
      *     possible object is
@@ -212,7 +212,7 @@ public class CumulatoType {
     }
 
     /**
-     * Imposta il valore della proprietà incassatoVendita.
+     * Imposta il valore della proprietï¿½ incassatoVendita.
      * 
      * @param value
      *     allowed object is
@@ -224,7 +224,7 @@ public class CumulatoType {
     }
 
     /**
-     * Recupera il valore della proprietà totaleResoTubiResto.
+     * Recupera il valore della proprietï¿½ totaleResoTubiResto.
      * 
      * @return
      *     possible object is
@@ -236,7 +236,7 @@ public class CumulatoType {
     }
 
     /**
-     * Imposta il valore della proprietà totaleResoTubiResto.
+     * Imposta il valore della proprietï¿½ totaleResoTubiResto.
      * 
      * @param value
      *     allowed object is
@@ -248,7 +248,7 @@ public class CumulatoType {
     }
 
     /**
-     * Recupera il valore della proprietà totaleCaricatoTubiResto.
+     * Recupera il valore della proprietï¿½ totaleCaricatoTubiResto.
      * 
      * @return
      *     possible object is
@@ -260,7 +260,7 @@ public class CumulatoType {
     }
 
     /**
-     * Imposta il valore della proprietà totaleCaricatoTubiResto.
+     * Imposta il valore della proprietï¿½ totaleCaricatoTubiResto.
      * 
      * @param value
      *     allowed object is
@@ -272,7 +272,7 @@ public class CumulatoType {
     }
 
     /**
-     * Recupera il valore della proprietà totaleResoManualeTubiResto.
+     * Recupera il valore della proprietï¿½ totaleResoManualeTubiResto.
      * 
      * @return
      *     possible object is
@@ -284,7 +284,7 @@ public class CumulatoType {
     }
 
     /**
-     * Imposta il valore della proprietà totaleResoManualeTubiResto.
+     * Imposta il valore della proprietï¿½ totaleResoManualeTubiResto.
      * 
      * @param value
      *     allowed object is
@@ -296,7 +296,7 @@ public class CumulatoType {
     }
 
     /**
-     * Recupera il valore della proprietà totaleCaricatoManualeTubiResto.
+     * Recupera il valore della proprietï¿½ totaleCaricatoManualeTubiResto.
      * 
      * @return
      *     possible object is
@@ -308,7 +308,7 @@ public class CumulatoType {
     }
 
     /**
-     * Imposta il valore della proprietà totaleCaricatoManualeTubiResto.
+     * Imposta il valore della proprietï¿½ totaleCaricatoManualeTubiResto.
      * 
      * @param value
      *     allowed object is

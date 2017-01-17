@@ -1,8 +1,8 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2016.11.29 alle 12:44:43 AM CET 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
+// Generato il: 2017.01.17 alle 08:19:27 PM CET 
 //
 
 
@@ -17,7 +17,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the cnr.isti.sse.data.corrispettivi package. 
+ * generated in the datanew package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -31,10 +31,10 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _DatiCorrispettivi_QNAME = new QName("http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0", "DatiCorrispettivi");
+    private final static QName _DatiCorrispettivi_QNAME = new QName("http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0", "DatiCorrispettivi");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cnr.isti.sse.data.corrispettivi
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: datanew
      * 
      */
     public ObjectFactory() {
@@ -65,14 +65,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DispositivoType }
-     * 
-     */
-    public DispositivoType createDispositivoType() {
-        return new DispositivoType();
-    }
-
-    /**
      * Create an instance of {@link SegnalazioneType }
      * 
      */
@@ -81,35 +73,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DatiDistributoriAutomaticiType }
-     * 
-     */
-    public DatiDistributoriAutomaticiType createDatiDistributoriAutomaticiType() {
-        return new DatiDistributoriAutomaticiType();
-    }
-
-    /**
      * Create an instance of {@link PeriodoType }
      * 
      */
     public PeriodoType createPeriodoType() {
         return new PeriodoType();
-    }
-
-    /**
-     * Create an instance of {@link GeoLocType }
-     * 
-     */
-    public GeoLocType createGeoLocType() {
-        return new GeoLocType();
-    }
-
-    /**
-     * Create an instance of {@link InterventoTecnicoType }
-     * 
-     */
-    public InterventoTecnicoType createInterventoTecnicoType() {
-        return new InterventoTecnicoType();
     }
 
     /**
@@ -129,6 +97,54 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DispositivoType }
+     * 
+     */
+    public DispositivoType createDispositivoType() {
+        return new DispositivoType();
+    }
+
+    /**
+     * Create an instance of {@link DatiDistributoriAutomaticiType }
+     * 
+     */
+    public DatiDistributoriAutomaticiType createDatiDistributoriAutomaticiType() {
+        return new DatiDistributoriAutomaticiType();
+    }
+
+    /**
+     * Create an instance of {@link IVAType }
+     * 
+     */
+    public IVAType createIVAType() {
+        return new IVAType();
+    }
+
+    /**
+     * Create an instance of {@link GeoLocType }
+     * 
+     */
+    public GeoLocType createGeoLocType() {
+        return new GeoLocType();
+    }
+
+    /**
+     * Create an instance of {@link InterventoTecnicoType }
+     * 
+     */
+    public InterventoTecnicoType createInterventoTecnicoType() {
+        return new InterventoTecnicoType();
+    }
+
+    /**
+     * Create an instance of {@link IdFiscaleType }
+     * 
+     */
+    public IdFiscaleType createIdFiscaleType() {
+        return new IdFiscaleType();
+    }
+
+    /**
      * Create an instance of {@link DatiRegistratoriTelematiciType }
      * 
      */
@@ -140,7 +156,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link DatiCorrispettiviType }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0", name = "DatiCorrispettivi")
+    @XmlElementDecl(namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0", name = "DatiCorrispettivi")
     public JAXBElement<DatiCorrispettiviType> createDatiCorrispettivi(DatiCorrispettiviType value) {
         return new JAXBElement<DatiCorrispettiviType>(_DatiCorrispettivi_QNAME, DatiCorrispettiviType.class, null, value);
     }

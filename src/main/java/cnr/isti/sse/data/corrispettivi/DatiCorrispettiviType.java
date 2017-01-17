@@ -1,8 +1,8 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2016.11.29 alle 12:44:43 AM CET 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
+// Generato il: 2017.01.17 alle 08:19:27 PM CET 
 //
 
 
@@ -10,12 +10,10 @@ package cnr.isti.sse.data.corrispettivi;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -31,17 +29,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Trasmissione" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}DatiTrasmissioneType"/>
- *         &lt;element name="PeriodoInattivo" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}PeriodoInattivoType" minOccurs="0"/>
+ *         &lt;element name="Trasmissione" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}DatiTrasmissioneType"/>
+ *         &lt;element name="PeriodoInattivo" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}PeriodoInattivoType" minOccurs="0"/>
  *         &lt;element name="DataOraRilevazione" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *         &lt;choice>
- *           &lt;element name="DatiRT" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}ElencoCorrispettiviType"/>
- *           &lt;element name="DatiDA" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}DatiDistributoriAutomaticiType"/>
+ *           &lt;element name="DatiRT" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}ElencoCorrispettiviType"/>
+ *           &lt;element name="DatiDA" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}DatiDistributoriAutomaticiType"/>
  *         &lt;/choice>
- *         &lt;element name="InterventoTecnico" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}InterventoTecnicoType" maxOccurs="50" minOccurs="0"/>
- *         &lt;element name="Segnalazione" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}SegnalazioneType" maxOccurs="50" minOccurs="0"/>
+ *         &lt;element name="InterventoTecnico" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}InterventoTecnicoType" maxOccurs="50" minOccurs="0"/>
+ *         &lt;element name="Segnalazione" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}SegnalazioneType" maxOccurs="50" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="versione" use="required" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}FormatoTrasmissioneType" />
+ *       &lt;attribute name="versione" use="required" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}FormatoTrasmissioneType" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -59,7 +57,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "interventoTecnico",
     "segnalazione"
 })
-@XmlRootElement(name = "DatiCorrispettivi")
 public class DatiCorrispettiviType {
 
     @XmlElement(name = "Trasmissione", required = true)
@@ -81,7 +78,7 @@ public class DatiCorrispettiviType {
     protected FormatoTrasmissioneType versione;
 
     /**
-     * Recupera il valore della proprietà trasmissione.
+     * Recupera il valore della proprietï¿½ trasmissione.
      * 
      * @return
      *     possible object is
@@ -93,7 +90,7 @@ public class DatiCorrispettiviType {
     }
 
     /**
-     * Imposta il valore della proprietà trasmissione.
+     * Imposta il valore della proprietï¿½ trasmissione.
      * 
      * @param value
      *     allowed object is
@@ -105,7 +102,7 @@ public class DatiCorrispettiviType {
     }
 
     /**
-     * Recupera il valore della proprietà periodoInattivo.
+     * Recupera il valore della proprietï¿½ periodoInattivo.
      * 
      * @return
      *     possible object is
@@ -117,7 +114,7 @@ public class DatiCorrispettiviType {
     }
 
     /**
-     * Imposta il valore della proprietà periodoInattivo.
+     * Imposta il valore della proprietï¿½ periodoInattivo.
      * 
      * @param value
      *     allowed object is
@@ -129,7 +126,7 @@ public class DatiCorrispettiviType {
     }
 
     /**
-     * Recupera il valore della proprietà dataOraRilevazione.
+     * Recupera il valore della proprietï¿½ dataOraRilevazione.
      * 
      * @return
      *     possible object is
@@ -141,7 +138,7 @@ public class DatiCorrispettiviType {
     }
 
     /**
-     * Imposta il valore della proprietà dataOraRilevazione.
+     * Imposta il valore della proprietï¿½ dataOraRilevazione.
      * 
      * @param value
      *     allowed object is
@@ -153,7 +150,7 @@ public class DatiCorrispettiviType {
     }
 
     /**
-     * Recupera il valore della proprietà datiRT.
+     * Recupera il valore della proprietï¿½ datiRT.
      * 
      * @return
      *     possible object is
@@ -165,7 +162,7 @@ public class DatiCorrispettiviType {
     }
 
     /**
-     * Imposta il valore della proprietà datiRT.
+     * Imposta il valore della proprietï¿½ datiRT.
      * 
      * @param value
      *     allowed object is
@@ -177,7 +174,7 @@ public class DatiCorrispettiviType {
     }
 
     /**
-     * Recupera il valore della proprietà datiDA.
+     * Recupera il valore della proprietï¿½ datiDA.
      * 
      * @return
      *     possible object is
@@ -189,7 +186,7 @@ public class DatiCorrispettiviType {
     }
 
     /**
-     * Imposta il valore della proprietà datiDA.
+     * Imposta il valore della proprietï¿½ datiDA.
      * 
      * @param value
      *     allowed object is
@@ -259,7 +256,7 @@ public class DatiCorrispettiviType {
     }
 
     /**
-     * Recupera il valore della proprietà versione.
+     * Recupera il valore della proprietï¿½ versione.
      * 
      * @return
      *     possible object is
@@ -271,7 +268,7 @@ public class DatiCorrispettiviType {
     }
 
     /**
-     * Imposta il valore della proprietà versione.
+     * Imposta il valore della proprietï¿½ versione.
      * 
      * @param value
      *     allowed object is

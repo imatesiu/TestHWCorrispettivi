@@ -1,8 +1,8 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2016.11.29 alle 12:44:43 AM CET 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
+// Generato il: 2017.01.17 alle 08:19:27 PM CET 
 //
 
 
@@ -53,7 +53,7 @@ public class PeriodoInattivoType {
     protected XMLGregorianCalendar al;
 
     /**
-     * Recupera il valore della proprietà dal.
+     * Recupera il valore della proprietï¿½ dal.
      * 
      * @return
      *     possible object is
@@ -65,7 +65,7 @@ public class PeriodoInattivoType {
     }
 
     /**
-     * Imposta il valore della proprietà dal.
+     * Imposta il valore della proprietï¿½ dal.
      * 
      * @param value
      *     allowed object is
@@ -77,7 +77,7 @@ public class PeriodoInattivoType {
     }
 
     /**
-     * Recupera il valore della proprietà al.
+     * Recupera il valore della proprietï¿½ al.
      * 
      * @return
      *     possible object is
@@ -89,7 +89,7 @@ public class PeriodoInattivoType {
     }
 
     /**
-     * Imposta il valore della proprietà al.
+     * Imposta il valore della proprietï¿½ al.
      * 
      * @param value
      *     allowed object is

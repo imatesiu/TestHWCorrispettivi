@@ -1,8 +1,8 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2016.11.29 alle 12:44:43 AM CET 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
+// Generato il: 2017.01.17 alle 08:19:27 PM CET 
 //
 
 
@@ -30,10 +30,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="CFTecnico" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}CodiceFiscaleType"/>
+ *         &lt;element name="CFTecnico" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}CodiceFiscaleType"/>
+ *         &lt;element name="IdIVALaboratorio" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}IdFiscaleType"/>
  *         &lt;element name="DataOra" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *         &lt;element name="Codice" type="{http://www.w3.org/2001/XMLSchema}normalizedString"/>
- *         &lt;element name="Note" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}String1000LatinType" minOccurs="0"/>
+ *         &lt;element name="Note" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}String1000LatinType" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -45,6 +46,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "InterventoTecnicoType", propOrder = {
     "cfTecnico",
+    "idIVALaboratorio",
     "dataOra",
     "codice",
     "note"
@@ -53,6 +55,8 @@ public class InterventoTecnicoType {
 
     @XmlElement(name = "CFTecnico", required = true)
     protected String cfTecnico;
+    @XmlElement(name = "IdIVALaboratorio", required = true)
+    protected IdFiscaleType idIVALaboratorio;
     @XmlElement(name = "DataOra", required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dataOra;
@@ -66,7 +70,7 @@ public class InterventoTecnicoType {
     protected String note;
 
     /**
-     * Recupera il valore della proprietà cfTecnico.
+     * Recupera il valore della proprietï¿½ cfTecnico.
      * 
      * @return
      *     possible object is
@@ -78,7 +82,7 @@ public class InterventoTecnicoType {
     }
 
     /**
-     * Imposta il valore della proprietà cfTecnico.
+     * Imposta il valore della proprietï¿½ cfTecnico.
      * 
      * @param value
      *     allowed object is
@@ -90,7 +94,31 @@ public class InterventoTecnicoType {
     }
 
     /**
-     * Recupera il valore della proprietà dataOra.
+     * Recupera il valore della proprietï¿½ idIVALaboratorio.
+     * 
+     * @return
+     *     possible object is
+     *     {@link IdFiscaleType }
+     *     
+     */
+    public IdFiscaleType getIdIVALaboratorio() {
+        return idIVALaboratorio;
+    }
+
+    /**
+     * Imposta il valore della proprietï¿½ idIVALaboratorio.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link IdFiscaleType }
+     *     
+     */
+    public void setIdIVALaboratorio(IdFiscaleType value) {
+        this.idIVALaboratorio = value;
+    }
+
+    /**
+     * Recupera il valore della proprietï¿½ dataOra.
      * 
      * @return
      *     possible object is
@@ -102,7 +130,7 @@ public class InterventoTecnicoType {
     }
 
     /**
-     * Imposta il valore della proprietà dataOra.
+     * Imposta il valore della proprietï¿½ dataOra.
      * 
      * @param value
      *     allowed object is
@@ -114,7 +142,7 @@ public class InterventoTecnicoType {
     }
 
     /**
-     * Recupera il valore della proprietà codice.
+     * Recupera il valore della proprietï¿½ codice.
      * 
      * @return
      *     possible object is
@@ -126,7 +154,7 @@ public class InterventoTecnicoType {
     }
 
     /**
-     * Imposta il valore della proprietà codice.
+     * Imposta il valore della proprietï¿½ codice.
      * 
      * @param value
      *     allowed object is
@@ -138,7 +166,7 @@ public class InterventoTecnicoType {
     }
 
     /**
-     * Recupera il valore della proprietà note.
+     * Recupera il valore della proprietï¿½ note.
      * 
      * @return
      *     possible object is
@@ -150,7 +178,7 @@ public class InterventoTecnicoType {
     }
 
     /**
-     * Imposta il valore della proprietà note.
+     * Imposta il valore della proprietï¿½ note.
      * 
      * @param value
      *     allowed object is

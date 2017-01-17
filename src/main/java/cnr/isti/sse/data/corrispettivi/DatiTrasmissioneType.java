@@ -1,8 +1,8 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2016.11.29 alle 12:44:43 AM CET 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
+// Generato il: 2017.01.17 alle 08:19:27 PM CET 
 //
 
 
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Progressivo" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Integer15Type"/>
- *         &lt;element name="Formato" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}FormatoTrasmissioneType"/>
- *         &lt;element name="Dispositivo" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}DispositivoType" minOccurs="0"/>
+ *         &lt;element name="Progressivo" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Integer15Type"/>
+ *         &lt;element name="Formato" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}FormatoTrasmissioneType"/>
+ *         &lt;element name="Dispositivo" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}DispositivoType" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -56,7 +56,7 @@ public class DatiTrasmissioneType {
     protected DispositivoType dispositivo;
 
     /**
-     * Recupera il valore della proprietà progressivo.
+     * Recupera il valore della proprietï¿½ progressivo.
      * 
      */
     public long getProgressivo() {
@@ -64,7 +64,7 @@ public class DatiTrasmissioneType {
     }
 
     /**
-     * Imposta il valore della proprietà progressivo.
+     * Imposta il valore della proprietï¿½ progressivo.
      * 
      */
     public void setProgressivo(long value) {
@@ -72,7 +72,7 @@ public class DatiTrasmissioneType {
     }
 
     /**
-     * Recupera il valore della proprietà formato.
+     * Recupera il valore della proprietï¿½ formato.
      * 
      * @return
      *     possible object is
@@ -84,7 +84,7 @@ public class DatiTrasmissioneType {
     }
 
     /**
-     * Imposta il valore della proprietà formato.
+     * Imposta il valore della proprietï¿½ formato.
      * 
      * @param value
      *     allowed object is
@@ -96,7 +96,7 @@ public class DatiTrasmissioneType {
     }
 
     /**
-     * Recupera il valore della proprietà dispositivo.
+     * Recupera il valore della proprietï¿½ dispositivo.
      * 
      * @return
      *     possible object is
@@ -108,7 +108,7 @@ public class DatiTrasmissioneType {
     }
 
     /**
-     * Imposta il valore della proprietà dispositivo.
+     * Imposta il valore della proprietï¿½ dispositivo.
      * 
      * @param value
      *     allowed object is

@@ -16,17 +16,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per GeoLocType complex type.
+ * <p>Classe Java per IVAType complex type.
  * 
  * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * 
  * <pre>
- * &lt;complexType name="GeoLocType">
+ * &lt;complexType name="IVAType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Lat" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}GeoType"/>
- *         &lt;element name="Long" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}GeoType"/>
+ *         &lt;element name="AliquotaIVA" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}RateType"/>
+ *         &lt;element name="Imposta" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,63 +36,63 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "GeoLocType", propOrder = {
-    "lat",
-    "_long"
+@XmlType(name = "IVAType", propOrder = {
+    "aliquotaIVA",
+    "imposta"
 })
-public class GeoLocType {
+public class IVAType {
 
-    @XmlElement(name = "Lat", required = true)
-    protected BigDecimal lat;
-    @XmlElement(name = "Long", required = true)
-    protected BigDecimal _long;
+    @XmlElement(name = "AliquotaIVA", required = true)
+    protected BigDecimal aliquotaIVA;
+    @XmlElement(name = "Imposta", required = true)
+    protected BigDecimal imposta;
 
     /**
-     * Recupera il valore della propriet� lat.
+     * Recupera il valore della propriet� aliquotaIVA.
      * 
      * @return
      *     possible object is
      *     {@link BigDecimal }
      *     
      */
-    public BigDecimal getLat() {
-        return lat;
+    public BigDecimal getAliquotaIVA() {
+        return aliquotaIVA;
     }
 
     /**
-     * Imposta il valore della propriet� lat.
+     * Imposta il valore della propriet� aliquotaIVA.
      * 
      * @param value
      *     allowed object is
      *     {@link BigDecimal }
      *     
      */
-    public void setLat(BigDecimal value) {
-        this.lat = value;
+    public void setAliquotaIVA(BigDecimal value) {
+        this.aliquotaIVA = value;
     }
 
     /**
-     * Recupera il valore della propriet� long.
+     * Recupera il valore della propriet� imposta.
      * 
      * @return
      *     possible object is
      *     {@link BigDecimal }
      *     
      */
-    public BigDecimal getLong() {
-        return _long;
+    public BigDecimal getImposta() {
+        return imposta;
     }
 
     /**
-     * Imposta il valore della propriet� long.
+     * Imposta il valore della propriet� imposta.
      * 
      * @param value
      *     allowed object is
      *     {@link BigDecimal }
      *     
      */
-    public void setLong(BigDecimal value) {
-        this._long = value;
+    public void setImposta(BigDecimal value) {
+        this.imposta = value;
     }
 
 }

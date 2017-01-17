@@ -8,7 +8,6 @@
 
 package cnr.isti.sse.data.corrispettivi;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -16,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per GeoLocType complex type.
+ * <p>Classe Java per IdFiscaleType complex type.
  * 
  * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * 
  * <pre>
- * &lt;complexType name="GeoLocType">
+ * &lt;complexType name="IdFiscaleType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Lat" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}GeoType"/>
- *         &lt;element name="Long" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}GeoType"/>
+ *         &lt;element name="IdPaese" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}NazioneType"/>
+ *         &lt;element name="IdCodice" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}IdCodiceType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,63 +35,63 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "GeoLocType", propOrder = {
-    "lat",
-    "_long"
+@XmlType(name = "IdFiscaleType", propOrder = {
+    "idPaese",
+    "idCodice"
 })
-public class GeoLocType {
+public class IdFiscaleType {
 
-    @XmlElement(name = "Lat", required = true)
-    protected BigDecimal lat;
-    @XmlElement(name = "Long", required = true)
-    protected BigDecimal _long;
+    @XmlElement(name = "IdPaese", required = true)
+    protected String idPaese;
+    @XmlElement(name = "IdCodice", required = true)
+    protected String idCodice;
 
     /**
-     * Recupera il valore della propriet� lat.
+     * Recupera il valore della propriet� idPaese.
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public BigDecimal getLat() {
-        return lat;
+    public String getIdPaese() {
+        return idPaese;
     }
 
     /**
-     * Imposta il valore della propriet� lat.
+     * Imposta il valore della propriet� idPaese.
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public void setLat(BigDecimal value) {
-        this.lat = value;
+    public void setIdPaese(String value) {
+        this.idPaese = value;
     }
 
     /**
-     * Recupera il valore della propriet� long.
+     * Recupera il valore della propriet� idCodice.
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public BigDecimal getLong() {
-        return _long;
+    public String getIdCodice() {
+        return idCodice;
     }
 
     /**
-     * Imposta il valore della propriet� long.
+     * Imposta il valore della propriet� idCodice.
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public void setLong(BigDecimal value) {
-        this._long = value;
+    public void setIdCodice(String value) {
+        this.idCodice = value;
     }
 
 }

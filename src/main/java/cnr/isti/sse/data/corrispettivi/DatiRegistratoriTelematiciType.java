@@ -1,8 +1,8 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2016.11.29 alle 12:44:43 AM CET 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
+// Generato il: 2017.01.17 alle 08:19:27 PM CET 
 //
 
 
@@ -28,14 +28,15 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="AliquotaIVA" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}RateType"/>
- *         &lt;element name="Natura" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}NaturaType" minOccurs="0"/>
- *         &lt;element name="Ammontare" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType"/>
- *         &lt;element name="Imposta" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType"/>
- *         &lt;element name="RifNormativo" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}String100LatinType" minOccurs="0"/>
- *         &lt;element name="VentilazioneIVA" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}VentilazioneIVAType" minOccurs="0"/>
- *         &lt;element name="TotaleAmmontareResi" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType" minOccurs="0"/>
- *         &lt;element name="TotaleAmmontareAnnulli" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}Amount2DecimalType" minOccurs="0"/>
+ *         &lt;choice>
+ *           &lt;element name="IVA" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}IVAType"/>
+ *           &lt;element name="Natura" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}NaturaType"/>
+ *           &lt;element name="VentilazioneIVA" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}VentilazioneIVAType"/>
+ *         &lt;/choice>
+ *         &lt;element name="Ammontare" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType"/>
+ *         &lt;element name="RifNormativo" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}String100LatinType" minOccurs="0"/>
+ *         &lt;element name="TotaleAmmontareResi" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType" minOccurs="0"/>
+ *         &lt;element name="TotaleAmmontareAnnulli" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -46,64 +47,61 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DatiRegistratoriTelematiciType", propOrder = {
-    "aliquotaIVA",
+    "iva",
     "natura",
-    "ammontare",
-    "imposta",
-    "rifNormativo",
     "ventilazioneIVA",
+    "ammontare",
+    "rifNormativo",
     "totaleAmmontareResi",
     "totaleAmmontareAnnulli"
 })
 public class DatiRegistratoriTelematiciType {
 
-    @XmlElement(name = "AliquotaIVA", required = true)
-    protected BigDecimal aliquotaIVA;
+    @XmlElement(name = "IVA")
+    protected IVAType iva;
     @XmlElement(name = "Natura")
     @XmlSchemaType(name = "string")
     protected NaturaType natura;
+    @XmlElement(name = "VentilazioneIVA")
+    @XmlSchemaType(name = "string")
+    protected VentilazioneIVAType ventilazioneIVA;
     @XmlElement(name = "Ammontare", required = true)
     protected BigDecimal ammontare;
-    @XmlElement(name = "Imposta", required = true)
-    protected BigDecimal imposta;
     @XmlElement(name = "RifNormativo")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     @XmlSchemaType(name = "normalizedString")
     protected String rifNormativo;
-    @XmlElement(name = "VentilazioneIVA")
-    @XmlSchemaType(name = "string")
-    protected VentilazioneIVAType ventilazioneIVA;
     @XmlElement(name = "TotaleAmmontareResi")
     protected BigDecimal totaleAmmontareResi;
     @XmlElement(name = "TotaleAmmontareAnnulli")
     protected BigDecimal totaleAmmontareAnnulli;
 
     /**
-     * Recupera il valore della proprietà aliquotaIVA.
+     * Recupera il valore della proprietï¿½ iva.
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link IVAType }
      *     
      */
-    public BigDecimal getAliquotaIVA() {
-        return aliquotaIVA;
+    public IVAType getIVA() {
+        return iva;
     }
 
     /**
-     * Imposta il valore della proprietà aliquotaIVA.
+     * Imposta il valore della proprietï¿½ iva.
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link IVAType }
      *     
      */
-    public void setAliquotaIVA(BigDecimal value) {
-        this.aliquotaIVA = value;
+    public void setIVA(IVAType value) {
+        this.iva = value;
     }
 
     /**
-     * Recupera il valore della proprietà natura.
+     * Recupera il valore della proprietï¿½ natura.
      * 
      * @return
      *     possible object is
@@ -115,7 +113,7 @@ public class DatiRegistratoriTelematiciType {
     }
 
     /**
-     * Imposta il valore della proprietà natura.
+     * Imposta il valore della proprietï¿½ natura.
      * 
      * @param value
      *     allowed object is
@@ -127,79 +125,7 @@ public class DatiRegistratoriTelematiciType {
     }
 
     /**
-     * Recupera il valore della proprietà ammontare.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public BigDecimal getAmmontare() {
-        return ammontare;
-    }
-
-    /**
-     * Imposta il valore della proprietà ammontare.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public void setAmmontare(BigDecimal value) {
-        this.ammontare = value;
-    }
-
-    /**
-     * Recupera il valore della proprietà imposta.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public BigDecimal getImposta() {
-        return imposta;
-    }
-
-    /**
-     * Imposta il valore della proprietà imposta.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public void setImposta(BigDecimal value) {
-        this.imposta = value;
-    }
-
-    /**
-     * Recupera il valore della proprietà rifNormativo.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getRifNormativo() {
-        return rifNormativo;
-    }
-
-    /**
-     * Imposta il valore della proprietà rifNormativo.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setRifNormativo(String value) {
-        this.rifNormativo = value;
-    }
-
-    /**
-     * Recupera il valore della proprietà ventilazioneIVA.
+     * Recupera il valore della proprietï¿½ ventilazioneIVA.
      * 
      * @return
      *     possible object is
@@ -211,7 +137,7 @@ public class DatiRegistratoriTelematiciType {
     }
 
     /**
-     * Imposta il valore della proprietà ventilazioneIVA.
+     * Imposta il valore della proprietï¿½ ventilazioneIVA.
      * 
      * @param value
      *     allowed object is
@@ -223,7 +149,55 @@ public class DatiRegistratoriTelematiciType {
     }
 
     /**
-     * Recupera il valore della proprietà totaleAmmontareResi.
+     * Recupera il valore della proprietï¿½ ammontare.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigDecimal }
+     *     
+     */
+    public BigDecimal getAmmontare() {
+        return ammontare;
+    }
+
+    /**
+     * Imposta il valore della proprietï¿½ ammontare.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigDecimal }
+     *     
+     */
+    public void setAmmontare(BigDecimal value) {
+        this.ammontare = value;
+    }
+
+    /**
+     * Recupera il valore della proprietï¿½ rifNormativo.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getRifNormativo() {
+        return rifNormativo;
+    }
+
+    /**
+     * Imposta il valore della proprietï¿½ rifNormativo.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRifNormativo(String value) {
+        this.rifNormativo = value;
+    }
+
+    /**
+     * Recupera il valore della proprietï¿½ totaleAmmontareResi.
      * 
      * @return
      *     possible object is
@@ -235,7 +209,7 @@ public class DatiRegistratoriTelematiciType {
     }
 
     /**
-     * Imposta il valore della proprietà totaleAmmontareResi.
+     * Imposta il valore della proprietï¿½ totaleAmmontareResi.
      * 
      * @param value
      *     allowed object is
@@ -247,7 +221,7 @@ public class DatiRegistratoriTelematiciType {
     }
 
     /**
-     * Recupera il valore della proprietà totaleAmmontareAnnulli.
+     * Recupera il valore della proprietï¿½ totaleAmmontareAnnulli.
      * 
      * @return
      *     possible object is
@@ -259,7 +233,7 @@ public class DatiRegistratoriTelematiciType {
     }
 
     /**
-     * Imposta il valore della proprietà totaleAmmontareAnnulli.
+     * Imposta il valore della proprietï¿½ totaleAmmontareAnnulli.
      * 
      * @param value
      *     allowed object is

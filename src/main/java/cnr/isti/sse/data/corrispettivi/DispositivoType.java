@@ -1,8 +1,8 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2016.11.29 alle 12:44:43 AM CET 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
+// Generato il: 2017.01.17 alle 08:19:27 PM CET 
 //
 
 
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Tipo" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}TipoDispositivoType"/>
- *         &lt;element name="IdDispositivo" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}IdDispositivoType"/>
- *         &lt;element name="GeoLocalizzazione" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0}GeoLocType" minOccurs="0"/>
+ *         &lt;element name="Tipo" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}TipoDispositivoType"/>
+ *         &lt;element name="IdDispositivo" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}IdDispositivoType"/>
+ *         &lt;element name="GeoLocalizzazione" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}GeoLocType" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -57,7 +57,7 @@ public class DispositivoType {
     protected GeoLocType geoLocalizzazione;
 
     /**
-     * Recupera il valore della proprietà tipo.
+     * Recupera il valore della proprietï¿½ tipo.
      * 
      * @return
      *     possible object is
@@ -69,7 +69,7 @@ public class DispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà tipo.
+     * Imposta il valore della proprietï¿½ tipo.
      * 
      * @param value
      *     allowed object is
@@ -81,7 +81,7 @@ public class DispositivoType {
     }
 
     /**
-     * Recupera il valore della proprietà idDispositivo.
+     * Recupera il valore della proprietï¿½ idDispositivo.
      * 
      * @return
      *     possible object is
@@ -93,7 +93,7 @@ public class DispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà idDispositivo.
+     * Imposta il valore della proprietï¿½ idDispositivo.
      * 
      * @param value
      *     allowed object is
@@ -105,7 +105,7 @@ public class DispositivoType {
     }
 
     /**
-     * Recupera il valore della proprietà geoLocalizzazione.
+     * Recupera il valore della proprietï¿½ geoLocalizzazione.
      * 
      * @return
      *     possible object is
@@ -117,7 +117,7 @@ public class DispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà geoLocalizzazione.
+     * Imposta il valore della proprietï¿½ geoLocalizzazione.
      * 
      * @param value
      *     allowed object is
