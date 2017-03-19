@@ -19,12 +19,12 @@
   <DataOraRilevazione>2012-12-13T12:12:12</DataOraRilevazione>
   <DatiRT>
     <Riepilogo>
-      <IVA>
-        <AliquotaIVA>123.45</AliquotaIVA>
-        <Imposta>123.45</Imposta>
-      </IVA>
+      <AliquotaIVA>123.45</AliquotaIVA>
+      <Natura>N1</Natura>
       <Ammontare>123.45</Ammontare>
+      <Imposta>123.45</Imposta>
       <RifNormativo>str111</RifNormativo>
+      <VentilazioneIVA>SI</VentilazioneIVA>
       <TotaleAmmontareResi>123.45</TotaleAmmontareResi>
       <TotaleAmmontareAnnulli>123.45</TotaleAmmontareAnnulli>
     </Riepilogo>
