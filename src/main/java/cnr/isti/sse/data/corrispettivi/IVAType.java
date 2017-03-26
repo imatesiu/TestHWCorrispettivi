@@ -8,6 +8,7 @@
 
 package cnr.isti.sse.data.corrispettivi;
 
+import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -15,17 +16,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for IdFiscaleType complex type.
+ * <p>Java class for IVAType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="IdFiscaleType">
+ * &lt;complexType name="IVAType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="IdPaese" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}NazioneType"/>
- *         &lt;element name="IdCodice" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}IdCodiceType"/>
+ *         &lt;element name="AliquotaIVA" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}RateType"/>
+ *         &lt;element name="Imposta" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0}Amount2DecimalType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,63 +36,63 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "IdFiscaleType", propOrder = {
-    "idPaese",
-    "idCodice"
+@XmlType(name = "IVAType", propOrder = {
+    "aliquotaIVA",
+    "imposta"
 })
-public class IdFiscaleType {
+public class IVAType {
 
-    @XmlElement(name = "IdPaese", required = true)
-    protected String idPaese;
-    @XmlElement(name = "IdCodice", required = true)
-    protected String idCodice;
+    @XmlElement(name = "AliquotaIVA", required = true)
+    protected BigDecimal aliquotaIVA;
+    @XmlElement(name = "Imposta", required = true)
+    protected BigDecimal imposta;
 
     /**
-     * Gets the value of the idPaese property.
+     * Gets the value of the aliquotaIVA property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link BigDecimal }
      *     
      */
-    public String getIdPaese() {
-        return idPaese;
+    public BigDecimal getAliquotaIVA() {
+        return aliquotaIVA;
     }
 
     /**
-     * Sets the value of the idPaese property.
+     * Sets the value of the aliquotaIVA property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link BigDecimal }
      *     
      */
-    public void setIdPaese(String value) {
-        this.idPaese = value;
+    public void setAliquotaIVA(BigDecimal value) {
+        this.aliquotaIVA = value;
     }
 
     /**
-     * Gets the value of the idCodice property.
+     * Gets the value of the imposta property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link BigDecimal }
      *     
      */
-    public String getIdCodice() {
-        return idCodice;
+    public BigDecimal getImposta() {
+        return imposta;
     }
 
     /**
-     * Sets the value of the idCodice property.
+     * Sets the value of the imposta property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link BigDecimal }
      *     
      */
-    public void setIdCodice(String value) {
-        this.idCodice = value;
+    public void setImposta(BigDecimal value) {
+        this.imposta = value;
     }
 
 }
