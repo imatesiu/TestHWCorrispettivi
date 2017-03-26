@@ -54,7 +54,7 @@ public class APIProveHWImplTest extends JerseyTest{
 	public void test() throws JAXBException {
 		
 		
-		String nameFilexml = "corrispettivo.xml";
+		String nameFilexml = "test_corrispettivi.xml";
 		InputStream is = APIProveHWImplTest.class.getClassLoader().getResourceAsStream(nameFilexml );
 		assertNotNull(is);
 		JAXBContext jaxbContexti = JAXBContext.newInstance(DatiCorrispettiviType.class);
