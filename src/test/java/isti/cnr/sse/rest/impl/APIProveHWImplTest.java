@@ -63,7 +63,7 @@ public class APIProveHWImplTest extends JerseyTest{
 		DatiCorrispettiviType collaborativeContentInput = (DatiCorrispettiviType) jaxbUnmarshaller1.unmarshal(is);
 
 		Entity<DatiCorrispettiviType> entity = Entity.entity(collaborativeContentInput,MediaType.APPLICATION_XML);
-		Response response =  target("/dispositivi/corrispettivi").request(MediaType.APPLICATION_XML).post(entity);
+		Response response =  target("/dispositivi/corrispettivi/v1").request(MediaType.APPLICATION_XML).post(entity);
 
 		//String id = response.readEntity(String.class);
 		
