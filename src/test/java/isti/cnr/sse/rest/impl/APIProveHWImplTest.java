@@ -53,8 +53,27 @@ public class APIProveHWImplTest extends JerseyTest{
 	@Test
 	public void test() throws JAXBException {
 		
-		
+		for(int i = 0 ; i<10; i++){
 		String nameFilexml = "test_corrispettivi.xml";
+		runTest(nameFilexml);
+		
+		nameFilexml = "corrispettivo.xml";
+		runTest(nameFilexml);
+		if(i==8){
+			sendgetclear();
+		}
+		
+		}
+		
+		
+		
+	}
+	
+	private void sendgetclear() {
+		Response response =  target("/dispositivi/corrispettivi/clear").request(MediaType.APPLICATION_XML).get();
+	}
+
+	private void runTest(String nameFilexml) throws JAXBException{
 		InputStream is = APIProveHWImplTest.class.getClassLoader().getResourceAsStream(nameFilexml );
 		assertNotNull(is);
 		JAXBContext jaxbContexti = JAXBContext.newInstance(DatiCorrispettiviType.class);
@@ -76,14 +95,9 @@ public class APIProveHWImplTest extends JerseyTest{
 		marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_ENCODING, "UTF-8"); //NOI18N
 		marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		
-		marshaller.marshal( res, System.out );
+		//marshaller.marshal( res, System.out );
 		
 		assertNotNull(response);
-		
-		
-		
-		
-		
 	}
 
 }
