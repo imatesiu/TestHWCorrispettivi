@@ -20,10 +20,10 @@
   <DatiRT>
     <Riepilogo>
       <IVA>
-        <AliquotaIVA>22</AliquotaIVA>
-        <Imposta>123.45</Imposta>
+        <AliquotaIVA>10</AliquotaIVA>
+        <Imposta>1.0</Imposta>
       </IVA>
-      <Ammontare>123.45</Ammontare>
+      <Ammontare>10.0</Ammontare>
       <RifNormativo>str111</RifNormativo>
       <TotaleAmmontareResi>0</TotaleAmmontareResi>
       <TotaleAmmontareAnnulli>0</TotaleAmmontareAnnulli>

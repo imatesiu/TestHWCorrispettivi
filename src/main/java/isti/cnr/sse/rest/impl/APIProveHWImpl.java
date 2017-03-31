@@ -20,6 +20,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -49,14 +50,25 @@ public class APIProveHWImpl {
 
 	private static Map<String, Integer> ricevuti = new HashMap<>();
 
-	
-	@Path("/clear")
+
+	@Path("/clearall")
 	@GET
-	public String clear(){
+	public String clearall(){
 		num = 1;
 		map = new HashMap<>();
 		ricevuti = new HashMap<>();
 		return "OK";
+	}
+
+	@Path("/clear/{key:.*}")
+	@GET
+	public String clear(@PathParam("key") String key){
+		if(map.containsKey(key)){
+			map.put(key, new BigDecimal(0));
+			ricevuti.put(key, 0);
+			return "OK";
+		}else 
+			return "Elemento non presente";
 	}
 
 	@Path("/v1")
@@ -107,7 +119,7 @@ public class APIProveHWImpl {
 				if (datiRegistratoriTelematici.getTotaleAmmontareAnnulli().compareTo(new BigDecimal(0))!=0){
 					log.error("dovevano esser 0 gli annullii");
 				}
-			BigDecimal lordo = ammontare.multiply(iva.getAliquotaIVA());
+			BigDecimal lordo = ammontare.multiply((iva.getAliquotaIVA().add(new BigDecimal(100)).divide(new BigDecimal(100))));
 			if(map.containsKey(key)){
 				BigDecimal old = map.get(key);
 				BigDecimal res = old.add(lordo);

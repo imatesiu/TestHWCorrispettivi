@@ -70,7 +70,7 @@ public class APIProveHWImplTest extends JerseyTest{
 	}
 	
 	private void sendgetclear() {
-		Response response =  target("/dispositivi/corrispettivi/clear").request(MediaType.APPLICATION_XML).get();
+		Response response =  target("/dispositivi/corrispettivi/clear/127.0.0.1").request(MediaType.APPLICATION_XML).get();
 	}
 
 	private void runTest(String nameFilexml) throws JAXBException{

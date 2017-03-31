@@ -10,10 +10,10 @@
 	<DatiRT>
 		<Riepilogo>
 			<IVA>
-				<AliquotaIVA>22.00</AliquotaIVA>
-				<Imposta>0.00</Imposta>
+				<AliquotaIVA>10.00</AliquotaIVA>
+				<Imposta>1.00</Imposta>
 			</IVA>
-			<Ammontare>22.02</Ammontare>
+			<Ammontare>10.00</Ammontare>
 		</Riepilogo>
 	</DatiRT>
 	<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
