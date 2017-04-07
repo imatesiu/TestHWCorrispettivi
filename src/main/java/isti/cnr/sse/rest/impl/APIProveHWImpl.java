@@ -117,17 +117,36 @@ public class APIProveHWImpl {
 				}
 			if(datiRegistratoriTelematici.getTotaleAmmontareAnnulli()!=null)
 				if (datiRegistratoriTelematici.getTotaleAmmontareAnnulli().compareTo(new BigDecimal(0))!=0){
-					log.error("dovevano esser 0 gli annullii");
+					log.error("dovevano esser 0 gli annulli");
 				}
-			BigDecimal lordo = ammontare.multiply((iva.getAliquotaIVA().add(new BigDecimal(100)).divide(new BigDecimal(100))));
-			if(map.containsKey(key)){
-				BigDecimal old = map.get(key);
-				BigDecimal res = old.add(lordo);
-				log.info("totale per "+key+": "+res);
-				map.put(key, res );
+			if(iva!=null){
+				BigDecimal lordo = ammontare.multiply((iva.getAliquotaIVA().add(new BigDecimal(100)).divide(new BigDecimal(100)))).setScale(2);
+				BigDecimal impostaiva = ammontare.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2);
+				if(!impostaiva.equals(iva.getImposta())){
+					log.error("imposta Errata!! per imponibile "+ammontare+" aliquota iva "+iva.getAliquotaIVA());	
+					log.error("imposta Errata!! mi aspettavo iva "+impostaiva+" trovo "+iva.getImposta());			
+				}
+				if(lordo.compareTo(new BigDecimal(0))!=0)
+					if(map.containsKey(key)){
+						BigDecimal old = map.get(key);
+						BigDecimal res = old.add(lordo);
+						log.info("totale per "+key+": "+res);
+						map.put(key, res );
+					}else{
+						map.put(key, lordo);
+						log.info("totale per "+key+": "+lordo);
+					}
 			}else{
-				map.put(key, lordo);
-				log.info("totale per "+key+": "+lordo);
+				if(ammontare.compareTo(new BigDecimal(0))!=0)
+					if(map.containsKey(key)){
+						BigDecimal old = map.get(key);
+						BigDecimal res = old.add(ammontare);
+						log.info("totale per "+key+": "+res);
+						map.put(key, res );
+					}else{
+						map.put(key, ammontare);
+						log.info("totale per "+key+": "+ammontare);
+					}
 			}
 		}
 

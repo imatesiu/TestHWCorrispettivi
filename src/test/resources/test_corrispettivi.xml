@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <r:DatiCorrispettivi
-	xmlns:r="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0"
+	xmlns:r="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0"
 	versione="1.0">
 	<Trasmissione>
 		<Progressivo>56</Progressivo>

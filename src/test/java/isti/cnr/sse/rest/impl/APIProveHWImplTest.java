@@ -53,17 +53,26 @@ public class APIProveHWImplTest extends JerseyTest{
 	@Test
 	public void test() throws JAXBException {
 		
-		for(int i = 0 ; i<10; i++){
+		//for(int i = 0 ; i<10; i++){
 		String nameFilexml = "test_corrispettivi.xml";
 		runTest(nameFilexml);
 		
-		nameFilexml = "corrispettivo.xml";
+		nameFilexml = "CC/RT_192.168.1.166_07_04_2017__10_16_45_4.xml";
+		runTest(nameFilexml);
+		
+		nameFilexml = "CC/RT_192.168.1.166_07_04_2017__10_17_04_5.xml";
+		runTest(nameFilexml);
+		
+		nameFilexml = "CC/RT_192.168.1.166_07_04_2017__10_17_24_6.xml";
+		runTest(nameFilexml);
+		
+		/*nameFilexml = "corrispettivo.xml";
 		runTest(nameFilexml);
 		if(i==8){
 			sendgetclear();
-		}
+		}*/
 		
-		}
+	//	}
 		
 		
 		
