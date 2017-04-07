@@ -57,7 +57,8 @@ public class APIProveHWImpl {
 		num = 1;
 		map = new HashMap<>();
 		ricevuti = new HashMap<>();
-		return "OK";
+		log.info("Clear All\n\r");
+		return "<html><body>OK</body></html>";
 	}
 
 	@Path("/clear/{key:.*}")
@@ -66,12 +67,13 @@ public class APIProveHWImpl {
 		if(map.containsKey(key)){
 			map.put(key, new BigDecimal(0));
 			ricevuti.put(key, 0);
-			return "OK";
+			log.info("Clear "+key);
+			return "<html><body>OK</body></html>";
 		}else 
-			return "Elemento non presente";
+			return "<html><body>Elemento non presente</body></html>";
 	}
 
-	@Path("/v1")
+	@Path("/")
 	@POST
 	public EsitoOperazioneType putListMisuratoriFiscale(DatiCorrispettiviType Corrispettivi, @Context HttpServletRequest request){
 
@@ -106,6 +108,8 @@ public class APIProveHWImpl {
 	private void calc(DatiCorrispettiviType corrispettivi, String key) {
 
 		aggiornaricevuti(key);
+		log.info("Dati di trasmissione: ");
+		log.info("Progessivo: "+corrispettivi.getTrasmissione().getProgressivo());
 
 		List<DatiRegistratoriTelematiciType> riepilogo = corrispettivi.getDatiRT().getRiepilogo();
 		for (DatiRegistratoriTelematiciType datiRegistratoriTelematici : riepilogo) {
@@ -163,10 +167,10 @@ public class APIProveHWImpl {
 			ricevuti.put(key, 1 );
 			log.info("totale ricevuti da "+key+": 1");
 		}
-
+		
 	}
 
-	@Path("/")
+	@Path("/v1")
 	@POST
 	public String putListMisuratoriFiscale(String Corrispettivi, @Context HttpServletRequest request){
 

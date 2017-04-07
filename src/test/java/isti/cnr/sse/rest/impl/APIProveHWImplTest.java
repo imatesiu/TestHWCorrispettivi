@@ -56,7 +56,7 @@ public class APIProveHWImplTest extends JerseyTest{
 		//for(int i = 0 ; i<10; i++){
 		String nameFilexml = "test_corrispettivi.xml";
 		runTest(nameFilexml);
-		
+		sendgetclear();
 		nameFilexml = "CC/RT_192.168.1.166_07_04_2017__10_16_45_4.xml";
 		runTest(nameFilexml);
 		
@@ -91,7 +91,7 @@ public class APIProveHWImplTest extends JerseyTest{
 		DatiCorrispettiviType collaborativeContentInput = (DatiCorrispettiviType) jaxbUnmarshaller1.unmarshal(is);
 
 		Entity<DatiCorrispettiviType> entity = Entity.entity(collaborativeContentInput,MediaType.APPLICATION_XML);
-		Response response =  target("/dispositivi/corrispettivi/v1").request(MediaType.APPLICATION_XML).post(entity);
+		Response response =  target("/dispositivi/corrispettivi/").request(MediaType.APPLICATION_XML).post(entity);
 
 		//String id = response.readEntity(String.class);
 		
