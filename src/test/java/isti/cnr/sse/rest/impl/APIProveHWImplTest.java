@@ -57,6 +57,13 @@ public class APIProveHWImplTest extends JerseyTest{
 		String nameFilexml = "test_corrispettivi.xml";
 		runTest(nameFilexml);
 		sendgetclear();
+		
+		
+		nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";
+		runTest(nameFilexml);
+		
+		
+		
 		nameFilexml = "CC/RT_192.168.1.166_07_04_2017__10_16_45_4.xml";
 		runTest(nameFilexml);
 		
