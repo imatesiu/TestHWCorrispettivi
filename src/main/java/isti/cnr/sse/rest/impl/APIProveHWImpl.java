@@ -75,7 +75,7 @@ public class APIProveHWImpl {
 
 	@Path("/")
 	@POST
-	public EsitoOperazioneType putListMisuratoriFiscale(DatiCorrispettiviType Corrispettivi, @Context HttpServletRequest request){
+	public String putListMisuratoriFiscale(DatiCorrispettiviType Corrispettivi, @Context HttpServletRequest request){
 
 		String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(new Date());
 		String ipAddress = request.getHeader("X-FORWARDED-FOR");
@@ -101,7 +101,8 @@ public class APIProveHWImpl {
 		EsitoOperazioneType esito = new EsitoOperazioneType();
 		esito.setIdOperazione(String.valueOf(x));
 		esito.setVersione("1.0");
-		return esito;
+		return "<ns2:EsitoOperazione xmlns:ns2=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\" versione=\"1.0\"><IdOperazione>0</IdOperazione></ns2:EsitoOperazione>"; 
+		
 
 	}
 
@@ -124,8 +125,8 @@ public class APIProveHWImpl {
 					log.error("dovevano esser 0 gli annulli");
 				}
 			if(iva!=null){
-				BigDecimal lordo = ammontare.multiply((iva.getAliquotaIVA().add(new BigDecimal(100)).divide(new BigDecimal(100)))).setScale(2);
-				BigDecimal impostaiva = ammontare.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2);
+				BigDecimal lordo = ammontare.multiply((iva.getAliquotaIVA().add(new BigDecimal(100)).divide(new BigDecimal(100)))).setScale(2,BigDecimal.ROUND_HALF_DOWN);
+				BigDecimal impostaiva = ammontare.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2,BigDecimal.ROUND_HALF_DOWN);
 				if(!impostaiva.equals(iva.getImposta())){
 					log.error("imposta Errata!! per imponibile "+ammontare+" aliquota iva "+iva.getAliquotaIVA());	
 					log.error("imposta Errata!! mi aspettavo iva "+impostaiva+" trovo "+iva.getImposta());			
