@@ -9,6 +9,8 @@
 package cnr.isti.sse.data.corrispettivi;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -201,6 +203,8 @@ public class DatiRegistratoriTelematiciType {
      *     
      */
     public BigDecimal getTotaleAmmontareResi() {
+    	if(totaleAmmontareResi==null)
+    		return new BigDecimal(0);
         return totaleAmmontareResi;
     }
 
@@ -225,6 +229,8 @@ public class DatiRegistratoriTelematiciType {
      *     
      */
     public BigDecimal getTotaleAmmontareAnnulli() {
+    	if(totaleAmmontareAnnulli==null)
+    		return new BigDecimal(0);
         return totaleAmmontareAnnulli;
     }
 

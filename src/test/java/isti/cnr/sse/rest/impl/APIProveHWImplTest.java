@@ -56,6 +56,7 @@ public class APIProveHWImplTest extends JerseyTest{
 		//for(int i = 0 ; i<10; i++){
 		String nameFilexml = "test_corrispettivi.xml";
 		runTest(nameFilexml);
+		sendgetinfo();
 		sendgetclear();
 		
 		
@@ -72,7 +73,7 @@ public class APIProveHWImplTest extends JerseyTest{
 		
 		nameFilexml = "CC/RT_192.168.1.166_07_04_2017__10_17_24_6.xml";
 		runTest(nameFilexml);
-		
+		sendgetinfo();
 		/*nameFilexml = "corrispettivo.xml";
 		runTest(nameFilexml);
 		if(i==8){
@@ -87,6 +88,10 @@ public class APIProveHWImplTest extends JerseyTest{
 	
 	private void sendgetclear() {
 		Response response =  target("/dispositivi/corrispettivi/clear/127.0.0.1").request(MediaType.APPLICATION_XML).get();
+	}
+	
+	private void sendgetinfo() {
+		Response response =  target("/dispositivi/corrispettivi/info/127.0.0.1").request(MediaType.APPLICATION_XML).get();
 	}
 
 	private void runTest(String nameFilexml) throws JAXBException{
