@@ -53,8 +53,48 @@ public class APIProveHWImplTest extends JerseyTest{
 	@Test
 	public void test() throws JAXBException {
 		
+		//for(int i = 0 ; i<10; i++){
+		String nameFilexml = "test_corrispettivi.xml";
+		runTest(nameFilexml);
+		sendgetinfo();
+		sendgetclear();
 		
-		String nameFilexml = "corrispettivo.xml";
+		
+		nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";
+		runTest(nameFilexml);
+		
+		
+		
+		nameFilexml = "CC/RT_192.168.1.166_07_04_2017__10_16_45_4.xml";
+		runTest(nameFilexml);
+		
+		nameFilexml = "CC/RT_192.168.1.166_07_04_2017__10_17_04_5.xml";
+		runTest(nameFilexml);
+		
+		nameFilexml = "CC/RT_192.168.1.166_07_04_2017__10_17_24_6.xml";
+		runTest(nameFilexml);
+		sendgetinfo();
+		/*nameFilexml = "corrispettivo.xml";
+		runTest(nameFilexml);
+		if(i==8){
+			sendgetclear();
+		}*/
+		
+	//	}
+		
+		
+		
+	}
+	
+	private void sendgetclear() {
+		Response response =  target("/corrispettivi/clear/127.0.0.1").request(MediaType.APPLICATION_XML).get();
+	}
+	
+	private void sendgetinfo() {
+		Response response =  target("/corrispettivi/info/127.0.0.1").request(MediaType.APPLICATION_XML).get();
+	}
+
+	private void runTest(String nameFilexml) throws JAXBException{
 		InputStream is = APIProveHWImplTest.class.getClassLoader().getResourceAsStream(nameFilexml );
 		assertNotNull(is);
 		JAXBContext jaxbContexti = JAXBContext.newInstance(DatiCorrispettiviType.class);
@@ -63,7 +103,7 @@ public class APIProveHWImplTest extends JerseyTest{
 		DatiCorrispettiviType collaborativeContentInput = (DatiCorrispettiviType) jaxbUnmarshaller1.unmarshal(is);
 
 		Entity<DatiCorrispettiviType> entity = Entity.entity(collaborativeContentInput,MediaType.APPLICATION_XML);
-		Response response =  target("/dispositivi/corrispettivi").request(MediaType.APPLICATION_XML).post(entity);
+		Response response =  target("/corrispettivi/").request(MediaType.APPLICATION_XML).post(entity);
 
 		//String id = response.readEntity(String.class);
 		
@@ -76,14 +116,9 @@ public class APIProveHWImplTest extends JerseyTest{
 		marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_ENCODING, "UTF-8"); //NOI18N
 		marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		
-		marshaller.marshal( res, System.out );
+		//marshaller.marshal( res, System.out );
 		
 		assertNotNull(response);
-		
-		
-		
-		
-		
 	}
 
 }

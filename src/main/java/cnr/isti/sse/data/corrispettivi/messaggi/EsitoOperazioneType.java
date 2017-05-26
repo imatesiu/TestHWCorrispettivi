@@ -1,7 +1,7 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
 // Generato il: 2016.11.29 alle 12:39:14 AM CET 
 //
 
@@ -37,12 +37,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
+@XmlRootElement(name = "EsitoOperazione", namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EsitoOperazioneType", propOrder = {
     "idOperazione",
     "errori"
 })
-@XmlRootElement(name = "EsitoOperazione")
 public class EsitoOperazioneType {
 
     @XmlElement(name = "IdOperazione", required = true)
@@ -53,7 +53,7 @@ public class EsitoOperazioneType {
     protected String versione;
 
     /**
-     * Recupera il valore della proprietà idOperazione.
+     * Recupera il valore della proprietï¿½ idOperazione.
      * 
      * @return
      *     possible object is
@@ -65,7 +65,7 @@ public class EsitoOperazioneType {
     }
 
     /**
-     * Imposta il valore della proprietà idOperazione.
+     * Imposta il valore della proprietï¿½ idOperazione.
      * 
      * @param value
      *     allowed object is
@@ -77,7 +77,7 @@ public class EsitoOperazioneType {
     }
 
     /**
-     * Recupera il valore della proprietà errori.
+     * Recupera il valore della proprietï¿½ errori.
      * 
      * @return
      *     possible object is
@@ -89,7 +89,7 @@ public class EsitoOperazioneType {
     }
 
     /**
-     * Imposta il valore della proprietà errori.
+     * Imposta il valore della proprietï¿½ errori.
      * 
      * @param value
      *     allowed object is
@@ -101,7 +101,7 @@ public class EsitoOperazioneType {
     }
 
     /**
-     * Recupera il valore della proprietà versione.
+     * Recupera il valore della proprietï¿½ versione.
      * 
      * @return
      *     possible object is
@@ -117,7 +117,7 @@ public class EsitoOperazioneType {
     }
 
     /**
-     * Imposta il valore della proprietà versione.
+     * Imposta il valore della proprietï¿½ versione.
      * 
      * @param value
      *     allowed object is

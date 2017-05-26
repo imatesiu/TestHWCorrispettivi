@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:DatiCorrispettivi xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:p="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" versione="COR10" xsi:schemaLocation="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0 CorrispettiviTypes_v1.0.xsd http://www.w3.org/2000/09/xmldsig# xmldsig-core-schema.xsd">
+<Trasmissione>
+<Progressivo>000184</Progressivo>
+<Formato>COR10</Formato>
+<Dispositivo>
+<Tipo>MC</Tipo>
+<IdDispositivo>80M08002493</IdDispositivo>
+</Dispositivo>
+</Trasmissione>
+<DataOraRilevazione>2017-04-07T00:13:10</DataOraRilevazione>
+<DatiRT>
+<Riepilogo>
+<IVA>
+<AliquotaIVA>22.00</AliquotaIVA>
+<Imposta>0.18</Imposta>
+</IVA>
+<Ammontare>0.82</Ammontare>
+<TotaleAmmontareResi>0.00</TotaleAmmontareResi>
+<TotaleAmmontareAnnulli>0.00</TotaleAmmontareAnnulli>
+</Riepilogo>
+</DatiRT>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+<ds:Reference URI="">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+<ds:DigestValue>Ip4UyrMjzVUdkexsuucxQUE3JB5KxwaRbHGZaOFthMg=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>b7ahzZL+xgai47rby4KYpicw+h4WzeDzKoxcgV62TbMmxt8x1QiIT+cUHjPCRm5L
+Q27d/nhvSvr6aeWcZVmTTnU65p4VvJ6YtS7yC5taQH4T7l5Mg+5aMbACcrZ/EeP1
+tq5NDW0HDFDT2BAvvqmJF8QEL/3WN3r5XDepuZ5ZGc/EwXEjiQEHRheQkBRywdWt
+WZT1nHssulExzxvL7pzaT8ro2epfuhcd0HLF8FoaC9OIW4MJxp6ziTjZIFWdo0Gm
+C7cz0PbjyMAZNYO0D/mHNc3Q61XmsNQaOZyjC1GBIwEaInDqmcMcjX8nqSywKsGD
+yAj/ZZkiYIzaLVHNu/8dtQ==</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:X509Data>
+<ds:X509SubjectName>CN=80M08002493,OU=Servizio AE Corrispettivi IVA,O=Agenzia delle Entrate,C=IT</ds:X509SubjectName>
+<ds:X509Certificate>MIID5zCCAs+gAwIBAgIIY+W9uw3o2OIwDQYJKoZIhvcNAQELBQAwNTELMAkGA1UE
+BhMCSVQxDjAMBgNVBAoTBVNvZ2VpMRYwFAYDVQQDEw1DQSBTb2dlaSBUZXN0MB4X
+DTE3MDQxMDE0NDE1MFoXDTIwMDQxMDE0NDE1MFowazELMAkGA1UEBhMCSVQxHjAc
+BgNVBAoMFUFnZW56aWEgZGVsbGUgRW50cmF0ZTEmMCQGA1UECwwdU2Vydml6aW8g
+QUUgQ29ycmlzcGV0dGl2aSBJVkExFDASBgNVBAMMCzgwTTA4MDAyNDkzMIIBIjAN
+BgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx0mT6P8BmT1mifH9po+h9Lg6b8wh
+0yZCABvoeStHxrzelrmcwzWUF6r7RL9j/r4mh93hA8fpjMdvyq/XpUPR5cZKV71B
+hQzByLJKuPrP+LOVdEU3H29uJnrvnTExuUwta/rWlCzuTUIb688sMv4D1loJJW+0
+5x/qXaAsh+o0+ingYHnnT3BO3Q100rrDa5ULu3bhNmjHCngCTvwAqdluEuVdw72l
+JelMPnjjYnxNb2KmAko1mwXMZh0WztE05uwNZN7bafIEPEG+4HF5p6wVAs8W54rJ
+qw82NdZgXaL4BNdwEqm8prgDJGnwyIE0t1g2n5gGy2NiWBmCiwfuJK/9CwIDAQAB
+o4HEMIHBMB8GA1UdIwQYMBaAFFfDfM0VomETCms+4cZJ7E5DH8OHMG8GA1UdHwRo
+MGYwZKBioGCGXmxkYXA6Ly9jYWRzLnNvZ2VpLmZpbmFuemUuaXQvY24lM2RDQSUy
+MFNvZ2VpJTIwVGVzdCxvJTNkU29nZWksYyUzZGl0P2NlcnRpZmljYXRlUmV2b2Nh
+dGlvbkxpc3QwHQYDVR0OBBYEFEqQl0X/YBJVpPnQXAf7iAYzrDJXMA4GA1UdDwEB
+/wQEAwIGQDANBgkqhkiG9w0BAQsFAAOCAQEACmalY8gCaOL6+TS3Smo+J/vOpHYF
+QWHsvctwrM6dp4leNVcb7Ll1fiZVCA2sbty76o/s0b5PztQGJX+ubJZU7oUFTI03
+Zbx0kS5zMXwIGzOB/TMsGMJUVa7d95gdtX1OKLhT9iUXt4fun/Y5Vups2BaLySb9
+2+n57ToZd9VIwlxZuPsXvuLSSlk7YQ6/puha53hYm9G2xxsk/raCezdzLHnKwFKM
+Z1G2jzxwkq3vkMm+PVc9qogYF5LHG4yRNs2k1qEIIqdupnhZ2ax0nii4GUUTRDG8
+Tbk4GoDjI/EcMQTgMYoMAKBFQtcebvPLdoHxh1tWojtCR5o733wUGBqlYA==</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature></p:DatiCorrispettivi>

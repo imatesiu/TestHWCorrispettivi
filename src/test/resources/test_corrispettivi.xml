@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<r:DatiCorrispettivi
+	xmlns:r="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0"
+	versione="1.0">
+	<Trasmissione>
+		<Progressivo>56</Progressivo>
+		<Formato>COR10</Formato>
+	</Trasmissione>
+	<DataOraRilevazione>2017-03-17T15:38:16</DataOraRilevazione>
+	<DatiRT>
+		<Riepilogo>
+			<IVA>
+				<AliquotaIVA>10.00</AliquotaIVA>
+				<Imposta>1.00</Imposta>
+			</IVA>
+			<Ammontare>10.00</Ammontare>
+		</Riepilogo>
+	</DatiRT>
+	<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+		<SignedInfo>
+			<CanonicalizationMethod
+				Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+			<SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" />
+			<Reference URI="">
+				<Transforms>
+					<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+					<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+				</Transforms>
+				<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+				<DigestValue>FvVPZgk8XaX9dcQgtVuIosK5hRBUFhIM95NWQk/p8kA=
+				</DigestValue>
+			</Reference>
+		</SignedInfo>
+		<SignatureValue>h4ItANW02xkRy6iTdRAOtO5Z9zUcKPSu7ei4sQ8NELZTqtlgz4xPNoenM6W1IAGy
+			nB7S2JZHGIc0E59Yej8ShXUJxnZwwVQMyZ/39eAbP6Vz2Gmo532HU/6xlMm2FonQ
+			8yqMc+ZyOUKnN44YEaV3eB6eBSKOklBw26nvdsrCkHF2EpaUAuHvrg0qAWiS3zYd
+			ubl2tRdemEJSZxVGcS2sr/F7mo59C9ITm8oY88ljAPLa+yB/2wwSohMzK2Iso6QA
+			H8xirMc95y1thEmxMK0LKuVNhnXRWW5/kIDqSnLO80u6B5ZMoDsxZK6Px20Cdqw9
+			AhZ5hGjKvjvDLxcrDqD5FA==
+		</SignatureValue>
+		<KeyInfo>
+			<X509Data>
+				<X509Certificate>MIID5zCCAs+gAwIBAgIIfpQ2emjucxcwDQYJKoZIhvcNAQELBQAwNTELMAkGA1UE
+					BhMCSVQxDjAMBgNVBAoTBVNvZ2VpMRYwFAYDVQQDEw1DQSBTb2dlaSBUZXN0MB4X
+					DTE3MDIwMzExMDMwOFoXDTIwMDIwNDExMDMwOFowazELMAkGA1UEBhMCSVQxHjAc
+					BgNVBAoMFUFnZW56aWEgZGVsbGUgRW50cmF0ZTEmMCQGA1UECwwdU2Vydml6aW8g
+					QUUgQ29ycmlzcGV0dGl2aSBJVkExFDASBgNVBAMMCzk5SUFBMDAwMDAyMIIBIjAN
+					BgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsR1dz7QIYuNnFEc4GOcdRuiqMJM+
+					cibhe5HzZX3uVyOFWtAQ9AX7jbqIacfYqAlML+IybZaSSeN/4ySJNQTgzgnXEjv5
+					2iCrHi9CajW7VkEzCC4sCL5OvtPBDnTMoZIip/kqTzOaOritfUXC0TT38CgeX8/I
+					lQYTR0ZcSrPHDjXLNnJ3MNSZcnOX6vcNWBdOyn1VlGEf7ccN1/oDVTgXAvpW9Hk6
+					vsAyxN+dQjloFfC/FkLOFF32PTf3tR4xQ9X839KSzEr+CNz1BMJemyhccpRqq585
+					/XqBd6aRjnjuSO7Dz6Rq9rIRHZnq4cOk3LJO1lE/F6hs0o4/yiVel7hvgQIDAQAB
+					o4HEMIHBMB8GA1UdIwQYMBaAFFfDfM0VomETCms+4cZJ7E5DH8OHMG8GA1UdHwRo
+					MGYwZKBioGCGXmxkYXA6Ly9jYWRzLnNvZ2VpLmZpbmFuemUuaXQvY24lM2RDQSUy
+					MFNvZ2VpJTIwVGVzdCxvJTNkU29nZWksYyUzZGl0P2NlcnRpZmljYXRlUmV2b2Nh
+					dGlvbkxpc3QwHQYDVR0OBBYEFP44gOMB6eKlDQitBsSU0Hxt/Wh1MA4GA1UdDwEB
+					/wQEAwIGQDANBgkqhkiG9w0BAQsFAAOCAQEASYGuZPueOIN8kCXlqDv6njBP35bu
+					R1OXj7+b3rzq6nUfYSqcLfF/fl1az5llX4N6LCdPakfmfPY6n4zdKEAkwWATMv97
+					N52EF3nknphidgZ9vjxA8KtqWlDSiNQrn12hZu1LgCzz0XW77WR6kMZ9GUiivNJN
+					cgyut+B5XzMklBwsKCTutkDaS+MmWfzK6bspghfdoKOsoA/B923PNtUK2rjyWKEr
+					k+hUtvO7vllVlHwa1FEa+5+ZA8WXvcgUdrPUYubNN0Y3JY84/5Df3bXbBm56Px7v
+					wr71RAnMuFy1xH64f9QI5JfrAAo8zv0fU3aIs2sEalEHOGjf08pD0DSTuQ==
+				</X509Certificate>
+				<X509IssuerSerial>
+					<X509IssuerName>CN=CA Sogei Test,O=Sogei,C=IT</X509IssuerName>
+					<X509SerialNumber>9120975044706464535</X509SerialNumber>
+				</X509IssuerSerial>
+			</X509Data>
+		</KeyInfo>
+	</Signature>
+</r:DatiCorrispettivi>
+

@@ -1,0 +1,51 @@
+<p:DatiCorrispettivi
+	xmlns:p="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" versione="COR10"
+	xsi:schemaLocation="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0 CorrispettiviTypes_v1.0.xsd">
+	<Trasmissione>
+		<Progressivo>114</Progressivo>
+		<Formato>COR10</Formato>
+	</Trasmissione>
+	<DataOraRilevazione>2017-03-28T10:15:54</DataOraRilevazione>
+	<DatiRT>
+		<Riepilogo>
+			<IVA>
+				<AliquotaIVA>22.00</AliquotaIVA>
+				<Imposta>9.02</Imposta>
+			</IVA>
+			<Ammontare>40.98</Ammontare>
+		</Riepilogo>
+		<Riepilogo>
+			<IVA>
+				<AliquotaIVA>10.00</AliquotaIVA>
+				<Imposta>0.00</Imposta>
+			</IVA>
+			<Ammontare>0.00</Ammontare>
+		</Riepilogo>
+		<Riepilogo>
+			<IVA>
+				<AliquotaIVA>0.00</AliquotaIVA>
+				<Imposta>0.00</Imposta>
+			</IVA>
+			<Ammontare>0.00</Ammontare>
+		</Riepilogo>
+		<Riepilogo>
+			<IVA>
+				<AliquotaIVA>0.00</AliquotaIVA>
+				<Imposta>0.00</Imposta>
+			</IVA>
+			<Ammontare>0.00</Ammontare>
+		</Riepilogo>
+		<Riepilogo>
+			<IVA>
+				<AliquotaIVA>0.00</AliquotaIVA>
+				<Imposta>0.00</Imposta>
+			</IVA>
+			<Ammontare>0.00</Ammontare>
+		</Riepilogo>
+		<Riepilogo>
+			<Natura>N4</Natura>
+			<Ammontare>0.00</Ammontare>
+		</Riepilogo>
+	</DatiRT>
+</p:DatiCorrispettivi>
