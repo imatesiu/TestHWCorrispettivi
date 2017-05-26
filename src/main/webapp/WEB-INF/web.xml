@@ -2,12 +2,9 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>TestHWCorrispettivi</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
+
     <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    
   </welcome-file-list>
   
   
@@ -21,6 +18,12 @@
 		     <param-name>jersey.config.server.provider.packages</param-name>
 		     <param-value>isti.cnr.sse.rest.impl</param-value>
 		</init-param>
+	
+      <init-param>
+          <param-name>jersey.config.server.provider.classnames</param-name>
+          <param-value>org.glassfish.jersey.server.mvc.jsp.JspMvcFeature</param-value>
+      </init-param>
+
 		<!-- <init-param>
 			<param-name>org.glassfish.jersey.container.ContainerResponseFilters</param-name>
 			<param-value>eu.learnpad.ca.rest.api.web.security.ResponseCorsFilter</param-value>
@@ -35,7 +38,7 @@
  
 	<servlet-mapping>
 		<servlet-name>jersey-serlvet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/dispositivi/*</url-pattern>
 	</servlet-mapping>
   
 </web-app>

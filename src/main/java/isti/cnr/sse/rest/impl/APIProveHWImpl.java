@@ -35,7 +35,7 @@ import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
 
 @Consumes(MediaType.APPLICATION_XML)
 //@Produces(MediaType.APPLICATION_XML)
-@Path("/dispositivi/corrispettivi")
+@Path("/corrispettivi")
 public class APIProveHWImpl {
 
 	//@Inject 
