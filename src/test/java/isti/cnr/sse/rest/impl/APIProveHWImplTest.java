@@ -87,11 +87,11 @@ public class APIProveHWImplTest extends JerseyTest{
 	}
 	
 	private void sendgetclear() {
-		Response response =  target("/dispositivi/corrispettivi/clear/127.0.0.1").request(MediaType.APPLICATION_XML).get();
+		Response response =  target("/corrispettivi/clear/127.0.0.1").request(MediaType.APPLICATION_XML).get();
 	}
 	
 	private void sendgetinfo() {
-		Response response =  target("/dispositivi/corrispettivi/info/127.0.0.1").request(MediaType.APPLICATION_XML).get();
+		Response response =  target("/corrispettivi/info/127.0.0.1").request(MediaType.APPLICATION_XML).get();
 	}
 
 	private void runTest(String nameFilexml) throws JAXBException{
@@ -103,7 +103,7 @@ public class APIProveHWImplTest extends JerseyTest{
 		DatiCorrispettiviType collaborativeContentInput = (DatiCorrispettiviType) jaxbUnmarshaller1.unmarshal(is);
 
 		Entity<DatiCorrispettiviType> entity = Entity.entity(collaborativeContentInput,MediaType.APPLICATION_XML);
-		Response response =  target("/dispositivi/corrispettivi/").request(MediaType.APPLICATION_XML).post(entity);
+		Response response =  target("/corrispettivi/").request(MediaType.APPLICATION_XML).post(entity);
 
 		//String id = response.readEntity(String.class);
 		
