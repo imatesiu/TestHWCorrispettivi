@@ -270,7 +270,29 @@ public class APIProveHWImpl {
 		
 		
 	}
+	
+	
+	@Path("/jinfo/")
+	@POST
+	public void  receive_info(String sdata){
+		
+		
+		
+		Gson g = new Gson();
+		
+		Type listType = new TypeToken<ArrayList<dataProve>>(){}.getType();
+		List<dataProve> Listprove = g.fromJson(sdata, listType);
+		
+		for(dataProve d : Listprove){
+			data.put(d.getIpAddress(),d);
+			ricevuti.put(d.getIpAddress(), d.getNuminvii());
+		}
+		
+		
+	}
 
+	
+	
 
 
 
