@@ -22,10 +22,10 @@ public class LoadProperties {
 			prop.load(input);
 
 			// get the property value and print it out
-			System.out.println(prop.getProperty("NomeProva"));
+			/*System.out.println(prop.getProperty("NomeProva"));
 			System.out.println(prop.getProperty("grantotale"));
 			System.out.println(prop.getProperty("numeroRapportoProva"));
-			System.out.println(prop.getProperty("nomeModello"));
+			System.out.println(prop.getProperty("nomeModello"));*/
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

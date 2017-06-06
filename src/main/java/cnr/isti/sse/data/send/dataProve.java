@@ -1,5 +1,8 @@
 package cnr.isti.sse.data.send;
 
+import java.math.BigDecimal;
+import java.util.Properties;
+
 import javax.annotation.Generated;
 
 import com.google.gson.annotations.Expose;
@@ -9,6 +12,18 @@ import com.google.gson.annotations.SerializedName;
 public class dataProve {
 	
 	
+	public dataProve(String key, BigDecimal grantotale, int num) {
+		this.ipAddress= key;
+		this.grantotale = grantotale.intValueExact();
+		this.numinvii = num;
+		Properties p = LoadProperties.loadp();
+		this.nomeModello = p.getProperty("nomeModello");
+		this.nomeprova = p.getProperty("NomeProva");
+		this.numeroRapportoProva = p.getProperty("numeroRapportoProva");
+		
+	}
+
+
 	@SerializedName("nomeModello")
     @Expose
 	private String nomeModello = new String();
