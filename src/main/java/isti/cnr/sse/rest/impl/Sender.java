@@ -2,6 +2,7 @@ package isti.cnr.sse.rest.impl;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -19,8 +20,11 @@ import javax.ws.rs.core.Response;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.filter.LoggingFilter;
 
+import com.google.gson.Gson;
+
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
+import cnr.isti.sse.data.send.dataProve;
 
 public final class Sender {
 	
@@ -55,16 +59,16 @@ public final class Sender {
 	}
 	
 	
-	public static EsitoOperazioneType sendDatiCorrispettivi(DatiCorrispettiviType collaborativeContentInput) {
+	public static EsitoOperazioneType sendDatiCorrispettivi(DatiCorrispettiviType collaborativeContentInput, String ipAddress) {
 		try{
 			
 
 
-			Client client = ClientBuilder.newClient( new ClientConfig().register( LoggingFilter.class ) );
+			Client client = ClientBuilder.newClient( new ClientConfig() );
 			WebTarget webTarget = client.target("http://fmt.isti.cnr.it:8080/TestHWCorrispettivi/dispositivi/").path("corrispettivi");
 
 
-			Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_XML);
+			Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_XML).header("X-FORWARDED-FOR", ipAddress);
 			Response response = invocationBuilder.post(Entity.entity(collaborativeContentInput, MediaType.APPLICATION_XML));
 
 			EsitoOperazioneType res =	response.readEntity(new GenericType<EsitoOperazioneType>() {});
@@ -110,6 +114,31 @@ public final class Sender {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public static void sendconfig(List<dataProve> listmf) {
+		
+		try{
+			
+
+
+			Client client = ClientBuilder.newClient( new ClientConfig().register( LoggingFilter.class ) );
+			WebTarget webTarget = client.target("http://fmt.isti.cnr.it:8080/TestHWCorrispettivi/dispositivi/").path("corrispettivi/jinfo");
+
+			Gson g = new Gson();
+			
+		
+			Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
+			Response response = invocationBuilder.post(Entity.entity(g.toJson(listmf), MediaType.APPLICATION_JSON));
+
+			
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }

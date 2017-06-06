@@ -173,7 +173,7 @@ public class APIProveHWImpl {
 			
 			
 			
-			Sender.sendDatiCorrispettivi(Corrispettivi);
+			Sender.sendDatiCorrispettivi(Corrispettivi, ipAddress);
 			
 			
 			return esito;
@@ -211,7 +211,7 @@ public class APIProveHWImpl {
 			//timediff.put(key, new Pair<>(0, new Date()));
 		}
 		
-		
+		Sender.sendconfig(Listmf);
 	/*	if(p.getProperty("ip").equals(ipAddress))
 			map.put(p.getProperty("ip"), new BigDecimal(p.getProperty("grantotale")));*/
 		
