@@ -4,6 +4,8 @@ package isti.cnr.sse.rest.impl;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +22,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.glassfish.grizzly.utils.Pair;
+
+import com.google.gson.Gson;
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
@@ -216,16 +220,21 @@ public class APIProveHWImpl {
 	@Path("/jinfo/")
 	@GET
 	public String jinfo(){
+		Collection<dataProve> c = new ArrayList<>();
 		for(String key : map.keySet()){
 			BigDecimal grantotale = map.get(key);
 			int num = ricevuti.get(key);
+			int diff = timediff.get(key).getFirst();
+			dataProve dp = new dataProve(key, grantotale, num, diff);
+			c.add(dp);
 			
-			dataProve dp = new dataProve(key, grantotale, num);
 			
 		}
+		Gson g = new Gson();
+			//List<Prova> Listprove = g.fromJson(MF, listType);
+		return g.toJson(c);
 		
 		
-		return "";
 	}
 
 

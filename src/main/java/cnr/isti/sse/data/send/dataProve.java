@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 public class dataProve {
 	
 	
-	public dataProve(String key, BigDecimal grantotale, int num) {
+	public dataProve(String key, BigDecimal grantotale, int num, int diff) {
 		this.ipAddress= key;
 		this.grantotale = grantotale.intValueExact();
 		this.numinvii = num;
@@ -20,7 +20,7 @@ public class dataProve {
 		this.nomeModello = p.getProperty("nomeModello");
 		this.nomeprova = p.getProperty("NomeProva");
 		this.numeroRapportoProva = p.getProperty("numeroRapportoProva");
-		
+		this.difftime = diff;
 	}
 
 
