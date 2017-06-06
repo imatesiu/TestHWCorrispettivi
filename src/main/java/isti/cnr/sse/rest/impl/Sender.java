@@ -123,7 +123,7 @@ public final class Sender {
 
 
 			Client client = ClientBuilder.newClient( new ClientConfig().register( LoggingFilter.class ) );
-			WebTarget webTarget = client.target("http://fmt.isti.cnr.it:8080/TestHWCorrispettivi/dispositivi/").path("corrispettivi/jinfo");
+			WebTarget webTarget = client.target("http://fmt.isti.cnr.it:8080/TestHWCorrispettivi/dispositivi/").path("corrispettivi/jinit");
 
 			Gson g = new Gson();
 			
