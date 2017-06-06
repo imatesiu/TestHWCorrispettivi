@@ -33,7 +33,7 @@ import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
 import cnr.isti.sse.data.send.dataProve;
 
 
-@Consumes(MediaType.APPLICATION_XML)
+
 //@Produces(MediaType.APPLICATION_XML)
 @Path("/corrispettivi")
 public class APIProveHWImpl {
@@ -155,6 +155,7 @@ public class APIProveHWImpl {
 
 
 	@Path("/")
+	@Consumes(MediaType.APPLICATION_XML)
 	@POST
 	public EsitoOperazioneType putListMisuratoriFiscale(DatiCorrispettiviType Corrispettivi, @Context HttpServletRequest request){
 		Date now = new Date();
@@ -219,12 +220,13 @@ public class APIProveHWImpl {
 				
 			}
 
+
 			Sender.sendconfig(Listmf);
 			
 			
 			
 			
-			
+
 			
 		}catch (FileNotFoundException e) {
 			log.error(e);
@@ -312,6 +314,7 @@ public class APIProveHWImpl {
 
 
 	@Path("/jinit/")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public void  receive_info(String sdata){
 
