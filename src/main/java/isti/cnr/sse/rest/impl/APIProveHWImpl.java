@@ -226,6 +226,14 @@ public class APIProveHWImpl {
 			data.get(key).setOldtime(now);
 		//	timediff.put(key, new Pair<>(diff,now));
 			log.info("diff_time: "+diff);
+		}else{
+			//map.put(key, new BigDecimal(grantotale));
+		
+		//	timediff.put(key, new Pair<>(0, new Date()));
+			dataProve d = new dataProve(key,new BigDecimal(0), 0, 0);
+			d.setOldtime(new Date());
+			data.put(key, d);
+			
 		}
 		
 	}
@@ -234,11 +242,13 @@ public class APIProveHWImpl {
 		if(ricevuti.containsKey(key)){
 			int res = ricevuti.get(key) + 1;
 			log.info("totale ricevuti da "+key+": "+res);
+			data.get(key).setNuminvii(res);
 			ricevuti.put(key, res );
 			return res;
 		}else{
 			ricevuti.put(key, 1 );
 			log.info("totale ricevuti da "+key+": 1");
+			data.get(key).setNuminvii(1);
 			return 1;
 		}
 		
@@ -283,7 +293,7 @@ public class APIProveHWImpl {
 	}
 	
 	
-	@Path("/jinfo/")
+	@Path("/jinit/")
 	@POST
 	public void  receive_info(String sdata){
 		
