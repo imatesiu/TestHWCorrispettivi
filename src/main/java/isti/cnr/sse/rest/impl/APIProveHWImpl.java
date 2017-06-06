@@ -52,7 +52,9 @@ public class APIProveHWImpl {
 	
 	private static Map<String, dataProve> data = new HashMap<>();
 
-
+	
+	
+	
 	@Path("/clearall")
 	@GET
 	public String clearall(){
@@ -61,6 +63,9 @@ public class APIProveHWImpl {
 		ricevuti = new HashMap<>();
 		//timediff = new HashMap<>();
 		data = new HashMap<>();
+		
+		Sender.sendClearAll();
+		
 		log.info("Clear All\n\r");
 		return "<html><body>OK</body></html>";
 	}
@@ -76,6 +81,9 @@ public class APIProveHWImpl {
 			d.init();
 			data.put(key, d);
 			log.info("Clear "+key);
+			
+			Sender.sendClear(key);
+			
 			return "<html><body>OK</body></html>";
 		}else 
 			return "<html><body>Elemento non presente</body></html>";
@@ -197,7 +205,7 @@ public class APIProveHWImpl {
 
 	private void loadconfig(String ipAddress) throws FileNotFoundException {
 		
-		
+	
 		Gson g = new Gson();
 		JsonReader reader = new JsonReader(new FileReader("config.json"));
 		Type listType = new TypeToken<ArrayList<dataProve>>(){}.getType();
@@ -212,6 +220,7 @@ public class APIProveHWImpl {
 		}
 		
 		Sender.sendconfig(Listmf);
+		
 	/*	if(p.getProperty("ip").equals(ipAddress))
 			map.put(p.getProperty("ip"), new BigDecimal(p.getProperty("grantotale")));*/
 		

@@ -115,6 +115,23 @@ public final class Sender {
 		}
 		return null;
 	}
+	
+	public static String  sendClear(String key) {
+		try{
+			Client client = ClientBuilder.newClient( new ClientConfig().register( LoggingFilter.class ) );
+			WebTarget webTarget = client.target("http://fmt.isti.cnr.it:8080/TestHWCorrispettivi/dispositivi/").path("corrispettivi/clear/").path(key);
+			
+			Invocation.Builder invocationBuilder =  webTarget.request();
+			Response response = invocationBuilder.get();
+			
+			String res =	response.readEntity(new GenericType<String>() {});
+			
+			return res;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public static void sendconfig(List<dataProve> listmf) {
 		
