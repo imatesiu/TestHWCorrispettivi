@@ -16,6 +16,22 @@ Status project| [![Build Status](https://travis-ci.org/imatesiu/TestHWCorrispett
 
 # Summary
 
+# How to install, build and run?
+To install:
+* For Ubuntu:
+  * Install maven `sudo apt-get install maven`
+  * Install Java 8 `sudo add-apt-repository ppa:webupd8team/java`
+`sudo apt-get update`
+`sudo apt-get install oracle-java8-installer`
+
+* For Windows:
+  * Install [Maven](https://maven.apache.org/download.cgi) ([How to](https://maven.apache.org/install.html))
+  * Install [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+
+To build and run into TestHWCorrispettivi directory:
+
+* `mvn install`
+* `mvn jetty:run`
 
 # How it works?
 
