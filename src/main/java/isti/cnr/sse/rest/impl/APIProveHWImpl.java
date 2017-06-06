@@ -1,15 +1,17 @@
 package isti.cnr.sse.rest.impl;
 
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
@@ -21,13 +23,13 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import org.glassfish.grizzly.utils.Pair;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
-import cnr.isti.sse.data.send.LoadProperties;
 import cnr.isti.sse.data.send.dataProve;
 
 
@@ -42,20 +44,23 @@ public class APIProveHWImpl {
 
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(APIProveHWImpl.class);
 
-	private static Map<String, BigDecimal> map = new HashMap<>();
+	//private static Map<String, BigDecimal> map = new HashMap<>();
 	
-	private static Map<String, Pair<Integer,Date>> timediff = new HashMap<>();
+	//private static Map<String, Pair<Integer,Date>> timediff = new HashMap<>();
 
 	private static Map<String, Integer> ricevuti = new HashMap<>();
+	
+	private static Map<String, dataProve> data = new HashMap<>();
 
 
 	@Path("/clearall")
 	@GET
 	public String clearall(){
 		
-		map = new HashMap<>();
+		//map = new HashMap<>();
 		ricevuti = new HashMap<>();
-		timediff = new HashMap<>();
+		//timediff = new HashMap<>();
+		data = new HashMap<>();
 		log.info("Clear All\n\r");
 		return "<html><body>OK</body></html>";
 	}
@@ -63,10 +68,13 @@ public class APIProveHWImpl {
 	@Path("/clear/{key:.*}")
 	@GET
 	public String clear(@PathParam("key") String key){
-		if(map.containsKey(key)){
-			map.put(key, new BigDecimal(0));
+		if(data.containsKey(key)){
+			//map.put(key, new BigDecimal(0));
 			ricevuti.put(key, 0);
-			timediff.put(key, new Pair<>(0, new Date()));
+		//	timediff.put(key, new Pair<>(0, new Date()));
+			dataProve d = data.get(key);
+			d.init();
+			data.put(key, d);
 			log.info("Clear "+key);
 			return "<html><body>OK</body></html>";
 		}else 
@@ -76,18 +84,28 @@ public class APIProveHWImpl {
 	@Path("/init/{key:.*}")
 	@GET
 	public String init(@PathParam("key") String key, @QueryParam("grantot") int grantotale){
-		if(map.containsKey(key)){
-			map.put(key, new BigDecimal(grantotale));
+		if(data.containsKey(key)){
+			//map.put(key, new BigDecimal(grantotale));
 			ricevuti.put(key, 0);
-			timediff.put(key, new Pair<>(0, new Date()));
+		//	timediff.put(key, new Pair<>(0, new Date()));
+			
+			dataProve d = data.get(key);
+			d.init();
+			d.setGrantotale(new BigDecimal(grantotale));
+			data.put(key, d);
+			
 			log.info("Init: "+key);
 			log.info("Grantotale "+grantotale);
 			log.info("");
 			return "<html><body>OK,  Init: "+key+" Grantotale "+grantotale+"</body></html>";
 		}else{
-			map.put(key, new BigDecimal(grantotale));
+			//map.put(key, new BigDecimal(grantotale));
 			ricevuti.put(key, 0);
-			timediff.put(key, new Pair<>(0, new Date()));
+		//	timediff.put(key, new Pair<>(0, new Date()));
+			dataProve d = new dataProve(key,new BigDecimal(grantotale), 0,0);
+			d.setOldtime(new Date());
+			data.put(key, d);
+			
 			log.info("Init "+key);
 			log.info("Grantotale "+grantotale);
 			return "<html><body>Elemento non presente, creato Init: "+key+" Grantotale: "+grantotale+"</body></html>";
@@ -98,10 +116,10 @@ public class APIProveHWImpl {
 	@Path("/info/{key:.*}")
 	@GET
 	public String info(@PathParam("key") String key){
-		if(map.containsKey(key)){
-			BigDecimal grantotale = map.get(key);
+		if(data.containsKey(key)){
+			BigDecimal grantotale = data.get(key).getGrantotale();
 			int num = ricevuti.get(key);
-			Integer  diff = timediff.get(key).getFirst();
+			Integer  diff = data.get(key).getDifftime();//timediff.get(key).getFirst();
 		//	map.put(key, new BigDecimal(0));
 			//ricevuti.put(key, 0);
 			log.info("Info for: "+key);
@@ -136,12 +154,13 @@ public class APIProveHWImpl {
 			
 			int num = aggiornaricevuti(ipAddress);
 			if(num<=1){
-				Properties p = LoadProperties.loadp();
+				loadconfig(ipAddress);
+				/*Properties p = LoadProperties.loadp();
 				if(p.getProperty("ip").equals(ipAddress))
-					map.put(p.getProperty("ip"), new BigDecimal(p.getProperty("grantotale")));
+					map.put(p.getProperty("ip"), new BigDecimal(p.getProperty("grantotale")));*/
 			}
 			Utility.writeTo(Corrispettivi, ipAddress, num);
-			Utility.calc(Corrispettivi, ipAddress, map);
+			Utility.calc(Corrispettivi, ipAddress, data);
 			
 			EsitoOperazioneType esito = new EsitoOperazioneType();
 			esito.setIdOperazione(String.valueOf(num));
@@ -165,15 +184,37 @@ public class APIProveHWImpl {
 
 	
 
+	private void loadconfig(String ipAddress) throws FileNotFoundException {
+		
+		
+		Gson g = new Gson();
+		JsonReader reader = new JsonReader(new FileReader("config.json"));
+		Type listType = new TypeToken<ArrayList<dataProve>>(){}.getType();
+		List<dataProve> Listmf = g.fromJson(reader, listType);
+
+		for(dataProve d : Listmf){
+			String key = d.getIpAddress();
+			data.put(key, d);
+			//map.put(key, d.getGrantotale());
+			//ricevuti.put(key, 1);
+			//timediff.put(key, new Pair<>(0, new Date()));
+		}
+		
+		
+	/*	if(p.getProperty("ip").equals(ipAddress))
+			map.put(p.getProperty("ip"), new BigDecimal(p.getProperty("grantotale")));*/
+		
+	}
+
 	private void aggiornadiff(Date now,  String key) {
-		if(timediff.containsKey(key)){
-			Date oldtime = (Date) timediff.get(key).getSecond();
+		
+		if(data.containsKey(key)){
+			Date oldtime = data.get(key).getOldtime();
 			int diff = (int)((now.getTime()-oldtime.getTime()) / 1000);
-			timediff.put(key, new Pair<>(diff,now));
+			data.get(key).setDifftime(diff);
+			data.get(key).setOldtime(now);
+		//	timediff.put(key, new Pair<>(diff,now));
 			log.info("diff_time: "+diff);
-		}else{
-			timediff.put(key, new Pair<>(0,now));
-			log.info("diff_time: "+0);
 		}
 		
 	}
@@ -220,16 +261,9 @@ public class APIProveHWImpl {
 	@Path("/jinfo/")
 	@GET
 	public String jinfo(){
-		Collection<dataProve> c = new ArrayList<>();
-		for(String key : map.keySet()){
-			BigDecimal grantotale = map.get(key);
-			int num = ricevuti.get(key);
-			int diff = timediff.get(key).getFirst();
-			dataProve dp = new dataProve(key, grantotale, num, diff);
-			c.add(dp);
-			
-			
-		}
+		Collection<dataProve> c = data.values();
+		
+		
 		Gson g = new Gson();
 			//List<Prova> Listprove = g.fromJson(MF, listType);
 		return g.toJson(c);

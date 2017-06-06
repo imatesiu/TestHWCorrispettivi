@@ -21,12 +21,13 @@ import javax.xml.bind.Marshaller;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.DatiRegistratoriTelematiciType;
 import cnr.isti.sse.data.corrispettivi.IVAType;
+import cnr.isti.sse.data.send.dataProve;
 
 public class Utility {
 	
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Utility.class);
 	
-	public static void calc(DatiCorrispettiviType corrispettivi, String key, Map<String, BigDecimal> map) {
+	public static void calc(DatiCorrispettiviType corrispettivi, String key, Map<String, dataProve> data) {
 
 		
 		log.info("Dati di trasmissione: ");
@@ -63,30 +64,32 @@ public class Utility {
 					log.error("imposta Errata!! mi aspettavo iva "+impostaiva+" trovo "+iva.getImposta());			
 				}
 				if(lordo.compareTo(new BigDecimal(0))!=0)
-					if(map.containsKey(key)){
-						BigDecimal old = map.get(key);
+					if(data.containsKey(key)){
+						dataProve d = data.get(key);
+						BigDecimal old = d.getGrantotale();
 						BigDecimal res = old.add(lordo);
 						log.info("Ricevuto per "+key+": "+lordo);
 						log.info("totale per "+key+": "+res);
-						map.put(key, res );
-					}else{
-						map.put(key, lordo);
+						d.setGrantotale( res );
+					}/*else{
+						data.put(key, lordo);
 						log.info("Ricevuto per "+key+": "+lordo);
 						log.info("totale per "+key+": "+lordo);
-					}
+					}*/
 			}else{
 				if(ammontare.compareTo(new BigDecimal(0))!=0)
-					if(map.containsKey(key)){
-						BigDecimal old = map.get(key);
+					if(data.containsKey(key)){
+						dataProve d = data.get(key);
+						BigDecimal old = d.getGrantotale();
 						BigDecimal res = old.add(ammontare);
 						log.info("Ricevuto per "+key+": "+ammontare);
 						log.info("totale per "+key+": "+res);
-						map.put(key, res );
-					}else{
-						map.put(key, ammontare);
+						d.setGrantotale( res );
+					}/*else{
+						data.put(key, ammontare);
 						log.info("Ricevuto per "+key+": "+ammontare);
 						log.info("totale per "+key+": "+ammontare);
-					}
+					}*/
 			}
 		}
 
