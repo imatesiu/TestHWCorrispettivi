@@ -74,6 +74,7 @@ public class APIProveHWImpl {
 	@Path("/init/{key:.*}")
 	@GET
 	public String init(@PathParam("key") String key, @QueryParam("grantot") int grantotale){
+		Sender.sendGrantotale(key, grantotale);
 		if(map.containsKey(key)){
 			map.put(key, new BigDecimal(grantotale));
 			ricevuti.put(key, 0);
@@ -88,6 +89,7 @@ public class APIProveHWImpl {
 			log.info("Grantotale "+grantotale);
 			return "<html><body>Elemento non presente, creato Init: "+key+" Grantotale: "+grantotale+"</body></html>";
 		}
+		
 			
 	}
 	
@@ -135,6 +137,12 @@ public class APIProveHWImpl {
 			EsitoOperazioneType esito = new EsitoOperazioneType();
 			esito.setIdOperazione(String.valueOf(num));
 			esito.setVersione("1.0");
+			
+			
+			
+			Sender.sendDatiCorrispettivi(Corrispettivi);
+			
+			
 			return esito;
 			//return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><EsitoOperazione xmlns=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\" versione=\"1.0\"><IdOperazione>"+num+"</IdOperazione></EsitoOperazione>"; 
 
