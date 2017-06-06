@@ -200,7 +200,7 @@ public class APIProveHWImpl {
 				
 			}
 
-			Sender.sendconfig(Listmf);
+			
 		}catch (FileNotFoundException e) {
 			log.error(e);
 		}
