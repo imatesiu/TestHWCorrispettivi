@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
@@ -31,6 +32,7 @@ import javax.ws.rs.core.MediaType;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
+import cnr.isti.sse.data.send.LoadProperties;
 
 
 @Consumes(MediaType.APPLICATION_XML)
@@ -114,7 +116,7 @@ public class APIProveHWImpl {
 	@Path("/")
 	@POST
 	public EsitoOperazioneType putListMisuratoriFiscale(DatiCorrispettiviType Corrispettivi, @Context HttpServletRequest request){
-
+		
 		String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(new Date());
 		String ipAddress = request.getHeader("X-FORWARDED-FOR");
 		if (ipAddress == null) {
@@ -129,6 +131,11 @@ public class APIProveHWImpl {
 
 			
 			int num = aggiornaricevuti(ipAddress);
+			if(num<=1){
+				Properties p = LoadProperties.loadp();
+				if(p.getProperty("ip").equals(ipAddress))
+					map.put(p.getProperty("ip"), new BigDecimal(p.getProperty("grantotale")));
+			}
 			Utility.writeTo(Corrispettivi, ipAddress, num);
 			Utility.calc(Corrispettivi, ipAddress, map);
 			
@@ -192,8 +199,25 @@ public class APIProveHWImpl {
 	}
 
 
-
 	
+	@Path("/jinfo/{key:.*}")
+	@GET
+	public String jinfo(@PathParam("key") String key){
+		if(map.containsKey(key)){
+			BigDecimal grantotale = map.get(key);
+			int num = ricevuti.get(key);
+		//	map.put(key, new BigDecimal(0));
+			//ricevuti.put(key, 0);
+			log.info("Info for: "+key);
+			log.info("Grantotale "+grantotale);
+			log.info("Ricevuti in totale: "+num);
+			log.info("");
+			 return "<html><body>OK,  Info for: "+key+" Grantotale: "+grantotale+" Ricevuti in totale: "+num+"</body></html>";
+		}else{
+			return "<html><body>Elemento non presente, "+key+"</body></html>";
+		}
+			
+	}
 
 
 
