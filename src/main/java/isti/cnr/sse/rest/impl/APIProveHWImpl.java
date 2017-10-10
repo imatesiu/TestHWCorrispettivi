@@ -138,7 +138,7 @@ public class APIProveHWImpl {
 			EsitoOperazioneType esito = new EsitoOperazioneType();
 			esito.setIdOperazione(String.valueOf(num));
 			esito.setVersione("1.0"); 
-			Beep.tone(1000, 300);  
+			Beep.tone(1000, 300,ipAddress );  
 			return esito;
 			//return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><EsitoOperazione xmlns=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\" versione=\"1.0\"><IdOperazione>"+num+"</IdOperazione></EsitoOperazione>"; 
 

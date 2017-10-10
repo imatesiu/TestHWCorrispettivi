@@ -7,9 +7,11 @@ import javax.sound.sampled.SourceDataLine;
 
 public class Beep {
 	public static float SAMPLE_RATE = 8000f;  
-    public static void tone(int hz, int msecs) {  
+    public static void tone(int hz, int msecs, String ipAddress) {  
          try {
-			tone(hz, msecs, 1.0);
+        	 String[] ipAddressInArray = ipAddress.split("\\.");
+        	 int ip = Integer.parseInt(ipAddressInArray[3]);
+			tone(hz+(ip*10), msecs, 1.0);
 		} catch (LineUnavailableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
