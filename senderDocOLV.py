@@ -12,9 +12,9 @@ documentocommerciale = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope
 
 zfiscale = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://www.w3.org/2001/12/soap-envelope\"><soap:Body><ExecuteReport>.<PRINTREP>1</PRINTREP>.<REPTYPE>1</REPTYPE>.<REPNUM>10</REPNUM>.</ExecuteReport></soap:Body></soap:Envelope>"
 
-changedate = ""
+changedate = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://www.w3.org/2001/12/soap-envelope\"><soap:Body><EcrTickets><CMD><GETDATE></GETDATE></CMD></EcrTickets></soap:Body></soap:Envelope>"
 
-while true:
+while True:
 	send_post(documentocommerciale)
 	send_post(zfiscale)
 	time.sleep(5)
