@@ -14,10 +14,14 @@ zfiscale = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=
 
 changedate = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://www.w3.org/2001/12/soap-envelope\"><soap:Body><EcrTickets><CMD><GETDATE></GETDATE></CMD></EcrTickets></soap:Body></soap:Envelope>"
 
+
+data2 = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://www.w3.org/2001/12/soap-envelope\"><soap:Body><SetEcrDate><SETDATE><DATE>09092017</DATE><TIME>020000</TIME></SETDATE></SetEcrDate></soap:Body></soap:Envelope>"
+
 num = 1
 while True:
 	if num == 1 or num == 70:
 			send_post(changedate)
+			send_post(data2)
 			num = 2
 	send_post(documentocommerciale)
 	send_post(zfiscale)
