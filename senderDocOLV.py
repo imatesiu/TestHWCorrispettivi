@@ -1,7 +1,7 @@
 import requests
 import time
 
-set_ip_apparato = "192.168.0.170"
+set_ip_apparato = "192.168.1.110"
 
 def send_post(content):
 	response = requests.post('http://'+set_ip_apparato+':80/oli_webservice.cgi',data=content,headers={"Content-Type": "text/xml"})
@@ -14,13 +14,15 @@ zfiscale = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=
 
 changedate = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://www.w3.org/2001/12/soap-envelope\"><soap:Body><EcrTickets><CMD><GETDATE></GETDATE></CMD></EcrTickets></soap:Body></soap:Envelope>"
 
+day = 7
+data2 = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://www.w3.org/2001/12/soap-envelope\"><soap:Body><SetEcrDate><SETDATE><DATE>08102017</DATE><TIME>010000</TIME></SETDATE></SetEcrDate></soap:Body></soap:Envelope>"
 
-data2 = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://www.w3.org/2001/12/soap-envelope\"><soap:Body><SetEcrDate><SETDATE><DATE>09092017</DATE><TIME>020000</TIME></SETDATE></SetEcrDate></soap:Body></soap:Envelope>"
 
-num = 1
+num = 2
 while True:
 	if num == 1 or num == 70:
 			send_post(changedate)
+			send_post(data2)
 			send_post(data2)
 			num = 2
 	send_post(documentocommerciale)
