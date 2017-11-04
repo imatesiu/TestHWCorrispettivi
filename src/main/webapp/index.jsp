@@ -18,7 +18,7 @@
 <h:panelGroup>
 <div style="width: 600px;">
 <p align="center">
- <a href="http://www.fmt.isti.cnr.it" target="_blank">System and Software Evaluation Center Fiscal Group</a><br/>
+ <a href="http://ssec.isti.cnr.it" target="_blank">System and Software Evaluation Center Fiscal Group</a><br/>
 <a href="http://www.isti.cnr.it" target="_blank">Institute of information science and technologies "Alessandro Faedo"</a><br/>  
 <a href="http://www.cnr.it" target="_blank"><img  src="images/Logo_CNR-2010-ENG-high.png" style="height: 80px;" /></a>
 </p>
