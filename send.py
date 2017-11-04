@@ -2,7 +2,7 @@ import requests
 
 
 def send_post(content):
-	response = requests.post('http://192.168.0.146:9090/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"})
+	response = requests.post('http://127.0.0.1:9090/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"})
 	print response.text
 	assert response.status_code == 200
 
