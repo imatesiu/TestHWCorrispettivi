@@ -5,6 +5,7 @@ from requests.auth import HTTPDigestAuth
 import datetime as date
 import hashlib
 import re
+from datetime import datetime
 
 
 def createhash(content):
@@ -35,19 +36,23 @@ def request_token():
 	matches = re.findall(regex, reply)
 	for matche in matches:
 		token = matche.replace("</token>","").replace("token>","")
-		return token,token[:44], float(token[44:])/100
+		ndoc = int(token[36:40])
+		znum = token[32:36]
+		return token,token[:44], float(token[44:])/100, int(ndoc),znum
 	exit(0)
 
 
 
 
 
-token,tok,dailyamount = request_token()
+token,tok,dailyamount,ndoc,znum = request_token()
 print token
 
 dailyamount -= 10.5
+ndoc +=1
+daten =  datetime.now().strftime('%Y%m%dT%H%M%S') #20171023T085606
 
-scontrino = "<receipt><hash fingerPrint=\""+token+"\"/><printerFiscalReceipt><beginFiscalReceipt/><printRecItem description=\"VAT ID 1\" quantity=\"1\" unitPrice=\"-10,00\" vatID=\"1\"/><printRecItem description=\"VAT ID 2\" quantity=\"1\" unitPrice=\"0,20\" vatID=\"2\"/><printRecItem description=\"VAT ID 3\" quantity=\"1\" unitPrice=\"-0,30\" vatID=\"3\"/><printRecItem description=\"VAT ID 0\" quantity=\"1\" unitPrice=\"-0,40\" vatID=\"0\"/><printRecTotal description=\"PAGAMENTO CONTANTE\" index=\"0\" payment=\"0\" paymentType=\"0\"/><fiscalInformation cashAmount=\"-10,50\" changeAmount=\"0,00\" dailyAmount=\""+str(dailyamount).replace(".",",")+"\" dateTime=\"20171023T085606\" docType=\"0\" ePayAmount=\"-10,00\" noPayAmount=\"0,00\" paidAmount=\"-10,50\" recAmount=\"-10,50\" recNumber=\"0006\" recVAT=\"-1,83\" tillId=\"AAAA0001\" zRepNumber=\"0036\"/><endFiscalReceipt/></printerFiscalReceipt></receipt>"
+scontrino = "<receipt><hash fingerPrint=\""+token+"\"/><printerFiscalReceipt><beginFiscalReceipt/><printRecItem description=\"VAT ID 1\" quantity=\"1\" unitPrice=\"-10,00\" vatID=\"1\"/><printRecItem description=\"VAT ID 2\" quantity=\"1\" unitPrice=\"0,20\" vatID=\"2\"/><printRecItem description=\"VAT ID 3\" quantity=\"1\" unitPrice=\"-0,30\" vatID=\"3\"/><printRecItem description=\"VAT ID 0\" quantity=\"1\" unitPrice=\"-0,40\" vatID=\"0\"/><printRecTotal description=\"PAGAMENTO CONTANTE\" index=\"0\" payment=\"0\" paymentType=\"0\"/><fiscalInformation cashAmount=\"-10,50\" changeAmount=\"0,00\" dailyAmount=\""+str(dailyamount).replace(".",",")+"\" dateTime=\""+daten+"\" docType=\"0\" ePayAmount=\"-10,00\" noPayAmount=\"0,00\" paidAmount=\"-10,50\" recAmount=\"-10,50\" recNumber=\""+str(ndoc).zfill(4)+"\" recVAT=\"-1,83\" tillId=\"AAAA0001\" zRepNumber=\""+znum+"\"/><endFiscalReceipt/></printerFiscalReceipt></receipt>"
 
 hash = createhash(scontrino)
 
