@@ -22,14 +22,14 @@ set_ip_server = "10.0.0.90"
 
 
 def send_post(content):
-	response = requests.post('https://'+set_ip_server+'/cgi-bin/fpserver.cgi',data=content,auth=HTTPDigestAuth('AAAA0001', 'epson'),headers={"Content-Type": "application/soap+xml" }, verify=False)
+	response = requests.post('https://'+set_ip_server+'/cgi-bin/fpserver.cgi',data=content,auth=HTTPDigestAuth('AAAA0002', 'epson'),headers={"Content-Type": "application/soap+xml" }, verify=False)
 	#response = requests.post('http://'+set_ip_apparato+':80/cgi-bin/epos/service.cgi?devid=local_printer',data=content,headers={"Content-Type": "application/soap+xml"})
 	print response.text
 	assert response.status_code == 200
 	return response.text
 	
 def request_token():
-	token = "<createToken><till tillId=\"AAAA0001\" /></createToken>"
+	token = "<createToken><till tillId=\"AAAA0002\" /></createToken>"
 	soaptoken = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"><soapenv:Body>"+token+"</soapenv:Body></soapenv:Envelope>"
 	reply = send_post(soaptoken)
 	regex = r"token>.*"
@@ -47,12 +47,16 @@ def request_token():
 
 token,tok,dailyamount,ndoc,znum = request_token()
 print token
+print dailyamount
+print ndoc
+print znum
+#exit(0)
 
-dailyamount -= 10.5
-ndoc +=1
+dailyamount += 0.2
+ndoc +=2
 daten =  datetime.now().strftime('%Y%m%dT%H%M%S') #20171023T085606
 
-scontrino = "<receipt><hash fingerPrint=\""+token+"\"/><printerFiscalReceipt><beginFiscalReceipt/><printRecItem description=\"VAT ID 1\" quantity=\"1\" unitPrice=\"-10,00\" vatID=\"1\"/><printRecItem description=\"VAT ID 2\" quantity=\"1\" unitPrice=\"0,20\" vatID=\"2\"/><printRecItem description=\"VAT ID 3\" quantity=\"1\" unitPrice=\"-0,30\" vatID=\"3\"/><printRecItem description=\"VAT ID 0\" quantity=\"1\" unitPrice=\"-0,40\" vatID=\"0\"/><printRecTotal description=\"PAGAMENTO CONTANTE\" index=\"0\" payment=\"0\" paymentType=\"0\"/><fiscalInformation cashAmount=\"-10,50\" changeAmount=\"0,00\" dailyAmount=\""+str(dailyamount).replace(".",",")+"\" dateTime=\""+daten+"\" docType=\"0\" ePayAmount=\"-10,00\" noPayAmount=\"0,00\" paidAmount=\"-10,50\" recAmount=\"-10,50\" recNumber=\""+str(ndoc).zfill(4)+"\" recVAT=\"-1,83\" tillId=\"AAAA0001\" zRepNumber=\""+znum+"\"/><endFiscalReceipt/></printerFiscalReceipt></receipt>"
+scontrino = "<receipt><hash fingerPrint=\""+token+"\"/><printerFiscalReceipt><beginFiscalReceipt/><printRecItem description=\"VAT ID 1\" quantity=\"1\" unitPrice=\"-10,00\" vatID=\"1\"/><printRecItem description=\"VAT ID 2\" quantity=\"1\" unitPrice=\"0,20\" vatID=\"2\"/><printRecItem description=\"VAT ID 3\" quantity=\"1\" unitPrice=\"-0,30\" vatID=\"3\"/><printRecItem description=\"VAT ID 0\" quantity=\"1\" unitPrice=\"-0,40\" vatID=\"0\"/><printRecTotal description=\"PAGAMENTO CONTANTE\" index=\"0\" payment=\"0\" paymentType=\"0\"/><fiscalInformation cashAmount=\"-10,50\" changeAmount=\"0,00\" dailyAmount=\""+str(dailyamount).replace(".",",")+"\" dateTime=\""+daten+"\" docType=\"0\" ePayAmount=\"-10,00\" noPayAmount=\"0,00\" paidAmount=\"-10,50\" recAmount=\"-10,50\" recNumber=\""+str(ndoc).zfill(4)+"\" recVAT=\"-1,83\" tillId=\"AAAA0002\" zRepNumber=\""+znum+"\"/><endFiscalReceipt/></printerFiscalReceipt></receipt>"
 
 hash = createhash(scontrino)
 

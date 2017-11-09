@@ -166,11 +166,14 @@
 				<version>1.5</version>
 				<configuration>
 					<keystore>${project.basedir}/src/main/config/jetty-ssl.keystore</keystore>
-					<dname>cn=localhost</dname>
+					<dname>cn=127.0.0.1 , ou=SSEC ISTI, L=Pisa, ST=Tuscany, o=CNR, c=IT</dname>
 					<!--Both `keypass` and `storepass` must be at least 6 characters long. -->
 					<keypass>jetty8</keypass>
 					<storepass>jetty8</storepass>
 					<alias>jetty8</alias>
+<sigalg>SHA256withRSA</sigalg>
+<ext>SAN=ip:127.0.0.1</ext>
+<trustcacerts>true</trustcacerts>
 					<keyalg>RSA</keyalg>
 					<validity>99999</validity>
 				</configuration>
@@ -179,8 +182,8 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>8.1.14.v20131031</version>
-
+				<!--<version>8.1.14.v20131031</version>-->
+<version>8.1.16.v20140903</version>
 				<configuration>
 					<connectors>
 						<connector implementation="org.eclipse.jetty.server.bio.SocketConnector">
@@ -190,6 +193,7 @@
 							<port>7443</port>
 							<keystore>${project.basedir}/src/main/config/jetty-ssl.keystore</keystore>
 							<keyPassword>jetty8</keyPassword>
+							<protocol>TLSv1.2</protocol> 
 							<password>jetty8</password>
 						</connector>
 					</connectors>
