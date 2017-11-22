@@ -125,6 +125,11 @@ public class APIProveHWImpl {
 		Date now = new Date();
 		String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(now);
 		String ipAddress = getMatricola(Corrispettivi);
+		if(ipAddress==null){
+			ipAddress = request.getHeader("X-FORWARDED-FOR");
+		}
+				
+				
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
@@ -216,22 +221,23 @@ public class APIProveHWImpl {
 
 	private String getMatricola(DatiCorrispettiviType d){
 		String matricola = null;
-		byte[] certificate = d.getSignature().getKeyInfo().getX509Data().getX509Certificate();
-		CertificateFactory fact = null;
-		try {
-			fact = CertificateFactory.getInstance("X.509");
+		if (d.getSignature() != null) {
+			byte[] certificate = d.getSignature().getKeyInfo().getX509Data().getX509Certificate();
+			CertificateFactory fact = null;
+			try {
+				fact = CertificateFactory.getInstance("X.509");
 
-			X509Certificate cer = (X509Certificate) fact.generateCertificate(new ByteArrayInputStream(certificate));
-			Principal principal = cer.getSubjectDN();
-			String name = principal.getName();
-			matricola = name.substring(3, 14);
-			
-		
-		} catch (CertificateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-	    
+				X509Certificate cer = (X509Certificate) fact.generateCertificate(new ByteArrayInputStream(certificate));
+				Principal principal = cer.getSubjectDN();
+				String name = principal.getName();
+				matricola = name.substring(3, 14);
+
+			} catch (CertificateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
 		return matricola;
 	}
 
