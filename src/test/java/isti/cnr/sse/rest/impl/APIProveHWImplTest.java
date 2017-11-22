@@ -2,7 +2,12 @@ package isti.cnr.sse.rest.impl;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.security.Principal;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
@@ -54,13 +59,13 @@ public class APIProveHWImplTest extends JerseyTest{
 	public void test() throws JAXBException {
 		
 		//for(int i = 0 ; i<10; i++){
-		String nameFilexml = "test_corrispettivi.xml";
+		String nameFilexml = "CC/c1.xml";//"corrispettivo.xml";//
 		runTest(nameFilexml);
 		sendgetinfo();
 		sendgetclear();
 		
 		
-		nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";
+	/*	nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";
 		runTest(nameFilexml);
 		
 		
@@ -72,7 +77,7 @@ public class APIProveHWImplTest extends JerseyTest{
 		runTest(nameFilexml);
 		
 		nameFilexml = "CC/RT_192.168.1.166_07_04_2017__10_17_24_6.xml";
-		runTest(nameFilexml);
+		runTest(nameFilexml);*/
 		sendgetinfo();
 		/*nameFilexml = "corrispettivo.xml";
 		runTest(nameFilexml);
@@ -101,7 +106,7 @@ public class APIProveHWImplTest extends JerseyTest{
 
 		Unmarshaller jaxbUnmarshaller1 = jaxbContexti.createUnmarshaller();
 		DatiCorrispettiviType collaborativeContentInput = (DatiCorrispettiviType) jaxbUnmarshaller1.unmarshal(is);
-
+getMatricola(collaborativeContentInput);
 		Entity<DatiCorrispettiviType> entity = Entity.entity(collaborativeContentInput,MediaType.APPLICATION_XML);
 		Response response =  target("/corrispettivi/").request(MediaType.APPLICATION_XML).post(entity);
 
@@ -119,6 +124,27 @@ public class APIProveHWImplTest extends JerseyTest{
 		//marshaller.marshal( res, System.out );
 		
 		assertNotNull(response);
+	}
+	
+	private String getMatricola(DatiCorrispettiviType d){
+		String matricola = null;
+		byte[] certificate = d.getSignature().getKeyInfo().getX509Data().getX509Certificate();
+		CertificateFactory fact = null;
+		try {
+			fact = CertificateFactory.getInstance("X.509");
+
+			X509Certificate cer = (X509Certificate) fact.generateCertificate(new ByteArrayInputStream(certificate));
+			Principal principal = cer.getSubjectDN();
+			String name = principal.getName();
+			matricola = name.substring(3, 14);
+			
+		
+		} catch (CertificateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	    
+		return matricola;
 	}
 
 }

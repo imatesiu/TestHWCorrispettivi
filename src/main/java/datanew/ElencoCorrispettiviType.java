@@ -1,12 +1,12 @@
 //
-// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.11.22 alle 09:38:20 PM CET 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+// Generato il: 2017.11.22 alle 11:15:36 PM CET 
 //
 
 
-package cnr.isti.sse.data.corrispettivi;
+package datanew;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ElencoCorrispettiviType", namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0", propOrder = {
+@XmlType(name = "ElencoCorrispettiviType", propOrder = {
     "riepilogo"
 })
 public class ElencoCorrispettiviType {

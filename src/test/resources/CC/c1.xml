@@ -1,0 +1,79 @@
+<p:DatiCorrispettivi
+	xmlns:p="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" versione="COR10"
+	xsi:schemaLocation="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0 CorrispettiviTypes_v1.0.xsd">
+	<Trasmissione>
+		<Progressivo>10</Progressivo>
+		<Formato>COR10</Formato>
+	</Trasmissione>
+	<DataOraRilevazione>2017-04-06T12:01:42</DataOraRilevazione>
+	<DatiRT>
+		<Riepilogo>
+			<IVA>
+				<AliquotaIVA>4.00</AliquotaIVA>
+				<Imposta>1.45</Imposta>
+			</IVA>
+			<Ammontare>36.18</Ammontare>
+		</Riepilogo>
+		<Riepilogo>
+			<IVA>
+				<AliquotaIVA>10.00</AliquotaIVA>
+				<Imposta>1.69</Imposta>
+			</IVA>
+			<Ammontare>30.45</Ammontare>
+			<TotaleAmmontareAnnulli>13.64</TotaleAmmontareAnnulli>
+		</Riepilogo>
+		<Riepilogo>
+			<IVA>
+				<AliquotaIVA>22.00</AliquotaIVA>
+				<Imposta>0.00</Imposta>
+			</IVA>
+			<Ammontare>28.69</Ammontare>
+			<TotaleAmmontareAnnulli>28.69</TotaleAmmontareAnnulli>
+		</Riepilogo>
+		<Riepilogo>
+			<IVA>
+				<AliquotaIVA>0.00</AliquotaIVA>
+				<Imposta>0.00</Imposta>
+			</IVA>
+			<Ammontare>0.00</Ammontare>
+		</Riepilogo>
+		<Riepilogo>
+			<IVA>
+				<AliquotaIVA>0.00</AliquotaIVA>
+				<Imposta>0.00</Imposta>
+			</IVA>
+			<Ammontare>0.00</Ammontare>
+		</Riepilogo>
+		<Riepilogo>
+			<Natura>N4</Natura>
+			<Ammontare>0.00</Ammontare>
+		</Riepilogo>
+	</DatiRT>
+	<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+		<SignedInfo xmlns="http://www.w3.org/2000/09/xmldsig#"
+			xmlns:p="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<CanonicalizationMethod
+				Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></CanonicalizationMethod>
+			<SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
+			<Reference URI="">
+				<Transforms>
+					<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></Transform>
+					<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></Transform>
+				</Transforms>
+				<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+				<DigestValue>20SAjTSEhp/fNWnnYLRe4sOLbF4QUqDMrAo9JRM905U=
+				</DigestValue>
+			</Reference>
+		</SignedInfo>
+		<SignatureValue>fLEO2zx1OYbCK/4YOEMWMIXNv4FUY8tUs8y2pkuFVdQ3Ws9qbwK8aeH7x1+hK/SliMI1u9NcbuS2Fce+p59QCxYQhUwEO9c+MUOfWBViytRiShCodeDJWtBtb78gXaw4MRCeQeXwRFqD7RnsSR7v37Z7aS5Mb7xjVSZ2xT1Iwld4ebxScs54s/pTexJphcyPzTA/YasHZBhA+o+1P9JdTrbBb8+K+taobWn+2fo/YYLU6zlk4ru/0HHbrjLpL1j72ZUO4lVU72tykfMtTODbFdmfO/aF8BjEYLTilXqXdljik2sTg1YsPtRSGbwGZnzx0KMBeOHRVP3MSDTyvZRBxA==
+		</SignatureValue>
+		<KeyInfo>
+			<X509Data>
+				<X509Certificate>MIID5zCCAs+gAwIBAgIILwMCP4dHIf8wDQYJKoZIhvcNAQELBQAwNTELMAkGA1UEBhMCSVQxDjAMBgNVBAoTBVNvZ2VpMRYwFAYDVQQDEw1DQSBTb2dlaSBUZXN0MB4XDTE3MDYwMTA4MjkzNVoXDTIwMDYwMTA4MjkzNVowazELMAkGA1UEBhMCSVQxHjAcBgNVBAoMFUFnZW56aWEgZGVsbGUgRW50cmF0ZTEmMCQGA1UECwwdU2Vydml6aW8gQUUgQ29ycmlzcGV0dGl2aSBJVkExFDASBgNVBAMMCzk2TUtSMDAwMTExMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4VxFVQlpMnvxFkq411+H2Ztzg0JNsXajRgC8L7GZgSW245xAzAuXqTm1aiVqDAK9jRKtHX2KiOzojW2Lwsyyt543LxxdMc2mE9J8JSu63Isq+LqGK7cUjzmfPgTVzw4owwNLA62shnVRpP92rYabIXATL2jXPVHYj77ahEI+56yM8e/H87LgA36l4pfGkxhj+k7s4RfHdX+6hyEsi+9J5VUhbP2Vp3zz5RawCGwqemwcXyfrjmNvLgJDgYlv91ILeoSvnLp+MXRmUzNdFGWt9LWlBtSCMF6d6WMU3WyWj85kr0JO6gKbnk370O3puXF6ZvIE9Snj1sGOoUy7gVjcswIDAQABo4HEMIHBMB8GA1UdIwQYMBaAFFfDfM0VomETCms+4cZJ7E5DH8OHMG8GA1UdHwRoMGYwZKBioGCGXmxkYXA6Ly9jYWRzLnNvZ2VpLmZpbmFuemUuaXQvY24lM2RDQSUyMFNvZ2VpJTIwVGVzdCxvJTNkU29nZWksYyUzZGl0P2NlcnRpZmljYXRlUmV2b2NhdGlvbkxpc3QwHQYDVR0OBBYEFNEgnD//xlUPjI6jXRIJ2/u1DF/nMA4GA1UdDwEB/wQEAwIGQDANBgkqhkiG9w0BAQsFAAOCAQEAmNEvZp9r8BqP1CZHtVO9sqee3e6ibQ3pjI2MxMPyxqz8krfxvEnjrfV7kmUqgnH95EFWBsn9a+VERs0xx0tR9TzpT1UylYNOdPxDfwgVqOPbq/rJrX4alml1OeWVv+qjuo7DLAeyRVXILKuvUlVkmOD45Bkvl0U1EovN9CwdOoyFQvwXnkWikZ/fIgFk1XmhVHWpX2BGh9AwD1K280emkAK5VbVfsOnCA/oByTFPAmYwGnjjKnB7NODDDfSDyLmehwnWYLyej0HNqXfZ4eHoWe83Yppb6/2DUFz9E4iGTMh0+aBGs6faOAFbHgSXi45NEV3cTiAYGgodvnM0oOG2sQ==
+				</X509Certificate>
+			</X509Data>
+		</KeyInfo>
+	</Signature>
+</p:DatiCorrispettivi>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:DatiCorrispettivi xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:p="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" versione="COR10" xsi:schemaLocation="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0 CorrispettiviTypes_v1.0.xsd http://www.w3.org/2000/09/xmldsig# xmldsig-core-schema.xsd">
+<Trasmissione>
+<Progressivo>000004</Progressivo>
+<Formato>COR10</Formato>
+</Trasmissione>
+<DataOraRilevazione>2017-10-01T14:47:48</DataOraRilevazione>
+<DatiRT>
+<Riepilogo>
+<IVA>
+<AliquotaIVA>22.00</AliquotaIVA>
+<Imposta>5.41</Imposta>
+</IVA>
+<Ammontare>24.59</Ammontare>
+<TotaleAmmontareResi>0.00</TotaleAmmontareResi>
+<TotaleAmmontareAnnulli>0.00</TotaleAmmontareAnnulli>
+</Riepilogo>
+</DatiRT>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+<ds:Reference URI="">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+<ds:DigestValue>3MUuXV5Yfn16Nmt2gAAT90dq1UJ09FnhWH/NabUDKAw=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>GOtOpcn7+wJqr67feajVY1ayD6/nr8qm6WmpdfsdRkNsiCyRvGO/GQ7fVmhEpOJJ
+nKAwNBywex/jAqmmtclHtO9vryJZYZJPMqrnQNINTrq2I4l4ad7/S0TNX5cWGMWN
+YBR0VkPomXwUxuVFk9uA9WDEeU8Wxz6CrStKIEzjNJGnq+XdrRE2E2bPmGdY6LYH
+tpF6FKy7OsHTsfTMyYd4B0FclnjUyF6r6/mMnDgtSsTU1m6UpCqvAAThvp/3gQXi
+roR1X/o7xAMXtR4wfhFcQzH2uHRmtn2fTwA4T0vwK3WMh0rYsjV6gU9qmjr7nVgx
+wFYZNg9CDU/SpHCpCL6diA==</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:X509Data>
+<ds:X509SubjectName>CN=80I15002815,OU=Servizio AE Corrispettivi IVA,O=Agenzia delle Entrate,C=IT</ds:X509SubjectName>
+<ds:X509Certificate>MIID5zCCAs+gAwIBAgIICebICtRnXQIwDQYJKoZIhvcNAQELBQAwNTELMAkGA1UE
+BhMCSVQxDjAMBgNVBAoTBVNvZ2VpMRYwFAYDVQQDEw1DQSBTb2dlaSBUZXN0MB4X
+DTE3MTAxOTA4NDgxNVoXDTIwMTAxOTA4NDgxNVowazELMAkGA1UEBhMCSVQxHjAc
+BgNVBAoMFUFnZW56aWEgZGVsbGUgRW50cmF0ZTEmMCQGA1UECwwdU2Vydml6aW8g
+QUUgQ29ycmlzcGV0dGl2aSBJVkExFDASBgNVBAMMCzgwSTE1MDAyODE1MIIBIjAN
+BgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqJR4AXI8sjXRvALXDFmL5Ro8ehEv
+u36oOGyg898vPBFLzflmLSz88dbtJ7yXvbJVBkRxAWbR8VdTzZqSzc9jUGwzhj+O
+Gv89EEoEir10EK5U5y+vu+d5Imqo/ugdRcpMtyOrI6UWqqzG+Lq8/EWlpyaLy5lb
+T53ko1bfg2BofMBjHA7FrCPNj++jUnj4v7v/s59/HgLSrhGOPqA9L4ovXFHFfWoe
+8Ko3PgiVtHNa14Hu/Sn63nsfHIUX4/RQPSiMzUxQBwmJBIW8cROvXa0p4bC9A3+T
+fs3764LbAB19RDEXnQZsivzr3r1iWyHfW8ISmc7c4AECyufMMTpeHi1FgQIDAQAB
+o4HEMIHBMB8GA1UdIwQYMBaAFFfDfM0VomETCms+4cZJ7E5DH8OHMG8GA1UdHwRo
+MGYwZKBioGCGXmxkYXA6Ly9jYWRzLnNvZ2VpLmZpbmFuemUuaXQvY24lM2RDQSUy
+MFNvZ2VpJTIwVGVzdCxvJTNkU29nZWksYyUzZGl0P2NlcnRpZmljYXRlUmV2b2Nh
+dGlvbkxpc3QwHQYDVR0OBBYEFFWFRAXjxaL6MWCrbfM88eT5FIMmMA4GA1UdDwEB
+/wQEAwIGQDANBgkqhkiG9w0BAQsFAAOCAQEAR9z36dK4TFtCWjhKTQT5zlhI3EDa
+jlHXVomIwy6Fi6QZKfC75xFb375nE43CKDhJLkCsvP+uTYz6iSAoCWqxA+0BPLQR
+QT0gWMZcGa0yI3NzwhJaQrWGW/IVXauBikkbe9b0z2syoaOf4RLNMhrVGexEFJE9
+w1C0KtX4MNWVyfh5G/vMHpuVWxtHz3PIEOU2MM06pyACMHXLIkKyC7GbUBOm2nc+
+SPKuU9HvNdkjkSOMjok0DWwCU2WLeURiJp/Wmun4PvKET5NAyarQfgTVfXzwlrCe
+lz3otZvKEzzTsGNpNWs03ldInjfl3u5Kv31db457rwxUs8iRZn3UEJDrUQ==</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature></p:DatiCorrispettivi>

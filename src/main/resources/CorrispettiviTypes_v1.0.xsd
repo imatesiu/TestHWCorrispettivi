@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
 	xmlns="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0"
 	targetNamespace="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0"
 	version="1.0">
-	
+	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#"
+		schemaLocation="./xmldsig-core-schema.xsd" />
 	<!-- =================================================================== -->
 	<!-- ELEMENTO PER TRASMISSIONE DATI CORRISPETTIVI -->
 	<!-- =================================================================== -->
@@ -30,10 +30,11 @@
 				minOccurs="0" maxOccurs="50" />
 			<xs:element name="Segnalazione" type="SegnalazioneType"
 				minOccurs="0" maxOccurs="50" />
-			
+			<xs:element ref="ds:Signature" />
 		</xs:sequence>
 		<xs:attribute name="versione" type="FormatoTrasmissioneType"
 			use="required" />
+		<xs:attribute name="simulazione" type="xs:string" fixed="true" />
 	</xs:complexType>
 	<xs:complexType name="DatiTrasmissioneType">
 		<xs:annotation>
@@ -131,26 +132,6 @@
 			<xs:enumeration value="N2">
 				<xs:annotation>
 					<xs:documentation>Non soggette</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="N2a">
-				<xs:annotation>
-					<xs:documentation>
-						Non soggette ex art. 2, comma 3, lett. a) del DPR 633/72
-					</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="N2b">
-				<xs:annotation>
-					<xs:documentation>
-						Non soggette ex artt. da 7 a 7 septies del DPR 633/72
-					</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="N2c">
-				<xs:annotation>
-					<xs:documentation>Non soggette ex art. 74 DPR 633/72
-					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="N3">

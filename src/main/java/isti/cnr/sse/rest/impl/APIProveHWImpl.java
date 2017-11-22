@@ -3,7 +3,12 @@ package isti.cnr.sse.rest.impl;
 
 
 
+import java.io.ByteArrayInputStream;
 import java.math.BigDecimal;
+import java.security.Principal;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -209,6 +214,25 @@ public class APIProveHWImpl {
 		//"<EsitoOperazione versione=\"1.0\"><IdOperazione>0</IdOperazione></EsitoOperazione>";
 	}
 
+	private String getMatricola(DatiCorrispettiviType d){
+		String matricola = null;
+		byte[] certificate = d.getSignature().getKeyInfo().getX509Data().getX509Certificate();
+		CertificateFactory fact = null;
+		try {
+			fact = CertificateFactory.getInstance("X.509");
 
+			X509Certificate cer = (X509Certificate) fact.generateCertificate(new ByteArrayInputStream(certificate));
+			Principal principal = cer.getSubjectDN();
+			String name = principal.getName();
+			matricola = name.substring(3, 14);
+			
+		
+		} catch (CertificateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	    
+		return matricola;
+	}
 
 }
