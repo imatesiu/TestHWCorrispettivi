@@ -9,8 +9,8 @@ public class Beep {
 	public static float SAMPLE_RATE = 8000f;  
     public static void tone(int hz, int msecs, String ipAddress) {  
          try {
-        	 String[] ipAddressInArray = ipAddress.split("\\.");
-        	 int ip = Integer.parseInt(ipAddressInArray[3]);
+        	 String ipAddressInArray = ipAddress.substring(ipAddress.length()-2,ipAddress.length());
+        	 int ip = Integer.parseInt(ipAddressInArray);
 			tone(hz+(ip*10), msecs, 1.0);
 		} catch (LineUnavailableException e) {
 			// TODO Auto-generated catch block

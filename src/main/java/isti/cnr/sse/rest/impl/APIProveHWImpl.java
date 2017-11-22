@@ -124,7 +124,7 @@ public class APIProveHWImpl {
 	public EsitoOperazioneType putListMisuratoriFiscale(DatiCorrispettiviType Corrispettivi, @Context HttpServletRequest request){
 		Date now = new Date();
 		String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(now);
-		String ipAddress = request.getHeader("X-FORWARDED-FOR");
+		String ipAddress = getMatricola(Corrispettivi);
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
