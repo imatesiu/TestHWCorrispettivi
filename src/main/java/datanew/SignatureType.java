@@ -1,7 +1,7 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
 // Generato il: 2017.11.22 alle 11:15:36 PM CET 
 //
 
@@ -41,12 +41,17 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SignatureType", namespace = "http://www.w3.org/2000/09/xmldsig#", propOrder = {
-    "signatureValue",
+@XmlType(name = "SignatureType", namespace = "http://www.w3.org/2000/09/xmldsig#" , propOrder = {
+		"signedInfo",
+	"signatureValue",
     "keyInfo"
 })
-public class SignatureType {
 
+public class SignatureType {
+	
+	
+	@XmlElement(name = "SignedInfo", namespace = "http://www.w3.org/2000/09/xmldsig#", required = true)
+    protected SignedInfoType signedInfo;
     @XmlElement(name = "SignatureValue", namespace = "http://www.w3.org/2000/09/xmldsig#", required = true)
     protected SignatureValueType signatureValue;
     @XmlElement(name = "KeyInfo", namespace = "http://www.w3.org/2000/09/xmldsig#")
@@ -58,7 +63,7 @@ public class SignatureType {
     protected String id;
 
     /**
-     * Recupera il valore della proprietà signatureValue.
+     * Recupera il valore della proprietï¿½ signatureValue.
      * 
      * @return
      *     possible object is
@@ -70,7 +75,7 @@ public class SignatureType {
     }
 
     /**
-     * Imposta il valore della proprietà signatureValue.
+     * Imposta il valore della proprietï¿½ signatureValue.
      * 
      * @param value
      *     allowed object is
@@ -82,7 +87,7 @@ public class SignatureType {
     }
 
     /**
-     * Recupera il valore della proprietà keyInfo.
+     * Recupera il valore della proprietï¿½ keyInfo.
      * 
      * @return
      *     possible object is
@@ -94,7 +99,7 @@ public class SignatureType {
     }
 
     /**
-     * Imposta il valore della proprietà keyInfo.
+     * Imposta il valore della proprietï¿½ keyInfo.
      * 
      * @param value
      *     allowed object is
@@ -106,7 +111,7 @@ public class SignatureType {
     }
 
     /**
-     * Recupera il valore della proprietà id.
+     * Recupera il valore della proprietï¿½ id.
      * 
      * @return
      *     possible object is
@@ -118,7 +123,7 @@ public class SignatureType {
     }
 
     /**
-     * Imposta il valore della proprietà id.
+     * Imposta il valore della proprietï¿½ id.
      * 
      * @param value
      *     allowed object is
@@ -127,6 +132,29 @@ public class SignatureType {
      */
     public void setId(String value) {
         this.id = value;
+    }
+    /**
+     * Gets the value of the signedInfo property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link SignedInfoType }
+     *     
+     */
+    public SignedInfoType getSignedInfo() {
+        return signedInfo;
+    }
+
+    /**
+     * Sets the value of the signedInfo property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SignedInfoType }
+     *     
+     */
+    public void setSignedInfo(SignedInfoType value) {
+        this.signedInfo = value;
     }
 
 }

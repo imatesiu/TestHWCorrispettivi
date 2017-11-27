@@ -2,8 +2,18 @@ package isti.cnr.sse.rest.impl;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
@@ -19,6 +29,11 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.io.FileUtils;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
+import org.glassfish.jersey.media.multipart.file.StreamDataBodyPart;
+import org.glassfish.jersey.message.internal.ReaderWriter;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.test.DeploymentContext;
@@ -53,15 +68,15 @@ public class APIProveHWImplTest extends JerseyTest {
 	}
 
 	@Test
-	public void test() throws JAXBException {
+	public void test() throws JAXBException, IOException {
 
 		// for(int i = 0 ; i<10; i++){
-		String nameFilexml = "corrispettivo.xml";//
+		String nameFilexml = "CC/00000005.xml";//
 		runTest(nameFilexml);
 		sendgetinfo();
 		sendgetclear();
 
-		/**/ nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";
+		/* nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";
 		runTest(nameFilexml);
 
 		nameFilexml = "CC/c1.xml";
@@ -81,7 +96,7 @@ public class APIProveHWImplTest extends JerseyTest {
 		runTest(nameFilexml);
 
 		nameFilexml = "CC/RT_192.168.1.166_07_04_2017__10_17_24_6.xml";
-		runTest(nameFilexml);
+		runTest(nameFilexml);*/
 		sendgetinfo();
 		/*
 		 * nameFilexml = "corrispettivo.xml"; runTest(nameFilexml); if(i==8){
@@ -100,18 +115,26 @@ public class APIProveHWImplTest extends JerseyTest {
 		Response response = target("/corrispettivi/info/127.0.0.1").request(MediaType.APPLICATION_XML).get();
 	}
 
-	private void runTest(String nameFilexml) throws JAXBException {
+	private void runTest(String nameFilexml) throws JAXBException, IOException {
 		InputStream is = APIProveHWImplTest.class.getClassLoader().getResourceAsStream(nameFilexml);
 		assertNotNull(is);
 		JAXBContext jaxbContexti = JAXBContext.newInstance(DatiCorrispettiviType.class);
 
 		Unmarshaller jaxbUnmarshaller1 = jaxbContexti.createUnmarshaller();
 		DatiCorrispettiviType collaborativeContentInput = (DatiCorrispettiviType) jaxbUnmarshaller1.unmarshal(is);
-		getMatricola(collaborativeContentInput);
+		//getMatricola(collaborativeContentInput);
 		Entity<DatiCorrispettiviType> entity = Entity.entity(collaborativeContentInput, MediaType.APPLICATION_XML);
-		Response response = target("/corrispettivi/").request(MediaType.APPLICATION_XML).post(entity);
+		
+		
+		File f = FileUtils.toFile( APIProveHWImplTest.class.getClassLoader().getResource(nameFilexml));
+		InputStream content = new FileInputStream(f);
+		final String read = ReaderWriter.readFromAsString(content, MediaType.APPLICATION_XML_TYPE);
+		
+		final Entity<String> rex = Entity.entity(read, MediaType.APPLICATION_XML_TYPE);
 
-		// String id = response.readEntity(String.class);
+		
+		Response response = target("/corrispettivi/").request(MediaType.APPLICATION_XML).post(rex);
+
 
 		EsitoOperazioneType res = response.readEntity(new GenericType<EsitoOperazioneType>() {
 		});
@@ -148,5 +171,20 @@ public class APIProveHWImplTest extends JerseyTest {
 		}
 		return matricola;
 	}
-
+	private String stringtoStreaming(InputStream inputStream){
+		
+		StringBuilder textBuilder = new StringBuilder();
+	   try{ 
+		   try (Reader reader = new BufferedReader(new InputStreamReader
+	      (inputStream, Charset.forName(StandardCharsets.UTF_8.name())))) {
+	        int c = 0;
+	        while ((c = reader.read()) != -1) {
+	            textBuilder.append((char) c);
+	        }
+	    }
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return textBuilder.toString();
+	}
 }

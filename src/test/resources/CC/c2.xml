@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <p:DatiCorrispettivi xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:p="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" versione="COR10" xsi:schemaLocation="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0 CorrispettiviTypes_v1.0.xsd http://www.w3.org/2000/09/xmldsig# xmldsig-core-schema.xsd">
 <Trasmissione>
-<Progressivo>000004</Progressivo>
+<Progressivo>000001</Progressivo>
 <Formato>COR10</Formato>
 </Trasmissione>
-<DataOraRilevazione>2017-10-01T14:47:48</DataOraRilevazione>
+<DataOraRilevazione>2017-10-01T14:09:16</DataOraRilevazione>
 <DatiRT>
 <Riepilogo>
 <IVA>
 <AliquotaIVA>22.00</AliquotaIVA>
-<Imposta>5.41</Imposta>
+<Imposta>1.80</Imposta>
 </IVA>
-<Ammontare>24.59</Ammontare>
+<Ammontare>8.20</Ammontare>
 <TotaleAmmontareResi>0.00</TotaleAmmontareResi>
 <TotaleAmmontareAnnulli>0.00</TotaleAmmontareAnnulli>
 </Riepilogo>
@@ -25,15 +25,15 @@
 <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-<ds:DigestValue>3MUuXV5Yfn16Nmt2gAAT90dq1UJ09FnhWH/NabUDKAw=</ds:DigestValue>
+<ds:DigestValue>ABhKOvbTMp+HqFIqm0/eSePb39kDgOuJc4vn/orBCiE=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
-<ds:SignatureValue>GOtOpcn7+wJqr67feajVY1ayD6/nr8qm6WmpdfsdRkNsiCyRvGO/GQ7fVmhEpOJJ
-nKAwNBywex/jAqmmtclHtO9vryJZYZJPMqrnQNINTrq2I4l4ad7/S0TNX5cWGMWN
-YBR0VkPomXwUxuVFk9uA9WDEeU8Wxz6CrStKIEzjNJGnq+XdrRE2E2bPmGdY6LYH
-tpF6FKy7OsHTsfTMyYd4B0FclnjUyF6r6/mMnDgtSsTU1m6UpCqvAAThvp/3gQXi
-roR1X/o7xAMXtR4wfhFcQzH2uHRmtn2fTwA4T0vwK3WMh0rYsjV6gU9qmjr7nVgx
-wFYZNg9CDU/SpHCpCL6diA==</ds:SignatureValue>
+<ds:SignatureValue>QcgTPQx7heQ8r5eSqdiNoO1QnIPnEfWDAWbOorKPNsQoDi7AaeDJQJQK/wLyYCh+
+tpOKhWDCpcEJR+cB85aThc1vydca7n1C0cBzmPPvuqOrJ1E70c9DdfeUpevBM622
+HgO93P7GJg5vImdtMeUGaC6fLNG+vPktTS7dUyIu8XwVYQ8/qntTEMxulbU5fChl
+mtxp20zSp3VmMqdpkd4BDKdTFPw0BPQdVMGCFI4fEvmDczSbcJQXzulj1ptSp/Xo
+/QWxSTzq4GpNSsf2VDrCHfAYxKaUyRCtw6d3cA1ojUuemfKzHPNLudWTHRj2ODl+
+WgSu+R9Vwh0Ny+Yd7ydvpA==</ds:SignatureValue>
 <ds:KeyInfo>
 <ds:X509Data>
 <ds:X509SubjectName>CN=80I15002815,OU=Servizio AE Corrispettivi IVA,O=Agenzia delle Entrate,C=IT</ds:X509SubjectName>

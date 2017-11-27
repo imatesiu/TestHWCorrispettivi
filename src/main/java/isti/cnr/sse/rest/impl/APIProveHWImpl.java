@@ -1,11 +1,13 @@
 package isti.cnr.sse.rest.impl;
 
-
-
-
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.security.Principal;
+import java.security.PublicKey;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
@@ -13,6 +15,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
@@ -25,36 +28,51 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.crypto.MarshalException;
+import javax.xml.crypto.dsig.Reference;
+import javax.xml.crypto.dsig.XMLSignature;
+import javax.xml.crypto.dsig.XMLSignatureException;
+import javax.xml.crypto.dsig.XMLSignatureFactory;
+import javax.xml.crypto.dsig.dom.DOMValidateContext;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.glassfish.grizzly.utils.Pair;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
 
-
-
 @Consumes(MediaType.APPLICATION_XML)
-//@Produces(MediaType.APPLICATION_XML)
+// @Produces(MediaType.APPLICATION_XML)
 @Path("/corrispettivi")
 public class APIProveHWImpl {
 
-	//@Inject 
-	//TokenPersistence em;
-
+	// @Inject
+	// TokenPersistence em;
 
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(APIProveHWImpl.class);
 
 	private static Map<String, BigDecimal> map = new HashMap<>();
-	
-	private static Map<String, Pair<Integer,Date>> timediff = new HashMap<>();
+
+	private static Map<String, Pair<Integer, Date>> timediff = new HashMap<>();
 
 	private static Map<String, Integer> ricevuti = new HashMap<>();
 
-
 	@Path("/clearall")
 	@GET
-	public String clearall(){
-		
+	public String clearall() {
+
 		map = new HashMap<>();
 		ricevuti = new HashMap<>();
 		timediff = new HashMap<>();
@@ -64,162 +82,169 @@ public class APIProveHWImpl {
 
 	@Path("/clear/{key:.*}")
 	@GET
-	public String clear(@PathParam("key") String key){
-		if(map.containsKey(key)){
+	public String clear(@PathParam("key") String key) {
+		if (map.containsKey(key)) {
 			map.put(key, new BigDecimal(0));
 			ricevuti.put(key, 0);
 			timediff.put(key, new Pair<>(0, new Date()));
-			log.info("Clear "+key);
+			log.info("Clear " + key);
 			return "<html><body>OK</body></html>";
-		}else 
+		} else
 			return "<html><body>Elemento non presente</body></html>";
 	}
-	
+
 	@Path("/init/{key:.*}")
 	@GET
-	public String init(@PathParam("key") String key, @QueryParam("grantot") int grantotale){
-		if(map.containsKey(key)){
+	public String init(@PathParam("key") String key, @QueryParam("grantot") int grantotale) {
+		if (map.containsKey(key)) {
 			map.put(key, new BigDecimal(grantotale));
 			ricevuti.put(key, 0);
 			timediff.put(key, new Pair<>(0, new Date()));
-			log.info("Init: "+key);
-			log.info("Grantotale "+grantotale);
+			log.info("Init: " + key);
+			log.info("Grantotale " + grantotale);
 			log.info("");
-			return "<html><body>OK,  Init: "+key+" Grantotale "+grantotale+"</body></html>";
-		}else{
+			return "<html><body>OK,  Init: " + key + " Grantotale " + grantotale + "</body></html>";
+		} else {
 			map.put(key, new BigDecimal(grantotale));
 			ricevuti.put(key, 0);
 			timediff.put(key, new Pair<>(0, new Date()));
-			log.info("Init "+key);
-			log.info("Grantotale "+grantotale);
-			return "<html><body>Elemento non presente, creato Init: "+key+" Grantotale: "+grantotale+"</body></html>";
+			log.info("Init " + key);
+			log.info("Grantotale " + grantotale);
+			return "<html><body>Elemento non presente, creato Init: " + key + " Grantotale: " + grantotale
+					+ "</body></html>";
 		}
-			
+
 	}
-	
+
 	@Path("/info/{key:.*}")
 	@GET
-	public String info(@PathParam("key") String key){
-		if(map.containsKey(key)){
+	public String info(@PathParam("key") String key) {
+		if (map.containsKey(key)) {
 			BigDecimal grantotale = map.get(key);
 			int num = ricevuti.get(key);
-			Integer  diff = timediff.get(key).getFirst();
-		//	map.put(key, new BigDecimal(0));
-			//ricevuti.put(key, 0);
-			log.info("Info for: "+key);
-			log.info("Grantotale "+grantotale);
-			log.info("Ricevuti in totale: "+num);
-			log.info("TimeDiff: "+diff);
+			Integer diff = timediff.get(key).getFirst();
+			// map.put(key, new BigDecimal(0));
+			// ricevuti.put(key, 0);
+			log.info("Info for: " + key);
+			log.info("Grantotale " + grantotale);
+			log.info("Ricevuti in totale: " + num);
+			log.info("TimeDiff: " + diff);
 			log.info("");
-			 return "<html><body>OK,  Info for: "+key+" Grantotale: "+grantotale+" Ricevuti in totale: "+num+" tempo in sencodi:"+diff+" </body></html>";
-		}else{
-			return "<html><body>Elemento non presente, "+key+"</body></html>";
+			return "<html><body>OK,  Info for: " + key + " Grantotale: " + grantotale + " Ricevuti in totale: " + num
+					+ " tempo in sencodi:" + diff + " </body></html>";
+		} else {
+			return "<html><body>Elemento non presente, " + key + "</body></html>";
 		}
-			
+
 	}
-	
 
 	@Path("/")
 	@POST
-	public EsitoOperazioneType putListMisuratoriFiscale(DatiCorrispettiviType Corrispettivi, @Context HttpServletRequest request){
+	public EsitoOperazioneType putListMisuratoriFiscale(String Corri, @Context HttpServletRequest request)
+			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
+									// @Context HttpServletRequest request){
+		JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
+		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+		StringReader reader = new StringReader(Corri);
+		DatiCorrispettiviType Corrispettivi = (DatiCorrispettiviType) unmarshaller.unmarshal(reader);
+
 		Date now = new Date();
 		String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(now);
-		String ipAddress = getMatricola(Corrispettivi);
-		if(ipAddress==null){
+		String ipAddress = getMatricola(Corrispettivi, Corri);
+		if (ipAddress == null) {
 			ipAddress = request.getHeader("X-FORWARDED-FOR");
 		}
-				
-				
+
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
-		log.info("received form: " +ipAddress+ " "+timeStamp);
-		try{
+		log.info("received form: " + ipAddress + " " + timeStamp);
+		try {
 
+			// is client behind something?
+			aggiornadiff(now, ipAddress);
 
-			//is client behind something?
-			aggiornadiff(now,ipAddress);
-			
-			
 			int num = aggiornaricevuti(ipAddress);
 			Utility.writeTo(Corrispettivi, ipAddress, num);
 			Utility.calc(Corrispettivi, ipAddress, map);
-			
+
 			EsitoOperazioneType esito = new EsitoOperazioneType();
 			esito.setIdOperazione(String.valueOf(num));
-			esito.setVersione("1.0"); 
-			Beep.tone(1000, 300,ipAddress );  
+			esito.setVersione("1.0");
+			Beep.tone(1000, 300, ipAddress);
 			return esito;
-			//return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><EsitoOperazione xmlns=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\" versione=\"1.0\"><IdOperazione>"+num+"</IdOperazione></EsitoOperazione>"; 
+			// return "<?xml version=\"1.0\" encoding=\"UTF-8\"
+			// standalone=\"yes\"?><EsitoOperazione
+			// xmlns=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\"
+			// versione=\"1.0\"><IdOperazione>"+num+"</IdOperazione></EsitoOperazione>";
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			log.error(e);
 		}
 
-		int x = (int)Math.random() * 10;
+		int x = (int) Math.random() * 10;
 		EsitoOperazioneType esito = new EsitoOperazioneType();
 		esito.setIdOperazione(String.valueOf(x));
 		esito.setVersione("1.0");
-        
-		return esito;// "<ns2:EsitoOperazione xmlns:ns2=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\" versione=\"1.0\"><IdOperazione>0</IdOperazione></ns2:EsitoOperazione>"; 
-		
+
+		return esito;// "<ns2:EsitoOperazione
+						// xmlns:ns2=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\"
+						// versione=\"1.0\"><IdOperazione>0</IdOperazione></ns2:EsitoOperazione>";
 
 	}
 
-	
-
-	private void aggiornadiff(Date now,  String key) {
-		if(timediff.containsKey(key)){
+	private void aggiornadiff(Date now, String key) {
+		if (timediff.containsKey(key)) {
 			Date oldtime = (Date) timediff.get(key).getSecond();
-			int diff = (int)((now.getTime()-oldtime.getTime()) / 1000);
-			timediff.put(key, new Pair<>(diff,now));
-			log.info("diff_time: "+diff);
-		}else{
-			timediff.put(key, new Pair<>(0,now));
-			log.info("diff_time: "+0);
+			int diff = (int) ((now.getTime() - oldtime.getTime()) / 1000);
+			timediff.put(key, new Pair<>(diff, now));
+			log.info("diff_time: " + diff);
+		} else {
+			timediff.put(key, new Pair<>(0, now));
+			log.info("diff_time: " + 0);
 		}
-		
+
 	}
 
 	private int aggiornaricevuti(String key) {
-		if(ricevuti.containsKey(key)){
+		if (ricevuti.containsKey(key)) {
 			int res = ricevuti.get(key) + 1;
-			log.info("totale ricevuti da "+key+": "+res);
-			ricevuti.put(key, res );
+			log.info("totale ricevuti da " + key + ": " + res);
+			ricevuti.put(key, res);
 			return res;
-		}else{
-			ricevuti.put(key, 1 );
-			log.info("totale ricevuti da "+key+": 1");
+		} else {
+			ricevuti.put(key, 1);
+			log.info("totale ricevuti da " + key + ": 1");
 			return 1;
 		}
-		
+
 	}
 
-	@Path("/v1")
-	@POST
-	public String putListMisuratoriFiscale(String Corrispettivi, @Context HttpServletRequest request){
+	/*
+	 * @Path("/v1")
+	 * 
+	 * @POST public String putListMisuratoriFiscale(String
+	 * Corrispettivi, @Context HttpServletRequest request){
+	 * 
+	 * 
+	 * String timeStamp = new
+	 * SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(new Date()); int x =
+	 * (int)Math.random() * 10; EsitoOperazioneType esito = new
+	 * EsitoOperazioneType(); esito.setIdOperazione(String.valueOf(x));
+	 * esito.setVersione("1.0"); //is client behind something? String ipAddress
+	 * = request.getHeader("X-FORWARDED-FOR"); if (ipAddress == null) {
+	 * ipAddress = request.getRemoteAddr(); } log.info("received form: "
+	 * +ipAddress+ " "+timeStamp); int num = aggiornaricevuti(ipAddress);
+	 * Utility.writeTo(Corrispettivi, ipAddress, num); // return
+	 * "<ns2:EsitoOperazione xmlns:ns2=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\" versione=\"1.0\"><IdOperazione>"
+	 * +num+"</IdOperazione></ns2:EsitoOperazione>";
+	 * //"<EsitoOperazione versione=\"1.0\"><IdOperazione>0</IdOperazione></EsitoOperazione>"
+	 * ; }
+	 */
 
-
-		String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(new Date());
-		int x = (int)Math.random() * 10;
-		EsitoOperazioneType esito = new EsitoOperazioneType();
-		esito.setIdOperazione(String.valueOf(x));
-		esito.setVersione("1.0");
-		//is client behind something?
-		String ipAddress = request.getHeader("X-FORWARDED-FOR");
-		if (ipAddress == null) {
-			ipAddress = request.getRemoteAddr();
-		}
-		log.info("received form: " +ipAddress+ " "+timeStamp);
-		int num = aggiornaricevuti(ipAddress);
-		Utility.writeTo(Corrispettivi, ipAddress, num);
-		//
-		return "<ns2:EsitoOperazione xmlns:ns2=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\" versione=\"1.0\"><IdOperazione>"+num+"</IdOperazione></ns2:EsitoOperazione>"; 
-		//"<EsitoOperazione versione=\"1.0\"><IdOperazione>0</IdOperazione></EsitoOperazione>";
-	}
-
-	private String getMatricola(DatiCorrispettiviType d){
+	private String getMatricola(DatiCorrispettiviType d, String corri) {
 		String matricola = null;
 		if (d.getSignature() != null) {
 			byte[] certificate = d.getSignature().getKeyInfo().getX509Data().getX509Certificate();
@@ -227,18 +252,83 @@ public class APIProveHWImpl {
 			try {
 				fact = CertificateFactory.getInstance("X.509");
 
-				X509Certificate cer = (X509Certificate) fact.generateCertificate(new ByteArrayInputStream(certificate));
-				Principal principal = cer.getSubjectDN();
+				X509Certificate cert = (X509Certificate) fact
+						.generateCertificate(new ByteArrayInputStream(certificate));
+
+				PublicKey publicKey = cert.getPublicKey();
+
+				Document doc = convertStringToDocument(corri);// marshallToDocument(d,DatiCorrispettiviType.class);
+
+				NodeList nl = doc.getElementsByTagNameNS(XMLSignature.XMLNS, "Signature");
+
+				if (nl.getLength() == 0) {
+					throw new Exception("Cannot find Signature element");
+				}
+
+				DOMValidateContext valContext = new DOMValidateContext(publicKey, nl.item(0));
+
+				XMLSignatureFactory fac = XMLSignatureFactory.getInstance("DOM");
+
+				XMLSignature signature = fac.unmarshalXMLSignature(valContext);
+
+				boolean validFlag = signature.validate(valContext);
+
+				// Check core validation status.
+				if (validFlag == false) {
+					System.err.println("Signature failed core validation");
+					boolean sv = signature.getSignatureValue().validate(valContext);
+					System.out.println("signature validation status: " + sv);
+					if (sv == false) {
+						// Check the validation status of each Reference.
+						Iterator i = signature.getSignedInfo().getReferences().iterator();
+						for (int j = 0; i.hasNext(); j++) {
+							boolean refValid = ((Reference) i.next()).validate(valContext);
+							System.out.println("ref[" + j + "] validity status: " + refValid);
+						}
+					}
+				} else {
+					System.out.println("Signature passed core validation");
+				}
+
+				Principal principal = cert.getSubjectDN();
 				String name = principal.getName();
 				matricola = name.substring(3, 14);
 
-			} catch (CertificateException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 		}
 		return matricola;
+	}
+
+	private static Document convertStringToDocument(String xmlStr) {
+		try {
+
+			DOMResult output = new DOMResult();
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.transform(new StreamSource(new StringReader(xmlStr)), output);
+
+			return (Document) output.getNode();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private <T> Document marshallToDocument(T object, Class<T> type) {
+		try {
+			JAXBContext context = JAXBContext.newInstance(type);
+			Marshaller marshaller = context.createMarshaller();
+			DOMResult domResult = new DOMResult();
+			marshaller.marshal(object, domResult);
+			return (Document) domResult.getNode();
+		} catch (JAXBException e) {
+			// Rethrow as runtime
+			throw new RuntimeException("Unable to marshall JAXB SAML object to DOM for signing.", e);
+		}
 	}
 
 }

@@ -17,12 +17,12 @@ import javax.xml.bind.annotation.XmlValue;
 
 
 /**
- * <p>Java class for DigestMethodType complex type.
+ * <p>Java class for SignatureMethodType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="DigestMethodType">
+ * &lt;complexType name="SignatureMethodType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;attribute name="Algorithm" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
@@ -34,10 +34,10 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DigestMethodType", namespace = "http://www.w3.org/2000/09/xmldsig#", propOrder = {
+@XmlType(name = "SignatureMethodType", namespace = "http://www.w3.org/2000/09/xmldsig#", propOrder = {
     "content"
 })
-public class DigestMethodType {
+public class SignatureMethodType {
 
     @XmlValue
     protected String content;
