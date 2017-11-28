@@ -166,7 +166,7 @@ public class APIProveHWImpl {
 			aggiornadiff(now, ipAddress);
 
 			int num = aggiornaricevuti(ipAddress);
-			Utility.writeTo(Corrispettivi, ipAddress, num);
+			Utility.writeTo(Corri, ipAddress, num);
 			Utility.calc(Corrispettivi, ipAddress, map);
 
 			EsitoOperazioneType esito = new EsitoOperazioneType();
@@ -275,6 +275,9 @@ public class APIProveHWImpl {
 
 				// Check core validation status.
 				if (validFlag == false) {
+					Beep.tone(1000, 300,1600);
+					Beep.tone(1000, 300,1600);
+					Beep.tone(1000, 300,1600);
 					System.err.println("Signature failed core validation");
 					boolean sv = signature.getSignatureValue().validate(valContext);
 					System.out.println("signature validation status: " + sv);
