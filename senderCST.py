@@ -17,11 +17,12 @@ import fileinput
 import hmac
 import hashlib
 import base64
+import time
 
 
 user = "0001ab01"
-
-user = sys.argv[2]
+if(len(sys.argv)>2):
+	 user = sys.argv[2]
 password = "admin"
 set_ip_server = "10.10.56.128"
 matricola = "96SRT000017"
@@ -522,6 +523,7 @@ for line in spamReader:
 		#print re
 		cashToken = signaure	
 		print "exit",ndoc
+		time.sleep(5) 
 		if(ndoc>=12):
 			break
 		#exit(0)
