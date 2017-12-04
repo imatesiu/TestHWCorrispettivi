@@ -389,7 +389,7 @@ def createTAX(imponibile,imposta,aliquota,imponibile2,imposta2,aliquota2):
 	#return res
       #imposta,aliquota,imposta2,aliquota2
 	
-def createfiscaldata(amount,importosenzasconto,element,element2,totale,iva,pagamentoC,pagamentoE,pagamentoCC,taxs,referenceClosurenumber,referenceDocnumber,doctype):
+def createfiscaldata(amount,importosenzasconto,element,element2,totale,iva,pagamentoC,pagamentoE,pagamentoCC,taxs,referenceClosurenumber,referenceDocnumber,doctype,z):
 	fiscal = {  
   	 "fiscalData":{  
       "document":{  
@@ -397,6 +397,7 @@ def createfiscaldata(amount,importosenzasconto,element,element2,totale,iva,pagam
          "doctype":str(doctype),
          "dtime":str(date),
          "docnumber":str(ndoc),
+         "docznumber":str(z),
          "amount":importosenzasconto,
          "fiscalcode":"",
          "vatcode": matricola,
@@ -501,7 +502,7 @@ for line in spamReader:
 		jpagementoC = createPagContanti(pagementoC)
 		jpagementoE = createPagElettronico(pagementoE)
 		jpagementoCred = createPagCredito(pagementoCred)
-		fiscal = createfiscaldata(amount,int(float(importoscontato.replace(",","."))*100),prev,prev2,current,iva,jpagementoC,jpagementoE,jpagementoCred,taxs,referenceClosurenumber,referenceDocnumber,doctype)
+		fiscal = createfiscaldata(amount,int(float(importoscontato.replace(",","."))*100),prev,prev2,current,iva,jpagementoC,jpagementoE,jpagementoCred,taxs,referenceClosurenumber,referenceDocnumber,doctype,z)
 		if(doctype==1 ):
 			amount += int(float(importoscontato.replace(",","."))*100)#int(importoscontato)
 
@@ -523,7 +524,7 @@ for line in spamReader:
 		#print re
 		cashToken = signaure	
 		print "exit",ndoc
-		time.sleep(5) 
+		#time.sleep(5) 
 		if(ndoc>=12):
 			break
 		#exit(0)
