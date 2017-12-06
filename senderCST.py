@@ -147,13 +147,13 @@ response  = {
 
 #json_response = json.dumps(response)
 data = json.loads(response)
-#print data
+print data
 #print type(data)
 cashToken =  data["cashToken"]
 cashHmacKey =  data["cashHmacKey"]
 numberClosure =  data["numberClosure"]
 cashLastDocNumber = data['cashLastDocNumber']
-print data
+
 
 print "##########"
 date =  datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -525,14 +525,18 @@ for line in spamReader:
 		cashToken = signaure	
 		print "exit",ndoc
 		#time.sleep(5) 
-		if(ndoc>=12):
+		if(ndoc>=13):
 			break
 		#exit(0)
+close = 0
+if(len(sys.argv)>3):
+	 close = sys.argv[3]
 
-close_ECR_command = {"data" : { "cashuuid" : user,"znum" : z , "dtime" : date, "amount" : amount}}
-json_close_ECR = json.dumps(close_ECR_command)
-resp = send_post(json_close_ECR,sendZ)
-print resp
+if (close==0):
+	close_ECR_command = {"data" : { "cashuuid" : user,"znum" : z , "dtime" : date, "amount" : amount}}
+	json_close_ECR = json.dumps(close_ECR_command)
+	resp = send_post(json_close_ECR,sendZ)
+	print resp
 
 exit(0)
 
