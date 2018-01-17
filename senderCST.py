@@ -24,8 +24,8 @@ user = "0001ab01"
 if(len(sys.argv)>2):
 	 user = sys.argv[2]
 password = "admin"
-set_ip_server = "10.10.56.128"
-matricola = "96SRT000017"
+set_ip_server = "10.10.56.136"
+matricola = "96SRT000036"
 
 
 
@@ -93,9 +93,15 @@ def read(filename):
 	del spamReader[0]
 	return spamReader
 
-
-
-
+'''
+i = 0 
+while i<17:
+	close_fiscalbox = {"data" : { "type" : "0"}}
+	json_close_fiscalbox = json.dumps(close_fiscalbox)
+	respc = send_post(json_close_fiscalbox,sendzdoc)
+	print respc
+exit(0)	
+'''
 '''
 amount = 0
 znum = 0
@@ -127,6 +133,7 @@ init = {"data" : { "cashuuid" : user}}
 json_init = json.dumps(init)
 response = send_post(json_init,getdailystatus)
 
+print json_init
 
 '''
 response  = { 
@@ -154,7 +161,7 @@ cashHmacKey =  data["cashHmacKey"]
 numberClosure =  data["numberClosure"]
 cashLastDocNumber = data['cashLastDocNumber']
 
-
+#exit(0)
 print "##########"
 date =  datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 openday = {"data" : { "cashuuid" : user, "dtime" : date}}
@@ -525,7 +532,7 @@ for line in spamReader:
 		cashToken = signaure	
 		print "exit",ndoc
 		#time.sleep(5) 
-		if(ndoc>=13):
+		if(ndoc>=12):
 			break
 		#exit(0)
 close = 0
