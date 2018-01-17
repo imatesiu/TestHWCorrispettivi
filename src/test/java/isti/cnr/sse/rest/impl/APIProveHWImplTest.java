@@ -71,12 +71,12 @@ public class APIProveHWImplTest extends JerseyTest {
 	public void test() throws JAXBException, IOException {
 
 		// for(int i = 0 ; i<10; i++){
-		String nameFilexml = "CC/00000005.xml";//
+		String nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";//
 		runTest(nameFilexml);
 		sendgetinfo();
 		sendgetclear();
 
-		 nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";
+		/*	 nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";
 		runTest(nameFilexml);
 
 		nameFilexml = "CC/c1.xml";
@@ -96,7 +96,7 @@ public class APIProveHWImplTest extends JerseyTest {
 		runTest(nameFilexml);
 
 		nameFilexml = "CC/RT_192.168.1.166_07_04_2017__10_17_24_6.xml";
-		runTest(nameFilexml);/**/
+		runTest(nameFilexml);*/
 		sendgetinfo();
 		/*
 		 * nameFilexml = "corrispettivo.xml"; runTest(nameFilexml); if(i==8){
