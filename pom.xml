@@ -191,7 +191,7 @@
 							<port>9090</port>
 						</connector>
 						<connector implementation="org.eclipse.jetty.server.ssl.SslSocketConnector">
-							<port>7443</port>
+							<port>443</port>
 							<keystore>${project.basedir}/src/main/config/jetty-ssl.keystore</keystore>
 							<keyPassword>jetty8</keyPassword>
 							<protocol>TLSv1.2</protocol>
