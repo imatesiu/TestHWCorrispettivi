@@ -32,13 +32,13 @@ The service is available at `localhost:9090/dispositivi/corrispettivi`.
 `curl -X POST -H "Content-Type: application/XML" --data @DatiCorrispettiviType.xml http://localhost:9090/dispositivi/corrispettivi/`
 
 * To send Init of :  
-`curl -X GET http://localhost:9090/dispositivi/corrispettivi/init/{ip}?grantot={grantotale}`
+`curl -X GET http://localhost:9090/dispositivi/corrispettivi/init/{matricola or ip}?grantot={grantotale}`
 
 * To get Status of :  
-`curl -X GET http://localhost:9090/dispositivi/corrispettivi/info/{ip}`
+`curl -X GET http://localhost:9090/dispositivi/corrispettivi/info/{matricola or ip}`
 
 * To send Clear:  
-`curl -X GET http://localhost:9090/dispositivi/corrispettivi/clear/{ip}`
+`curl -X GET http://localhost:9090/dispositivi/corrispettivi/clear/{matricola or ip}`
 
 * To send Clear all:  
 `curl -X GET http://localhost:9090/dispositivi/corrispettivi/clearall`
