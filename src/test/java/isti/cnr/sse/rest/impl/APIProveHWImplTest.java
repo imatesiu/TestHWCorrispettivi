@@ -71,7 +71,7 @@ public class APIProveHWImplTest extends JerseyTest {
 	public void test() throws JAXBException, IOException {
 
 		// for(int i = 0 ; i<10; i++){
-		String nameFilexml = "CC/00000005.xml";//
+		String nameFilexml = "CC/c1.xml";//
 		runTest(nameFilexml);
 		sendgetinfo();
 		sendgetclear();
