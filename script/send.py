@@ -2,8 +2,9 @@ import requests
 
 
 def send_post(content):
-	response = requests.post('http://192.168.1.146:9090/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"}, verify=False)
-	#response = requests.post('https://127.0.0.1:7443/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"}, verify=False)
+	#response = requests.post('http://192.168.1.146:9090/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"}, verify=False)
+	pem = 'cert.key'
+	response = requests.post('https://192.168.1.146:7443/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"}, verify=pem)
 	print response.text
 	assert response.status_code == 200
 
