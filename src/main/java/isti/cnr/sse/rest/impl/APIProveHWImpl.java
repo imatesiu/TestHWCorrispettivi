@@ -45,6 +45,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.io.IOUtils;
 import org.glassfish.grizzly.utils.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -140,9 +141,9 @@ public class APIProveHWImpl {
 
 	@Path("/")
 	@POST
-	public EsitoOperazioneType putListMisuratoriFiscale(String Corri, @Context HttpServletRequest request)
+	public String putListMisuratoriFiscale(String Corri, @Context HttpServletRequest request)
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
-									// @Context HttpServletRequest request){
+		// @Context HttpServletRequest request){
 		JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
@@ -173,25 +174,37 @@ public class APIProveHWImpl {
 			esito.setIdOperazione(String.valueOf(num));
 			esito.setVersione("1.0");
 			Beep.tone(1000, 300, ipAddress);
-			return esito;
+			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
+			String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+			return text;
 			// return "<?xml version=\"1.0\" encoding=\"UTF-8\"
 			// standalone=\"yes\"?><EsitoOperazione
 			// xmlns=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\"
 			// versione=\"1.0\"><IdOperazione>"+num+"</IdOperazione></EsitoOperazione>";
 
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error(e);
 		}
-
-		int x = (int) Math.random() * 10;
+		try{
+			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
+			String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+			return text;
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error(e);
+		}
+		return null;
+		/*int x = (int) Math.random() * 10;
 		EsitoOperazioneType esito = new EsitoOperazioneType();
 		esito.setIdOperazione(String.valueOf(x));
 		esito.setVersione("1.0");
 
-		return esito;// "<ns2:EsitoOperazione
-						// xmlns:ns2=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\"
-						// versione=\"1.0\"><IdOperazione>0</IdOperazione></ns2:EsitoOperazione>";
+		return esito;*/// "<ns2:EsitoOperazione
+		// xmlns:ns2=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\"
+		// versione=\"1.0\"><IdOperazione>0</IdOperazione></ns2:EsitoOperazione>";
 
 	}
 
