@@ -25,7 +25,15 @@ The component is ready to be packaged as a WAR to be deployed on an Application 
 
 The service is available at `localhost:9090/dispositivi/corrispettivi`.
 
+# How to install?
 
+  * Windows/Linux
+    * Install Java Sdk 1.8 
+    * Install Maven 
+    * Set the path and environment variables 
+  
+  * Download repository
+  * Run ./run.sh or run.bat
 
 # CURL Test
  * To send DatiCorrispettiviType XML to component, the reply is a EsitoOperazioneType:  
