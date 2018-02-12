@@ -167,7 +167,7 @@
 				<version>1.5</version>
 				<configuration>
 					<keystore>${project.basedir}/src/main/config/jetty-ssl.keystore</keystore>
-					<dname>cn=127.0.0.1 , ou=SSEC ISTI, L=Pisa, ST=Tuscany, o=CNR, c=IT</dname>
+					<dname>cn=192.168.1.* , ou=SSEC ISTI, L=Pisa, ST=Tuscany, o=CNR, c=IT</dname>
 					<!--Both `keypass` and `storepass` must be at least 6 characters long. -->
 					<keypass>jetty8</keypass>
 					<storepass>jetty8</storepass>
