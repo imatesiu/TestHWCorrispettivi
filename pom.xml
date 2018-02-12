@@ -173,7 +173,7 @@
 					<storepass>jetty8</storepass>
 					<alias>jetty8</alias>
 					<sigalg>SHA256withRSA</sigalg>
-					<ext>SAN=ip:127.0.0.1,ip:192.168.1.146,ip:192.168.0.146</ext>
+					<ext>SAN=ip:127.0.0.1,ip:192.168.1.146,ip:192.168.0.146,dns:localhost</ext>
 					<trustcacerts>true</trustcacerts>
 					<keyalg>RSA</keyalg>
 					<rfc>true</rfc>
