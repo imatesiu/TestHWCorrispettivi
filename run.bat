@@ -1,3 +1,2 @@
-mvn keytool:clean keytool:generateKeyPair
-mvn jetty:run 
+mvn keytool:clean keytool:generateKeyPair && mvn jetty:run 
 

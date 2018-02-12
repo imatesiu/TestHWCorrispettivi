@@ -45,6 +45,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.io.IOUtils;
 import org.glassfish.grizzly.utils.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -137,8 +138,76 @@ public class APIProveHWImpl {
 		}
 
 	}
-
+	
 	@Path("/")
+	@POST
+	public String putListMisuratoriFiscale2(String Corri, @Context HttpServletRequest request)
+			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
+		// @Context HttpServletRequest request){
+		JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
+		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+		StringReader reader = new StringReader(Corri);
+		DatiCorrispettiviType Corrispettivi = (DatiCorrispettiviType) unmarshaller.unmarshal(reader);
+
+		Date now = new Date();
+		String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(now);
+		String ipAddress = getMatricola(Corrispettivi, Corri);
+		if (ipAddress == null) {
+			ipAddress = request.getHeader("X-FORWARDED-FOR");
+		}
+
+		if (ipAddress == null) {
+			ipAddress = request.getRemoteAddr();
+		}
+		log.info("received form: " + ipAddress + " " + timeStamp);
+		try {
+
+			// is client behind something?
+			aggiornadiff(now, ipAddress);
+
+			int num = aggiornaricevuti(ipAddress);
+			Utility.writeTo(Corri, ipAddress, num);
+			Utility.calc(Corrispettivi, ipAddress, map);
+
+			EsitoOperazioneType esito = new EsitoOperazioneType();
+			esito.setIdOperazione(String.valueOf(num));
+			esito.setVersione("1.0");
+			Beep.tone(1000, 300, ipAddress);
+			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
+			String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+			return text;
+			// return "<?xml version=\"1.0\" encoding=\"UTF-8\"
+			// standalone=\"yes\"?><EsitoOperazione
+			// xmlns=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\"
+			// versione=\"1.0\"><IdOperazione>"+num+"</IdOperazione></EsitoOperazione>";
+
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error(e);
+		}
+		try{
+			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
+			String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+			return text;
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error(e);
+		}
+		return null;
+		/*int x = (int) Math.random() * 10;
+		EsitoOperazioneType esito = new EsitoOperazioneType();
+		esito.setIdOperazione(String.valueOf(x));
+		esito.setVersione("1.0");
+		return esito;*/// "<ns2:EsitoOperazione
+		// xmlns:ns2=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\"
+		// versione=\"1.0\"><IdOperazione>0</IdOperazione></ns2:EsitoOperazione>";
+
+	}
+
+/*	@Path("/v2")
 	@POST
 	public EsitoOperazioneType putListMisuratoriFiscale(String Corri, @Context HttpServletRequest request)
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
@@ -194,7 +263,7 @@ public class APIProveHWImpl {
 						// versione=\"1.0\"><IdOperazione>0</IdOperazione></ns2:EsitoOperazione>";
 
 	}
-
+*/
 	private void aggiornadiff(Date now, String key) {
 		if (timediff.containsKey(key)) {
 			Date oldtime = (Date) timediff.get(key).getSecond();
