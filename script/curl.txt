@@ -1,0 +1,4 @@
+curl -POST  -k  --header 'Content-Type: application/xml' --header 'Accept: application/xml' 'https://192.168.1.146:7443/dispositivi/corrispettivi/' --data-binary @file.xml --verbose
+
+
+
