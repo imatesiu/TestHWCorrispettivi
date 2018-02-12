@@ -167,15 +167,17 @@
 				<version>1.5</version>
 				<configuration>
 					<keystore>${project.basedir}/src/main/config/jetty-ssl.keystore</keystore>
-					<dname>cn=127.0.0.1 , ou=SSEC ISTI, L=Pisa, ST=Tuscany, o=CNR, c=IT</dname>
+					<dname>cn=192.168.1.* , ou=SSEC ISTI, L=Pisa, ST=Tuscany, o=CNR, c=IT</dname>
 					<!--Both `keypass` and `storepass` must be at least 6 characters long. -->
 					<keypass>jetty8</keypass>
 					<storepass>jetty8</storepass>
 					<alias>jetty8</alias>
 					<sigalg>SHA256withRSA</sigalg>
-					<ext>SAN=ip:127.0.0.1</ext>
+					<ext>SAN=ip:127.0.0.1,ip:192.168.1.146,ip:192.168.0.146,dns:localhost</ext>
 					<trustcacerts>true</trustcacerts>
 					<keyalg>RSA</keyalg>
+					<rfc>true</rfc>
+					<file>${project.basedir}/script/cert.key</file>
 					<validity>99999</validity>
 				</configuration>
 			</plugin>
