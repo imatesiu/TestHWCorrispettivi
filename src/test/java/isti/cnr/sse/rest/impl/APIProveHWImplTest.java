@@ -12,12 +12,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.StringReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.Principal;
+import java.security.PublicKey;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.Iterator;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
@@ -28,8 +31,17 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.crypto.dsig.Reference;
+import javax.xml.crypto.dsig.XMLSignature;
+import javax.xml.crypto.dsig.XMLSignatureFactory;
+import javax.xml.crypto.dsig.dom.DOMValidateContext;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
 import org.glassfish.jersey.media.multipart.file.StreamDataBodyPart;
@@ -43,6 +55,8 @@ import org.glassfish.jersey.test.TestProperties;
 import org.glassfish.jersey.test.grizzly.GrizzlyWebTestContainerFactory;
 import org.glassfish.jersey.test.spi.TestContainerFactory;
 import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
@@ -124,23 +138,32 @@ public class APIProveHWImplTest extends JerseyTest {
 		DatiCorrispettiviType collaborativeContentInput = (DatiCorrispettiviType) jaxbUnmarshaller1.unmarshal(is);
 		//getMatricola(collaborativeContentInput);
 		Entity<DatiCorrispettiviType> entity = Entity.entity(collaborativeContentInput, MediaType.APPLICATION_XML);
-		
-		
+
+
 		File f = FileUtils.toFile( APIProveHWImplTest.class.getClassLoader().getResource(nameFilexml));
 		InputStream content = new FileInputStream(f);
 		final String read = ReaderWriter.readFromAsString(content, MediaType.APPLICATION_XML_TYPE);
-		
+
 		final Entity<String> rex = Entity.entity(read, MediaType.APPLICATION_XML_TYPE);
 
-		
+
 		Response response = target("/corrispettivi/").request(MediaType.APPLICATION_XML).post(rex);
 
 
-		EsitoOperazioneType res = response.readEntity(new GenericType<EsitoOperazioneType>() {
+
+		String res2 = response.readEntity(new GenericType<String>() {
 		});
+		JAXBContext jaxbContext = JAXBContext.newInstance(EsitoOperazioneType.class);
+		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
+		StringReader reader = new StringReader(res2);
+		EsitoOperazioneType esito = (EsitoOperazioneType) unmarshaller.unmarshal(reader);
+		byte[] certificate = esito.getSignature().getKeyInfo().getX509Data().getX509Certificate();
+		statusCertificateAndSignature(certificate,res2);
+
+
+		//EsitoOperazioneType res = response.readEntity(new GenericType<EsitoOperazioneType>() {});
 		JAXBContext jaxbCtx = javax.xml.bind.JAXBContext.newInstance(EsitoOperazioneType.class);
-
 		Marshaller marshaller = jaxbCtx.createMarshaller();
 		marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_ENCODING, "UTF-8"); // NOI18N
 		marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -172,19 +195,98 @@ public class APIProveHWImplTest extends JerseyTest {
 		return matricola;
 	}
 	private String stringtoStreaming(InputStream inputStream){
-		
+
 		StringBuilder textBuilder = new StringBuilder();
-	   try{ 
-		   try (Reader reader = new BufferedReader(new InputStreamReader
-	      (inputStream, Charset.forName(StandardCharsets.UTF_8.name())))) {
-	        int c = 0;
-	        while ((c = reader.read()) != -1) {
-	            textBuilder.append((char) c);
-	        }
-	    }
+		try{ 
+			try (Reader reader = new BufferedReader(new InputStreamReader
+					(inputStream, Charset.forName(StandardCharsets.UTF_8.name())))) {
+				int c = 0;
+				while ((c = reader.read()) != -1) {
+					textBuilder.append((char) c);
+				}
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return textBuilder.toString();
 	}
+
+
+	private boolean statusCertificateAndSignature(byte[] certificate, String Document) {
+
+		//byte[] certificate = d.getSignature().getKeyInfo().getX509Data().getX509Certificate();
+		CertificateFactory fact = null;
+		try {
+			fact = CertificateFactory.getInstance("X.509");
+
+			X509Certificate cert = (X509Certificate) fact
+					.generateCertificate(new ByteArrayInputStream(certificate));
+
+			PublicKey publicKey = cert.getPublicKey();
+
+			Document doc = convertStringToDocument(Document);// marshallToDocument(d,DatiCorrispettiviType.class);
+
+			NodeList nl = doc.getElementsByTagNameNS(XMLSignature.XMLNS, "Signature");
+
+			if (nl.getLength() == 0) {
+				throw new Exception("Cannot find Signature element");
+			}
+
+			DOMValidateContext valContext = new DOMValidateContext(publicKey, nl.item(0));
+
+			XMLSignatureFactory fac = XMLSignatureFactory.getInstance("DOM");
+
+			XMLSignature signature = fac.unmarshalXMLSignature(valContext);
+
+			boolean validFlag = signature.validate(valContext);
+
+			// Check core validation status.
+			if (validFlag == false) {
+				Beep.tone(1000, 300,1600);
+				Beep.tone(1000, 300,1600);
+				Beep.tone(1000, 300,1600);
+				System.err.println("Signature failed core validation");
+				boolean sv = signature.getSignatureValue().validate(valContext);
+				System.out.println("signature validation status: " + sv);
+				if (sv == false) {
+					// Check the validation status of each Reference.
+					Iterator i = signature.getSignedInfo().getReferences().iterator();
+					for (int j = 0; i.hasNext(); j++) {
+						boolean refValid = ((Reference) i.next()).validate(valContext);
+						System.out.println("ref[" + j + "] validity status: " + refValid);
+					}
+				}
+			} else {
+				System.out.println("Signature passed core validation");
+			}
+
+			Principal principal = cert.getSubjectDN();
+			String name = principal.getName();
+			return validFlag;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+
+
+	private static Document convertStringToDocument(String xmlStr) {
+		try {
+
+			DOMResult output = new DOMResult();
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.transform(new StreamSource(new StringReader(xmlStr)), output);
+
+			return (Document) output.getNode();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

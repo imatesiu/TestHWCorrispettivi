@@ -15,6 +15,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import datanew.SignatureType;
+
 
 /**
  * <p>Classe Java per EsitoOperazioneType complex type.
@@ -37,11 +39,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
-@XmlRootElement(name = "EsitoOperazione", namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0")
+@XmlRootElement(name = "EsitoOperazione", namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EsitoOperazioneType", propOrder = {
     "idOperazione",
-    "errori"
+    "errori",
+    "signature"
 })
 public class EsitoOperazioneType {
 
@@ -51,6 +54,8 @@ public class EsitoOperazioneType {
     protected ErroriType errori;
     @XmlAttribute(name = "versione", required = true)
     protected String versione;
+    @XmlElement(name = "Signature", namespace = "http://www.w3.org/2000/09/xmldsig#")
+    protected SignatureType signature;
 
     /**
      * Recupera il valore della propriet� idOperazione.
@@ -127,5 +132,27 @@ public class EsitoOperazioneType {
     public void setVersione(String value) {
         this.versione = value;
     }
+    /**
+     * Recupera il valore della propriet� signature.
+     * 
+     * @return
+     *     possible object is
+     *     {@link SignatureType }
+     *     
+    */
+    public SignatureType getSignature() {
+        return signature;
+    } 
 
+    /**
+     * Imposta il valore della propriet� signature.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SignatureType }
+     *     
+     */
+    public void setSignature(SignatureType value) {
+        this.signature = value;
+    }
 }
