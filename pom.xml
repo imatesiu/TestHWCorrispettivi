@@ -176,8 +176,8 @@
 					<ext>EKU=serverAuth" -ext "KU=dS,keyEncipherment,dataEncipherment,cRLS,kCS" -ext "SAN=ip:192.168.1.146,ip:127.0.0.1,ip:192.168.0.146,dns:localhost" -ext "CRLDistributionPoints=URI:ldap://cads.entrate.finanze.it/</ext>
 					<trustcacerts>true</trustcacerts>
 					<keyalg>RSA</keyalg>
+					<verbose>true</verbose>
 					<skip>true</skip>
-					<verobose>true</verobose>
 					<rfc>true</rfc>
 					<file>${project.basedir}/script/cert.pem</file>
 					<validity>99999</validity>
@@ -196,7 +196,7 @@
 						</connector>
 						<connector implementation="org.eclipse.jetty.server.ssl.SslSocketConnector">
 							<port>443</port>
-							<keystore>${project.basedir}/src/main/config/jetty-ssl.keystore</keystore>
+							<keystore>${project.basedir}/src/main/config/jetty-server-ssl.jks</keystore>
 							<keyPassword>jetty8</keyPassword>
 							<protocol>TLSv1.2</protocol>
 							<password>jetty8</password>
