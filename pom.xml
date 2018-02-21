@@ -176,8 +176,10 @@
 					<ext>EKU=serverAuth" -ext "KU=dS,keyEncipherment,dataEncipherment,cRLS,kCS" -ext "SAN=ip:192.168.1.146,ip:127.0.0.1,ip:192.168.0.146,dns:localhost" -ext "CRLDistributionPoints=URI:ldap://cads.entrate.finanze.it/</ext>
 					<trustcacerts>true</trustcacerts>
 					<keyalg>RSA</keyalg>
+					<skip>true</skip>
+					<verobose>true</verobose>
 					<rfc>true</rfc>
-					<file>${project.basedir}/script/cert.key</file>
+					<file>${project.basedir}/script/cert.pem</file>
 					<validity>99999</validity>
 				</configuration>
 			</plugin>
