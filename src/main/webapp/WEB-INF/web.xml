@@ -38,6 +38,7 @@
  
 	<servlet-mapping>
 		<servlet-name>jersey-serlvet</servlet-name>
+		<url-pattern>/v1/dispositivi/*</url-pattern>
 		<url-pattern>/dispositivi/*</url-pattern>
 	</servlet-mapping>
   
