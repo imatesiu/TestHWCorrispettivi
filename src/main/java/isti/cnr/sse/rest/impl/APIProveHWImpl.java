@@ -146,22 +146,23 @@ public class APIProveHWImpl {
 		// @Context HttpServletRequest request){
 		JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-
-		StringReader reader = new StringReader(Corri);
-		DatiCorrispettiviType Corrispettivi = (DatiCorrispettiviType) unmarshaller.unmarshal(reader);
-
-		Date now = new Date();
-		String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(now);
-		String ipAddress = getMatricola(Corrispettivi, Corri);
-		if (ipAddress == null) {
-			ipAddress = request.getHeader("X-FORWARDED-FOR");
-		}
-
-		if (ipAddress == null) {
-			ipAddress = request.getRemoteAddr();
-		}
-		log.info("received form: " + ipAddress + " " + timeStamp);
 		try {
+			StringReader reader = new StringReader(Corri);
+			DatiCorrispettiviType Corrispettivi = (DatiCorrispettiviType) unmarshaller.unmarshal(reader);
+
+			Date now = new Date();
+			String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(now);
+			Pair<String, Boolean> pair = getMatricola(Corrispettivi, Corri);
+			String ipAddress = pair.getFirst();
+			if (ipAddress == null) {
+				ipAddress = request.getHeader("X-FORWARDED-FOR");
+			}
+
+			if (ipAddress == null) {
+				ipAddress = request.getRemoteAddr();
+			}
+			log.info("received form: " + ipAddress + " " + timeStamp);
+
 
 			// is client behind something?
 			aggiornadiff(now, ipAddress);
@@ -174,9 +175,16 @@ public class APIProveHWImpl {
 			esito.setIdOperazione(String.valueOf(num));
 			esito.setVersione("1.0");
 			Beep.tone(1000, 300, ipAddress);
-			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
-			String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-			return text;
+			
+			if(pair.getSecond()){
+				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
+				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+				return text;
+			}else{
+				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
+				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+				return text;
+			}
 			// return "<?xml version=\"1.0\" encoding=\"UTF-8\"
 			// standalone=\"yes\"?><EsitoOperazione
 			// xmlns=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\"
@@ -313,8 +321,9 @@ public class APIProveHWImpl {
 	 * ; }
 	 */
 
-	private String getMatricola(DatiCorrispettiviType d, String corri) {
-		String matricola = null;
+	private Pair<String,Boolean> getMatricola(DatiCorrispettiviType d, String corri) {
+		String matricola = "";
+		boolean validFlag = false;
 		if (d.getSignature() != null) {
 			byte[] certificate = d.getSignature().getKeyInfo().getX509Data().getX509Certificate();
 			CertificateFactory fact = null;
@@ -340,7 +349,7 @@ public class APIProveHWImpl {
 
 				XMLSignature signature = fac.unmarshalXMLSignature(valContext);
 
-				boolean validFlag = signature.validate(valContext);
+				validFlag = signature.validate(valContext);
 
 				// Check core validation status.
 				if (validFlag == false) {
@@ -372,7 +381,10 @@ public class APIProveHWImpl {
 			}
 
 		}
-		return matricola;
+		Pair <String,Boolean> pair = new Pair<>();
+		pair.setFirst(matricola);
+		pair.setSecond(validFlag);
+		return pair;
 	}
 
 	private static Document convertStringToDocument(String xmlStr) {
