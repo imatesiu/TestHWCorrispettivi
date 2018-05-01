@@ -6,7 +6,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.ws.rs.core.GenericType;
 
+import isti.cnr.sse.rest.impl.RT;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.StatusType;
 
 
 
@@ -67,8 +71,16 @@ public class NewProva {
 		args[4] = "z";
 		args[5] = getZchiusure();
 		SendRest s = new SendRest();
-		String resutl = s.sendGet("init/"+getMatricola(), args);
-		addMessage(resutl);
+		Response resp = s.sendGet("init/"+getMatricola(), args);
+		/*RT res = resp.readEntity(new GenericType<RT>() {
+		});*/
+		StatusType sf = resp.getStatusInfo();
+		if(sf.getStatusCode()==200){
+			addMessage(getMatricola()+" added");
+		}else{
+			addMessage(getMatricola()+"NOT added");
+		}
+		
 	}
 	
 	public void addMessage(String summary) {

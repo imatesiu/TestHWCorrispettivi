@@ -14,9 +14,11 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -125,7 +127,7 @@ public class APIProveHWImpl {
 		if (map.containsKey(key)) {
 			RT rt = map.get(key);
 			BigDecimal grantotale = rt.getGT();
-			int num = rt.getKricevuti();
+			int num = rt.getZricevuti();
 			Integer diff = rt.getTimediff();
 			// map.put(key, new BigDecimal(0));
 			// ricevuti.put(key, 0);
@@ -148,7 +150,7 @@ public class APIProveHWImpl {
 		if (map.containsKey(key)) {
 			RT rt = map.get(key);
 			BigDecimal grantotale = rt.getGT();
-			int num = rt.getKricevuti();
+			int num = rt.getZricevuti();
 			Integer diff = rt.getTimediff();
 			// map.put(key, new BigDecimal(0));
 			// ricevuti.put(key, 0);
@@ -164,13 +166,23 @@ public class APIProveHWImpl {
 
 	}
 	
+	@Path("/allrt/")
+	@GET
+	public Collection<RT> allrtinfo() {
+		
+			log.info("");
+			return map.values();
+		
+
+	}
+	
 	@Path("/stop/{key:.*}")
 	@GET
 	public String rtstop(@PathParam("key") String key) {
 		if (map.containsKey(key)) {
 			RT rt = map.get(key);
 			BigDecimal grantotale = rt.getGT();
-			int num = rt.getKricevuti();
+			int num = rt.getZricevuti();
 			Integer diff = rt.getTimediff();
 			rt.setCloded();
 			log.info("Info for: " + key);
@@ -337,9 +349,9 @@ public class APIProveHWImpl {
 	private int aggiornaricevuti(String key) {
 		if (map.containsKey(key)) {
 			RT rt = map.get(key);
-			int res = rt.getKricevuti() + 1;
+			int res = rt.getZricevuti() + 1;
 			log.info("totale ricevuti da " + key + ": " + res);
-			rt.setKricevuti(res);
+			rt.setZricevuti(res);
 			return res;
 		} /*else {
 			ricevuti.put(key, 1);

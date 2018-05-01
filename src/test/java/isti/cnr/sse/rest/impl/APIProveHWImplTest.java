@@ -20,7 +20,10 @@ import java.security.PublicKey;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
@@ -84,7 +87,7 @@ public class APIProveHWImplTest extends JerseyTest {
 	@Test
 	public void test() throws JAXBException, IOException {
 
-		sendinit();sendrt();
+		sendinit();sendrtall();
 		// for(int i = 0 ; i<10; i++){
 		String nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";//
 		runTest(nameFilexml);
@@ -127,12 +130,20 @@ public class APIProveHWImplTest extends JerseyTest {
 	}
 	
 	private void sendinit() {
-		Response response = target("/corrispettivi/init/96MKR000111").queryParam("grantot", "28.8","desc","ciao").request(MediaType.APPLICATION_XML).get();
+		Response response = target("/corrispettivi/init/96MKR000111").queryParam("grantot", "28.8","desc","ciao","z","33").request(MediaType.APPLICATION_XML).get();
 	}
 	
 	private void sendrt() {
 		Response response = target("/corrispettivi/rt/96MKR000111").request(MediaType.APPLICATION_XML).get();
 		System.out.println(response);
+	}
+	
+	private void sendrtall() {
+		Response response = target("/corrispettivi/allrt/").request(MediaType.APPLICATION_XML).get();
+		System.out.println(response);
+		Collection<RT> res = response.readEntity(new GenericType<Collection<RT>>() {
+		});
+		System.out.println(res);
 	}
 
 	private void sendgetinfo() {

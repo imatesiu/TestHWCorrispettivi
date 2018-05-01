@@ -18,8 +18,11 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import isti.cnr.sse.rest.impl.RT;
 
 
 
@@ -62,13 +65,13 @@ try{
 	}
 	
 
-	public String sendGet(String path, String... args){
+	public Response sendGet(String path, String... args){
 		Client client = ignoreSSLClient();
 		WebTarget target = client.target("https://127.0.0.1").path("/v1/dispositivi/corrispettivi/"+path)
 				.queryParam(args[0], args[1]).queryParam(args[2], args[3]).queryParam(args[4], args[5]);
 		Response allID =  target.request(MediaType.APPLICATION_XML).get();
-		String res = allID.readEntity(String.class);
-		return res;
+
+		return allID;
 	}
 
 

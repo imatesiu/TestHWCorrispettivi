@@ -48,6 +48,18 @@ public class RT {
 	
 	
 	
+	public RT() {
+		this.Matricola="";
+		GT = new BigDecimal(0);
+		this.timediff = 0;
+		this.starttime = new Date();
+		this.workingtime = starttime;
+		this.stoptime = starttime;
+		Zricevuti = 0;
+		this.Descrizione = "";
+		this.isCloded = false;
+	}
+
 	public RT(String Matricola,BigDecimal gT, Integer timediff, Date starttime, Date workingtime, Date stoptime, Integer kricevuti) {
 	
 		this.Matricola=Matricola;
@@ -93,6 +105,9 @@ public class RT {
 
 	public void setDescrizione(String descrizione) {
 		Descrizione = descrizione;
+		if(descrizione==null){
+			Descrizione= "";
+		}
 	}
 
 	public boolean isCloded() {
@@ -145,10 +160,10 @@ public class RT {
 	public void setStoptime(Date stoptime) {
 		this.stoptime = stoptime;
 	}
-	public Integer getKricevuti() {
+	public Integer getZricevuti() {
 		return Zricevuti;
 	}
-	public void setKricevuti(Integer kricevuti) {
+	public void setZricevuti(Integer kricevuti) {
 		Zricevuti = kricevuti;
 	}
 
@@ -158,13 +173,13 @@ public class RT {
 				+ ", workingtime=" + workingtime + ", stoptime=" + stoptime + ", Kricevuti=" + Zricevuti + "]";
 	}
 
-	public void setZ(int k) {
-		Z = k;
-		
-	}
 	
 	public Integer getZ() {
 		return Z+Zricevuti;
+	}
+
+	public void setZ(Integer z) {
+		Z = z;
 	}
 	
 	
