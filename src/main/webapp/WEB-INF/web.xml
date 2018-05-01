@@ -40,10 +40,7 @@
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		<servlet-mapping>
-		<servlet-name>faces-servlet</servlet-name>
-		<url-pattern>*.xhtml</url-pattern>
-	</servlet-mapping>
+		
 		<context-param>
 		<param-name>facelets.SKIP_COMMENTS</param-name>
 		<param-value>true</param-value>
@@ -53,6 +50,11 @@
 		<servlet-name>jersey-serlvet</servlet-name>
 		<url-pattern>/v1/dispositivi/*</url-pattern>
 		<url-pattern>/dispositivi/*</url-pattern>
+	</servlet-mapping>
+  
+  <servlet-mapping>
+		<servlet-name>faces-servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
   
 </web-app>

@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.model.SelectItem;
+import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -38,15 +40,12 @@ try{
     }}, new java.security.SecureRandom());
 
 
-	    return ClientBuilder.newBuilder()
+/*	    return ClientBuilder.newBuilder()
 	                        .sslContext(sslcontext)
 	                        .hostnameVerifier((s1, s2) -> true)
-	                        .build();
-}catch (Exception e) {
-	// TODO: handle exception
-	
-}
-	 /*   HostnameVerifier allowAll = new HostnameVerifier() 
+	                        .build();*/
+
+	   HostnameVerifier allowAll = new HostnameVerifier() 
 	    {
 	        @Override
 	        public boolean verify(String hostname, SSLSession session) {
@@ -54,14 +53,18 @@ try{
 	        }
 	    };
 
-	    return ClientBuilder.newBuilder().sslContext(sslcontext).hostnameVerifier(allowAll).build();*/
+	    return ClientBuilder.newBuilder().sslContext(sslcontext).hostnameVerifier(allowAll).build();
+	}catch (Exception e) {
+	// TODO: handle exception
+	
+}
  return ClientBuilder.newClient();
 	}
 	
 
 	public String sendGet(String path, String... args){
 		Client client = ignoreSSLClient();
-		WebTarget target = client.target("https://127.0.0.1").path("/corrispettivi/"+path)
+		WebTarget target = client.target("https://127.0.0.1").path("/v1/dispositivi/corrispettivi/"+path)
 				.queryParam(args[0], args[1]).queryParam(args[2], args[3]).queryParam(args[4], args[5]);
 		Response allID =  target.request(MediaType.APPLICATION_XML).get();
 		String res = allID.readEntity(String.class);
