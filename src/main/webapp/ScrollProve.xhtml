@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Prove Aperte</title>
+</h:head>
+<h:body>
+
+    <h:form id="ProveForm">
+    
+     <p:dataScroller value="#{dataScrollerView.cars}" var="car" chunkSize="10" mode="inline" scrollHeight="500">
+        <f:facet name="header">
+            Scroll Down to Load More Cars
+        </f:facet>
+ 
+        <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+            <p:graphicImage name="demo/images/prove/#{car.brand}-big.gif" /> 
+ 
+            <p:outputPanel>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <h:outputText value="Matricola RT:" />
+                    <h:outputText value="#{rt.matricola}" style="font-weight: bold"/>
+ 					<h:outputText value="" />
+ 					
+                    <h:outputText value="Prova:" />
+                    <h:outputText value="#{rt.prova}" style="font-weight: bold"/>
+ 					<h:outputText value="" />
+                    
+                    <h:outputText value="Totale Ricevuto:" />
+                    <h:outputText value="#{rt.totalericevuto}" style="font-weight: bold"/>
+                    <h:outputText value="" />
+                    
+                     <h:outputText value="GranTotale:" />
+                    <h:outputText value="#{rt.gt}" style="font-weight: bold"/>
+                    <h:outputText value="" />
+                    
+                    <h:outputText value="Totale Chiusure:" />
+                    <h:outputText value="#{rt.totchiusure}" style="font-weight: bold"/>
+                    <h:outputText value="" />
+                    
+                    <h:outputText value="" />
+                    <h:outputText value="" />
+                    <p:commandButton value="Chiudi Prova" type="submit" action="#{user.goLoginPage}" />
+                </h:panelGrid>
+            </p:outputPanel>
+        </h:panelGrid>
+    </p:dataScroller>
+    </h:form>
+
+</h:body>
+</html>

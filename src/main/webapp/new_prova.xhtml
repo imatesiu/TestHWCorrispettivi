@@ -15,17 +15,17 @@
     
     <p:panel id="panel" header="Form" style="margin-bottom:10px;">
     <h:panelGrid columns="2" cellpadding="5">
-        <h:outputLabel value="Matricola RT:" for="matrRT" />
-        <h:inputText id="matrRT" value="#{creaProve.matricolaRT}" required="true" requiredMessage="Please enter number" />
+        <p:outputLabel value="Matricola RT:" for="matrRT" />
+        <p:inputText id="matrRT" value="#{creaProve.matricolaRT}" required="true" requiredMessage="Please enter number" />
         
-        <h:outputLabel value="Prova RT:"  />   
-      <h:selectOneMenu   value="#{user.favFood1}">	
+        <p:outputLabel value="Prova RT:"  />   
+      <p:selectOneMenu   value="#{user.favFood1}">	
     
    	<f:selectItem itemValue="1" itemLabel="Number1 - 1" />
    	<f:selectItem itemValue="2" itemLabel="Number1 - 2" />
    	<f:selectItem itemValue="3" itemLabel="Number1 - 3" />
 
-</h:selectOneMenu >
+</p:selectOneMenu >
 
  <p:outputLabel value="Grantotale RT:" for="GranRT" />
         <p:inputText id="GranRT" value="#{creaProve.matricolaRT}" required="true" requiredMessage="Please enter number" />
@@ -36,7 +36,7 @@
         </h:panelGrid>
         </p:panel>
     
-    <h:commandButton value="submit" type="submit" action="#{user.goLoginPage}" />
+    <p:commandButton value="submit" type="submit" action="#{user.goLoginPage}" />
     
     </h:form>
 
