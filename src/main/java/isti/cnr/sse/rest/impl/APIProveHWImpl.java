@@ -91,19 +91,20 @@ public class APIProveHWImpl {
 			return "<html><body>Elemento non presente</body></html>";
 	}
 
-	@Path("/init/{key:.*}")
+	@Path("/init/{key}")
 	@GET
-	public String init(@PathParam("key") String key, @QueryParam("grantot") int grantotale) {
+	public String init(@PathParam("key") String key, @QueryParam("grantot") BigDecimal grantotale, @QueryParam("desc") String desc) {
 		if (map.containsKey(key)) {
 	
 			RT rt = map.get(key);
-			rt.setGT(new BigDecimal(grantotale));
+			rt.setGT((grantotale));
 			log.info("Init: " + key);
 			log.info("Grantotale " + grantotale);
 			log.info("");
 			return "<html><body>OK,  Init: " + key + " Grantotale " + grantotale + "</body></html>";
 		} else {
-			RT rt = new RT(key, new Date(),new BigDecimal(grantotale));
+			RT rt = new RT(key, new Date(),(grantotale));
+			rt.setDescrizione(desc);
 			map.put(key,rt);
 			
 			
