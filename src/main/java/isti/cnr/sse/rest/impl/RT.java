@@ -11,7 +11,8 @@ public class RT {
 	private Date workingtime;
 	private Date stoptime;
 	private Integer Kricevuti;
-
+	private String Descrizione;
+	private boolean isCloded;
 	
 	
 	
@@ -23,7 +24,9 @@ public class RT {
 		this.starttime = starttime;
 		this.workingtime = workingtime;
 		this.stoptime = stoptime;
-		Kricevuti = kricevuti;
+		this.Kricevuti = kricevuti;
+		this.Descrizione = "";
+		this.isCloded = false;
 	}
 	
 	public RT(String Matricola, Date starttime) {
@@ -34,6 +37,8 @@ public class RT {
 		this.workingtime = starttime;
 		this.stoptime = starttime;
 		Kricevuti = 0;
+		this.Descrizione = "";
+		this.isCloded = false;
 	}
 	
 	public RT(String Matricola, Date starttime, BigDecimal gt) {
@@ -44,10 +49,28 @@ public class RT {
 		this.workingtime = starttime;
 		this.stoptime = starttime;
 		Kricevuti = 0;
+		this.Descrizione = "";
+		this.isCloded = false;
 	}
 	
 	
 	
+	public String getDescrizione() {
+		return Descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		Descrizione = descrizione;
+	}
+
+	public boolean isCloded() {
+		return isCloded;
+	}
+
+	public void setCloded(boolean isCloded) {
+		this.isCloded = isCloded;
+	}
+
 	public String getMatricola() {
 		return Matricola;
 	}
