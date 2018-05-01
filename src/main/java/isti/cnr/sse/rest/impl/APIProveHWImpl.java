@@ -93,11 +93,13 @@ public class APIProveHWImpl {
 
 	@Path("/init/{key}")
 	@GET
-	public String init(@PathParam("key") String key, @QueryParam("grantot") BigDecimal grantotale, @QueryParam("desc") String desc) {
+	public String init(@PathParam("key") String key, @QueryParam("grantot") BigDecimal grantotale, 
+			@QueryParam("desc") String desc, @QueryParam("z") int z) {
 		if (map.containsKey(key)) {
 	
 			RT rt = map.get(key);
 			rt.setGT((grantotale));
+			rt.setZ(z);
 			log.info("Init: " + key);
 			log.info("Grantotale " + grantotale);
 			log.info("");
@@ -105,6 +107,7 @@ public class APIProveHWImpl {
 		} else {
 			RT rt = new RT(key, new Date(),(grantotale));
 			rt.setDescrizione(desc);
+			rt.setZ(z);
 			map.put(key,rt);
 			
 			
@@ -135,6 +138,49 @@ public class APIProveHWImpl {
 					+ " tempo in sencodi:" + diff + " </body></html>";
 		} else {
 			return "<html><body>Elemento non presente, " + key + "</body></html>";
+		}
+
+	}
+	
+	@Path("/rt/{key:.*}")
+	@GET
+	public RT rtinfo(@PathParam("key") String key) {
+		if (map.containsKey(key)) {
+			RT rt = map.get(key);
+			BigDecimal grantotale = rt.getGT();
+			int num = rt.getKricevuti();
+			Integer diff = rt.getTimediff();
+			// map.put(key, new BigDecimal(0));
+			// ricevuti.put(key, 0);
+			log.info("Info for: " + key);
+			log.info("Grantotale " + grantotale);
+			log.info("Ricevuti in totale: " + num);
+			log.info("TimeDiff: " + diff);
+			log.info("");
+			return rt;
+		} else {
+			return null;
+		}
+
+	}
+	
+	@Path("/stop/{key:.*}")
+	@GET
+	public String rtstop(@PathParam("key") String key) {
+		if (map.containsKey(key)) {
+			RT rt = map.get(key);
+			BigDecimal grantotale = rt.getGT();
+			int num = rt.getKricevuti();
+			Integer diff = rt.getTimediff();
+			rt.setCloded();
+			log.info("Info for: " + key);
+			log.info("Grantotale " + grantotale);
+			log.info("Ricevuti in totale: " + num);
+			log.info("TimeDiff: " + diff);
+			log.info("");
+			return "OK";
+		} else {
+			return "NonEsiste";
 		}
 
 	}

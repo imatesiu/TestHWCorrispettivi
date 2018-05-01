@@ -3,15 +3,47 @@ package isti.cnr.sse.rest.impl;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlRootElement(name = "RT")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "RT", propOrder = {
+    "Matricola",
+    "GT",
+    "timediff",
+    "starttime",
+    "workingtime",
+    "stoptime",
+    "Zricevuti",
+    "Z",
+    "Descrizione",
+    "isCloded"
+})
 public class RT {
+	@XmlElement(name = "Matricola", required = true)
 	private String Matricola;
+	@XmlElement(name = "GT", required = true)
 	private BigDecimal GT;
+	@XmlElement(name = "timediff", required = true)
 	private Integer timediff;
+	@XmlElement(name = "starttime", required = true)
 	private Date starttime;
+	@XmlElement(name = "workingtime", required = true)
 	private Date workingtime;
+	@XmlElement(name = "stoptime", required = true)
 	private Date stoptime;
-	private Integer Kricevuti;
+	@XmlElement(name = "Zricevuti", required = true)
+	private Integer Zricevuti;
+	@XmlElement(name = "Z", required = true)
+	private Integer Z;
+	@XmlElement(name = "Descrizione", required = true)
 	private String Descrizione;
+	@XmlAttribute(name = "isCloded", required = true)
 	private boolean isCloded;
 	
 	
@@ -24,7 +56,7 @@ public class RT {
 		this.starttime = starttime;
 		this.workingtime = workingtime;
 		this.stoptime = stoptime;
-		this.Kricevuti = kricevuti;
+		this.Zricevuti = kricevuti;
 		this.Descrizione = "";
 		this.isCloded = false;
 	}
@@ -36,7 +68,7 @@ public class RT {
 		this.starttime = starttime;
 		this.workingtime = starttime;
 		this.stoptime = starttime;
-		Kricevuti = 0;
+		Zricevuti = 0;
 		this.Descrizione = "";
 		this.isCloded = false;
 	}
@@ -48,7 +80,7 @@ public class RT {
 		this.starttime = starttime;
 		this.workingtime = starttime;
 		this.stoptime = starttime;
-		Kricevuti = 0;
+		Zricevuti = 0;
 		this.Descrizione = "";
 		this.isCloded = false;
 	}
@@ -69,6 +101,10 @@ public class RT {
 
 	public void setCloded(boolean isCloded) {
 		this.isCloded = isCloded;
+	}
+	
+	public void setCloded() {
+		this.isCloded = true;
 	}
 
 	public String getMatricola() {
@@ -110,16 +146,25 @@ public class RT {
 		this.stoptime = stoptime;
 	}
 	public Integer getKricevuti() {
-		return Kricevuti;
+		return Zricevuti;
 	}
 	public void setKricevuti(Integer kricevuti) {
-		Kricevuti = kricevuti;
+		Zricevuti = kricevuti;
 	}
 
 	@Override
 	public String toString() {
 		return "RT [Matricola=" + Matricola + ", GT=" + GT + ", timediff=" + timediff + ", starttime=" + starttime
-				+ ", workingtime=" + workingtime + ", stoptime=" + stoptime + ", Kricevuti=" + Kricevuti + "]";
+				+ ", workingtime=" + workingtime + ", stoptime=" + stoptime + ", Kricevuti=" + Zricevuti + "]";
+	}
+
+	public void setZ(int k) {
+		Z = k;
+		
+	}
+	
+	public Integer getZ() {
+		return Z+Zricevuti;
 	}
 	
 	

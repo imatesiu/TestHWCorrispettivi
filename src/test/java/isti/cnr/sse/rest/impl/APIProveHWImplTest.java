@@ -84,7 +84,7 @@ public class APIProveHWImplTest extends JerseyTest {
 	@Test
 	public void test() throws JAXBException, IOException {
 
-		sendinit();
+		sendinit();sendrt();
 		// for(int i = 0 ; i<10; i++){
 		String nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";//
 		runTest(nameFilexml);
@@ -128,6 +128,11 @@ public class APIProveHWImplTest extends JerseyTest {
 	
 	private void sendinit() {
 		Response response = target("/corrispettivi/init/96MKR000111").queryParam("grantot", "28.8","desc","ciao").request(MediaType.APPLICATION_XML).get();
+	}
+	
+	private void sendrt() {
+		Response response = target("/corrispettivi/rt/96MKR000111").request(MediaType.APPLICATION_XML).get();
+		System.out.println(response);
 	}
 
 	private void sendgetinfo() {
