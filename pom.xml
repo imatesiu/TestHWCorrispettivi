@@ -74,12 +74,12 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
-		
+
 		<dependency>
-    <groupId>commons-io</groupId>
-    <artifactId>commons-io</artifactId>
-    <version>2.5</version>
-</dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
@@ -134,6 +134,19 @@
 			<version>2.19</version>
 			<scope>test</scope>
 		</dependency>
+				<!-- JSF -->
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.2.13</version>
+
+		</dependency>
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>2.2.13</version>
+
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>
@@ -167,13 +180,17 @@
 				<version>1.5</version>
 				<configuration>
 					<keystore>${project.basedir}/src/main/config/jetty-ssl.keystore</keystore>
-					<dname>cn=192.168.1.* , ou=SSEC ISTI, L=Pisa, ST=Tuscany, o=CNR, c=IT</dname>
+					<dname>cn=192.168.1.* , ou=SSEC ISTI, L=Pisa, ST=Tuscany, o=CNR,
+						c=IT</dname>
 					<!--Both `keypass` and `storepass` must be at least 6 characters long. -->
 					<keypass>jetty8</keypass>
 					<storepass>jetty8</storepass>
 					<alias>jetty8</alias>
 					<sigalg>SHA256withRSA</sigalg>
-					<ext>EKU=serverAuth" -ext "KU=dS,keyEncipherment,dataEncipherment,cRLS,kCS" -ext "SAN=ip:192.168.1.146,ip:127.0.0.1,ip:192.168.0.146,dns:localhost" -ext "CRLDistributionPoints=URI:ldap://cads.entrate.finanze.it/</ext>
+					<ext>EKU=serverAuth" -ext
+						"KU=dS,keyEncipherment,dataEncipherment,cRLS,kCS" -ext
+						"SAN=ip:192.168.1.146,ip:127.0.0.1,ip:192.168.0.146,dns:localhost"
+						-ext "CRLDistributionPoints=URI:ldap://cads.entrate.finanze.it/</ext>
 					<trustcacerts>true</trustcacerts>
 					<keyalg>RSA</keyalg>
 					<verbose>true</verbose>
@@ -190,7 +207,7 @@
 				<!--<version>8.1.14.v20131031</version> -->
 				<version>9.4.8.v20171121</version>
 				<configuration>
-				 <jettyXml>${project.basedir}/src/main/resources/jetty.xml,${project.basedir}/src/main/resources/jetty-http.xml,${project.basedir}/src/main/resources/jetty-ssl.xml,${project.basedir}/src/main/resources/jetty-https.xml</jettyXml>
+					<jettyXml>${project.basedir}/src/main/resources/jetty.xml,${project.basedir}/src/main/resources/jetty-http.xml,${project.basedir}/src/main/resources/jetty-ssl.xml,${project.basedir}/src/main/resources/jetty-https.xml</jettyXml>
 					<connectors>
 						<connector implementation="org.eclipse.jetty.server.bio.SocketConnector">
 							<port>9090</port>

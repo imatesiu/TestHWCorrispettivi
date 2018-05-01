@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Crea Prove</title>
+</h:head>
+<h:body>
+
+    <h:form id="ProveForm">
+    
+    <p:panel id="panel" header="Form" style="margin-bottom:10px;">
+    <h:panelGrid columns="2" cellpadding="5">
+        <h:outputLabel value="Matricola RT:" for="matrRT" />
+        <h:inputText id="matrRT" value="#{creaProve.matricolaRT}" required="true" requiredMessage="Please enter number" />
+        
+        <h:outputLabel value="Prova RT:"  />   
+      <h:selectOneMenu   value="#{user.favFood1}">	
+    
+   	<f:selectItem itemValue="1" itemLabel="Number1 - 1" />
+   	<f:selectItem itemValue="2" itemLabel="Number1 - 2" />
+   	<f:selectItem itemValue="3" itemLabel="Number1 - 3" />
+
+</h:selectOneMenu >
+
+ <p:outputLabel value="Grantotale RT:" for="GranRT" />
+        <p:inputText id="GranRT" value="#{creaProve.matricolaRT}" required="true" requiredMessage="Please enter number" />
+        
+         <p:outputLabel value="Numero Chiusure:" for="NKRT" />
+        <p:inputText id="NKRT" value="#{creaProve.matricolaRT}" required="true" requiredMessage="Please enter number" />
+        
+        </h:panelGrid>
+        </p:panel>
+    
+    <h:commandButton value="submit" type="submit" action="#{user.goLoginPage}" />
+    
+    </h:form>
+
+</h:body>
+</html>
