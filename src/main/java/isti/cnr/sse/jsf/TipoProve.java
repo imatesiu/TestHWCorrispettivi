@@ -1,5 +1,7 @@
 package isti.cnr.sse.jsf;
 
+import javax.faces.bean.ManagedBean;
+
 /**
  * Created by m4rt3 on 20/11/2016.
  */
@@ -29,7 +31,7 @@ public enum TipoProve {
         if (tipo.equals("Disturbi Elettromagnetici")) {
             return DisturbiElettromagnetici;
         }
-        if (tipo.equals("Impermeabilit�")) {
+        if (tipo.equals("Impermeabilita'")) {
             return Impermeabilita;
         }
         if (tipo.equals("Vibrazione")) {

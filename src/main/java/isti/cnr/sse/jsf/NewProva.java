@@ -54,14 +54,16 @@ public class NewProva {
 	}
 	public String getDescrizione() {
 		if(Descrizione==null){
-			Descrizione  = "pia";
+			Descrizione  = prove.name();
 		}
 		return Descrizione;
 	}
 	public void setDescrizione(String descrizione) {
 		Descrizione = descrizione;
 	}
-	
+	public TipoProve[] getStatuses() {
+        return TipoProve.values();
+    }
 	public void save(ActionEvent actionEvent) {
 		String[] args = new String[10];
 		args[0] = "grantot";
