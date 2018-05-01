@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "RT", propOrder = {
     "Matricola",
     "GT",
+    "TotaleRicevuto",
     "timediff",
     "starttime",
     "workingtime",
@@ -29,6 +30,8 @@ public class RT {
 	private String Matricola;
 	@XmlElement(name = "GT", required = true)
 	private BigDecimal GT;
+	@XmlElement(name = "TotaleRicevuto", required = true)
+	private BigDecimal TotaleRicevuto;
 	@XmlElement(name = "timediff", required = true)
 	private Integer timediff;
 	@XmlElement(name = "starttime", required = true)
@@ -51,6 +54,7 @@ public class RT {
 	public RT() {
 		this.Matricola="";
 		GT = new BigDecimal(0);
+		this.TotaleRicevuto = new BigDecimal(0);
 		this.timediff = 0;
 		this.starttime = new Date();
 		this.workingtime = starttime;
@@ -64,6 +68,7 @@ public class RT {
 	
 		this.Matricola=Matricola;
 		GT = gT;
+		this.TotaleRicevuto = new BigDecimal(0);
 		this.timediff = timediff;
 		this.starttime = starttime;
 		this.workingtime = workingtime;
@@ -76,6 +81,7 @@ public class RT {
 	public RT(String Matricola, Date starttime) {
 		this.Matricola=Matricola;
 		GT = new BigDecimal(0);
+		this.TotaleRicevuto = new BigDecimal(0);
 		this.timediff = 0;
 		this.starttime = starttime;
 		this.workingtime = starttime;
@@ -88,6 +94,7 @@ public class RT {
 	public RT(String Matricola, Date starttime, BigDecimal gt) {
 		this.Matricola=Matricola;
 		GT = gt;
+		this.TotaleRicevuto = new BigDecimal(0);
 		this.timediff = 0;
 		this.starttime = starttime;
 		this.workingtime = starttime;
@@ -130,8 +137,17 @@ public class RT {
 		Matricola = matricola;
 	}
 
+	public BigDecimal getTotaleRicevuto() {
+		return TotaleRicevuto;
+	}
+
+	public void setTotaleRicevuto(BigDecimal totaleRicevuto) {
+		TotaleRicevuto = totaleRicevuto;
+	}
+
 	public BigDecimal getGT() {
-		return GT;
+		BigDecimal gb = new BigDecimal(0); 
+		return gb.add(GT).add(TotaleRicevuto);
 	}
 	public void setGT(BigDecimal gT) {
 		GT = gT;
@@ -153,6 +169,7 @@ public class RT {
 	}
 	public void setWorkingtime(Date workingtime) {
 		this.workingtime = workingtime;
+		setStoptime(workingtime);
 	}
 	public Date getStoptime() {
 		return stoptime;

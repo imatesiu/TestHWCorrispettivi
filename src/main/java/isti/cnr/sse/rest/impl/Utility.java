@@ -65,11 +65,11 @@ public class Utility {
 				if(lordo.compareTo(new BigDecimal(0))!=0)
 					if(map.containsKey(key)){
 						RT rt = map.get(key);
-						BigDecimal old = rt.getGT();
+						BigDecimal old = rt.getTotaleRicevuto();
 						BigDecimal res = old.add(lordo);
 						log.info("Ricevuto per "+key+": "+lordo);
 						log.info("totale per "+key+": "+res);
-						rt.setGT(res );
+						rt.setTotaleRicevuto(res );
 					}/*else{
 						RT rt = map.get(key);
 						rt.setGT(lordo);
@@ -81,11 +81,11 @@ public class Utility {
 				if(ammontare.compareTo(new BigDecimal(0))!=0)
 					if(map.containsKey(key)){
 						RT rt = map.get(key);
-						BigDecimal old = rt.getGT();
+						BigDecimal old = rt.getTotaleRicevuto();
 						BigDecimal res = old.add(ammontare);
 						log.info("Ricevuto per "+key+": "+ammontare);
 						log.info("totale per "+key+": "+res);
-						rt.setGT(res );
+						rt.setTotaleRicevuto(res );
 					}/*else{
 						map.put(key, ammontare);
 						log.info("Ricevuto per "+key+": "+ammontare);

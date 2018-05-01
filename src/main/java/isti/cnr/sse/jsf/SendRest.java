@@ -29,46 +29,51 @@ import isti.cnr.sse.rest.impl.RT;
 public class SendRest {
 
 	public static Client ignoreSSLClient()  {
-try{
-	    SSLContext sslcontext = SSLContext.getInstance("TLS");
+		try{
+			SSLContext sslcontext = SSLContext.getInstance("TLS");
 
-	    sslcontext.init(null,  new TrustManager[]{new X509TrustManager() {
-            public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException{}
-            public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException{}
-            public X509Certificate[] getAcceptedIssuers()
-            {
-                return new X509Certificate[0];
-            }
+			sslcontext.init(null,  new TrustManager[]{new X509TrustManager() {
+				public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException{}
+				public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException{}
+				public X509Certificate[] getAcceptedIssuers()
+				{
+					return new X509Certificate[0];
+				}
 
-    }}, new java.security.SecureRandom());
+			}}, new java.security.SecureRandom());
 
 
-/*	    return ClientBuilder.newBuilder()
+			/*	    return ClientBuilder.newBuilder()
 	                        .sslContext(sslcontext)
 	                        .hostnameVerifier((s1, s2) -> true)
 	                        .build();*/
 
-	   HostnameVerifier allowAll = new HostnameVerifier() 
-	    {
-	        @Override
-	        public boolean verify(String hostname, SSLSession session) {
-	            return true;
-	        }
-	    };
+			HostnameVerifier allowAll = new HostnameVerifier() 
+			{
+				@Override
+				public boolean verify(String hostname, SSLSession session) {
+					return true;
+				}
+			};
 
-	    return ClientBuilder.newBuilder().sslContext(sslcontext).hostnameVerifier(allowAll).build();
-	}catch (Exception e) {
-	// TODO: handle exception
-	
-}
- return ClientBuilder.newClient();
+			return ClientBuilder.newBuilder().sslContext(sslcontext).hostnameVerifier(allowAll).build();
+		}catch (Exception e) {
+			// TODO: handle exception
+
+		}
+		return ClientBuilder.newClient();
 	}
-	
+
 
 	public Response sendGet(String path, String... args){
 		Client client = ignoreSSLClient();
-		WebTarget target = client.target("https://127.0.0.1").path("/v1/dispositivi/corrispettivi/"+path)
-				.queryParam(args[0], args[1]).queryParam(args[2], args[3]).queryParam(args[4], args[5]);
+		WebTarget target = null;
+		if(args!=null){
+			 target = client.target("https://127.0.0.1").path("/v1/dispositivi/corrispettivi/"+path).queryParam(args[0], args[1]).queryParam(args[2], args[3]).queryParam(args[4], args[5]);
+		}else{
+			 target = client.target("https://127.0.0.1").path("/v1/dispositivi/corrispettivi/"+path);
+		}
+			
 		Response allID =  target.request(MediaType.APPLICATION_XML).get();
 
 		return allID;
@@ -93,6 +98,6 @@ try{
 	}
 
 
-	
+
 
 }

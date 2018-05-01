@@ -14,6 +14,7 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -173,6 +174,22 @@ public class APIProveHWImpl {
 			log.info("");
 			return map.values();
 		
+
+	}
+	
+	@Path("/allrtopen/")
+	@GET
+	public Collection<RT> allrtopen() {
+
+		log.info("");
+		Collection<RT> crt = new ArrayList<>();
+		for(RT rt: map.values()){
+			if(!rt.isCloded()){
+				crt.add(rt);
+			}
+		}
+		return crt;
+
 
 	}
 	

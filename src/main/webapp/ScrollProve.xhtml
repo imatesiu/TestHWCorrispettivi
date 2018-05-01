@@ -12,14 +12,15 @@
 <h:body>
 
     <h:form id="ProveForm">
+         <p:growl id="msgs" showDetail="true" />
     
-     <p:dataScroller value="#{dataScrollerView.cars}" var="car" chunkSize="10" mode="inline" scrollHeight="500">
+     <p:dataScroller value="#{dataScroller.rts}" var="rt" chunkSize="10" mode="inline" scrollHeight="500">
         <f:facet name="header">
-            Scroll Down to Load More Cars
+            Scroll Down to Load More Elements
         </f:facet>
  
         <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
-            <p:graphicImage name="demo/images/prove/#{car.brand}-big.gif" /> 
+      <!--       <p:graphicImage name="demo/images/prove/#{car.brand}-big.gif" /> --> 
  
             <p:outputPanel>
                 <h:panelGrid columns="3" cellpadding="5">
@@ -28,24 +29,42 @@
  					<h:outputText value="" />
  					
                     <h:outputText value="Prova:" />
-                    <h:outputText value="#{rt.prova}" style="font-weight: bold"/>
+                    <h:outputText value="#{rt.descrizione}" style="font-weight: bold"/>
  					<h:outputText value="" />
                     
                     <h:outputText value="Totale Ricevuto:" />
-                    <h:outputText value="#{rt.totalericevuto}" style="font-weight: bold"/>
+                    <h:outputText value="#{rt.totaleRicevuto}" style="font-weight: bold"/>
+                    <h:outputText value="" />
+                    
+                    <h:outputText value="Totale Chiusure Ricevute:" />
+                    <h:outputText value="#{rt.zricevuti}" style="font-weight: bold"/>
+                    <h:outputText value="" />
+                    
+                    <h:outputText value="Time Diff in Seconds:" />
+                    <h:outputText value="#{rt.timediff}" style="font-weight: bold"/>
                     <h:outputText value="" />
                     
                      <h:outputText value="GranTotale:" />
-                    <h:outputText value="#{rt.gt}" style="font-weight: bold"/>
+                    <h:outputText value="#{rt.GT}" style="font-weight: bold"/>
                     <h:outputText value="" />
                     
                     <h:outputText value="Totale Chiusure:" />
-                    <h:outputText value="#{rt.totchiusure}" style="font-weight: bold"/>
+                    <h:outputText value="#{rt.z}" style="font-weight: bold"/>
                     <h:outputText value="" />
                     
+                    <h:outputText value="Data Inzio:" />
+                    <h:outputText value="#{rt.starttime}" style="font-weight: bold"/>
                     <h:outputText value="" />
+                    
+                    <h:outputText value="Data Fine:" />
+                    <h:outputText value="#{rt.stoptime}" style="font-weight: bold"/>
                     <h:outputText value="" />
-                    <p:commandButton value="Chiudi Prova" type="submit" action="#{user.goLoginPage}" />
+                    
+                    <h:outputText value="" />       
+                    <p:commandButton icon="ui-icon-close" immediate="true" update="@form" action="#{dataScroller.remprova}">  <!--  oncomplete="PF('ProveDialog').show()"--> 
+                        <f:setPropertyActionListener value="#{rt}" target="#{dataScroller.selected}" />
+                    </p:commandButton>
+               
                 </h:panelGrid>
             </p:outputPanel>
         </h:panelGrid>
