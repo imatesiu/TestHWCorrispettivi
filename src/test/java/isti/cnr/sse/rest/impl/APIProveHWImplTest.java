@@ -90,12 +90,12 @@ public class APIProveHWImplTest extends JerseyTest {
 		sendgetinfo();
 		sendgetclear();
 
-		/*	 nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";
-		runTest(nameFilexml);
-
 		nameFilexml = "CC/c1.xml";
 		runTest(nameFilexml);
-		nameFilexml = "CC/c2.xml";
+
+ 	nameFilexml = "CC/c1.xml";
+		runTest(nameFilexml);
+		/*		nameFilexml = "CC/c2.xml";
 		runTest(nameFilexml);
 		nameFilexml = "test_corrispettivi.xml";
 		runTest(nameFilexml);

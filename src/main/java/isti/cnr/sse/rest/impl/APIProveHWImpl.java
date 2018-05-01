@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.security.PublicKey;
@@ -63,20 +64,17 @@ public class APIProveHWImpl {
 	// TokenPersistence em;
 
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(APIProveHWImpl.class);
+	
+	private static Map<String, RT> map = new HashMap<>();
 
-	private static Map<String, BigDecimal> map = new HashMap<>();
 
-	private static Map<String, Pair<Integer, Date>> timediff = new HashMap<>();
-
-	private static Map<String, Integer> ricevuti = new HashMap<>();
 
 	@Path("/clearall")
 	@GET
 	public String clearall() {
 
 		map = new HashMap<>();
-		ricevuti = new HashMap<>();
-		timediff = new HashMap<>();
+		
 		log.info("Clear All\n\r");
 		return "<html><body>OK</body></html>";
 	}
@@ -85,9 +83,8 @@ public class APIProveHWImpl {
 	@GET
 	public String clear(@PathParam("key") String key) {
 		if (map.containsKey(key)) {
-			map.put(key, new BigDecimal(0));
-			ricevuti.put(key, 0);
-			timediff.put(key, new Pair<>(0, new Date()));
+			map.remove(key);
+		
 			log.info("Clear " + key);
 			return "<html><body>OK</body></html>";
 		} else
@@ -98,17 +95,18 @@ public class APIProveHWImpl {
 	@GET
 	public String init(@PathParam("key") String key, @QueryParam("grantot") int grantotale) {
 		if (map.containsKey(key)) {
-			map.put(key, new BigDecimal(grantotale));
-			ricevuti.put(key, 0);
-			timediff.put(key, new Pair<>(0, new Date()));
+	
+			RT rt = map.get(key);
+			rt.setGT(new BigDecimal(grantotale));
 			log.info("Init: " + key);
 			log.info("Grantotale " + grantotale);
 			log.info("");
 			return "<html><body>OK,  Init: " + key + " Grantotale " + grantotale + "</body></html>";
 		} else {
-			map.put(key, new BigDecimal(grantotale));
-			ricevuti.put(key, 0);
-			timediff.put(key, new Pair<>(0, new Date()));
+			RT rt = new RT(key, new Date(),new BigDecimal(grantotale));
+			map.put(key,rt);
+			
+			
 			log.info("Init " + key);
 			log.info("Grantotale " + grantotale);
 			return "<html><body>Elemento non presente, creato Init: " + key + " Grantotale: " + grantotale
@@ -121,9 +119,10 @@ public class APIProveHWImpl {
 	@GET
 	public String info(@PathParam("key") String key) {
 		if (map.containsKey(key)) {
-			BigDecimal grantotale = map.get(key);
-			int num = ricevuti.get(key);
-			Integer diff = timediff.get(key).getFirst();
+			RT rt = map.get(key);
+			BigDecimal grantotale = rt.getGT();
+			int num = rt.getKricevuti();
+			Integer diff = rt.getTimediff();
 			// map.put(key, new BigDecimal(0));
 			// ricevuti.put(key, 0);
 			log.info("Info for: " + key);
@@ -273,30 +272,34 @@ public class APIProveHWImpl {
 	}
 */
 	private void aggiornadiff(Date now, String key) {
-		if (timediff.containsKey(key)) {
-			Date oldtime = (Date) timediff.get(key).getSecond();
+		if (map.containsKey(key)) {
+			RT rt = map.get(key);
+			Date oldtime =  rt.getWorkingtime();
 			int diff = (int) ((now.getTime() - oldtime.getTime()) / 1000);
-			timediff.put(key, new Pair<>(diff, now));
+			rt.setTimediff(diff);
+			rt.setWorkingtime(now);
 			log.info("diff_time: " + diff);
 		} else {
-			timediff.put(key, new Pair<>(0, now));
+			RT rt = new RT(key,now);
+			map.put(key, rt);
 			log.info("diff_time: " + 0);
 		}
 
 	}
 
 	private int aggiornaricevuti(String key) {
-		if (ricevuti.containsKey(key)) {
-			int res = ricevuti.get(key) + 1;
+		if (map.containsKey(key)) {
+			RT rt = map.get(key);
+			int res = rt.getKricevuti() + 1;
 			log.info("totale ricevuti da " + key + ": " + res);
-			ricevuti.put(key, res);
+			rt.setKricevuti(res);
 			return res;
-		} else {
+		} /*else {
 			ricevuti.put(key, 1);
 			log.info("totale ricevuti da " + key + ": 1");
 			return 1;
-		}
-
+		}*/
+		return 1;
 	}
 
 	/*
