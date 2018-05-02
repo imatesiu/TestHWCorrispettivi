@@ -59,7 +59,7 @@ public class dataScrollerall implements Serializable {
 
 	public void setSelected(RT selectedProve) {
 		this.rt = selectedProve;
-		sendStop(selectedProve.getMatricola());
+		senddel(selectedProve.getMatricola());
 	}
 	
 	public void remprova() {
@@ -68,9 +68,9 @@ public class dataScrollerall implements Serializable {
 	}
 
 
-	private void sendStop(String matricola) {
+	private void senddel(String matricola) {
 		SendRest s = new SendRest();
-		Response resp = s.sendGet("stop/"+matricola, null);
+		Response resp = s.sendGet("clear/"+matricola, null);
 		StatusType sf = resp.getStatusInfo();
 		if(sf.getStatusCode()==200){
 			addMessage("OK");

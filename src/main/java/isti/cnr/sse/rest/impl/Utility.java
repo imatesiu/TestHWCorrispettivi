@@ -191,7 +191,7 @@ public class Utility {
 	
 	public static void writeRT( RT d){
 		try{
-			String csvFile = d.getMatricola()+"."+d.getDescrizione()+"."+".csv";
+			String csvFile = d.getMatricola()+"."+d.getDescrizione()+".csv";
 			File f = new File(csvFile);
 			FileWriter writer;
 			//for header

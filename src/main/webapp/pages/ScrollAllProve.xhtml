@@ -69,7 +69,9 @@
                     <h:outputText value="" />
                     
                     <h:outputText value="" />       
- 
+ 					<p:commandButton icon="ui-icon-delete" immediate="true" update="@form" action="#{dataScrollerall.remprova}">  <!--  oncomplete="PF('ProveDialog').show()"--> 
+                        <f:setPropertyActionListener value="#{rt}" target="#{dataScrollerall.selected}" />
+                    </p:commandButton>
                
                 </h:panelGrid>
             </p:outputPanel>
