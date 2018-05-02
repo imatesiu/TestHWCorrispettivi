@@ -20,16 +20,9 @@
 	<ui:define name="content">
 <h:body>
 
- 	
-    <h:panelGrid columns="2" cellpadding="5">
-    	    <p:outputLabel value="Matricola RT:" for="matrRT" />
-        <p:inputText id="matrRT" value="#{cercaProve.matricola}" required="true" requiredMessage="Please enter number" />
-     
-       <p:commandButton value="submit" type="submit" update="@form scroll"  actionListener="#{cercaProve.search}" />
-  
-    </h:panelGrid>
+ 
     
-     <p:dataScroller id="scroll" value="#{cercaProve.rts}" var="rt" chunkSize="10" mode="inline" scrollHeight="500">
+     <p:dataScroller value="#{dataScrollerall.rts}" var="rt" chunkSize="10" mode="inline" scrollHeight="500">
         <f:facet name="header">
             Scroll Down to Load More Elements
         </f:facet>
