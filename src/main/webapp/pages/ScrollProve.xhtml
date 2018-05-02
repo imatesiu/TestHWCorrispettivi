@@ -41,7 +41,9 @@
  					<h:outputText value="" />
                     
                     <h:outputText value="Totale Ricevuto:" />
-                    <h:outputText value="#{rt.totaleRicevuto}" style="font-weight: bold"/>
+                    <h:outputText value="#{rt.totaleRicevuto}" style="font-weight: bold">
+                     <f:convertNumber pattern="#0.00" locale="it_IT"/>
+                    </h:outputText>
                     <h:outputText value="" />
                     
                     <h:outputText value="Totale Chiusure Ricevute:" />
@@ -53,7 +55,9 @@
                     <h:outputText value="" />
                     
                      <h:outputText value="GranTotale:" />
-                    <h:outputText value="#{rt.GT}" style="font-weight: bold"/>
+                    <h:outputText value="#{rt.GT}" style="font-weight: bold">
+                     <f:convertNumber pattern="#0.00" locale="it_IT"/>
+                    </h:outputText>
                     <h:outputText value="" />
                     
                     <h:outputText value="Totale Chiusure:" />

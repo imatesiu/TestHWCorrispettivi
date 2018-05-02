@@ -25,7 +25,7 @@
     <p:panel id="panel" header="Inserisci Dati della Prova" style="margin-bottom:10px;">
     <h:panelGrid columns="2" cellpadding="5">
         <p:outputLabel value="Matricola RT:" for="matrRT" />
-        <p:inputText id="matrRT" value="#{newProva.matricola}" required="true" requiredMessage="Please enter number" />
+        <p:inputText id="matrRT" value="#{newProva.matricola}"  required="true" requiredMessage="Please enter number" />
         
         <p:outputLabel value="Prova RT:"  />  
       <p:selectOneMenu   value="#{newProva.prove}">	
@@ -35,10 +35,10 @@
 </p:selectOneMenu > 
 
  <p:outputLabel value="Grantotale RT:" for="GranRT" />
-        <p:inputText id="GranRT" value="#{newProva.grantotale}" required="true" requiredMessage="Please enter number" />
+        <p:inputNumber  id="GranRT" value="#{newProva.grantotale}" symbol="€"  required="true" requiredMessage="Please enter number" />
         
          <p:outputLabel value="Numero Chiusure:" for="NKRT" />
-        <p:inputText id="NKRT" value="#{newProva.zchiusure}" required="true" requiredMessage="Please enter number" />
+        <p:inputNumber id="NKRT" value="#{newProva.zchiusure}" required="true" requiredMessage="Please enter number"  minValue="0" maxValue="5000" />
         
         </h:panelGrid>
         </p:panel>
