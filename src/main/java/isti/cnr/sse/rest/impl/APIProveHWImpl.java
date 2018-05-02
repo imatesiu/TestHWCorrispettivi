@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -68,14 +69,17 @@ public class APIProveHWImpl {
 
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(APIProveHWImpl.class);
 	
-	private static Map<String, RT> map = new HashMap<>();
+	private static Map<String, RT> map = new HashMap<>(); /*Utility.deserialize();
 
-
+    @PreDestroy
+    public void reset () {
+    	Utility.serialize(map);
+    }*/
 
 	@Path("/clearall")
 	@GET
 	public String clearall() {
-
+		
 		map = new HashMap<>();
 		
 		log.info("Clear All\n\r");
@@ -103,6 +107,9 @@ public class APIProveHWImpl {
 			RT rt = map.get(key);
 			rt.setGT((grantotale));
 			rt.setZ(z);
+			rt.setTotaleRicevuto(new BigDecimal(0));
+			rt.setStarttime(new Date());
+			rt.setDescrizione(desc);
 			log.info("Init: " + key);
 			log.info("Grantotale " + grantotale);
 			log.info("");
@@ -112,8 +119,6 @@ public class APIProveHWImpl {
 			rt.setDescrizione(desc);
 			rt.setZ(z);
 			map.put(key,rt);
-			
-			
 			log.info("Init " + key);
 			log.info("Grantotale " + grantotale);
 			return "<html><body>Elemento non presente, creato Init: " + key + " Grantotale: " + grantotale
@@ -207,6 +212,7 @@ public class APIProveHWImpl {
 			log.info("Ricevuti in totale: " + num);
 			log.info("TimeDiff: " + diff);
 			log.info("");
+			Utility.writeRT(rt);
 			return "OK";
 		} else {
 			return "NonEsiste";
