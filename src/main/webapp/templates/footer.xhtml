@@ -1,20 +1,14 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:icecore="http://www.icefaces.org/icefaces/core"
-	xmlns:ace="http://www.icefaces.org/icefaces/components"
-	xmlns:ice="http://www.icesoft.com/icefaces/component"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
-
-<h:head>
-	<title>Welcome Page</title>
-</h:head>
-<h:body>
-<h2>Server Test HW Corrispettivi</h2>
-
-
-<h:panelGrid columns="2" border="0" layout="block">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<center>
+		<h:outputText value="#{msg['footer.title']}" />
+	</center>
+		<h:panelGrid columns="2" border="0" layout="block">
 <h:panelGroup>
 <div style="width: 600px;">
 <p align="center">
@@ -29,7 +23,4 @@
 
 <p>*For any bugs, please write to Giorgio O. Spagnolo (spagnolo at isti.cnr.it)</p>
 
-
-</h:body>
-
-</html>
+</ui:composition>

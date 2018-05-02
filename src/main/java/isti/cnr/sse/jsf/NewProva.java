@@ -53,9 +53,9 @@ public class NewProva {
 		this.prove = prove;
 	}
 	public String getDescrizione() {
-		if(Descrizione==null){
+		
 			Descrizione  = prove.name();
-		}
+		
 		return Descrizione;
 	}
 	public void setDescrizione(String descrizione) {

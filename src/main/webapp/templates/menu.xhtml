@@ -1,0 +1,41 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+	<h:form id="mainform">
+
+		<p:outputPanel id="menuPanel" layout="block">
+			
+				
+				<p:menu toggleable="true" ajax="false">
+        <p:submenu label="Crea Prova">
+            <p:menuitem value="NewProvaStart" url="/pages/new_prova.xhtml" icon="fa fa-plus-square" />
+           
+        <!--   <p:menuitem value="Prove" url="/pages/CreaProve.xhtml" icon="ui-icon-arrowrefresh-1-w"/> -->  
+
+        </p:submenu>
+         <p:submenu label="Prove Aperte">
+          <p:menuitem value="Lista Prove Aperte" url="/pages/ScrollProve.xhtml"  icon="fa fa-calculator">
+           <!--  <p:ajax  execute="@this"  listener="#{selectProve.reset}" update=":contentPanel" resetValues="true"/>
+           <p:resetInput target="contentPanel" />
+           <p:ajax update="contentPanel" resetValues="true" />-->
+          </p:menuitem>
+          </p:submenu>
+       <p:submenu label="Cerca ">
+       <p:menuitem value="Prove" url="/pages/searchMisuratoreFiscale.xhtml"  icon="fa fa-search-plus"/>
+       </p:submenu>
+       
+         
+       
+    </p:menu>
+		</p:outputPanel>
+
+	</h:form>
+</ui:composition>
+
+
