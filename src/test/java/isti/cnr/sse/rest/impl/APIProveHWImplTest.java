@@ -63,6 +63,7 @@ import org.w3c.dom.NodeList;
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
+import isti.cnr.sse.jsf.TipoProve;
 
 public class APIProveHWImplTest extends JerseyTest {
 
@@ -130,7 +131,8 @@ public class APIProveHWImplTest extends JerseyTest {
 	}
 	
 	private void sendinit() {
-		Response response = target("/corrispettivi/init/96MKR000111").queryParam("grantot", "28.8","desc","ciao","z","33").request(MediaType.APPLICATION_XML).get();
+		Response response = target("/corrispettivi/init/96MKR000111").queryParam("grantot", "28.8").queryParam("desc",TipoProve.Termiche.toString()).queryParam("z","33").request(MediaType.APPLICATION_XML).get();
+		System.out.println(response);
 	}
 	
 	private void sendrt() {

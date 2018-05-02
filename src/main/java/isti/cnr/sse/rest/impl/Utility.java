@@ -10,6 +10,8 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,7 @@ import javax.xml.bind.Marshaller;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.DatiRegistratoriTelematiciType;
 import cnr.isti.sse.data.corrispettivi.IVAType;
+import isti.cnr.sse.rest.impl.util.CSVUtils;
 
 public class Utility {
 	
@@ -152,6 +155,37 @@ public class Utility {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			log.error(e);
+		}
+	}
+	public static void writeRTs(Map<String,RT> map){
+		try{
+			String csvFile = "develope.csv";
+			File f = new File(csvFile);
+			FileWriter writer;
+			//for header
+			if(!f.exists()){
+				writer = new FileWriter(csvFile);
+				String header = "Matricola; GT; TotaleRicevuto; timediff; starttime; workingtime; stoptime; Zricevuti; Z; Descrizione; isCloded";
+				CSVUtils.writeLine(writer, Arrays.asList(header.split(";")));
+			}else{
+				writer = new FileWriter(csvFile,true);
+			}
+
+			for (RT d : map.values()) {
+
+				List<String> list = new ArrayList<>(Arrays.asList(d.toString().split(";")));
+
+
+				CSVUtils.writeLine(writer, list);
+
+				//try custom separator and quote. 
+				//CSVUtils.writeLine(writer, list, '|', '\"');
+			}
+
+			writer.flush();
+			writer.close();
+		}catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 

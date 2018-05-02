@@ -1,5 +1,6 @@
 package isti.cnr.sse.rest.impl;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,6 +10,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import isti.cnr.sse.jsf.TipoProve;
 
 @XmlRootElement(name = "RT")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -25,7 +28,12 @@ import javax.xml.bind.annotation.XmlType;
     "Descrizione",
     "isCloded"
 })
-public class RT {
+public class RT implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3320736152498502084L;
+	
 	@XmlElement(name = "Matricola", required = true)
 	private String Matricola;
 	@XmlElement(name = "GT", required = true)
@@ -113,7 +121,7 @@ public class RT {
 	public void setDescrizione(String descrizione) {
 		Descrizione = descrizione;
 		if(descrizione==null){
-			Descrizione= "";
+			Descrizione= TipoProve.Termiche.toString();
 		}
 	}
 
@@ -186,11 +194,13 @@ public class RT {
 
 	@Override
 	public String toString() {
-		return "RT [Matricola=" + Matricola + ", GT=" + GT + ", timediff=" + timediff + ", starttime=" + starttime
-				+ ", workingtime=" + workingtime + ", stoptime=" + stoptime + ", Kricevuti=" + Zricevuti + "]";
+		return " " + Matricola + "; " + GT + "; " + TotaleRicevuto + "; " + timediff + "; " + starttime + "; "
+				+ workingtime + "; " + stoptime + "; " + Zricevuti + "; " + Z + "; " + Descrizione + "; " + isCloded;
 	}
 
-	
+	public String getKey(){
+		return Matricola+Descrizione;
+	}
 	public Integer getZ() {
 		return Z+Zricevuti;
 	}
