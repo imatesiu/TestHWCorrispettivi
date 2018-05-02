@@ -2,10 +2,13 @@ package isti.cnr.sse.rest.impl;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -188,5 +191,44 @@ public class Utility {
 			// TODO: handle exception
 		}
 	}
+	
+
+    public static void serialize(Map<String,RT> map)
+    {
+    	String file = "database.ser";
+        FileOutputStream fileOut;
+        try
+         {
+            fileOut = new FileOutputStream(file);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(map);
+            out.close();
+            fileOut.close();
+         }catch(Exception e)
+         {
+             e.printStackTrace();
+             return;
+         }  
+        return;
+    }
+     
+    public static Map<String,RT> deserialize()
+    {
+    	String file = "database.ser";
+    	Map<String,RT> map = null;
+          try
+          {
+             FileInputStream fileIn = new FileInputStream(file);
+             ObjectInputStream in = new ObjectInputStream(fileIn);
+             map = (Map<String,RT>) in.readObject();
+             in.close();
+             fileIn.close();
+         }catch(Exception e)
+         {
+             e.printStackTrace();   
+             return null;
+         }
+         return map;
+    }
 
 }

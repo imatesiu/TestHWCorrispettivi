@@ -92,8 +92,8 @@ public class APIProveHWImplTest extends JerseyTest {
 		// for(int i = 0 ; i<10; i++){
 		String nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";//
 		runTest(nameFilexml);
-		sendgetinfo();
-		sendgetclear();
+		sendgetinfo();sendgetstop();
+		//sendgetclear();
 
 	/*	nameFilexml = "CC/c1.xml";
 		runTest(nameFilexml);
@@ -130,13 +130,17 @@ public class APIProveHWImplTest extends JerseyTest {
 		Response response = target("/corrispettivi/clear/127.0.0.1").request(MediaType.APPLICATION_XML).get();
 	}
 	
+	private void sendgetstop() {
+		Response response = target("/corrispettivi/stop/80M08002493").request(MediaType.APPLICATION_XML).get();
+	}
+	
 	private void sendinit() {
-		Response response = target("/corrispettivi/init/96MKR000111").queryParam("grantot", "28.8").queryParam("desc",TipoProve.Termiche.toString()).queryParam("z","33").request(MediaType.APPLICATION_XML).get();
+		Response response = target("/corrispettivi/init/80M08002493").queryParam("grantot", "28.8").queryParam("desc",TipoProve.Termiche.toString()).queryParam("z","33").request(MediaType.APPLICATION_XML).get();
 		System.out.println(response);
 	}
 	
 	private void sendrt() {
-		Response response = target("/corrispettivi/rt/96MKR000111").request(MediaType.APPLICATION_XML).get();
+		Response response = target("/corrispettivi/rt/80M08002493").request(MediaType.APPLICATION_XML).get();
 		System.out.println(response);
 	}
 	
