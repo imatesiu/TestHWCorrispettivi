@@ -162,7 +162,7 @@ public class Utility {
 	}
 	public static void writeRTs(Map<String,RT> map){
 		try{
-			String csvFile = "develope.csv";
+			String csvFile = "finals.csv";
 			File f = new File(csvFile);
 			FileWriter writer;
 			//for header
@@ -175,11 +175,8 @@ public class Utility {
 			}
 
 			for (RT d : map.values()) {
-
-				List<String> list = new ArrayList<>(Arrays.asList(d.toString().split(";")));
-
-
-				CSVUtils.writeLine(writer, list);
+				writeRT(writer,d);	
+				
 
 				//try custom separator and quote. 
 				//CSVUtils.writeLine(writer, list, '|', '\"');
@@ -192,8 +189,34 @@ public class Utility {
 		}
 	}
 	
+	public static void writeRT( RT d){
+		try{
+			String csvFile = d.getMatricola()+"."+d.getDescrizione()+"."+".csv";
+			File f = new File(csvFile);
+			FileWriter writer;
+			//for header
+			if(!f.exists()){
+				writer = new FileWriter(csvFile);
+				String header = "Matricola; GT; TotaleRicevuto; timediff; starttime; workingtime; stoptime; Zricevuti; Z; Descrizione; isCloded";
+				CSVUtils.writeLine(writer, Arrays.asList(header.split(";")));
+			}else{
+				writer = new FileWriter(csvFile,true);
+			}
+			writeRT(writer,d);	
+			writer.flush();
+			writer.close();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+    private static void writeRT(FileWriter writer, RT d) throws IOException {
+    	List<String> list = new ArrayList<>(Arrays.asList(d.toString().split(";")));
+		CSVUtils.writeLine(writer, list);
+		
+	}
 
-    public static void serialize(Map<String,RT> map)
+
+	public static void serialize(Map<String,RT> map)
     {
     	String file = "database.ser";
         FileOutputStream fileOut;
