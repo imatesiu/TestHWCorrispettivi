@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="/templates/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	
+	  <ui:define name="title">
+        Scrool Prove Aperte
+    </ui:define>
+
+    <ui:define name="description">
+        Scrool Prove Aperte
+    </ui:define>
+	
+	<ui:define name="content">
+<h:body>
+
+ 
+    
+     <p:dataScroller value="#{dataScrollerall.rts}" var="rt" chunkSize="10" mode="inline" scrollHeight="500">
+        <f:facet name="header">
+            Scroll Down to Load More Elements
+        </f:facet>
+ 
+        <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+             <h:graphicImage value="/resources/images/prove/#{rt.descrizione}.png" />  
+ 
+            <p:outputPanel>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <h:outputText value="Matricola RT:" />
+                    <h:outputText value="#{rt.matricola}" style="font-weight: bold"/>
+ 					<h:outputText value="" />
+ 					
+                    <h:outputText value="Prova:" />
+                    <h:outputText value="#{rt.descrizione}" style="font-weight: bold"/>
+ 					<h:outputText value="" />
+                    
+                    <h:outputText value="Totale Ricevuto:" />
+                    <h:outputText value="#{rt.totaleRicevuto}" style="font-weight: bold"/>
+                    <h:outputText value="" />
+                    
+                    <h:outputText value="Totale Chiusure Ricevute:" />
+                    <h:outputText value="#{rt.zricevuti}" style="font-weight: bold"/>
+                    <h:outputText value="" />
+                    
+                    <h:outputText value="Time Diff in Seconds:" />
+                    <h:outputText value="#{rt.timediff}" style="font-weight: bold"/>
+                    <h:outputText value="" />
+                    
+                     <h:outputText value="GranTotale:" />
+                    <h:outputText value="#{rt.GT}" style="font-weight: bold"/>
+                    <h:outputText value="" />
+                    
+                    <h:outputText value="Totale Chiusure:" />
+                    <h:outputText value="#{rt.z}" style="font-weight: bold"/>
+                    <h:outputText value="" />
+                    
+                    <h:outputText value="Data Inzio:" />
+                    <h:outputText value="#{rt.starttime}" style="font-weight: bold"/>
+                    <h:outputText value="" />
+                    
+                    <h:outputText value="Data Fine:" />
+                    <h:outputText value="#{rt.stoptime}" style="font-weight: bold"/>
+                    <h:outputText value="" />
+                    
+                    <h:outputText value="" />       
+ 
+               
+                </h:panelGrid>
+            </p:outputPanel>
+        </h:panelGrid>
+    </p:dataScroller>
+    
+
+</h:body>
+</ui:define>
+</ui:composition>
