@@ -31,45 +31,39 @@
              <h:graphicImage value="/resources/images/prove/#{rt.descrizione}.png" />  
  
             <p:outputPanel>
-                <h:panelGrid columns="3" cellpadding="5">
+                <h:panelGrid columns="4" cellpadding="5">
                     <h:outputText value="Matricola RT:" />
                     <h:outputText value="#{rt.matricola}" style="font-weight: bold"/>
- 					<h:outputText value="" />
+ 					
+ 					<h:outputText value="Data Inzio:" />
+                    <h:outputText value="#{rt.starttime}" style="font-weight: bold"/>
  					
                     <h:outputText value="Prova:" />
                     <h:outputText value="#{rt.descrizione}" style="font-weight: bold"/>
- 					<h:outputText value="" />
+ 					
+					<h:outputText value="Data Fine:" />
+                    <h:outputText value="#{rt.stoptime}" style="font-weight: bold"/>
                     
                     <h:outputText value="Totale Ricevuto:" />
                     <h:outputText value="#{rt.totaleRicevuto}" style="font-weight: bold"/>
-                    <h:outputText value="" />
-                    
+
                     <h:outputText value="Totale Chiusure Ricevute:" />
                     <h:outputText value="#{rt.zricevuti}" style="font-weight: bold"/>
-                    <h:outputText value="" />
-                    
+                   
                     <h:outputText value="Time Diff in Seconds:" />
                     <h:outputText value="#{rt.timediff}" style="font-weight: bold"/>
+ 					<h:outputText value="" />
                     <h:outputText value="" />
-                    
                      <h:outputText value="GranTotale:" />
                     <h:outputText value="#{rt.GT}" style="font-weight: bold"/>
-                    <h:outputText value="" />
-                    
+ 	
                     <h:outputText value="Totale Chiusure:" />
                     <h:outputText value="#{rt.z}" style="font-weight: bold"/>
                     <h:outputText value="" />
-                    
-                    <h:outputText value="Data Inzio:" />
-                    <h:outputText value="#{rt.starttime}" style="font-weight: bold"/>
-                    <h:outputText value="" />
-                    
-                    <h:outputText value="Data Fine:" />
-                    <h:outputText value="#{rt.stoptime}" style="font-weight: bold"/>
                     <h:outputText value="" />
                     
                     <h:outputText value="" />       
- 					<p:commandButton icon="ui-icon-delete" immediate="true" update="@form" action="#{dataScrollerall.remprova}">  <!--  oncomplete="PF('ProveDialog').show()"--> 
+ 					<p:commandButton icon="ui-icon-delete" title="Cancella Prova" immediate="true" update="@form" action="#{dataScrollerall.remprova}">  <!--  oncomplete="PF('ProveDialog').show()"--> 
                         <f:setPropertyActionListener value="#{rt}" target="#{dataScrollerall.selected}" />
                     </p:commandButton>
                
