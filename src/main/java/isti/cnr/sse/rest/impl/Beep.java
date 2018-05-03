@@ -22,11 +22,12 @@ public class Beep {
 			tone(hz+(ip*10), msecs, 1.0);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Problemi con l'audio");
+			//e.printStackTrace();
 		}  
     }  
     public static void tone(int hz, int msecs, double vol)  
-              throws LineUnavailableException {  
+              throws Exception {  
          byte[] buf = new byte[1];  
          AudioFormat af = new AudioFormat(SAMPLE_RATE, // sampleRate  
                    8, // sampleSizeInBits  
