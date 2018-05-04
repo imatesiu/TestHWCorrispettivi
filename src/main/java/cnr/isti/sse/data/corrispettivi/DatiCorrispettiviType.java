@@ -19,8 +19,7 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-//import datanew.FormatoTrasmissioneType;
-import datanew.SignatureType;
+import cnr.isti.sse.data.corrispettivi.messaggi.signature.SignatureType;
 
 
 /**

@@ -1,12 +1,12 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
 // Generato il: 2017.11.22 alle 11:15:36 PM CET 
 //
 
 
-package datanew;
+package cnr.isti.sse.data.corrispettivi.messaggi.signature;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -62,7 +62,7 @@ public class KeyInfoType {
     protected String id;
 
     /**
-     * Recupera il valore della proprietà keyName.
+     * Recupera il valore della proprietï¿½ keyName.
      * 
      * @return
      *     possible object is
@@ -74,7 +74,7 @@ public class KeyInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà keyName.
+     * Imposta il valore della proprietï¿½ keyName.
      * 
      * @param value
      *     allowed object is
@@ -86,7 +86,7 @@ public class KeyInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà x509Data.
+     * Recupera il valore della proprietï¿½ x509Data.
      * 
      * @return
      *     possible object is
@@ -98,7 +98,7 @@ public class KeyInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà x509Data.
+     * Imposta il valore della proprietï¿½ x509Data.
      * 
      * @param value
      *     allowed object is
@@ -110,7 +110,7 @@ public class KeyInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà mgmtData.
+     * Recupera il valore della proprietï¿½ mgmtData.
      * 
      * @return
      *     possible object is
@@ -122,7 +122,7 @@ public class KeyInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà mgmtData.
+     * Imposta il valore della proprietï¿½ mgmtData.
      * 
      * @param value
      *     allowed object is
@@ -134,7 +134,7 @@ public class KeyInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà id.
+     * Recupera il valore della proprietï¿½ id.
      * 
      * @return
      *     possible object is
@@ -146,7 +146,7 @@ public class KeyInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà id.
+     * Imposta il valore della proprietï¿½ id.
      * 
      * @param value
      *     allowed object is

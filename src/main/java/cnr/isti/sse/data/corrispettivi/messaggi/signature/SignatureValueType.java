@@ -1,12 +1,12 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
 // Generato il: 2017.11.22 alle 11:15:36 PM CET 
 //
 
 
-package datanew;
+package cnr.isti.sse.data.corrispettivi.messaggi.signature;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -51,7 +51,7 @@ public class SignatureValueType {
     protected String id;
 
     /**
-     * Recupera il valore della proprietà value.
+     * Recupera il valore della proprietï¿½ value.
      * 
      * @return
      *     possible object is
@@ -62,7 +62,7 @@ public class SignatureValueType {
     }
 
     /**
-     * Imposta il valore della proprietà value.
+     * Imposta il valore della proprietï¿½ value.
      * 
      * @param value
      *     allowed object is
@@ -73,7 +73,7 @@ public class SignatureValueType {
     }
 
     /**
-     * Recupera il valore della proprietà id.
+     * Recupera il valore della proprietï¿½ id.
      * 
      * @return
      *     possible object is
@@ -85,7 +85,7 @@ public class SignatureValueType {
     }
 
     /**
-     * Imposta il valore della proprietà id.
+     * Imposta il valore della proprietï¿½ id.
      * 
      * @param value
      *     allowed object is

@@ -6,7 +6,7 @@
 //
 
 
-package datanew;
+package cnr.isti.sse.data.corrispettivi.messaggi.signature;
 
 import java.util.ArrayList;
 import java.util.List;

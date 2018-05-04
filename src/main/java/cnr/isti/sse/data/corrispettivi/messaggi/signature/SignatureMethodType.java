@@ -6,7 +6,7 @@
 //
 
 
-package datanew;
+package cnr.isti.sse.data.corrispettivi.messaggi.signature;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
