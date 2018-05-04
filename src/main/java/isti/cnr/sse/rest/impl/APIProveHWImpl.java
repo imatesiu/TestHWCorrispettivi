@@ -108,6 +108,7 @@ public class APIProveHWImpl {
 			rt.setGT((grantotale));
 			rt.setZ(z);
 			rt.setTotaleRicevuto(new BigDecimal(0));
+			rt.setZricevuti(0);
 			rt.setStarttime(new Date());
 			rt.setDescrizione(desc);
 			log.info("Init: " + key);
