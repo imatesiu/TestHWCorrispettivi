@@ -198,6 +198,24 @@ public class RT implements Serializable {
 				+ workingtime + "; " + stoptime + "; " + Zricevuti + "; " + Z + "; " + Descrizione + "; " + isCloded;
 	}
 
+	public String toHtml(){
+		String tag = "<html><body> Info per";
+		String body = "Matricola: " + Matricola + "; <br/> GT: " + GT + "; <br/> TotaleRicevuto: " + TotaleRicevuto
+				+ "; <br/> timediff: " + timediff + "; <br/> starttime: " + starttime + "; <br/> workingtime: "
+				+ workingtime + "; <br/> stoptime: " + stoptime + "; <br/> Zricevuti: " + Zricevuti + "; <br/> Z: " + Z
+				+ "; <br/> Descrizione: " + Descrizione + "; <br/> isCloded: " + isCloded;
+		String etag = "</body></html>";
+		return tag+body+etag;
+	}
+	
+	public String getInfo(){
+		String body = "Matricola: " + Matricola + "; GT: " + GT + "; TotaleRicevuto: " + TotaleRicevuto + "; timediff: "
+				+ timediff + "; starttime: " + starttime + "; workingtime: " + workingtime + "; stoptime: " + stoptime
+				+ "; Zricevuti: " + Zricevuti + "; Z: " + Z + "; Descrizione: " + Descrizione + "; isCloded: "
+				+ isCloded;
+		
+		return body;
+	}
 	public String getKey(){
 		return Matricola+Descrizione;
 	}

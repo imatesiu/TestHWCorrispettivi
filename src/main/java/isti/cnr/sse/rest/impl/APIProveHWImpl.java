@@ -139,12 +139,13 @@ public class APIProveHWImpl {
 			// map.put(key, new BigDecimal(0));
 			// ricevuti.put(key, 0);
 			log.info("Info for: " + key);
+			log.info("Corrispettivi Ricevuti in totale: " + rt.getTotaleRicevuto());
 			log.info("Grantotale " + grantotale);
-			log.info("Ricevuti in totale: " + num);
+			log.info("Doc. Ricevuti in totale: " + rt.getZ());			
+			log.info("Doc. Ricevuti: " + num);
 			log.info("TimeDiff: " + diff);
 			log.info("");
-			return "<html><body>OK,  Info for: " + key + " Grantotale: " + grantotale + " Ricevuti in totale: " + num
-					+ " tempo in sencodi:" + diff + " </body></html>";
+			return rt.getInfo();
 		} else {
 			return "<html><body>Elemento non presente, " + key + "</body></html>";
 		}
