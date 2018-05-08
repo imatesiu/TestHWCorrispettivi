@@ -16,7 +16,8 @@ public enum TipoProve {
     BatteriaSottoProtezioneSF (6),
     AlimentazioneBatteriaSenzaVincoloFiscale (7),
     ScaricheElettrostatiche (8),
-	Guastoemalfunzionamento (9);
+	Guastoemalfunzionamento (9),
+	NonSelezionata (10);
 
     TipoProve(int i) {
     }
@@ -46,6 +47,9 @@ public enum TipoProve {
         if (tipo.equals("Alimentazione Batteria Senza Vincolo Fiscale")) {
             return AlimentazioneBatteriaSenzaVincoloFiscale;
         }
-        return ScaricheElettrostatiche;
+        if(tipo.equals("Scariche Elettrostatiche")){
+        	return ScaricheElettrostatiche;
+        }
+        return NonSelezionata;
     }
 }

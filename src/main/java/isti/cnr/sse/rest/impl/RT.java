@@ -68,8 +68,9 @@ public class RT implements Serializable {
 		this.workingtime = starttime;
 		this.stoptime = starttime;
 		Zricevuti = 0;
-		this.Descrizione = "";
+		this.Descrizione = TipoProve.NonSelezionata.name();
 		this.isCloded = false;
+		this.Z = 0;
 	}
 
 	public RT(String Matricola,BigDecimal gT, Integer timediff, Date starttime, Date workingtime, Date stoptime, Integer kricevuti) {
@@ -82,8 +83,9 @@ public class RT implements Serializable {
 		this.workingtime = workingtime;
 		this.stoptime = stoptime;
 		this.Zricevuti = kricevuti;
-		this.Descrizione = "";
+		this.Descrizione = TipoProve.NonSelezionata.name();
 		this.isCloded = false;
+		this.Z = 0;
 	}
 	
 	public RT(String Matricola, Date starttime) {
@@ -95,8 +97,9 @@ public class RT implements Serializable {
 		this.workingtime = starttime;
 		this.stoptime = starttime;
 		Zricevuti = 0;
-		this.Descrizione = "";
+		this.Descrizione = TipoProve.NonSelezionata.name();
 		this.isCloded = false;
+		this.Z = 0;
 	}
 	
 	public RT(String Matricola, Date starttime, BigDecimal gt) {
@@ -108,8 +111,9 @@ public class RT implements Serializable {
 		this.workingtime = starttime;
 		this.stoptime = starttime;
 		Zricevuti = 0;
-		this.Descrizione = "";
+		this.Descrizione = TipoProve.NonSelezionata.name();
 		this.isCloded = false;
+		this.Z = 0;
 	}
 	
 	
