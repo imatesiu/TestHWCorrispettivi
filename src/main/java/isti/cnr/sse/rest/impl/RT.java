@@ -204,18 +204,18 @@ public class RT implements Serializable {
 
 	public String toHtml(){
 		String tag = "<html><body> Info per";
-		String body = "Matricola: " + Matricola + "; <br/> GT: " + GT + "; <br/> TotaleRicevuto: " + TotaleRicevuto
+		String body = "Matricola: " + Matricola + "; <br/> GT: " + getGT() + "; <br/> TotaleRicevuto: " + TotaleRicevuto
 				+ "; <br/> timediff: " + timediff + "; <br/> starttime: " + starttime + "; <br/> workingtime: "
-				+ workingtime + "; <br/> stoptime: " + stoptime + "; <br/> Zricevuti: " + Zricevuti + "; <br/> Z: " + Z
+				+ workingtime + "; <br/> stoptime: " + stoptime + "; <br/> Zricevuti: " + Zricevuti + "; <br/> Z: " + getZ()
 				+ "; <br/> Descrizione: " + Descrizione + "; <br/> isCloded: " + isCloded;
 		String etag = "</body></html>";
 		return tag+body+etag;
 	}
 	
 	public String getInfo(){
-		String body = "Matricola: " + Matricola + "; GT: " + GT + "; TotaleRicevuto: " + TotaleRicevuto + "; timediff: "
+		String body = "Matricola: " + Matricola + "; GT: " + getGT() + "; TotaleRicevuto: " + TotaleRicevuto + "; timediff: "
 				+ timediff + "; starttime: " + starttime + "; workingtime: " + workingtime + "; stoptime: " + stoptime
-				+ "; Zricevuti: " + Zricevuti + "; Z: " + Z + "; Descrizione: " + Descrizione + "; isCloded: "
+				+ "; Zricevuti: " + Zricevuti + "; Z: " + getZ() + "; Descrizione: " + Descrizione + "; isCloded: "
 				+ isCloded;
 		
 		return body;
@@ -224,7 +224,7 @@ public class RT implements Serializable {
 		return Matricola+Descrizione;
 	}
 	public Integer getZ() {
-		return Z+Zricevuti;
+		return Z+(Zricevuti/3);
 	}
 
 	public void setZ(Integer z) {
