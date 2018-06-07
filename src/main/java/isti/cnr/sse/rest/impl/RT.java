@@ -26,7 +26,8 @@ import isti.cnr.sse.jsf.TipoProve;
     "Zricevuti",
     "Z",
     "Descrizione",
-    "isCloded"
+    "isCloded",
+    "isServer"
 })
 public class RT implements Serializable {
 	/**
@@ -56,7 +57,8 @@ public class RT implements Serializable {
 	private String Descrizione;
 	@XmlAttribute(name = "isCloded", required = true)
 	private boolean isCloded;
-	
+	@XmlAttribute(name = "isServer", required = true)
+	private boolean isServer;
 	
 	
 	public RT() {
@@ -71,6 +73,7 @@ public class RT implements Serializable {
 		this.Descrizione = TipoProve.NonSelezionata.name();
 		this.isCloded = false;
 		this.Z = 0;
+		this.isServer = false;
 	}
 
 	public RT(String Matricola,BigDecimal gT, Integer timediff, Date starttime, Date workingtime, Date stoptime, Integer kricevuti) {
@@ -86,6 +89,7 @@ public class RT implements Serializable {
 		this.Descrizione = TipoProve.NonSelezionata.name();
 		this.isCloded = false;
 		this.Z = 0;
+		this.isServer = false;
 	}
 	
 	public RT(String Matricola, Date starttime) {
@@ -100,6 +104,7 @@ public class RT implements Serializable {
 		this.Descrizione = TipoProve.NonSelezionata.name();
 		this.isCloded = false;
 		this.Z = 0;
+		this.isServer = false;
 	}
 	
 	public RT(String Matricola, Date starttime, BigDecimal gt) {
@@ -114,6 +119,7 @@ public class RT implements Serializable {
 		this.Descrizione = TipoProve.NonSelezionata.name();
 		this.isCloded = false;
 		this.Z = 0;
+		this.isServer = false;
 	}
 	
 	
@@ -207,7 +213,7 @@ public class RT implements Serializable {
 		String body = "Matricola: " + Matricola + "; <br/> GT: " + getGT() + "; <br/> TotaleRicevuto: " + TotaleRicevuto
 				+ "; <br/> timediff: " + timediff + "; <br/> starttime: " + starttime + "; <br/> workingtime: "
 				+ workingtime + "; <br/> stoptime: " + stoptime + "; <br/> Zricevuti: " + Zricevuti + "; <br/> Z: " + getZ()
-				+ "; <br/> Descrizione: " + Descrizione + "; <br/> isCloded: " + isCloded;
+				+ "; <br/> Descrizione: " + Descrizione + "; <br/> isCloded: " + isCloded + "; <br/> isServer: " + isServer;
 		String etag = "</body></html>";
 		return tag+body+etag;
 	}
@@ -216,7 +222,7 @@ public class RT implements Serializable {
 		String body = "Matricola: " + Matricola + "; GT: " + getGT() + "; TotaleRicevuto: " + TotaleRicevuto + "; timediff: "
 				+ timediff + "; starttime: " + starttime + "; workingtime: " + workingtime + "; stoptime: " + stoptime
 				+ "; Zricevuti: " + Zricevuti + "; Z: " + getZ() + "; Descrizione: " + Descrizione + "; isCloded: "
-				+ isCloded;
+				+ isCloded+ "; isServer: "+ isServer;
 		
 		return body;
 	}
@@ -224,11 +230,22 @@ public class RT implements Serializable {
 		return Matricola+Descrizione;
 	}
 	public Integer getZ() {
-		return Z+(Zricevuti/3);
+		if(isServer){
+			return Z+(Zricevuti/3);
+		}
+		return Z+(Zricevuti);
 	}
 
 	public void setZ(Integer z) {
 		Z = z;
+	}
+
+	public boolean isServer() {
+		return isServer;
+	}
+
+	public void setServer(boolean isServer) {
+		this.isServer = isServer;
 	}
 	
 	

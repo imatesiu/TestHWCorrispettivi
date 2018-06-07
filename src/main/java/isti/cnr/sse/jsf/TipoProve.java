@@ -11,13 +11,21 @@ public enum TipoProve {
     Termiche (1),
     Impermeabilita (2),
     Vibrazione (3),
-    DisturbiElettromagnetici (4),
-    DisturbiCondotti (5),
-    BatteriaSottoProtezioneSF (6),
-    AlimentazioneBatteriaSenzaVincoloFiscale (7),
-    ScaricheElettrostatiche (8),
-	Guastoemalfunzionamento (9),
-	NonSelezionata (10);
+    ImmunitaScaricheElettrostaticheESD (4),
+    ImmunitaCampoElettromagneticoRadiofrequenza (5),
+    ImmunitaTransitoriVelociEFTBURST (6),
+    ImmunitaImpulsiSURGE (7),
+    ImmunitaDisturbiCondottiContinuiRadiofrequenza (8),
+    ImmunitaCampiMagneticiFrequenzaRete (9),
+    ImmunitaBuchiInterruzioniTensione(10),
+    VariazioniTensione (11),
+    ProvaDurataBatteria (12),
+
+    BatteriaSottoProtezioneSF (13),
+    AlimentazioneBatteriaSenzaVincoloFiscale (14),
+
+	Guastoemalfunzionamento (15),
+	NonSelezionata (16);
 
     TipoProve(int i) {
     }
@@ -26,29 +34,45 @@ public enum TipoProve {
         if (tipo.equals("Termiche")) {
             return Termiche;
         }
-        if (tipo.equals("DisturbiElettromagnetici")) {
-            return DisturbiElettromagnetici;
-        }
-        if (tipo.equals("Disturbi Elettromagnetici")) {
-            return DisturbiElettromagnetici;
-        }
         if (tipo.equals("Impermeabilita'")) {
             return Impermeabilita;
         }
         if (tipo.equals("Vibrazione")) {
             return Vibrazione;
         }
-        if (tipo.equals("Disturbi Condotti")) {
-            return DisturbiCondotti;
+        if (tipo.equals("ImmunitaScaricheElettrostaticheESD'")) {
+            return ImmunitaScaricheElettrostaticheESD;
+        }
+        if (tipo.equals("ImmunitaCampoElettromagneticoRadiofrequenza")) {
+            return ImmunitaCampoElettromagneticoRadiofrequenza;
+        }
+        if (tipo.equals("ImmunitaTransitoriVelociEFTBURST")) {
+            return ImmunitaTransitoriVelociEFTBURST;
+        }
+        if (tipo.equals("ImmunitaImpulsiSURGE")) {
+            return ImmunitaImpulsiSURGE;
+        }
+        
+        if (tipo.equals("ImmunitaDisturbiCondottiContinuiRadiofrequenza")) {
+            return ImmunitaDisturbiCondottiContinuiRadiofrequenza;
+        }
+        if (tipo.equals("ImmunitaCampiMagneticiFrequenzaRete")) {
+            return ImmunitaCampiMagneticiFrequenzaRete;
+        }
+        if (tipo.equals("ImmunitaBuchiInterruzioniTensione'")) {
+            return ImmunitaBuchiInterruzioniTensione;
+        }
+        if (tipo.equals("VariazioniTensione")) {
+            return VariazioniTensione;
+        }
+        if (tipo.equals("ProvaDurataBatteria")) {
+            return ProvaDurataBatteria;
         }
         if (tipo.equals("Batteria Sotto Protezione SF")) {
             return BatteriaSottoProtezioneSF;
         }
         if (tipo.equals("Alimentazione Batteria Senza Vincolo Fiscale")) {
             return AlimentazioneBatteriaSenzaVincoloFiscale;
-        }
-        if(tipo.equals("Scariche Elettrostatiche")){
-        	return ScaricheElettrostatiche;
         }
         return NonSelezionata;
     }
