@@ -3,9 +3,11 @@ import sys
 
 
 def send_post(content):
-	#response = requests.post('http://192.168.1.146:9090/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"}, verify=False)
+	#response = requests.post('http://localhost:9090/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"}, verify=False)
 	pem = 'serverca.crt'
-	response = requests.post('https://localhost/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"}, verify=pem)
+	response = requests.post('https://v-apid-ivaservizi.agenziaentrate.gov.it/v1/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"}, verify=False)
+	#response = requests.post('https://localhost/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"}, verify=pem)
+	print response.headers
 	print response.text
 	assert response.status_code == 200
 

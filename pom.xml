@@ -160,7 +160,12 @@
 			<artifactId>primefaces</artifactId>
 			<version>${primefaces.version}</version>
 		</dependency>
-
+<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-rewrite</artifactId>
+				<!--<version>8.1.14.v20131031</version> -->
+				<version>9.4.8.v20171121</version>
+		</dependency> 
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>cupertino</artifactId>
@@ -231,7 +236,7 @@
 				<!--<version>8.1.14.v20131031</version> -->
 				<version>9.4.8.v20171121</version>
 				<configuration>
-					<jettyXml>${project.basedir}/src/main/resources/jetty.xml,${project.basedir}/src/main/resources/jetty-http.xml,${project.basedir}/src/main/resources/jetty-ssl.xml,${project.basedir}/src/main/resources/jetty-https.xml</jettyXml>
+					<jettyXml>${project.basedir}/src/main/resources/jetty.xml,${project.basedir}/src/main/resources/jetty-rewrite.xml,${project.basedir}/src/main/resources/jetty-http.xml,${project.basedir}/src/main/resources/jetty-ssl.xml,${project.basedir}/src/main/resources/jetty-https.xml</jettyXml>
 					<connectors>
 						<connector implementation="org.eclipse.jetty.server.bio.SocketConnector">
 							<port>9090</port>
@@ -245,6 +250,15 @@
 						</connector>
 					</connectors>
 				</configuration>
+					<dependencies>
+				
+				<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-rewrite</artifactId>
+				<!--<version>8.1.14.v20131031</version> -->
+				<version>9.4.8.v20171121</version>
+		</dependency> 
+	</dependencies>
 			</plugin>
 
 			<plugin>
