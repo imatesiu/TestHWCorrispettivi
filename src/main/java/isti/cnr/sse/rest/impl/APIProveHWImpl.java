@@ -235,6 +235,19 @@ public class APIProveHWImpl {
 		// @Context HttpServletRequest request){
 		JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		if(Corri.length()==0){
+			try{
+				response.setHeader("Connection", "Close");
+				
+				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
+				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+				return text;
+			} catch (Exception e) {
+				e.printStackTrace();
+				log.error(e);
+			}
+		}
+		
 		try {
 			StringReader reader = new StringReader(Corri);
 			DatiCorrispettiviType Corrispettivi = (DatiCorrispettiviType) unmarshaller.unmarshal(reader);
@@ -265,7 +278,7 @@ public class APIProveHWImpl {
 			esito.setVersione("1.0");
 			Beep.tone(1000, 300, ipAddress);
 			
-			response.setHeader("Connection", "Keep-Alive");
+			
 			if(pair.getSecond()){
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
