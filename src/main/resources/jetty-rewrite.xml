@@ -64,8 +64,8 @@
           <New class="org.eclipse.jetty.rewrite.handler.HeaderPatternRule">
                       <Set name="pattern">/*</Set>
             
-            <Set name="name">Content-Type</Set>
-            <Set name="value">text/xml</Set>
+            <Set name="name">Connection</Set>
+            <Set name="value">closed</Set>
             <Set name="terminating">true</Set>
           </New>
         </Arg>

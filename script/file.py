@@ -1,12 +1,17 @@
 import requests
 import sys
+import os
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 def send_post(content):
+	session = requests.Session()
 	#response = requests.post('http://localhost:9090/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"}, verify=False)
 	pem = 'serverca.crt'
-	response = requests.post('https://v-apid-ivaservizi.agenziaentrate.gov.it/v1/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"}, verify=False)
-	#response = requests.post('https://localhost/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"}, verify=pem)
+	#response = requests.post('https://v-apid-ivaservizi.agenziaentrate.gov.it/v1/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml"}, verify=False)
+	response = session.post('https://winspa.isti.cnr.it/dispositivi/corrispettivi/',data=content,headers={"Content-Type": "application/xml","Connection": "Keep-Alive"}, verify=False)
 	print response.headers
 	print response.text
 	assert response.status_code == 200

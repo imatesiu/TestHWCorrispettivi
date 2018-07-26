@@ -42,7 +42,7 @@ public class Main {
            // weld.initialize();
 			server = startServer();
 
-			WebappContext webappContext = new WebappContext("lp");
+			WebappContext webappContext = new WebappContext("v1");
 
 			//webappContext.addListener(GateServletContextListener.class);
 			//ServletRegistration servletRegistration = webappContext.addServlet( "jersey-servlet", "org.glassfish.jersey.servlet.ServletContainer" );

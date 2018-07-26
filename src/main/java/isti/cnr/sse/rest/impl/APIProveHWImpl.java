@@ -7,6 +7,8 @@ import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.security.PublicKey;
 import java.security.cert.CertificateException;
@@ -25,11 +27,13 @@ import java.util.Properties;
 
 import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -49,6 +53,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
+import javax.ws.rs.core.Response;
 
 import org.apache.commons.io.IOUtils;
 import org.glassfish.grizzly.utils.Pair;
@@ -224,7 +229,8 @@ public class APIProveHWImpl {
 	
 	@Path("/")
 	@POST
-	public String putListMisuratoriFiscale2(String Corri, @Context HttpServletRequest request)
+	//@Produces(MediaType.TEXT_XML)
+	public String putListMisuratoriFiscale2(String Corri, @Context HttpServletRequest request, @Context HttpServletResponse response)
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		// @Context HttpServletRequest request){
 		JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
@@ -259,13 +265,15 @@ public class APIProveHWImpl {
 			esito.setVersione("1.0");
 			Beep.tone(1000, 300, ipAddress);
 			
+			response.setHeader("Connection", "Keep-Alive");
 			if(pair.getSecond()){
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
 				return text;
+				
 			}else{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
-				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+				String text = "ciao";
 				return text;
 			}
 			// return "<?xml version=\"1.0\" encoding=\"UTF-8\"
