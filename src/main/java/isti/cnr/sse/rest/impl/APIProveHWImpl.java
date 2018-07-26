@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -141,11 +142,22 @@ public class APIProveHWImpl {
 	
 	@Path("/")
 	@POST
-	public String putListMisuratoriFiscale2(String Corri, @Context HttpServletRequest request)
+	public String putListMisuratoriFiscale2(String Corri, @Context HttpServletRequest request, @Context HttpServletResponse response)
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		// @Context HttpServletRequest request){
+		response.setHeader("Connection", "Close");
 		JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		if(Corri.length()==0){
+			try{
+				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
+				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+				return text;
+			} catch (Exception e) {
+				e.printStackTrace();
+				log.error(e);
+			}
+		}
 		try {
 			StringReader reader = new StringReader(Corri);
 			DatiCorrispettiviType Corrispettivi = (DatiCorrispettiviType) unmarshaller.unmarshal(reader);
