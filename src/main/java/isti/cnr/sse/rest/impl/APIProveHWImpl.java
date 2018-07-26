@@ -1,6 +1,7 @@
 package isti.cnr.sse.rest.impl;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -27,8 +28,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -152,8 +155,9 @@ public class APIProveHWImpl {
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-				return text;
-			} catch (Exception e) {
+				response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+				throw new WebApplicationException(Response.status(406).entity(text).build());
+			} catch (IOException e) {
 				e.printStackTrace();
 				log.error(e);
 			}
