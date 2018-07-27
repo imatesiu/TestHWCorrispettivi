@@ -15,7 +15,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
-import cnr.isti.sse.data.corrispettivi.messaggi.signature.SignatureType;
 
 
 
@@ -41,14 +40,12 @@ import cnr.isti.sse.data.corrispettivi.messaggi.signature.SignatureType;
  * 
  * 
  */
-@XmlRootElement(name = "CensimentoDispositivo", namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CensimentoDispositivoType", propOrder = {
     "tipo",
     "marchioFabbricante",
     "modello",
-    "rifApprovazioneDispositivo",
-    "signature"
+    "rifApprovazioneDispositivo"
 })
 public class CensimentoDispositivoType {
 
@@ -61,8 +58,7 @@ public class CensimentoDispositivoType {
     protected String modello;
     @XmlElement(name = "RifApprovazioneDispositivo")
     protected RifApprovazioneType rifApprovazioneDispositivo;
-    @XmlElement(name = "Signature", namespace = "http://www.w3.org/2000/09/xmldsig#")
-    protected SignatureType signature;
+
 
     /**
      * Recupera il valore della propriet� tipo.
@@ -159,28 +155,5 @@ public class CensimentoDispositivoType {
     public void setRifApprovazioneDispositivo(RifApprovazioneType value) {
         this.rifApprovazioneDispositivo = value;
     }
-    /**
-     * Recupera il valore della propriet� signature.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SignatureType }
-     *     
-    */
-    public SignatureType getSignature() {
-        return signature;
-    } 
-
-    /**
-     * Imposta il valore della propriet� signature.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SignatureType }
-     *     
-     */
-    public void setSignature(SignatureType value) {
-        this.signature = value;
-    }
-
+   
 }
