@@ -1,18 +1,16 @@
 package isti.cnr.sse.rest.impl;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
-import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.security.PublicKey;
-import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,7 +19,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
@@ -32,20 +29,18 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.crypto.MarshalException;
 import javax.xml.crypto.dsig.Reference;
 import javax.xml.crypto.dsig.XMLSignature;
-import javax.xml.crypto.dsig.XMLSignatureException;
 import javax.xml.crypto.dsig.XMLSignatureFactory;
 import javax.xml.crypto.dsig.dom.DOMValidateContext;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
@@ -55,7 +50,6 @@ import org.apache.commons.io.IOUtils;
 import org.glassfish.grizzly.utils.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
@@ -233,10 +227,10 @@ public class APIProveHWImpl {
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		if(Corri.length()==0){
 			try{
-				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
+				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-				return text;
-			} catch (Exception e) {
+				throw new WebApplicationException(Response.status(406).entity(text).build());
+			} catch (IOException e) {
 				e.printStackTrace();
 				log.error(e);
 			}
@@ -278,7 +272,7 @@ public class APIProveHWImpl {
 			}else{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-				return text;
+				throw new WebApplicationException(Response.status(406).entity(text).build());
 			}
 			// return "<?xml version=\"1.0\" encoding=\"UTF-8\"
 			// standalone=\"yes\"?><EsitoOperazione
@@ -287,15 +281,15 @@ public class APIProveHWImpl {
 
 
 
-		} catch (Exception e) {
+		} catch (IOException  | JAXBException e) {
 			e.printStackTrace();
 			log.error(e);
 		}
 		try{
-			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
+			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
 			String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-			return text;
-		} catch (Exception e) {
+			throw new WebApplicationException(Response.status(406).entity(text).build());
+		} catch (IOException e) {
 			e.printStackTrace();
 			log.error(e);
 		}

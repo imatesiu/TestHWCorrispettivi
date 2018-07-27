@@ -1,6 +1,7 @@
 package isti.cnr.sse.rest.impl;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,23 +11,46 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.StringReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.security.Principal;
+import java.security.PublicKey;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.crypto.dsig.Reference;
+import javax.xml.crypto.dsig.XMLSignature;
+import javax.xml.crypto.dsig.XMLSignatureFactory;
+import javax.xml.crypto.dsig.dom.DOMValidateContext;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.stream.StreamSource;
+
+import org.glassfish.grizzly.utils.Pair;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.DatiRegistratoriTelematiciType;
 import cnr.isti.sse.data.corrispettivi.IVAType;
+
+
+import cnr.isti.sse.data.corrispettivi.messaggi.EventoDispositivoType;
+import cnr.isti.sse.data.corrispettivi.messaggi.signature.SignatureType;
 import isti.cnr.sse.rest.impl.util.CSVUtils;
+
 
 public class Utility {
 	
@@ -133,7 +157,98 @@ public class Utility {
 
 		}
 	}
+	
+	
+	public static Pair<String,Boolean> getMatricola(DatiCorrispettiviType d, String corri) {
+		SignatureType signa = d.getSignature();
+		return getMatricola(signa, corri);
+	}
+	
+	public static Pair<String,Boolean> getMatricola(EventoDispositivoType d, String corri) {
+		SignatureType signa = d.getSignature();
+		return getMatricola(signa, corri);
+	}
+	
+	private static Pair<String,Boolean> getMatricola(SignatureType d, String corri) {
+		String matricola = "";
+		boolean validFlag = false;
+		if (d != null) {
+			byte[] certificate = d.getKeyInfo().getX509Data().getX509Certificate();
+			CertificateFactory fact = null;
+			try {
+				fact = CertificateFactory.getInstance("X.509");
 
+				X509Certificate cert = (X509Certificate) fact
+						.generateCertificate(new ByteArrayInputStream(certificate));
+
+				PublicKey publicKey = cert.getPublicKey();
+
+				Document doc = convertStringToDocument(corri);// marshallToDocument(d,DatiCorrispettiviType.class);
+
+				NodeList nl = doc.getElementsByTagNameNS(XMLSignature.XMLNS, "Signature");
+
+				if (nl.getLength() == 0) {
+					throw new Exception("Cannot find Signature element");
+				}
+
+				DOMValidateContext valContext = new DOMValidateContext(publicKey, nl.item(0));
+
+				XMLSignatureFactory fac = XMLSignatureFactory.getInstance("DOM");
+
+				XMLSignature signature = fac.unmarshalXMLSignature(valContext);
+
+				validFlag = signature.validate(valContext);
+
+				// Check core validation status.
+				if (validFlag == false) {
+					Beep.tone(1000, 300,1600);
+					Beep.tone(1000, 300,1600);
+					Beep.tone(1000, 300,1600);
+					System.err.println("Signature failed core validation");
+					boolean sv = signature.getSignatureValue().validate(valContext);
+					System.out.println("signature validation status: " + sv);
+					if (sv == false) {
+						// Check the validation status of each Reference.
+						Iterator i = signature.getSignedInfo().getReferences().iterator();
+						for (int j = 0; i.hasNext(); j++) {
+							boolean refValid = ((Reference) i.next()).validate(valContext);
+							System.out.println("ref[" + j + "] validity status: " + refValid);
+						}
+					}
+				} else {
+					System.out.println("Signature passed core validation");
+				}
+
+				Principal principal = cert.getSubjectDN();
+				String name = principal.getName();
+				matricola = name.substring(3, 14);
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		Pair <String,Boolean> pair = new Pair<>();
+		pair.setFirst(matricola);
+		pair.setSecond(validFlag);
+		return pair;
+	}
+
+	private static Document convertStringToDocument(String xmlStr) {
+		try {
+
+			DOMResult output = new DOMResult();
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.transform(new StreamSource(new StringReader(xmlStr)), output);
+
+			return (Document) output.getNode();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public static void writeTo(String DCT, String ipAddress, int num){
 
 		try {
