@@ -16,7 +16,7 @@
  
 		<init-param>
 		     <param-name>jersey.config.server.provider.packages</param-name>
-		     <param-value>isti.cnr.sse.rest.impl,isti.cnr.sse.rest.impl.event</param-value>
+		     <param-value>isti.cnr.sse.rest.impl,isti.cnr.sse.rest.impl.event,isti.cnr.sse.rest.impl.dispositivi</param-value>
 		</init-param>
 		
 
