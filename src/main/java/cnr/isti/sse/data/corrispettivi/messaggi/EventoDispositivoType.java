@@ -42,7 +42,7 @@ import datanew.SignatureType;
  * 
  * 
  */
-@XmlRootElement(name = "EventoDispositivo", namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0")
+@XmlRootElement(name = "EventoDispositivo", namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EventoDispositivoType", propOrder = {
     "evento",
