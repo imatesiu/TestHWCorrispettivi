@@ -25,8 +25,10 @@ import org.apache.commons.io.IOUtils;
 import org.glassfish.grizzly.utils.Pair;
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
+import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.CensimentoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EventoDispositivoType;
+import cnr.isti.sse.data.corrispettivi.messaggi.RichiestaCertificatoDispositivoType;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
 import isti.cnr.sse.rest.impl.Utility;
 
@@ -57,11 +59,11 @@ public class APIDispositiviImpl {
 		}
 		try {
 			StringReader reader = new StringReader(censimento);
-			CensimentoDispositivoType EventoDispositivo = (CensimentoDispositivoType) unmarshaller.unmarshal(reader);
+			RichiestaCertificatoDispositivoType CensimentoDispositivo = (RichiestaCertificatoDispositivoType) unmarshaller.unmarshal(reader);
 			
 			Date now = new Date();
 			String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(now);
-			Pair<String, Boolean> pair = Utility.getMatricola(EventoDispositivo, censimento);
+			Pair<String, Boolean> pair = Utility.getMatricola(CensimentoDispositivo, censimento);
 			String ipAddress = pair.getFirst();
 			if (ipAddress == null) {
 				ipAddress = request.getHeader("X-FORWARDED-FOR");
@@ -71,6 +73,9 @@ public class APIDispositiviImpl {
 				ipAddress = request.getRemoteAddr();
 			}
 			log.info("received form: " + ipAddress + " " + timeStamp);
+			
+		
+			
 			
 			if(pair.getSecond()){
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
@@ -106,7 +111,7 @@ public class APIDispositiviImpl {
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		response.setHeader("Connection", "Close");
 		
-		JAXBContext jaxbContext = JAXBContext.newInstance(CensimentoDispositivoType.class);
+		JAXBContext jaxbContext = JAXBContext.newInstance(AttivaDispositivoType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		if(attivazione.length()==0){
 			try{
@@ -120,11 +125,11 @@ public class APIDispositiviImpl {
 		}
 		try {
 			StringReader reader = new StringReader(attivazione);
-			CensimentoDispositivoType EventoDispositivo = (CensimentoDispositivoType) unmarshaller.unmarshal(reader);
+			AttivaDispositivoType AttivaDispositivo = (AttivaDispositivoType) unmarshaller.unmarshal(reader);
 			
 			Date now = new Date();
 			String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(now);
-			Pair<String, Boolean> pair = Utility.getMatricola(EventoDispositivo, attivazione);
+			Pair<String, Boolean> pair = Utility.getMatricola(AttivaDispositivo, attivazione);
 			String ipAddress = pair.getFirst();
 			if (ipAddress == null) {
 				ipAddress = request.getHeader("X-FORWARDED-FOR");

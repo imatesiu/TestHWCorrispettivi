@@ -41,8 +41,8 @@ import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.DatiRegistratoriTelematiciType;
 import cnr.isti.sse.data.corrispettivi.IVAType;
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
-import cnr.isti.sse.data.corrispettivi.messaggi.CensimentoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EventoDispositivoType;
+import cnr.isti.sse.data.corrispettivi.messaggi.RichiestaCertificatoDispositivoType;
 import datanew.SignatureType;
 
 public class Utility {
@@ -153,7 +153,7 @@ public class Utility {
 		return getMatricola(signa, corri);
 	}
 	
-	public static Pair<String,Boolean> getMatricola(CensimentoDispositivoType d, String corri) {
+	public static Pair<String,Boolean> getMatricola(RichiestaCertificatoDispositivoType d, String corri) {
 		SignatureType signa = d.getSignature();
 		return getMatricola(signa, corri);
 	}

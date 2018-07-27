@@ -1,7 +1,7 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
 // Generato il: 2016.11.29 alle 12:39:14 AM CET 
 //
 
@@ -12,7 +12,10 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import datanew.SignatureType;
 
 
 /**
@@ -37,11 +40,13 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
+@XmlRootElement(name = "RichiestaCertificatoDispositivo", namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RichiestaCertificatoDispositivoType", propOrder = {
     "csr",
     "dispositivo",
-    "tecnicoVerificatore"
+    "tecnicoVerificatore",
+    "signature"
 })
 public class RichiestaCertificatoDispositivoType {
 
@@ -51,11 +56,13 @@ public class RichiestaCertificatoDispositivoType {
     protected CensimentoDispositivoType dispositivo;
     @XmlElement(name = "TecnicoVerificatore", required = true)
     protected TecnicoVerificatoreType tecnicoVerificatore;
+    @XmlElement(name = "Signature", namespace = "http://www.w3.org/2000/09/xmldsig#")
+    protected SignatureType signature;
     @XmlAttribute(name = "versione", required = true)
     protected String versione;
 
     /**
-     * Recupera il valore della proprietà csr.
+     * Recupera il valore della proprietï¿½ csr.
      * 
      * @return
      *     possible object is
@@ -66,7 +73,7 @@ public class RichiestaCertificatoDispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà csr.
+     * Imposta il valore della proprietï¿½ csr.
      * 
      * @param value
      *     allowed object is
@@ -77,7 +84,7 @@ public class RichiestaCertificatoDispositivoType {
     }
 
     /**
-     * Recupera il valore della proprietà dispositivo.
+     * Recupera il valore della proprietï¿½ dispositivo.
      * 
      * @return
      *     possible object is
@@ -89,7 +96,7 @@ public class RichiestaCertificatoDispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà dispositivo.
+     * Imposta il valore della proprietï¿½ dispositivo.
      * 
      * @param value
      *     allowed object is
@@ -101,7 +108,7 @@ public class RichiestaCertificatoDispositivoType {
     }
 
     /**
-     * Recupera il valore della proprietà tecnicoVerificatore.
+     * Recupera il valore della proprietï¿½ tecnicoVerificatore.
      * 
      * @return
      *     possible object is
@@ -113,7 +120,7 @@ public class RichiestaCertificatoDispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà tecnicoVerificatore.
+     * Imposta il valore della proprietï¿½ tecnicoVerificatore.
      * 
      * @param value
      *     allowed object is
@@ -125,7 +132,7 @@ public class RichiestaCertificatoDispositivoType {
     }
 
     /**
-     * Recupera il valore della proprietà versione.
+     * Recupera il valore della proprietï¿½ versione.
      * 
      * @return
      *     possible object is
@@ -141,7 +148,7 @@ public class RichiestaCertificatoDispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà versione.
+     * Imposta il valore della proprietï¿½ versione.
      * 
      * @param value
      *     allowed object is
@@ -151,5 +158,30 @@ public class RichiestaCertificatoDispositivoType {
     public void setVersione(String value) {
         this.versione = value;
     }
+    
+    /**
+     * Recupera il valore della proprietï¿½ signature.
+     * 
+     * @return
+     *     possible object is
+     *     {@link SignatureType }
+     *     
+    */
+    public SignatureType getSignature() {
+        return signature;
+    } 
+
+    /**
+     * Imposta il valore della proprietï¿½ signature.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SignatureType }
+     *     
+     */
+    public void setSignature(SignatureType value) {
+        this.signature = value;
+    }
+
 
 }
