@@ -16,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
 import java.security.SecureRandom;
+import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPrivateCrtKey;
@@ -34,10 +35,15 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import java.security.cert.CertificateFactory;
 
 
@@ -55,12 +61,14 @@ import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 import org.glassfish.grizzly.utils.Pair;
+import org.w3c.dom.Document;
 
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoRichiestaCertificatoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.RichiestaCertificatoDispositivoType;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
 import isti.cnr.sse.rest.impl.Utility;
+import isti.cnr.sse.rest.impl.firma.SignReply;
 import sun.misc.BASE64Encoder;
 
 @Consumes(MediaType.APPLICATION_XML)
@@ -125,6 +133,16 @@ public class APIDispositiviImpl {
 				esito.setVersione("1.0");
 				esito.setCertificato(pem);
 				
+				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		        DocumentBuilder db = dbf.newDocumentBuilder();
+		        Document dosigndocument = db.newDocument();
+		        
+		        // Marshal the Object to a Document
+		        JAXBContext jc = JAXBContext.newInstance(EsitoRichiestaCertificatoDispositivoType.class);
+		        Marshaller marshaller = jc.createMarshaller();
+		        marshaller.marshal(esito, dosigndocument);
+		        
+				SignReply.Sign(dosigndocument);
 				return jaxbObjectToXML(esito);
 			}else{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
@@ -133,7 +151,7 @@ public class APIDispositiviImpl {
 			}
 
 
-		} catch (IOException  | JAXBException e) {
+		} catch (IOException  | JAXBException | ParserConfigurationException e) {
 			e.printStackTrace();
 			log.error(e);
 		}
@@ -303,8 +321,8 @@ public class APIDispositiviImpl {
 	        Marshaller m = context.createMarshaller();
 
 	        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); // To format XML
-
 	        StringWriter sw = new StringWriter();
+	       
 	        m.marshal(customer, sw);
 	        xmlString = sw.toString();
 
@@ -341,6 +359,18 @@ public class APIDispositiviImpl {
 	    }
 	    
 	    protected static String convertToPem(X509Certificate x509cert)  {
+	    	
+	    	StringWriter sw = new StringWriter();
+	        try {
+	           // sw.write("-----BEGIN CERTIFICATE-----\n");
+	            sw.write(DatatypeConverter.printBase64Binary(x509cert.getEncoded()).replaceAll("(.{64})", "$1\n"));
+	           // sw.write("\n-----END CERTIFICATE-----\n");
+	        } catch (CertificateEncodingException e) {
+	            e.printStackTrace();
+	        }
+	        return sw.toString();
+	    	
+	    	/*
 	    	String pemCert = "";
 	    	try {
 	    		BASE64Encoder  encoder = new BASE64Encoder();
@@ -358,7 +388,7 @@ public class APIDispositiviImpl {
 	    		// TODO Auto-generated catch block
 	    		e.printStackTrace();
 	    	}
-	    	return pemCert;
+	    	return pemCert;*/
 	    }
 
 }
