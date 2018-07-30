@@ -140,10 +140,12 @@ public class APIDispositiviImpl {
 		        // Marshal the Object to a Document
 		        JAXBContext jc = JAXBContext.newInstance(EsitoRichiestaCertificatoDispositivoType.class);
 		        Marshaller marshaller = jc.createMarshaller();
+		        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		        marshaller.marshal(esito, dosigndocument);
 		        
-				SignReply.Sign(dosigndocument);
-				return jaxbObjectToXML(esito);
+		        
+				String result = SignReply.Sign(dosigndocument);
+				return result;//jaxbObjectToXML(esito);
 			}else{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
@@ -363,7 +365,7 @@ public class APIDispositiviImpl {
 	    	StringWriter sw = new StringWriter();
 	        try {
 	           // sw.write("-----BEGIN CERTIFICATE-----\n");
-	            sw.write(DatatypeConverter.printBase64Binary(x509cert.getEncoded()).replaceAll("(.{64})", "$1\n"));
+	            sw.write(DatatypeConverter.printBase64Binary(x509cert.getEncoded()).replaceAll("(.{64})", "$1"));
 	           // sw.write("\n-----END CERTIFICATE-----\n");
 	        } catch (CertificateEncodingException e) {
 	            e.printStackTrace();

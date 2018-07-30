@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringWriter;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.Provider;
@@ -41,7 +42,7 @@ public class SignReply {
 	
 	public static final String SHA256_RSA_SIGNATURE_ALGORITHM = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
 
-    public static void Sign(Document dosigndocument) {
+    public static String Sign(Document dosigndocument) {
 
         try {
             InputStream jskfile = SignReply.class.getClassLoader().getResourceAsStream("jetty-serverca-ssl.jks");
@@ -120,9 +121,9 @@ public class SignReply {
             dbf.setValidating(true);
 
             // default false
-            // dbf.setIgnoringElementContentWhitespace(true);
+            dbf.setIgnoringElementContentWhitespace(true);
             // default true
-            // dbf.setExpandEntityReferences(false);
+            dbf.setExpandEntityReferences(false);
             //Document doc = null;
             //doc = dbf.newDocumentBuilder().parse(new FileInputStream(infile));
 
@@ -144,17 +145,32 @@ public class SignReply {
             os = new FileOutputStream(signedfile);
 
             TransformerFactory tf = TransformerFactory.newInstance();
-            Transformer trans = tf.newTransformer();
+            Transformer trans = tf.newTransformer(); 
+            
+            StringWriter writer = new StringWriter();
+            StreamResult result = new StreamResult(writer);
+            trans.transform(new DOMSource(dosigndocument), result);
+            
+            
             trans.transform(new DOMSource(dosigndocument), new StreamResult(os));
+            
+           
+            
 
             System.out.println("File " + signedfile + " firmato.");
+            
+            
+            return writer.toString();
 
         } 
         catch (Exception e) 
         {
             e.printStackTrace();
         }
+        return null;
     }
 	
+    
+   
 
 }
