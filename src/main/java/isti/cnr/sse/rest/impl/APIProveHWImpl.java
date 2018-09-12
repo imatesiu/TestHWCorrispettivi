@@ -106,6 +106,7 @@ public class APIProveHWImpl {
 			rt.setZricevuti(0);
 			rt.setStarttime(new Date());
 			rt.setDescrizione(desc);
+			rt.setUnCloded();
 			log.info("Init: " + key);
 			log.info("Grantotale " + grantotale);
 			log.info("");
@@ -114,6 +115,7 @@ public class APIProveHWImpl {
 			RT rt = new RT(key, new Date(),(grantotale));
 			rt.setDescrizione(desc);
 			rt.setZ(z);
+			rt.setUnCloded();
 			map.put(key,rt);
 			log.info("Init " + key);
 			log.info("Grantotale " + grantotale);
