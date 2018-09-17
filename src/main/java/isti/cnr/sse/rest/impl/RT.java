@@ -146,6 +146,10 @@ public class RT implements Serializable {
 	public void setCloded() {
 		this.isCloded = true;
 	}
+	
+	public void setUnCloded() {
+		this.isCloded = false;
+	}
 
 	public String getMatricola() {
 		return Matricola;

@@ -1,7 +1,7 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
 // Generato il: 2016.11.29 alle 12:39:14 AM CET 
 //
 
@@ -11,8 +11,11 @@ package cnr.isti.sse.data.corrispettivi.messaggi;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+
+
 
 
 /**
@@ -56,8 +59,9 @@ public class CensimentoDispositivoType {
     @XmlElement(name = "RifApprovazioneDispositivo")
     protected RifApprovazioneType rifApprovazioneDispositivo;
 
+
     /**
-     * Recupera il valore della proprietà tipo.
+     * Recupera il valore della proprietï¿½ tipo.
      * 
      * @return
      *     possible object is
@@ -69,7 +73,7 @@ public class CensimentoDispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà tipo.
+     * Imposta il valore della proprietï¿½ tipo.
      * 
      * @param value
      *     allowed object is
@@ -81,7 +85,7 @@ public class CensimentoDispositivoType {
     }
 
     /**
-     * Recupera il valore della proprietà marchioFabbricante.
+     * Recupera il valore della proprietï¿½ marchioFabbricante.
      * 
      * @return
      *     possible object is
@@ -93,7 +97,7 @@ public class CensimentoDispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà marchioFabbricante.
+     * Imposta il valore della proprietï¿½ marchioFabbricante.
      * 
      * @param value
      *     allowed object is
@@ -105,7 +109,7 @@ public class CensimentoDispositivoType {
     }
 
     /**
-     * Recupera il valore della proprietà modello.
+     * Recupera il valore della proprietï¿½ modello.
      * 
      * @return
      *     possible object is
@@ -117,7 +121,7 @@ public class CensimentoDispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà modello.
+     * Imposta il valore della proprietï¿½ modello.
      * 
      * @param value
      *     allowed object is
@@ -129,7 +133,7 @@ public class CensimentoDispositivoType {
     }
 
     /**
-     * Recupera il valore della proprietà rifApprovazioneDispositivo.
+     * Recupera il valore della proprietï¿½ rifApprovazioneDispositivo.
      * 
      * @return
      *     possible object is
@@ -141,7 +145,7 @@ public class CensimentoDispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà rifApprovazioneDispositivo.
+     * Imposta il valore della proprietï¿½ rifApprovazioneDispositivo.
      * 
      * @param value
      *     allowed object is
@@ -151,5 +155,5 @@ public class CensimentoDispositivoType {
     public void setRifApprovazioneDispositivo(RifApprovazioneType value) {
         this.rifApprovazioneDispositivo = value;
     }
-
+   
 }

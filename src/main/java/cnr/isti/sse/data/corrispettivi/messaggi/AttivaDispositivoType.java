@@ -1,7 +1,7 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
 // Generato il: 2016.11.29 alle 12:39:14 AM CET 
 //
 
@@ -12,7 +12,11 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import cnr.isti.sse.data.corrispettivi.messaggi.signature.SignatureType;
+
 
 
 /**
@@ -38,12 +42,14 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
+@XmlRootElement(name = "AttivaDispositivo", namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AttivaDispositivoType", propOrder = {
     "gestore",
     "tecnicoVerificatore",
     "geoLocalizzazione",
-    "informazioniAddizionali"
+    "informazioniAddizionali",
+    "signature"
 })
 public class AttivaDispositivoType {
 
@@ -55,11 +61,13 @@ public class AttivaDispositivoType {
     protected GeoLocType geoLocalizzazione;
     @XmlElement(name = "InformazioniAddizionali")
     protected InformazioniAddizionaliType informazioniAddizionali;
+    @XmlElement(name = "Signature", namespace = "http://www.w3.org/2000/09/xmldsig#")
+    protected SignatureType signature;
     @XmlAttribute(name = "versione", required = true)
     protected String versione;
 
     /**
-     * Recupera il valore della proprietà gestore.
+     * Recupera il valore della proprietï¿½ gestore.
      * 
      * @return
      *     possible object is
@@ -71,7 +79,7 @@ public class AttivaDispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà gestore.
+     * Imposta il valore della proprietï¿½ gestore.
      * 
      * @param value
      *     allowed object is
@@ -83,7 +91,7 @@ public class AttivaDispositivoType {
     }
 
     /**
-     * Recupera il valore della proprietà tecnicoVerificatore.
+     * Recupera il valore della proprietï¿½ tecnicoVerificatore.
      * 
      * @return
      *     possible object is
@@ -95,7 +103,7 @@ public class AttivaDispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà tecnicoVerificatore.
+     * Imposta il valore della proprietï¿½ tecnicoVerificatore.
      * 
      * @param value
      *     allowed object is
@@ -107,7 +115,7 @@ public class AttivaDispositivoType {
     }
 
     /**
-     * Recupera il valore della proprietà geoLocalizzazione.
+     * Recupera il valore della proprietï¿½ geoLocalizzazione.
      * 
      * @return
      *     possible object is
@@ -119,7 +127,7 @@ public class AttivaDispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà geoLocalizzazione.
+     * Imposta il valore della proprietï¿½ geoLocalizzazione.
      * 
      * @param value
      *     allowed object is
@@ -131,7 +139,7 @@ public class AttivaDispositivoType {
     }
 
     /**
-     * Recupera il valore della proprietà informazioniAddizionali.
+     * Recupera il valore della proprietï¿½ informazioniAddizionali.
      * 
      * @return
      *     possible object is
@@ -143,7 +151,7 @@ public class AttivaDispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà informazioniAddizionali.
+     * Imposta il valore della proprietï¿½ informazioniAddizionali.
      * 
      * @param value
      *     allowed object is
@@ -155,7 +163,7 @@ public class AttivaDispositivoType {
     }
 
     /**
-     * Recupera il valore della proprietà versione.
+     * Recupera il valore della proprietï¿½ versione.
      * 
      * @return
      *     possible object is
@@ -171,7 +179,7 @@ public class AttivaDispositivoType {
     }
 
     /**
-     * Imposta il valore della proprietà versione.
+     * Imposta il valore della proprietï¿½ versione.
      * 
      * @param value
      *     allowed object is
@@ -181,5 +189,30 @@ public class AttivaDispositivoType {
     public void setVersione(String value) {
         this.versione = value;
     }
+    
+    /**
+     * Recupera il valore della proprietï¿½ signature.
+     * 
+     * @return
+     *     possible object is
+     *     {@link SignatureType }
+     *     
+    */
+    public SignatureType getSignature() {
+        return signature;
+    } 
+
+    /**
+     * Imposta il valore della proprietï¿½ signature.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SignatureType }
+     *     
+     */
+    public void setSignature(SignatureType value) {
+        this.signature = value;
+    }
+
 
 }
