@@ -13,9 +13,9 @@ public enum TipoProve {
     Vibrazione (3),
     ImmunitaScaricheElettrostaticheESD (4),
     ImmunitaCampoElettromagneticoRadiofrequenza (5),
-    ImmunitaTransitoriVelociEFTBURST (6),
-    ImmunitaImpulsiSURGE (7),
-    ImmunitaDisturbiCondottiContinuiRadiofrequenza (8),
+    ImmunitaTransitoriVelociEFTBURST_PortaComunicazione (6),
+    ImmunitaImpulsiSURGE_PortaComunicazione (7),
+    ImmunitaDisturbiCondottiContinuiRadiofrequenza_PortaComunicazione (8),
     ImmunitaCampiMagneticiFrequenzaRete (9),
     ImmunitaBuchiInterruzioniTensione(10),
     VariazioniTensione (11),
@@ -25,7 +25,10 @@ public enum TipoProve {
     AlimentazioneBatteriaSenzaVincoloFiscale (14),
 
 	Guastoemalfunzionamento (15),
-	NonSelezionata (16);
+	NonSelezionata (16),
+	ImmunitaImpulsiSURGE_Alimentazione (17),
+	ImmunitaDisturbiCondottiContinuiRadiofrequenza_Alimentazione (18),
+	ImmunitaTransitoriVelociEFTBURST_Alimentazione (19);
 
     TipoProve(int i) {
     }
@@ -46,15 +49,25 @@ public enum TipoProve {
         if (tipo.equals("ImmunitaCampoElettromagneticoRadiofrequenza")) {
             return ImmunitaCampoElettromagneticoRadiofrequenza;
         }
-        if (tipo.equals("ImmunitaTransitoriVelociEFTBURST")) {
-            return ImmunitaTransitoriVelociEFTBURST;
+        if (tipo.equals("ImmunitaTransitoriVelociEFTBURST_PortaComunicazione")) {
+            return ImmunitaTransitoriVelociEFTBURST_PortaComunicazione;
         }
-        if (tipo.equals("ImmunitaImpulsiSURGE")) {
-            return ImmunitaImpulsiSURGE;
+        if (tipo.equals("ImmunitaImpulsiSURGE_PortaComunicazione")) {
+            return ImmunitaImpulsiSURGE_PortaComunicazione;
         }
         
-        if (tipo.equals("ImmunitaDisturbiCondottiContinuiRadiofrequenza")) {
-            return ImmunitaDisturbiCondottiContinuiRadiofrequenza;
+        if (tipo.equals("ImmunitaDisturbiCondottiContinuiRadiofrequenza_PortaComunicazione")) {
+            return ImmunitaDisturbiCondottiContinuiRadiofrequenza_PortaComunicazione;
+        }
+        if (tipo.equals("ImmunitaTransitoriVelociEFTBURST_Alimentazione")) {
+            return ImmunitaTransitoriVelociEFTBURST_Alimentazione;
+        }
+        if (tipo.equals("ImmunitaImpulsiSURGE_Alimentazione")) {
+            return ImmunitaImpulsiSURGE_Alimentazione;
+        }
+        
+        if (tipo.equals("ImmunitaDisturbiCondottiContinuiRadiofrequenza_Alimentazione")) {
+            return ImmunitaDisturbiCondottiContinuiRadiofrequenza_Alimentazione;
         }
         if (tipo.equals("ImmunitaCampiMagneticiFrequenzaRete")) {
             return ImmunitaCampiMagneticiFrequenzaRete;
