@@ -27,7 +27,8 @@ import isti.cnr.sse.jsf.TipoProve;
     "Z",
     "Descrizione",
     "isCloded",
-    "isServer"
+    "isServer",
+    "Progressivo"
 })
 public class RT implements Serializable {
 	/**
@@ -59,6 +60,8 @@ public class RT implements Serializable {
 	private boolean isCloded;
 	@XmlAttribute(name = "isServer", required = true)
 	private boolean isServer;
+	@XmlElement(name = "Progressivo", required = true)
+	private Integer Progressivo;
 	
 	
 	public RT() {
@@ -74,9 +77,10 @@ public class RT implements Serializable {
 		this.isCloded = false;
 		this.Z = 0;
 		this.isServer = false;
+		this.Progressivo = 0;
 	}
 
-	public RT(String Matricola,BigDecimal gT, Integer timediff, Date starttime, Date workingtime, Date stoptime, Integer kricevuti) {
+	public RT(String Matricola,BigDecimal gT, Integer timediff, Date starttime, Date workingtime, Date stoptime, Integer kricevuti, Integer prog) {
 	
 		this.Matricola=Matricola;
 		GT = gT;
@@ -90,6 +94,7 @@ public class RT implements Serializable {
 		this.isCloded = false;
 		this.Z = 0;
 		this.isServer = false;
+		this.Progressivo = prog;
 	}
 	
 	public RT(String Matricola, Date starttime) {
@@ -105,9 +110,10 @@ public class RT implements Serializable {
 		this.isCloded = false;
 		this.Z = 0;
 		this.isServer = false;
+		this.Progressivo = 0;
 	}
 	
-	public RT(String Matricola, Date starttime, BigDecimal gt) {
+	public RT(String Matricola, Date starttime, BigDecimal gt, int prog) {
 		this.Matricola=Matricola;
 		GT = gt;
 		this.TotaleRicevuto = new BigDecimal(0);
@@ -120,6 +126,7 @@ public class RT implements Serializable {
 		this.isCloded = false;
 		this.Z = 0;
 		this.isServer = false;
+		this.Progressivo = prog;
 	}
 	
 	
@@ -251,8 +258,18 @@ public class RT implements Serializable {
 	public void setServer(boolean isServer) {
 		this.isServer = isServer;
 	}
+
+	public Integer getProgressivo() {
+		return Progressivo;
+	}
+
+	public void setProgressivo(Integer progressivo) {
+		Progressivo = progressivo;
+	}
 	
 	
 	
 
 }
+
+

@@ -112,7 +112,7 @@ public class APIProveHWImpl {
 			log.info("");
 			return "<html><body>OK,  Init: " + key + " Grantotale " + grantotale + "</body></html>";
 		} else {
-			RT rt = new RT(key, new Date(),(grantotale));
+			RT rt = new RT(key, new Date(),grantotale, z);
 			rt.setDescrizione(desc);
 			rt.setZ(z);
 			rt.setUnCloded();
@@ -256,7 +256,8 @@ public class APIProveHWImpl {
 
 
 			// is client behind something?
-			aggiornadiff(now, ipAddress);
+			aggiornadiff(now, ipAddress, Corrispettivi.getTrasmissione().getProgressivo());
+			testProgressivo(Corrispettivi, ipAddress, map);
 
 			int num = aggiornaricevuti(ipAddress);
 			Utility.writeTo(Corri, ipAddress, num);
@@ -363,7 +364,7 @@ public class APIProveHWImpl {
 
 	}
 */
-	private void aggiornadiff(Date now, String key) {
+	private void aggiornadiff(Date now, String key, long l) {
 		if (map.containsKey(key)) {
 			RT rt = map.get(key);
 			Date oldtime =  rt.getWorkingtime();
@@ -373,10 +374,34 @@ public class APIProveHWImpl {
 			log.info("diff_time: " + diff);
 		} else {
 			RT rt = new RT(key,now);
+			rt.setProgressivo(Long.valueOf(l).intValue());
 			map.put(key, rt);
 			log.info("diff_time: " + 0);
 		}
 
+	}
+	
+private void testProgressivo(DatiCorrispettiviType corrispettivi, String key, Map<String, RT> map){
+		
+		if(map.containsKey(key)){
+			RT r = map.get(key);
+			long progressivoricevuto = corrispettivi.getTrasmissione().getProgressivo();
+			Integer progr = Long.valueOf(progressivoricevuto).intValue();
+			
+			if(!(r.getProgressivo().toString().equals(progr.toString()))){
+				Beep.tone(5000, 1000);
+				r.setProgressivo(progr);
+				log.info("************************ATTENZIONE HAI SALTATO UN PROGRESSIVO*********************");
+				log.info("************************ATTENZIONE HAI SALTATO UN PROGRESSIVO*********************");
+				log.info("************************ATTENZIONE HAI SALTATO UN PROGRESSIVO*********************");
+			}else{
+				Integer rprog = Integer.sum(r.getProgressivo(),1);
+				r.setProgressivo(rprog);
+			}
+		}else{
+			
+		}
+		
 	}
 
 	private int aggiornaricevuti(String key) {

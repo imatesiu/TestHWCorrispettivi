@@ -26,6 +26,19 @@ public class Beep {
 			//e.printStackTrace();
 		}  
     }  
+    
+    public static void tone(int hz, int msecs) {  
+        try {
+       	
+       	 
+			tone(hz+10, msecs, 1.0);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Problemi con l'audio");
+			//e.printStackTrace();
+		}  
+   }  
+    
     public static void tone(int hz, int msecs, double vol)  
               throws Exception {  
          byte[] buf = new byte[1];  
