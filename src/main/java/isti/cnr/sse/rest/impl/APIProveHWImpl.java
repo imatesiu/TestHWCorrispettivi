@@ -51,6 +51,8 @@ import org.glassfish.grizzly.utils.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
 
@@ -106,13 +108,14 @@ public class APIProveHWImpl {
 			rt.setZricevuti(0);
 			rt.setStarttime(new Date());
 			rt.setDescrizione(desc);
+			rt.setProgressivo(z+1);
 			rt.setUnCloded();
 			log.info("Init: " + key);
 			log.info("Grantotale " + grantotale);
 			log.info("");
 			return "<html><body>OK,  Init: " + key + " Grantotale " + grantotale + "</body></html>";
 		} else {
-			RT rt = new RT(key, new Date(),grantotale, z);
+			RT rt = new RT(key, new Date(),grantotale, z+1);
 			rt.setDescrizione(desc);
 			rt.setZ(z);
 			rt.setUnCloded();
@@ -390,7 +393,7 @@ private void testProgressivo(DatiCorrispettiviType corrispettivi, String key, Ma
 			
 			if(!(r.getProgressivo().toString().equals(progr.toString()))){
 				Beep.tone(5000, 1000);
-				r.setProgressivo(progr);
+				r.setProgressivo(Integer.sum(progr,1));
 				log.info("************************ATTENZIONE HAI SALTATO UN PROGRESSIVO*********************");
 				log.info("************************ATTENZIONE HAI SALTATO UN PROGRESSIVO*********************");
 				log.info("************************ATTENZIONE HAI SALTATO UN PROGRESSIVO*********************");
