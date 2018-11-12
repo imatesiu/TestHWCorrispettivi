@@ -23,7 +23,7 @@ This component expose REST API
 
 The component is ready to be packaged as a WAR to be deployed on an Application Server like jetty.
 
-The service is available at `localhost:9090/dispositivi/corrispettivi`.
+The service is available at `https://localhost:9090/dispositivi/corrispettivi`.
 
 # How to install?
 
@@ -37,19 +37,20 @@ The service is available at `localhost:9090/dispositivi/corrispettivi`.
 
 # CURL Test
  * To send DatiCorrispettiviType XML to component, the reply is a EsitoOperazioneType:  
-`curl -X POST -H "Content-Type: application/XML" --data @DatiCorrispettiviType.xml http://localhost:9090/dispositivi/corrispettivi/`
+`curl -X POST -H "Content-Type: application/XML" --data @DatiCorrispettiviType.xml https://localhost/dispositivi/corrispettivi/`
 
 * To send Init of :  
-`curl -X GET http://localhost:9090/dispositivi/corrispettivi/init/{matricola or ip}?grantot={grantotale}`
+`curl -X GET https://localhost/dispositivi/corrispettivi/init/{matricola or ip}?grantot={grantotale}`
 
 * To get Status of :  
-`curl -X GET http://localhost:9090/dispositivi/corrispettivi/info/{matricola or ip}`
+`curl -X GET https://localhost/dispositivi/corrispettivi/info/{matricola or ip}`
 
 * To send Clear:  
-`curl -X GET http://localhost:9090/dispositivi/corrispettivi/clear/{matricola or ip}`
+`curl -X GET https://localhost/dispositivi/corrispettivi/clear/{matricola or ip}`
 
 * To send Clear all:  
-`curl -X GET http://localhost:9090/dispositivi/corrispettivi/clearall`
+`curl -X GET https://localhost/dispositivi/corrispettivi/clearall`
 
 
 # Note
+Server Certificate Authority in `/script/serverca.crt` [link](https://raw.githubusercontent.com/imatesiu/TestHWCorrispettivi/v2.4.1/script/serverca.crt)
