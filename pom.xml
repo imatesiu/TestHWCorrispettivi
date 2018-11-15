@@ -201,9 +201,6 @@
 				<version>8.1.16.v20140903</version>
 				<configuration>
 					<connectors>
-						<connector implementation="org.eclipse.jetty.server.bio.SocketConnector">
-							<port>9090</port>
-						</connector>
 						<connector implementation="org.eclipse.jetty.server.ssl.SslSocketConnector">
 							<port>443</port>
 							<keystore>${project.basedir}/src/main/config/jetty-server-ssl.jks</keystore>
