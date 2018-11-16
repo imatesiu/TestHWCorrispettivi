@@ -328,7 +328,7 @@ public class APIProveHWImpl {
 	 */
 
 	private Pair<String,Boolean> getMatricola(DatiCorrispettiviType d, String corri) {
-		String matricola = "";
+		String matricola = null;
 		boolean validFlag = false;
 		if (d.getSignature() != null) {
 			byte[] certificate = d.getSignature().getKeyInfo().getX509Data().getX509Certificate();
