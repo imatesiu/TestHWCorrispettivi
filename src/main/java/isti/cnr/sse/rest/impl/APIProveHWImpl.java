@@ -488,6 +488,9 @@ private void testProgressivo(DatiCorrispettiviType corrispettivi, String key, Ma
 						for (int j = 0; i.hasNext(); j++) {
 							boolean refValid = ((Reference) i.next()).validate(valContext);
 							System.out.println("ref[" + j + "] validity status: " + refValid);
+							if(refValid==true){
+								validFlag = true;
+							}
 						}
 					}
 				} else {
