@@ -23,7 +23,7 @@ This component expose REST API
 
 The component is ready to be packaged as a WAR to be deployed on an Application Server like jetty.
 
-The service is available at `https://localhost:9090/dispositivi/corrispettivi`.
+The service is available at `https://localhost/dispositivi/corrispettivi`.
 
 # How to install?
 
