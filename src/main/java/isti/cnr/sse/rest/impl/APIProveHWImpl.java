@@ -29,7 +29,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -234,7 +233,7 @@ public class APIProveHWImpl {
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-				throw new WebApplicationException(Response.status(406).entity(text).build());
+				return text;
 			} catch (IOException e) {
 				e.printStackTrace();
 				log.error(e);
@@ -253,7 +252,11 @@ public class APIProveHWImpl {
 			}
 
 			if (ipAddress == null) {
-				ipAddress = request.getRemoteAddr();
+				if(request.getRemoteAddr()!=null){
+					ipAddress = request.getRemoteAddr();
+				}else{
+					ipAddress = "255.255.255.255";
+				}
 			}
 			log.info("received form: " + ipAddress + " " + timeStamp);
 
@@ -278,7 +281,7 @@ public class APIProveHWImpl {
 			}else{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-				throw new WebApplicationException(Response.status(406).entity(text).build());
+				return text;
 			}
 			// return "<?xml version=\"1.0\" encoding=\"UTF-8\"
 			// standalone=\"yes\"?><EsitoOperazione
@@ -294,7 +297,7 @@ public class APIProveHWImpl {
 		try{
 			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
 			String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-			throw new WebApplicationException(Response.status(406).entity(text).build());
+			return text;
 		} catch (IOException e) {
 			e.printStackTrace();
 			log.error(e);
@@ -445,7 +448,7 @@ private void testProgressivo(DatiCorrispettiviType corrispettivi, String key, Ma
 	 */
 
 	private Pair<String,Boolean> getMatricola(DatiCorrispettiviType d, String corri) {
-		String matricola = "";
+		String matricola = null;
 		boolean validFlag = false;
 		if (d.getSignature() != null) {
 			byte[] certificate = d.getSignature().getKeyInfo().getX509Data().getX509Certificate();
@@ -480,6 +483,7 @@ private void testProgressivo(DatiCorrispettiviType corrispettivi, String key, Ma
 					Beep.tone(1000, 300,1600);
 					Beep.tone(1000, 300,1600);
 					System.err.println("Signature failed core validation");
+					log.error("Signature failed core validation");
 					boolean sv = signature.getSignatureValue().validate(valContext);
 					System.out.println("signature validation status: " + sv);
 					if (sv == false) {
@@ -499,11 +503,13 @@ private void testProgressivo(DatiCorrispettiviType corrispettivi, String key, Ma
 
 				Principal principal = cert.getSubjectDN();
 				String name = principal.getName();
+				matricola = new String();
 				matricola = name.substring(3, 14);
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.err.println("Signature failed core validation");
+				log.error("FINAL: Signature failed core validation",e);
 			}
 
 		}
