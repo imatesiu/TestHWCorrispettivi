@@ -29,6 +29,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -233,7 +234,7 @@ public class APIProveHWImpl {
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-				return text;
+				throw new WebApplicationException(Response.status(406).entity(text).build());
 			} catch (IOException e) {
 				e.printStackTrace();
 				log.error(e);
@@ -281,7 +282,7 @@ public class APIProveHWImpl {
 			}else{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-				return text;
+				throw new WebApplicationException(Response.status(406).entity(text).build());
 			}
 			// return "<?xml version=\"1.0\" encoding=\"UTF-8\"
 			// standalone=\"yes\"?><EsitoOperazione
@@ -297,7 +298,7 @@ public class APIProveHWImpl {
 		try{
 			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
 			String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-			return text;
+			throw new WebApplicationException(Response.status(406).entity(text).build());
 		} catch (IOException e) {
 			e.printStackTrace();
 			log.error(e);
