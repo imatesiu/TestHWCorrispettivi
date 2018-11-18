@@ -160,7 +160,6 @@
 			<artifactId>primefaces</artifactId>
 			<version>${primefaces.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>cupertino</artifactId>
@@ -171,6 +170,18 @@
 			<artifactId>all-themes</artifactId>
 			<version>1.0.10</version>
 		</dependency> 
+
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.50</version>
+		</dependency>
+		<dependency>
+    <groupId>org.bouncycastle</groupId>
+    <artifactId>bcpkix-jdk15on</artifactId>
+    <version>1.50</version>
+</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>
@@ -198,32 +209,7 @@
 				<version>${jetty-maven-plugin.version}</version> <configuration> <httpConnector> 
 				<port>9090</port> </httpConnector> <webApp> <contextPath>/</contextPath> 
 				</webApp> </configuration> </plugin> -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>keytool-maven-plugin</artifactId>
-				<version>1.5</version>
-				<configuration>
-					<keystore>${project.basedir}/src/main/config/jetty-ssl.keystore</keystore>
-					<dname>cn=192.168.1.* , ou=SSEC ISTI, L=Pisa, ST=Tuscany, o=CNR,
-						c=IT</dname>
-					<!--Both `keypass` and `storepass` must be at least 6 characters long. -->
-					<keypass>jetty8</keypass>
-					<storepass>jetty8</storepass>
-					<alias>jetty8</alias>
-					<sigalg>SHA256withRSA</sigalg>
-					<ext>EKU=serverAuth" -ext
-						"KU=dS,keyEncipherment,dataEncipherment,cRLS,kCS" -ext
-						"SAN=ip:192.168.1.146,ip:127.0.0.1,ip:192.168.0.146,dns:localhost"
-						-ext "CRLDistributionPoints=URI:ldap://cads.entrate.finanze.it/</ext>
-					<trustcacerts>true</trustcacerts>
-					<keyalg>RSA</keyalg>
-					<verbose>true</verbose>
-					<skip>true</skip>
-					<rfc>true</rfc>
-					<file>${project.basedir}/script/cert.pem</file>
-					<validity>99999</validity>
-				</configuration>
-			</plugin>
+		
 
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
@@ -232,18 +218,7 @@
 				<version>9.4.8.v20171121</version>
 				<configuration>
 					<jettyXml>${project.basedir}/src/main/resources/jetty.xml,${project.basedir}/src/main/resources/jetty-http.xml,${project.basedir}/src/main/resources/jetty-ssl.xml,${project.basedir}/src/main/resources/jetty-https.xml</jettyXml>
-					<connectors>
-						<connector implementation="org.eclipse.jetty.server.bio.SocketConnector">
-							<port>9090</port>
-						</connector>
-						<connector implementation="org.eclipse.jetty.server.ssl.SslSocketConnector">
-							<port>443</port>
-							<keystore>${project.basedir}/src/main/config/jetty-server-ssl.jks</keystore>
-							<keyPassword>jetty8</keyPassword>
-							<protocol>TLSv1.2</protocol>
-							<password>jetty8</password>
-						</connector>
-					</connectors>
+				
 				</configuration>
 			</plugin>
 

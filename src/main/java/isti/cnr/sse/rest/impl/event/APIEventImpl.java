@@ -33,7 +33,7 @@ import isti.cnr.sse.rest.impl.Utility;
 @Path("/evento")
 public class APIEventImpl {
 
-	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(APIProveHWImpl.class);
+	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(APIEventImpl.class);
 
 	
 	@Path("/")
