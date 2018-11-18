@@ -20,9 +20,10 @@ public class Beep {
         		 ip = Integer.parseInt(ipAddressInArray);
      		}  
 			tone(hz+(ip*10), msecs, 1.0);
-		} catch (LineUnavailableException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		 	System.out.println("Problemi con l'audio");
 		}  
     }  
     public static void tone(int hz, int msecs, double vol)  
