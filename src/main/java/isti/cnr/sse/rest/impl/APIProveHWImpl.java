@@ -165,7 +165,11 @@ public class APIProveHWImpl {
 			}
 
 			if (ipAddress == null) {
-				ipAddress = request.getRemoteAddr();
+				if(request.getRemoteAddr()!=null){
+					ipAddress = request.getRemoteAddr();
+				}else{
+					ipAddress = "255.255.255.255";
+				}
 			}
 			log.info("received form: " + ipAddress + " " + timeStamp);
 
