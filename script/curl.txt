@@ -4,3 +4,8 @@ curl -XPOST  --header 'Content-Type: application/xml' --header 'Accept: applicat
 curl -XPOST  --header 'Content-Type: application/xml' --header 'Accept: application/xml' 'https://localhost/dispositivi/corrispettivi/' --data-ascii @RT_80I14002824_26_02_2018__15_17_58_15.xml --verbose --cacert serverca.crt
 
 
+curl -XPOST  --header 'Content-Type: application/xml' --header 'Accept: application/xml' 'https://localhost:8443/dispositivi/' --data-binary @201804011107_cer.xml  --verbose --cacert serverca.crt
+
+curl -XPUT  --header 'Content-Type: application/xml' --header 'Accept: application/xml' 'https://localhost:8443/dispositivi/' --data-binary @201804011107_att.xml  --verbose --cacert serverca.crt
+
+curl -XPOST  --header 'Content-Type: application/xml' --header 'Accept: application/xml' 'https://localhost:8443/dispositivi/evento/' --data-binary @201804051446_eve.xml  --verbose --cacert serverca.crt
