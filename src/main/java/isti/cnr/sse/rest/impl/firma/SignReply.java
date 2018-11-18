@@ -45,7 +45,7 @@ public class SignReply {
     public static String Sign(Document dosigndocument) {
 
         try {
-            InputStream jskfile = SignReply.class.getClassLoader().getResourceAsStream("jetty-serverca-ssl.jks");
+            InputStream jskfile = SignReply.class.getClassLoader().getResourceAsStream("jetty-server-ssl.jks");
             String p12pass = "jetty8";
             String infile = "path_file_da_firmare.xml";
             String signedfile = "path_file_firmato.xml";
