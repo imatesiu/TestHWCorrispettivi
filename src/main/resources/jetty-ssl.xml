@@ -27,7 +27,7 @@
         <Item>.*MD5.*</Item>
         <Item>.*DES.*</Item>
         <Item>.*DSS.*</Item>
-         <Item>.*AES_128_CBC.*</Item>
+        
     </Array>
   </Set>
   <Set name="ExcludeProtocols">
