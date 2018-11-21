@@ -36,6 +36,8 @@ import javax.xml.crypto.dsig.Reference;
 import javax.xml.crypto.dsig.XMLSignature;
 import javax.xml.crypto.dsig.XMLSignatureFactory;
 import javax.xml.crypto.dsig.dom.DOMValidateContext;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
@@ -48,6 +50,8 @@ import org.w3c.dom.NodeList;
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
+import cnr.isti.sse.data.corrispettivi.messaggi.EsitoRichiestaCertificatoDispositivoType;
+import isti.cnr.sse.rest.impl.firma.SignReply;
 
 @Consumes(MediaType.APPLICATION_XML)
 // @Produces(MediaType.APPLICATION_XML)
@@ -181,15 +185,36 @@ public class APIProveHWImpl {
 			Utility.writeTo(Corri, ipAddress, num);
 			Utility.calc(Corrispettivi, ipAddress, map);
 
-			EsitoOperazioneType esito = new EsitoOperazioneType();
+			/*EsitoOperazioneType esito = new EsitoOperazioneType();
 			esito.setIdOperazione(String.valueOf(num));
-			esito.setVersione("1.0");
+			esito.setVersione("1.0");*/
 			Beep.tone(1000, 300, ipAddress);
 			
 			if(pair.getSecond()){
-				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
+				EsitoOperazioneType esito = new EsitoOperazioneType();
+				int x = (int) Math.random() * 10;
+				esito.setIdOperazione(String.valueOf(x));
+				esito.setVersione("1.0");
+			
+				
+				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		        DocumentBuilder db = dbf.newDocumentBuilder();
+		        Document dosigndocument = db.newDocument();
+		        
+		        // Marshal the Object to a Document
+		        JAXBContext jc = JAXBContext.newInstance(EsitoOperazioneType.class);
+		        Marshaller marshaller = jc.createMarshaller();
+		        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		        marshaller.marshal(esito, dosigndocument);
+		        
+		        
+				String result = SignReply.Sign(dosigndocument);
+				return result;//jaxbObjectToXML(esito);
+				
+				
+				/*InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-				return text;
+				return text;*/
 			}else{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
@@ -202,7 +227,7 @@ public class APIProveHWImpl {
 
 
 
-		} catch (IOException  | JAXBException e) {
+		} catch (Exception  e) {
 			e.printStackTrace();
 			log.error(e);
 		}

@@ -160,7 +160,7 @@ public class APIProveHWImplTest extends JerseyTest {
 		EsitoOperazioneType esito = (EsitoOperazioneType) unmarshaller.unmarshal(reader);
 		byte[] certificate = esito.getSignature().getKeyInfo().getX509Data().getX509Certificate();
 		statusCertificateAndSignature(certificate,res2);
-
+		System.out.println(res2);
 
 		//EsitoOperazioneType res = response.readEntity(new GenericType<EsitoOperazioneType>() {});
 		JAXBContext jaxbCtx = javax.xml.bind.JAXBContext.newInstance(EsitoOperazioneType.class);
