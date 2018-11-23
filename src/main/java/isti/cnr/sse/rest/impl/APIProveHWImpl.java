@@ -192,7 +192,7 @@ public class APIProveHWImpl {
 			
 			if(pair.getSecond()){
 				EsitoOperazioneType esito = new EsitoOperazioneType();
-				int x = (int) Math.random() * 10;
+				int x = 33333;
 				esito.setIdOperazione(String.valueOf(x));
 				esito.setVersione("1.0");
 			

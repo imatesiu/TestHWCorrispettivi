@@ -64,6 +64,7 @@ import org.glassfish.grizzly.utils.Pair;
 import org.w3c.dom.Document;
 
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
+import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoRichiestaCertificatoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.RichiestaCertificatoDispositivoType;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
@@ -145,7 +146,8 @@ public class APIDispositiviImpl {
 		        
 		        
 				String result = SignReply.Sign(dosigndocument);
-				return result;//jaxbObjectToXML(esito);
+				//return result;//jaxbObjectToXML(esito);
+				throw new WebApplicationException(Response.status(201).entity(result).build());
 			}else{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
@@ -206,9 +208,28 @@ public class APIDispositiviImpl {
 			log.info("received form: " + ipAddress + " " + timeStamp);
 
 			if(pair.getSecond()){
-				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
+				EsitoOperazioneType esito = new EsitoOperazioneType();
+				int x = 33331;
+				esito.setIdOperazione(String.valueOf(x));
+				esito.setVersione("1.0");
+			
+				
+				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		        DocumentBuilder db = dbf.newDocumentBuilder();
+		        Document dosigndocument = db.newDocument();
+		        
+		        // Marshal the Object to a Document
+		        JAXBContext jc = JAXBContext.newInstance(EsitoOperazioneType.class);
+		        Marshaller marshaller = jc.createMarshaller();
+		        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		        marshaller.marshal(esito, dosigndocument);
+		        
+		        
+				String result = SignReply.Sign(dosigndocument);
+				return result;
+				/*InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-				return text;
+				return text;*/
 			}else{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
@@ -216,7 +237,7 @@ public class APIDispositiviImpl {
 			}
 
 
-		} catch (IOException  | JAXBException e) {
+		} catch (Exception  e) {
 			e.printStackTrace();
 			log.error(e);
 		}
