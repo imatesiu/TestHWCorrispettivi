@@ -248,7 +248,7 @@ public class APIProveHWImpl {
 
 			Date now = new Date();
 			String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(now);
-			Pair<String, Boolean> pair = getMatricola(Corrispettivi, Corri);
+			Pair<String, Boolean> pair = Utility.getMatricola(Corrispettivi, Corri);
 			String ipAddress = pair.getFirst();
 			if (ipAddress == null) {
 				ipAddress = request.getHeader("X-FORWARDED-FOR");
@@ -450,6 +450,7 @@ private void testProgressivo(DatiCorrispettiviType corrispettivi, String key, Ma
 	 * ; }
 	 */
 
+
 	private Pair<String,Boolean> getMatricola(DatiCorrispettiviType d, String corri) {
 		String matricola = null;
 		boolean validFlag = false;
@@ -524,6 +525,7 @@ private void testProgressivo(DatiCorrispettiviType corrispettivi, String key, Ma
 		pair.setSecond(validFlag);
 		return pair;
 	}
+
 
 	private static Document convertStringToDocument(String xmlStr) {
 		try {
