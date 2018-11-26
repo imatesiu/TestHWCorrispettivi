@@ -151,6 +151,7 @@ public class APIProveHWImpl {
 		}
 
 	}
+
 	
 	@Path("/rt/{key:.*}")
 	@GET
@@ -222,6 +223,7 @@ public class APIProveHWImpl {
 
 	}
 	
+
 	@Path("/")
 	@POST
 	public String putListMisuratoriFiscale2(String Corri, @Context HttpServletRequest request, @Context HttpServletResponse response)
@@ -274,7 +276,7 @@ public class APIProveHWImpl {
 			esito.setIdOperazione(String.valueOf(num));
 			esito.setVersione("1.0");
 			Beep.tone(1000, 300, ipAddress);
-			
+
 			if(pair.getSecond()){
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
@@ -314,7 +316,7 @@ public class APIProveHWImpl {
 
 	}
 
-/*	@Path("/v2")
+	/*	@Path("/v2")
 	@POST
 	public EsitoOperazioneType putListMisuratoriFiscale(String Corri, @Context HttpServletRequest request)
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
@@ -497,6 +499,9 @@ private void testProgressivo(DatiCorrispettiviType corrispettivi, String key, Ma
 								validFlag = true;
 							}
 						}
+					}else{
+
+						validFlag = true;
 					}
 				} else {
 					System.out.println("Signature passed core validation");
