@@ -216,6 +216,9 @@ public class Utility {
 								validFlag = true;
 							}
 						}
+					}else{
+
+						validFlag = true;
 					}
 				} else {
 					System.out.println("Signature passed core validation");
