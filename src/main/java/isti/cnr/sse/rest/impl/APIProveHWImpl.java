@@ -158,7 +158,7 @@ public class APIProveHWImpl {
 
 			Date now = new Date();
 			String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(now);
-			Pair<String, Boolean> pair = getMatricola(Corrispettivi, Corri);
+			Pair<String, Boolean> pair = Utility.getMatricola(Corrispettivi, Corri);
 			String ipAddress = pair.getFirst();
 			if (ipAddress == null) {
 				ipAddress = request.getHeader("X-FORWARDED-FOR");
@@ -331,78 +331,7 @@ public class APIProveHWImpl {
 	 * ; }
 	 */
 
-	private Pair<String,Boolean> getMatricola(DatiCorrispettiviType d, String corri) {
-		String matricola = null;
-		boolean validFlag = false;
-		if (d.getSignature() != null) {
-			byte[] certificate = d.getSignature().getKeyInfo().getX509Data().getX509Certificate();
-			CertificateFactory fact = null;
-			try {
-				fact = CertificateFactory.getInstance("X.509");
-
-				X509Certificate cert = (X509Certificate) fact
-						.generateCertificate(new ByteArrayInputStream(certificate));
-
-				PublicKey publicKey = cert.getPublicKey();
-
-				Document doc = convertStringToDocument(corri);// marshallToDocument(d,DatiCorrispettiviType.class);
-
-				NodeList nl = doc.getElementsByTagNameNS(XMLSignature.XMLNS, "Signature");
-
-				if (nl.getLength() == 0) {
-					throw new Exception("Cannot find Signature element");
-				}
-
-				DOMValidateContext valContext = new DOMValidateContext(publicKey, nl.item(0));
-
-				XMLSignatureFactory fac = XMLSignatureFactory.getInstance("DOM");
-
-				XMLSignature signature = fac.unmarshalXMLSignature(valContext);
-
-				validFlag = signature.validate(valContext);
-
-				// Check core validation status.
-				if (validFlag == false) {
-					Beep.tone(1000, 300,1600);
-					Beep.tone(1000, 300,1600);
-					Beep.tone(1000, 300,1600);
-					System.err.println("Signature failed core validation");
-					boolean sv = signature.getSignatureValue().validate(valContext);
-					System.out.println("signature validation status: " + sv);
-					if (sv == false) {
-						// Check the validation status of each Reference.
-						Iterator i = signature.getSignedInfo().getReferences().iterator();
-						for (int j = 0; i.hasNext(); j++) {
-							boolean refValid = ((Reference) i.next()).validate(valContext);
-							System.out.println("ref[" + j + "] validity status: " + refValid);
-							if(refValid==true){
-								validFlag = true;
-							}
-						}
-					}else{
-
-						validFlag = true;
-					}
-				} else {
-					System.out.println("Signature passed core validation");
-				}
-
-				Principal principal = cert.getSubjectDN();
-				String name = principal.getName();
-				matricola = name.substring(3, 14);
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		Pair <String,Boolean> pair = new Pair<>();
-		pair.setFirst(matricola);
-		pair.setSecond(validFlag);
-		return pair;
-	}
-
+	
 	private static Document convertStringToDocument(String xmlStr) {
 		try {
 
