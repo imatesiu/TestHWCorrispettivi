@@ -229,8 +229,11 @@ public class Utility {
 				matricola = name.substring(3, 14);
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.err.println("Signature VUOTA interrompere prova");
+				Pair <String,Boolean> pair = new Pair<>();
+				pair.setFirst("0.0.0.0");
+				pair.setSecond(false);
+				return pair;
 			}
 
 		}
