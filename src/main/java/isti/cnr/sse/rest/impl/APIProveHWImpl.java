@@ -68,10 +68,16 @@ public class APIProveHWImpl {
 	
 	private static Map<String, RT> map = new HashMap<>(); /*Utility.deserialize();
 
+
     @PreDestroy
     public void reset () {
     	Utility.serialize(map);
     }*/
+
+	
+	private static boolean fuoriorario = false;
+
+
 
 	@Path("/clearall")
 	@GET
@@ -124,6 +130,21 @@ public class APIProveHWImpl {
 			log.info("Grantotale " + grantotale);
 			return "<html><body>Elemento non presente, creato Init: " + key + " Grantotale: " + grantotale
 					+ "</body></html>";
+		}
+
+	}
+	
+	@Path("/set/{key:.*}")
+	@GET
+	public String fuoriorario(@PathParam("key") String key) {
+		if (key.equals("fuoriorario")) {
+			if(fuoriorario)
+				fuoriorario = false;
+			else
+				fuoriorario = true;
+			return "<html><body>OK, "+fuoriorario+"</body></html>";
+		} else {
+			return "<html><body>Elemento non presente, " + key + "</body></html>";
 		}
 
 	}
@@ -232,6 +253,18 @@ public class APIProveHWImpl {
 		response.setHeader("Connection", "Close");
 		JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		
+		if(fuoriorario){
+			try{
+				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
+				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+				throw new WebApplicationException(Response.status(500).build());
+			} catch (IOException e) {
+				e.printStackTrace();
+				log.error(e);
+			}
+			
+		}
 		if(Corri.length()==0){
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
