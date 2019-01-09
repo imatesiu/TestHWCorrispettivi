@@ -61,7 +61,7 @@ public class APIProveHWImpl {
 
 	private static Map<String, BigDecimal> map = new HashMap<>();
 	
-	private static boolean fuoriorario = false;
+	private static ErrorHttp flag = ErrorHttp.Null;
 
 	private static Map<String, Pair<Integer, Date>> timediff = new HashMap<>();
 
@@ -117,15 +117,12 @@ public class APIProveHWImpl {
 	@Path("/set/{key:.*}")
 	@GET
 	public String fuoriorario(@PathParam("key") String key) {
-		if (key.equals("fuoriorario")) {
-			if(fuoriorario)
-				fuoriorario = false;
-			else
-				fuoriorario = true;
-			return "<html><body>OK, "+fuoriorario+"</body></html>";
-		} else {
-			return "<html><body>Elemento non presente, " + key + "</body></html>";
-		}
+		
+			
+			flag = ErrorHttp.get(key);
+			
+			return "<html><body>OK, "+flag+"</body></html>";
+		
 
 	}
 
@@ -160,11 +157,11 @@ public class APIProveHWImpl {
 		JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		
-		if(fuoriorario){
+		if(!flag.equals(ErrorHttp.Null)){
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-				throw new WebApplicationException(Response.status(500).build());
+				throw new WebApplicationException(Response.status(flag.getValue()).build());
 			} catch (IOException e) {
 				e.printStackTrace();
 				log.error(e);
