@@ -82,7 +82,7 @@ public class APIDispositiviImpl {
 
 
 	@POST
-	public String postCensimentoRT(String censimento, @Context HttpServletRequest request, @Context HttpServletResponse response)
+	public Response postCensimentoRT(String censimento, @Context HttpServletRequest request, @Context HttpServletResponse response)
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		// @Context HttpServletRequest request){
 		response.setHeader("Connection", "Close");
@@ -148,8 +148,10 @@ public class APIDispositiviImpl {
 		        marshaller.marshal(esito, dosigndocument);
 		        
 		        
+
 				String result = SignReply.Sign(dosigndocument);
-				return result;//jaxbObjectToXML(esito);
+				
+				return Response.status(201).entity(result).build();//jaxbObjectToXML(esito);
 			}else{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
