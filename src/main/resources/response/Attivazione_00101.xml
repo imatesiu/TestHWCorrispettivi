@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns3:EsitoOperazione xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" xmlns:ns3="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0">
+    <IdOperazione>14608</IdOperazione>
+    <Errori>
+        <Errore>
+            <Codice>00101</Codice>
+            <Descrizione>Gestore non censito</Descrizione>
+        </Errore>
+    </Errori>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+  <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+  <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+  <Reference URI="">
+    <Transforms>
+      <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+      <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+    </Transforms>
+    <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+    <DigestValue>+jSi909ZqctUfvvzhjFZn8oTE+Y+rPklaY20jYxTglA=</DigestValue>
+  </Reference>
+</SignedInfo>
+    <SignatureValue>HlclVLMJ3qk8f+8d41BPs2KCS5M95+sogUvRcNB4hf6F0KDqAxkIueMfVJf6ATPGBJmCXtjHIB5pterAtC743xeb8PYKfcQ4UEZWYv+RtexKoBSIcUQhujJ2knNB3F+nFbVxyeJsoQsDRjtw+2DWS0RkmkvU/tLJFBJroHStKOjPBBk0u/xaQuU4Y9S0YMhQswu5O9YEoc+mNsLD0zllnGSSOi21xWawQzW2KPYkmqCSmBC0Ci1TIJ4fCRTKvetmFsBxyPBbcrvIdcTfxqhy0Huo5NfTRxcdiXtWG/B28sVA81yh9kbmopjgX5IOrVFKyRaYPghWX/CuX00STjeoOA==</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIEeDCCA2CgAwIBAgIIIyLY5OxLz9cwDQYJKoZIhvcNAQELBQAwcjELMAkGA1UEBhMCaXQxHjAcBgNVBAoTFUFnZW56aWEgZGVsbGUgRW50cmF0ZTEbMBkGA1UECxMSU2Vydml6aSBUZWxlbWF0aWNpMSYwJAYDVQQDEx1DQSBBZ2VuemlhIGRlbGxlIEVudHJhdGUgVGVzdDAeFw0xNjA2MDEwOTI4MDFaFw0xOTA2MDIwOTI4MDFaMHIxCzAJBgNVBAYTAklUMRswGQYDVQQKDBJTZXJ2aXppIFRlbGVtYXRpY2kxHjAcBgNVBAsMFUFnZW56aWEgZGVsbGUgRW50cmF0ZTEmMCQGA1UEAwwdU2Vydml6aW8gQUUgQ29ycmlzcGV0dGl2aSBJVkEwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCDTgNdGUfbC0Pv2n5DGADue0a63FeWPH0TM5Ulvt46Q4Hy561hzOJiXNsdXNvKQJUUisK/lwbJ8ZeXk7atHywvVvn9hk7CUnBz+O7J0VANwBfebaPYtvElV5MElf2Bkb+Fxwa9A8mIGHNj4p3QOXldzQZBt6XQuWayDtVS91F8n5NeBR+1xyg3D0zvdDXvJ+0Ct6r0dfiddNlU1bJmVlHrWjQRR9Tz0p35j7A8bEe7pIuwZa4Szv4tQwzV+QHLqfsQfpIG5SheSA7o43EaC5xs3K5kinWd2MhSHJl8+t/4zbhVkLTD2HPoRYh+tYuO9pzmvOmbXidX+mHeza6PksYFAgMBAAGjggEQMIIBDDAdBgNVHQ4EFgQUjiotXv6kt2P0jCvqVMo1iTakFTcwHwYDVR0jBBgwFoAUIv2qaSJMnLEgYp0yx9UXW+qcwTMwgbkGA1UdHwSBsTCBrjCBq6CBqKCBpYaBomxkYXA6Ly9jYWRzLmVudHJhdGUuZmluYW56ZS5pdC9jbiUzZENBJTIwQWdlbnppYSUyMGRlbGxlJTIwRW50cmF0ZSUyMFRlc3Qsb3UlM2RTZXJ2aXppJTIwVGVsZW1hdGljaSxvJTNkQWdlbnppYSUyMGRlbGxlJTIwRW50cmF0ZSxjJTNkaXQ/Y2VydGlmaWNhdGVSZXZvY2F0aW9uTGlzdDAOBgNVHQ8BAf8EBAMCBkAwDQYJKoZIhvcNAQELBQADggEBAKbnawkys14e8mQb7PXFFoy3UQ1z6H9/iQlQLidkDxEpKFfW+cCI3VpA9hPwSD0mJqVwW15QpkGKvYdGh2mQMFSQxl2Pa28Z20s823VnnAeCKwcNMd6nqzJzqRyVIMQcfOh6DCunr8EyItc36DOG098l9olCYhURLUwFDUwoAoX1yBAetbaWR0TNFDpWZn6JfrWqHkBGaMdhBM+6ANpIcNSJXcj67u5FmtjDVxG1PedDd1McZsGo7pE7vT+118gqhNSeYFbLUWhhXQLdjq3Gq95UWBlPeq9rfteBmkt4fP8OZebdA2IQVhqFv9muVelfbxex8GSd0UQhD2FppQ5ZSJg=</X509Certificate><X509IssuerSerial><X509IssuerName>CN=CA Agenzia delle Entrate Test, OU=Servizi Telematici, O=Agenzia delle Entrate, C=it</X509IssuerName><X509SerialNumber>2531824418264174551</X509SerialNumber></X509IssuerSerial></X509Data></KeyInfo></Signature></ns3:EsitoOperazione>

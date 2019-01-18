@@ -28,6 +28,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -62,6 +63,8 @@ public class APIProveHWImpl {
 	private static Map<String, BigDecimal> map = new HashMap<>();
 	
 	private static ErrorHttp flag = ErrorHttp.Null;
+	
+	private static Integer ErrorType = 9999;
 
 	private static Map<String, Pair<Integer, Date>> timediff = new HashMap<>();
 
@@ -125,6 +128,20 @@ public class APIProveHWImpl {
 		
 
 	}
+	
+	@Path("/setxml/{key:.*}")
+	@GET
+	public String setXml(@PathParam("key") Integer key) {
+		
+			if(key!=null)
+				ErrorType = key;
+			else
+				ErrorType = 9999;
+			
+			return "<html><body>OK, "+ErrorType+"</body></html>";
+		
+
+	}
 
 	@Path("/info/{key:.*}")
 	@GET
@@ -171,6 +188,17 @@ public class APIProveHWImpl {
 				log.error(e);
 			}
 			
+		}else {
+			try{
+				if(ErrorType!=9999) {
+					String error = Utility.getResource(ErrorType);
+					throw new WebApplicationException(Response.status(Status.OK).entity(error).build());
+
+				}
+			} catch (IOException e) {
+				
+				log.error("codice errore sconosciuto");
+			}
 		}
 		if(Corri.length()==0){
 			try{
