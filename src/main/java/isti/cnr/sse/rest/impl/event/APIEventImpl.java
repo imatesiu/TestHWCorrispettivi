@@ -10,12 +10,15 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -35,6 +38,8 @@ public class APIEventImpl {
 
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(APIEventImpl.class);
 
+	private static Integer ErrorType = 9999;
+
 	
 	@Path("/")
 	@POST
@@ -53,7 +58,19 @@ public class APIEventImpl {
 				e.printStackTrace();
 				log.error(e);
 			}
+		}else {
+			try{
+				if(ErrorType!=9999) {
+					String error = Utility.getResource(ErrorType);
+					throw new WebApplicationException(Response.status(Status.OK).entity(error).build());
+
+				}
+			} catch (IOException e) {
+				
+				log.error("codice errore sconosciuto");
+			}
 		}
+			
 		try {
 			StringReader reader = new StringReader(event);
 			EventoDispositivoType EventoDispositivo = (EventoDispositivoType) unmarshaller.unmarshal(reader);
@@ -97,5 +114,21 @@ public class APIEventImpl {
 		return null;
 		
 	}
+	
+	
+	@Path("/setxml/{key:.*}")
+	@GET
+	public String setXml(@PathParam("key") Integer key) {
+		
+			if(key!=null)
+				ErrorType = key;
+			else
+				ErrorType = 9999;
+			
+			return "<html><body>OK, "+ErrorType+"</body></html>";
+		
+
+	}
+	
 	
 }
