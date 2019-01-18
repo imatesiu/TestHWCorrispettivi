@@ -7,10 +7,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.security.PublicKey;
 import java.security.cert.CertificateFactory;
@@ -33,6 +35,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.io.IOUtils;
 import org.glassfish.grizzly.utils.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -282,6 +285,24 @@ public class Utility {
 			e.printStackTrace();
 			log.error(e);
 		}
+	}
+	
+	public static String getResource(int codeerror) throws IOException {
+		
+		String nameFile = "response/";
+		if(codeerror>=200 && codeerror<=299)
+			nameFile+="Corrispettivi_00"+codeerror+".xml";
+		if(codeerror>=100 && codeerror<=199)
+			nameFile+="Attivazione_00"+codeerror+".xml";
+		if(codeerror>=700 && codeerror<=799)
+			nameFile+="Eventi_00"+codeerror+".xml";
+		
+		
+		InputStream is = Utility.class.getClassLoader().getResourceAsStream(nameFile);
+		String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+		
+		
+		return text;
 	}
 
 }
