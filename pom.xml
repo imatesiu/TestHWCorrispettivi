@@ -203,7 +203,7 @@
 					<connectors>
 						<connector implementation="org.eclipse.jetty.server.ssl.SslSocketConnector">
 							<port>443</port>
-							<keystore>${project.basedir}/src/main/config/jetty-server-ssl.jks</keystore>
+							<keystore>${project.basedir}/src/main/config/jetty-server-ssl-all-10.jks</keystore>
 							<keyPassword>jetty8</keyPassword>
 							<protocol>TLSv1.2</protocol>
 							<password>jetty8</password>
