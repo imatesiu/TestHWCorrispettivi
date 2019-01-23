@@ -151,7 +151,7 @@ public class APIDispositiviImpl {
 		        
 		        
 
-				String result = SignReply.Sign(dosigndocument);
+				String result = SignReply.Sign(dosigndocument, "dispositivo");
 				
 				return Response.status(201).entity(result).build();//jaxbObjectToXML(esito);
 			}else{

@@ -102,7 +102,7 @@ String url = "dispositivi/corrispettivi/";
 	        marshaller.marshal(AttivaDispositivo, dosigndocument);
 	        
 
-			String result = SignReply.Sign(dosigndocument);
+			String result = SignReply.Sign(dosigndocument, "dispositivo");
 			
 			String EsitoOperazione = this.post(result, url);
 			
@@ -163,7 +163,7 @@ String url = "dispositivi/corrispettivi/";
 			        marshaller.marshal(EventoDispositivo, dosigndocument);
 			        
 
-					String result = SignReply.Sign(dosigndocument);
+					String result = SignReply.Sign(dosigndocument, "dispositivo");
 					
 					String EsitoOperazione = this.put(result, url);
 					
@@ -243,7 +243,7 @@ String url = "dispositivi/corrispettivi/";
 	        
 	        
 
-			String result = SignReply.Sign(dosigndocument);
+			String result = SignReply.Sign(dosigndocument, "dispositivo");
 			
 			String EsitoOperazione = this.put(result, url);
 			

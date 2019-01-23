@@ -42,7 +42,7 @@ public class SignReply {
 	
 	public static final String SHA256_RSA_SIGNATURE_ALGORITHM = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
 
-    public static String Sign(Document dosigndocument) {
+    public static String Sign(Document dosigndocument, String al) {
 
         try {
             InputStream jskfile = SignReply.class.getClassLoader().getResourceAsStream("jetty-server-ssl.jks");
@@ -63,7 +63,7 @@ public class SignReply {
             Enumeration<String> en = ks.aliases();
             while (en.hasMoreElements()) {
                 String alias = (String) en.nextElement();
-                if (ks.isKeyEntry(alias) && alias.equals("serverca")) {
+                if (ks.isKeyEntry(alias) && alias.equals(al)) {
                     signerCert = (X509Certificate) ks.getCertificate(alias);
                     key = (PrivateKey) ks.getKey(alias, p12pass.toCharArray());
                     break;
