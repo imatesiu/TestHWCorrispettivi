@@ -53,4 +53,4 @@ The service is available at `https://localhost/dispositivi/corrispettivi`.
 
 
 # Note
-Server Certificate Authority in `/script/serverca.crt` [link](https://raw.githubusercontent.com/imatesiu/TestHWCorrispettivi/v2.4.2_C10/script/serverca.crt)
+Server Certificate Authority in `/script/serverca.crt` [link](https://raw.githubusercontent.com/imatesiu/TestHWCorrispettivi/2.4.2_C10/script/serverca.crt)
