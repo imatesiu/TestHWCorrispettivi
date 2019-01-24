@@ -29,6 +29,7 @@ import org.glassfish.grizzly.utils.Pair;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EventoDispositivoType;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
+import isti.cnr.sse.rest.impl.ErrorHttp;
 import isti.cnr.sse.rest.impl.Utility;
 
 @Consumes(MediaType.APPLICATION_XML)
@@ -40,6 +41,8 @@ public class APIEventImpl {
 
 	private static Integer ErrorType = 9999;
 
+	private static ErrorHttp flag = ErrorHttp.Null;
+
 	
 	@Path("/")
 	@POST
@@ -49,6 +52,26 @@ public class APIEventImpl {
 		response.setHeader("Connection", "Close");
 		JAXBContext jaxbContext = JAXBContext.newInstance(EventoDispositivoType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		
+		if(!flag.equals(ErrorHttp.Null)){
+			try{
+				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
+				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+				
+				if(ErrorType!=9999) {
+					text = Utility.getResource(ErrorType);
+					
+				}			
+				
+					throw new WebApplicationException(Response.status(flag.getValue()).entity(text).build());
+
+			} catch (IOException e) {
+				e.printStackTrace();
+				log.error(e);
+			}
+			
+		}
+		
 		if(event.length()==0){
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
@@ -130,6 +153,18 @@ public class APIEventImpl {
 				ErrorType = 9999;
 			
 			return "<html><body>OK, "+ErrorType+"</body></html>";
+		
+
+	}
+	
+	@Path("/set/{key:.*}")
+	@GET
+	public String fuoriorario(@PathParam("key") String key) {
+		
+			
+			flag = ErrorHttp.get(key);
+			
+			return "<html><body>OK, "+flag+"</body></html>";
 		
 
 	}
