@@ -70,6 +70,7 @@ import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoRichiestaCertificatoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.RichiestaCertificatoDispositivoType;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
+import isti.cnr.sse.rest.impl.ErrorHttp;
 import isti.cnr.sse.rest.impl.Utility;
 import isti.cnr.sse.rest.impl.firma.SignReply;
 import sun.misc.BASE64Encoder;
@@ -85,6 +86,7 @@ public class APIDispositiviImpl {
 	
 	private static Integer ErrorType = 9999;
 
+	private static ErrorHttp flag = ErrorHttp.Null;
 
 
 	@POST
@@ -194,7 +196,17 @@ public class APIDispositiviImpl {
 		
 
 	}
-	
+	@Path("/set/{key:.*}")
+	@GET
+	public String fuoriorario(@PathParam("key") String key) {
+		
+			
+			flag = ErrorHttp.get(key);
+			
+			return "<html><body>OK, "+flag+"</body></html>";
+		
+
+	}
 
 	@Consumes(MediaType.APPLICATION_XML)
 	@PUT
@@ -204,6 +216,26 @@ public class APIDispositiviImpl {
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(AttivaDispositivoType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		
+		if(!flag.equals(ErrorHttp.Null)){
+			try{
+				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
+				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+				
+				if(ErrorType!=9999) {
+					text = Utility.getResource(ErrorType);
+					
+				}			
+				
+					throw new WebApplicationException(Response.status(flag.getValue()).entity(text).build());
+
+			} catch (IOException e) {
+				e.printStackTrace();
+				log.error(e);
+			}
+			
+		}
+		
 		if(attivazione.length()==0){
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");

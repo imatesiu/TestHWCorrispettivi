@@ -277,9 +277,7 @@ public class APIProveHWImpl {
 					text = Utility.getResource(ErrorType);
 					
 				}			
-				if(flag.equals(ErrorHttp.InputNonValido) || flag.equals(ErrorHttp.DispositivoNNValido))
-					throw new WebApplicationException(Response.status(flag.getValue()).build());
-				else
+				
 					throw new WebApplicationException(Response.status(flag.getValue()).entity(text).build());
 
 			} catch (IOException e) {
