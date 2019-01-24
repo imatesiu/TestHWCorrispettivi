@@ -155,7 +155,7 @@ public class APIDispositiviImpl {
 		        
 		        
 
-				String result = SignReply.Sign(dosigndocument);
+				String result = SignReply.Sign(dosigndocument, "server");
 				
 				return Response.status(201).entity(result).build();//jaxbObjectToXML(esito);
 			}else{
@@ -208,6 +208,12 @@ public class APIDispositiviImpl {
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+				
+				if(ErrorType!=9999) {
+					text = Utility.getResource(ErrorType);
+					
+				}	
+				
 				throw new WebApplicationException(Response.status(406).entity(text).build());
 			} catch (IOException e) {
 				e.printStackTrace();

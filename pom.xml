@@ -218,10 +218,17 @@
 				<version>9.4.8.v20171121</version>
 				<configuration>
 					<jettyXml>${project.basedir}/src/main/resources/jetty.xml,${project.basedir}/src/main/resources/jetty-http.xml,${project.basedir}/src/main/resources/jetty-ssl.xml,${project.basedir}/src/main/resources/jetty-https.xml</jettyXml>
-				
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.ssl.SslSocketConnector">
+							<port>443</port>
+							<keystore>${project.basedir}/src/main/config/jetty-server-ssl-all-10.jks</keystore>
+							<keyPassword>jetty8</keyPassword>
+							<protocol>TLSv1.2</protocol>
+							<password>jetty8</password>
+						</connector>
+					</connectors>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
