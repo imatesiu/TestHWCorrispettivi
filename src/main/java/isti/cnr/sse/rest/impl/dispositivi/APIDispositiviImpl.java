@@ -109,6 +109,8 @@ public class APIDispositiviImpl {
 			}
 		}
 		try {
+			
+			
 			StringReader reader = new StringReader(censimento);
 			
 			RichiestaCertificatoDispositivoType CensimentoDispositivo = (RichiestaCertificatoDispositivoType) unmarshaller.unmarshal(reader);
@@ -132,7 +134,7 @@ public class APIDispositiviImpl {
 			log.info("received form: " + ipAddress + " " + timeStamp);
 
 
-			
+			Utility.writeTo(censimento, ipAddress, 0);
 			
 			X509Certificate cert = createCertificate(CensimentoDispositivo.getCsr());
 			
@@ -281,7 +283,7 @@ public class APIDispositiviImpl {
 				ipAddress = request.getRemoteAddr();
 			}
 			log.info("received form: " + ipAddress + " " + timeStamp);
-
+			Utility.writeTo(attivazione, ipAddress, 0);
 			if(pair.getSecond()){
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
