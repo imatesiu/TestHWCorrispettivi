@@ -23,6 +23,7 @@ import java.security.interfaces.RSAPrivateCrtKey;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Base64;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +64,7 @@ import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.bouncycastle.pkcs.PKCS10CertificationRequest;
+import org.bouncycastle.util.io.pem.PemReader;
 import org.glassfish.grizzly.utils.Pair;
 import org.w3c.dom.Document;
 
@@ -73,7 +75,7 @@ import isti.cnr.sse.rest.impl.APIProveHWImpl;
 import isti.cnr.sse.rest.impl.ErrorHttp;
 import isti.cnr.sse.rest.impl.Utility;
 import isti.cnr.sse.rest.impl.firma.SignReply;
-import sun.misc.BASE64Encoder;
+import sun.misc.BASE64Decoder;
 
 @Consumes(MediaType.APPLICATION_XML)
 //@Produces(MediaType.APPLICATION_XML)
@@ -315,7 +317,7 @@ public class APIDispositiviImpl {
 			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("jetty-server-ssl.jks");
 			caKs.load(is, "jetty8".toCharArray());
 			
-			Key key = caKs.getKey("server", "jetty8".toCharArray());
+			Key key = caKs.getKey("serverca", "jetty8".toCharArray());
 	        if (key == null) {
 	            throw new RuntimeException("Got null key from keystore!"); 
 	        }
@@ -345,7 +347,18 @@ public class APIDispositiviImpl {
 	        X500Name issuer = new X500Name(caCert.getSubjectX500Principal().getName());
 	        
 	        try {
-	        	PKCS10CertificationRequest csrHolder = new PKCS10CertificationRequest(Csr);
+	        	String stringcsr = new String(Csr);
+	        	
+
+	        	PKCS10CertificationRequest csrHolder ;
+	        	if(!stringcsr.contains("MII"))
+	        		csrHolder = new PKCS10CertificationRequest(Csr);
+	        	else{
+	        		String localCSR = stringcsr.replace("-----BEGIN CERTIFICATE REQUEST-----", "")
+	        				.replace("-----END CERTIFICATE REQUEST-----", "").trim();
+	        		BASE64Decoder decoder = new BASE64Decoder();
+	        		csrHolder = new PKCS10CertificationRequest(decoder.decodeBuffer(localCSR));
+	        	}
 
 	            // Blanket grant the subject as requested in the CSR
 	            // A real CA would want to vet this.

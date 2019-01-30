@@ -9,7 +9,7 @@ Information   | Value
 Component     | Server Corrispettivi per Test HW RT
 Istitution    | ISTI-CNR
 Responsible   | Giorgio O. Spagnolo <spagnolo at isti.cnr.it>
-Status project| [![Build Status](https://travis-ci.org/imatesiu/TestHWCorrispettivi.svg?branch=v2.4.1)](https://github.com/imatesiu/TestHWCorrispettivi/) [![Coverage Status](https://coveralls.io/repos/github/imatesiu/TestHWCorrispettivi/badge.svg)](https://coveralls.io/github/imatesiu/TestHWCorrispettivi)
+Status project| [![Build Status](https://travis-ci.org/imatesiu/TestHWCorrispettivi.svg?branch=2.4.2_C10)](https://github.com/imatesiu/TestHWCorrispettivi/) [![Coverage Status](https://coveralls.io/repos/github/imatesiu/TestHWCorrispettivi/badge.svg)](https://coveralls.io/github/imatesiu/TestHWCorrispettivi)
 
 
 
@@ -23,7 +23,7 @@ This component expose REST API
 
 The component is ready to be packaged as a WAR to be deployed on an Application Server like jetty.
 
-The service is available at `https://localhost/dispositivi/corrispettivi`.
+The service is available at `https://localhost/v1/dispositivi/corrispettivi`.
 
 # How to install?
 
@@ -37,19 +37,33 @@ The service is available at `https://localhost/dispositivi/corrispettivi`.
 
 # CURL Test
  * To send DatiCorrispettiviType XML to component, the reply is a EsitoOperazioneType:  
-`curl -X POST -H "Content-Type: application/XML" --data @DatiCorrispettiviType.xml https://localhost/dispositivi/corrispettivi/`
+`curl -X POST -H "Content-Type: application/XML" --data @DatiCorrispettiviType.xml https://localhost/v1/dispositivi/corrispettivi/`
 
 * To send Init of :  
-`curl -X GET https://localhost/dispositivi/corrispettivi/init/{matricola or ip}?grantot={grantotale}`
+`curl -X GET https://localhost/v1/dispositivi/corrispettivi/init/{matricola or ip}?grantot={grantotale}`
 
 * To get Status of :  
-`curl -X GET https://localhost/dispositivi/corrispettivi/info/{matricola or ip}`
+`curl -X GET https://localhost/v1/dispositivi/corrispettivi/info/{matricola or ip}`
 
 * To send Clear:  
-`curl -X GET https://localhost/dispositivi/corrispettivi/clear/{matricola or ip}`
+`curl -X GET https://localhost/v1/dispositivi/corrispettivi/clear/{matricola or ip}`
 
 * To send Clear all:  
-`curl -X GET https://localhost/dispositivi/corrispettivi/clearall`
+`curl -X GET https://localhost/v1/dispositivi/corrispettivi/clearall`
+
+* To set Error Channel 
+`curl -X GET https://localhost/v1/dispositivi/corrispettivi/set/{key}` sostituire `{key}`con:
+  * `SuperoLimite` per avere (429),
+  *  `NonAutorizzato` per avere  (403),
+  *  `InputNonValido` (406),
+  *  `DispositivoNNValido` (409),
+  *  `ErrorContentType` per avere (415),
+  *  `fuoriorario` per avere (500),
+  *  `Default` per avere (500),
+  *  `Null` per ripristinare;
+
+* To set Error XML
+`curl -X GET https://localhost/v1/dispositivi/corrispettivi/setxml/{key}` sostituire `{key}`con i codici errore xml implementati che sono: `100, 101, 110, 111, 112, 200, 201, 202, 203, 204, 206, 208, 209, 212, 700, 701, 705, 706, 711`
 
 
 # Note
