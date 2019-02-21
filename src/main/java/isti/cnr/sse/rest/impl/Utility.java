@@ -8,12 +8,17 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import java.io.InputStream;
+
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.security.PublicKey;
 import java.security.cert.CertificateFactory;
@@ -38,6 +43,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.io.IOUtils;
 import org.glassfish.grizzly.utils.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -59,12 +65,12 @@ import cnr.isti.sse.data.corrispettivi.messaggi.RichiestaCertificatoDispositivoT
 
 
 public class Utility {
-	
+
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Utility.class);
-	
+
 	public static void calc(DatiCorrispettiviType corrispettivi, String key, Map<String, RT> map) {
 
-		
+
 		log.info("Dati di trasmissione: ");
 		log.info("Progessivo: "+corrispettivi.getTrasmissione().getProgressivo());
 
@@ -87,13 +93,13 @@ public class Utility {
 
 				BigDecimal ammAnn = datiRegistratoriTelematici.getTotaleAmmontareAnnulli();
 				BigDecimal ammResi = datiRegistratoriTelematici.getTotaleAmmontareResi();
-				
-				
+
+
 				BigDecimal ivaann = ammAnn.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
 				BigDecimal ivaresi= ammResi.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
-				
+
 				impostaiva = impostaiva.subtract(ivaann).subtract(ivaresi);
-				
+
 				if(!impostaiva.equals(iva.getImposta())){
 					log.error("imposta Errata!! per imponibile "+ammontare+" aliquota iva "+iva.getAliquotaIVA());	
 					log.error("imposta Errata!! mi aspettavo iva "+impostaiva+" trovo "+iva.getImposta());			
@@ -133,8 +139,8 @@ public class Utility {
 		System.out.println();
 
 	}
-	
-	
+
+
 	public static void writeTo(DatiCorrispettiviType DCT, String ipAddress, int num){
 		JAXBContext jaxbCtx;
 		try {
@@ -153,7 +159,7 @@ public class Utility {
 			}
 
 			OutputStream os = new FileOutputStream( "received_"+ipAddress+"/RT_"+ipAddress+"_"+timeStamp+"_"+num+".xml" );
-			
+
 			marshaller.marshal( DCT, os );
 
 		} catch (JAXBException | FileNotFoundException  e) {
@@ -163,28 +169,28 @@ public class Utility {
 
 		}
 	}
-	
-	
+
+
 	public static Pair<String,Boolean> getMatricola(DatiCorrispettiviType d, String corri) {
 		SignatureType signa = d.getSignature();
 		return getMatricola(signa, corri);
 	}
-	
+
 	public static Pair<String,Boolean> getMatricola(RichiestaCertificatoDispositivoType d, String corri) {
 		SignatureType signa = d.getSignature();
 		return getMatricola(signa, corri);
 	}
-	
+
 	public static Pair<String,Boolean> getMatricola(AttivaDispositivoType d, String corri) {
 		SignatureType signa = d.getSignature();
 		return getMatricola(signa, corri);
 	}
-	
+
 	public static Pair<String,Boolean> getMatricola(EventoDispositivoType d, String corri) {
 		SignatureType signa = d.getSignature();
 		return getMatricola(signa, corri);
 	}
-	
+
 	private static Pair<String,Boolean> getMatricola(SignatureType d, String corri) {
 		String matricola = "";
 		boolean validFlag = false;
@@ -289,7 +295,7 @@ public class Utility {
 
 			String FILENAME = "received_"+ipAddress+"/RT_"+ipAddress+"_"+timeStamp+"_"+num+".xml";
 			BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME));
-			
+
 
 			bw.write(DCT);
 			bw.close();
@@ -316,7 +322,7 @@ public class Utility {
 
 			for (RT d : map.values()) {
 				writeRT(writer,d);	
-				
+
 
 				//try custom separator and quote. 
 				//CSVUtils.writeLine(writer, list, '|', '\"');
@@ -328,7 +334,7 @@ public class Utility {
 			// TODO: handle exception
 		}
 	}
-	
+
 	public static void writeRT( RT d){
 		try{
 			String csvFile = d.getMatricola()+"."+d.getDescrizione()+".csv";
@@ -349,49 +355,68 @@ public class Utility {
 			// TODO: handle exception
 		}
 	}
-    private static void writeRT(FileWriter writer, RT d) throws IOException {
-    	List<String> list = new ArrayList<>(Arrays.asList(d.toString().split(";")));
+	private static void writeRT(FileWriter writer, RT d) throws IOException {
+		List<String> list = new ArrayList<>(Arrays.asList(d.toString().split(";")));
 		CSVUtils.writeLine(writer, list);
-		
+
 	}
 
 
 	public static void serialize(Map<String,RT> map)
-    {
-    	String file = "database.ser";
-        FileOutputStream fileOut;
-        try
-         {
-            fileOut = new FileOutputStream(file);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(map);
-            out.close();
-            fileOut.close();
-         }catch(Exception e)
-         {
-             e.printStackTrace();
-             return;
-         }  
-        return;
-    }
-     
-    public static Map<String,RT> deserialize()
-    {
-    	String file = "database.ser";
-    	Map<String,RT> map = null;
-          try
-          {
-             FileInputStream fileIn = new FileInputStream(file);
-             ObjectInputStream in = new ObjectInputStream(fileIn);
-             map = (Map<String,RT>) in.readObject();
-             in.close();
-             fileIn.close();
-         }catch(Exception e)
-         {
-             e.printStackTrace();   
-             return null;
-         }
-         return map;
-    }
+	{
+		String file = "database.ser";
+		FileOutputStream fileOut;
+		try
+		{
+			fileOut = new FileOutputStream(file);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(map);
+			out.close();
+			fileOut.close();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return;
+		}  
+		return;
+	}
+
+	public static Map<String,RT> deserialize()
+	{
+		String file = "database.ser";
+		Map<String,RT> map = null;
+		try
+		{
+			FileInputStream fileIn = new FileInputStream(file);
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			map = (Map<String,RT>) in.readObject();
+			in.close();
+			fileIn.close();
+		}catch(Exception e)
+		{
+			e.printStackTrace();   
+			return null;
+		}
+		return map;
+	}
+
+	public static String getResource(int codeerror) throws IOException {
+
+		String nameFile = "response/";
+		if(codeerror>=200 && codeerror<=299)
+			nameFile+="Corrispettivi_00"+codeerror+".xml";
+		if(codeerror>=100 && codeerror<=199)
+			nameFile+="Attivazione_00"+codeerror+".xml";
+		if(codeerror>=700 && codeerror<=799)
+			nameFile+="Eventi_00"+codeerror+".xml";
+
+
+		InputStream is = Utility.class.getClassLoader().getResourceAsStream(nameFile);
+		String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+
+
+		return text;
+	}
+
 
 }

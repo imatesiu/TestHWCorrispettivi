@@ -64,6 +64,7 @@ import org.w3c.dom.NodeList;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
 import isti.cnr.sse.jsf.TipoProve;
+import isti.cnr.sse.rest.impl.firma.CreateError;
 
 public class APIProveHWImplTest extends JerseyTest {
 
@@ -87,6 +88,17 @@ public class APIProveHWImplTest extends JerseyTest {
 
 	@Test
 	public void test() throws JAXBException, IOException {
+		
+		
+		//CreateError err = new CreateError();
+		//
+		
+		//err.Corrispettivi();
+		//err.Evento();
+		//err.Evento();
+		//err.Attivazione();
+
+		
 
 		sendinit();sendrtall();
 		// for(int i = 0 ; i<10; i++){

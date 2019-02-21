@@ -33,6 +33,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -68,10 +69,18 @@ public class APIProveHWImpl {
 	
 	private static Map<String, RT> map = new HashMap<>(); /*Utility.deserialize();
 
+
     @PreDestroy
     public void reset () {
     	Utility.serialize(map);
     }*/
+
+	
+	private static ErrorHttp flag = ErrorHttp.Null;
+	
+	private static Integer ErrorType = 9999;
+
+
 
 	@Path("/clearall")
 	@GET
@@ -125,6 +134,32 @@ public class APIProveHWImpl {
 			return "<html><body>Elemento non presente, creato Init: " + key + " Grantotale: " + grantotale
 					+ "</body></html>";
 		}
+
+	}
+	
+	@Path("/set/{key:.*}")
+	@GET
+	public String fuoriorario(@PathParam("key") String key) {
+		
+			
+			flag = ErrorHttp.get(key);
+			
+			return "<html><body>OK, "+flag+"</body></html>";
+		
+
+	}
+	
+	@Path("/setxml/{key:.*}")
+	@GET
+	public String setXml(@PathParam("key") Integer key) {
+		
+			if(key!=null)
+				ErrorType = key;
+			else
+				ErrorType = 9999;
+			
+			return "<html><body>OK, "+ErrorType+"</body></html>";
+		
 
 	}
 
@@ -232,6 +267,33 @@ public class APIProveHWImpl {
 		response.setHeader("Connection", "Close");
 		JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		
+		if(!flag.equals(ErrorHttp.Null)){
+			try{
+				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
+				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+				if(flag.equals(ErrorHttp.InputNonValido) || flag.equals(ErrorHttp.DispositivoNNValido))
+					throw new WebApplicationException(Response.status(flag.getValue()).build());
+				else
+					throw new WebApplicationException(Response.status(flag.getValue()).entity(text).build());
+
+			} catch (IOException e) {
+				e.printStackTrace();
+				log.error(e);
+			}
+			
+		}else {
+			try{
+				if(ErrorType!=9999) {
+					String error = Utility.getResource(ErrorType);
+					throw new WebApplicationException(Response.status(Status.OK).entity(error).build());
+
+				}
+			} catch (IOException e) {
+				
+				log.error("codice errore sconosciuto");
+			}
+		}
 		if(Corri.length()==0){
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");

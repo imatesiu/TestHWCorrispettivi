@@ -28,13 +28,16 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -79,10 +82,13 @@ public class APIDispositiviImpl {
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(APIDispositiviImpl.class);
 	
 	private static String SIGNATURE_ALGORITHM = "SHA256withRSA";
+	
+	private static Integer ErrorType = 9999;
+
 
 
 	@POST
-	public String postCensimentoRT(String censimento, @Context HttpServletRequest request, @Context HttpServletResponse response)
+	public Response postCensimentoRT(String censimento, @Context HttpServletRequest request, @Context HttpServletResponse response)
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		// @Context HttpServletRequest request){
 		response.setHeader("Connection", "Close");
@@ -148,8 +154,10 @@ public class APIDispositiviImpl {
 		        marshaller.marshal(esito, dosigndocument);
 		        
 		        
+
 				String result = SignReply.Sign(dosigndocument);
-				return result;//jaxbObjectToXML(esito);
+				
+				return Response.status(201).entity(result).build();//jaxbObjectToXML(esito);
 			}else{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
@@ -173,6 +181,20 @@ public class APIDispositiviImpl {
 
 	}
 
+	@Path("/setxml/{key:.*}")
+	@GET
+	public String setXml(@PathParam("key") Integer key) {
+		
+			if(key!=null)
+				ErrorType = key;
+			else
+				ErrorType = 9999;
+			
+			return "<html><body>OK, "+ErrorType+"</body></html>";
+		
+
+	}
+	
 
 	@Consumes(MediaType.APPLICATION_XML)
 	@PUT
@@ -190,6 +212,17 @@ public class APIDispositiviImpl {
 			} catch (IOException e) {
 				e.printStackTrace();
 				log.error(e);
+			}
+		}else {
+			try{
+				if(ErrorType!=9999) {
+					String error = Utility.getResource(ErrorType);
+					throw new WebApplicationException(Response.status(Status.OK).entity(error).build());
+
+				}
+			} catch (IOException e) {
+				
+				log.error("codice errore sconosciuto");
 			}
 		}
 		try {
