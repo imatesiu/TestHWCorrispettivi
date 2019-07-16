@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="/templates/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	
+	  <ui:define name="title">
+        Test File XML
+    </ui:define>
+
+    <ui:define name="description">
+        Test File XML
+    </ui:define>
+	
+	<ui:define name="content">
+<h:body>
+
+    <h:form  id="ProveForm">
+     <p:growl id="msgs" showDetail="true" />
+     
+     
+    <p:panel id="panel" header="Inserisci XML da Testare" style="margin-bottom:10px;">
+    <h:panelGrid columns="2" cellpadding="5">
+     
+        <p:outputLabel value="Set URL:" for="console" />
+        <p:selectOneMenu id="console" value="#{fileUploadView.url}" style="width:125px">
+            <f:selectItem itemLabel="v-apid" itemValue="https://v-apid-ivaservizi.agenziaentrate.gov.it" />
+            <f:selectItem itemLabel="apid" itemValue="https://apid-ivaservizi.agenziaentrate.gov.it" />
+            <f:selectItem itemLabel="tesseras" itemValue="https://apid-ivaservizi.agenziaentrate.gov.it" />
+            <f:selectItem itemLabel="CNR" itemValue="https://localhost" />
+        </p:selectOneMenu> 
+        
+        <p:outputLabel value="Set Path:" for="consolep" />
+        <p:selectOneMenu id="consolep" value="#{fileUploadView.path}" style="width:125px">
+            <f:selectItem itemLabel="corrispettivi" itemValue="/v1/dispositivi/corrispettivi/" />
+            <f:selectItem itemLabel="dispositivi" itemValue="/v1/dispositivi/" />
+            <f:selectItem itemLabel="eventi" itemValue="/v1/dispositivi/eventi/" />
+            <f:selectItem itemLabel="documenticommerciali" itemValue="/v1/dispositivi/documenticommerciali/" />
+        </p:selectOneMenu> 
+        
+         <h:form enctype="multipart/form-data">
+       <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}"   mode="advanced" dragDropSupport="true"
+        sizeLimit="100000" fileLimit="10" allowTypes="/(\.|\/)(xml)$/"/>
+    <br/> 
+    <!--
+        <p:fileUpload id="photo2" value="#{fileUploadView.file}" mode="auto" skinSimple="true"
+                        accept="image/*" capture="camera" required="true" requiredMessage="Choose a photo"/>
+		-->
+		
+   
+   
+</h:form>
+        
+        </h:panelGrid>
+        </p:panel>
+    
+    <p:commandButton icon="fa fa-send-o" style="font-size:15px;" value="Invia" type="submit"  update="out"   actionListener="#{fileUploadView.send}" />
+    
+     <p:outputPanel deferred="true">
+       <h:outputText id="out" value="#{fileUploadView.resp}" style="font-size:10px;" />
+     </p:outputPanel>
+    
+    
+    
+    </h:form>
+
+</h:body>
+</ui:define>
+
+</ui:composition>

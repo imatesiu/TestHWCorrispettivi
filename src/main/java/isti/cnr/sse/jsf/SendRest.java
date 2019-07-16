@@ -1,5 +1,6 @@
 package isti.cnr.sse.jsf;
 
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -95,6 +96,19 @@ public class SendRest {
 		//FacesContext context = FacesContext.getCurrentInstance();
 		//context.getExternalContext().getRequestMap().put("rest", id);
 
+	}
+	
+	public Response SendPost(String URL, String path, InputStream f) {
+		
+		Client client =  ignoreSSLClient();
+		WebTarget target = client.target(URL).path(path);
+
+		Entity<InputStream> entity = Entity.entity(f,MediaType.APPLICATION_XML);
+
+		Response response =  target.request().post(entity);
+		
+		
+		return response;
 	}
 
 
