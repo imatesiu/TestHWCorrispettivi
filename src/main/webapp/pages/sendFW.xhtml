@@ -10,11 +10,11 @@
 	</ui:define>
 	
 	  <ui:define name="title">
-        Test File XML
+        Test Firma FW
     </ui:define>
 
     <ui:define name="description">
-        Test File XML
+        Test Firma FW
     </ui:define>
 	
 	<ui:define name="content">
@@ -24,7 +24,7 @@
      <p:growl id="msgs" showDetail="true" />
      
      
-    <p:panel id="panel" header="Inserisci FW, Certificato e firma da Testare" style="margin-bottom:10px;">
+    <p:panel id="panel" header="Inserisci Certificato Firma e FW da Testare" style="margin-bottom:10px;">
     <h:panelGrid columns="2" cellpadding="5">
       <h:form enctype="multipart/form-data">
         <p:outputLabel value="Set certificate:" />
@@ -40,7 +40,7 @@
         sizeLimit="100000000" fileLimit="10" />
     <br/> 
       <p:outputLabel value="Set Signature Base64:" /> <br/>
-     <p:inputTextarea  value="#{fileUploadFWView.firma}" rows="6" cols="50"   />
+     <p:inputTextarea  value="#{fileUploadFWView.firma}" rows="6" cols="100"   />
     <!--
         <p:fileUpload id="photo2" value="#{fileUploadView.file}" mode="auto" skinSimple="true"
                         accept="image/*" capture="camera" required="true" requiredMessage="Choose a photo"/>allowTypes="/(\.|\/)(xml)$/"
