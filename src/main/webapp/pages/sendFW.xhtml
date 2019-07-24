@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="/templates/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	
+	  <ui:define name="title">
+        Test File XML
+    </ui:define>
+
+    <ui:define name="description">
+        Test File XML
+    </ui:define>
+	
+	<ui:define name="content">
+<h:body>
+
+    <h:form  id="ProveForm">
+     <p:growl id="msgs" showDetail="true" />
+     
+     
+    <p:panel id="panel" header="Inserisci FW, Certificato e firma da Testare" style="margin-bottom:10px;">
+    <h:panelGrid columns="2" cellpadding="5">
+      <h:form enctype="multipart/form-data">
+        <p:outputLabel value="Set certificate:" />
+        <p:fileUpload fileUploadListener="#{fileUploadFWView.handleCertificateFileUpload}"   mode="advanced" dragDropSupport="true"
+        sizeLimit="100000" fileLimit="10" />
+        <br/> 
+      <p:outputLabel value="Set firma:" />
+        <p:fileUpload fileUploadListener="#{fileUploadFWView.handleFirmaFileUpload}"   mode="advanced" dragDropSupport="true"
+        sizeLimit="100000" fileLimit="10" />
+        <br/> 
+        <p:outputLabel value="Set FW:"  />
+       <p:fileUpload fileUploadListener="#{fileUploadFWView.handleFileUpload}"   mode="advanced" dragDropSupport="true"
+        sizeLimit="100000000" fileLimit="10" />
+    <br/> 
+    
+    
+     <p:inputTextarea  value="#{fileUploadFWView.firma}" rows="6" cols="330"   />
+    <!--
+        <p:fileUpload id="photo2" value="#{fileUploadView.file}" mode="auto" skinSimple="true"
+                        accept="image/*" capture="camera" required="true" requiredMessage="Choose a photo"/>allowTypes="/(\.|\/)(xml)$/"
+                        
+                           <p:outputLabel value="Set signature:"  />
+       
+		-->
+		
+   
+   
+</h:form>
+        
+        </h:panelGrid>
+        </p:panel>
+    
+    <p:commandButton icon="fa fa-send-o" style="font-size:15px;" value="Invia" type="submit"  update="out"   actionListener="#{fileUploadFWView.send}" />
+    
+     <p:outputPanel deferred="true">
+       <h:outputText id="out" value="#{fileUploadFWView.resp}" style="font-size:10px;" />
+     </p:outputPanel>
+    
+    
+    
+    </h:form>
+
+</h:body>
+</ui:define>
+
+</ui:composition>
