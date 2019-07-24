@@ -31,7 +31,7 @@
         <p:fileUpload fileUploadListener="#{fileUploadFWView.handleCertificateFileUpload}"   mode="advanced" dragDropSupport="true"
         sizeLimit="100000" fileLimit="10" />
         <br/> 
-      <p:outputLabel value="Set firma:" />
+      <p:outputLabel value="Set Signature:" />
         <p:fileUpload fileUploadListener="#{fileUploadFWView.handleFirmaFileUpload}"   mode="advanced" dragDropSupport="true"
         sizeLimit="100000" fileLimit="10" />
         <br/> 
@@ -39,9 +39,8 @@
        <p:fileUpload fileUploadListener="#{fileUploadFWView.handleFileUpload}"   mode="advanced" dragDropSupport="true"
         sizeLimit="100000000" fileLimit="10" />
     <br/> 
-    
-    
-     <p:inputTextarea  value="#{fileUploadFWView.firma}" rows="6" cols="330"   />
+      <p:outputLabel value="Set Signature Base64:" /> <br/>
+     <p:inputTextarea  value="#{fileUploadFWView.firma}" rows="6" cols="50"   />
     <!--
         <p:fileUpload id="photo2" value="#{fileUploadView.file}" mode="auto" skinSimple="true"
                         accept="image/*" capture="camera" required="true" requiredMessage="Choose a photo"/>allowTypes="/(\.|\/)(xml)$/"
@@ -60,7 +59,7 @@
     <p:commandButton icon="fa fa-send-o" style="font-size:15px;" value="Invia" type="submit"  update="out"   actionListener="#{fileUploadFWView.send}" />
     
      <p:outputPanel deferred="true">
-       <h:outputText id="out" value="#{fileUploadFWView.resp}" style="font-size:10px;" />
+       <h:outputText id="out" value="#{fileUploadFWView.resp}" style="font-size:20px;" />
      </p:outputPanel>
     
     
