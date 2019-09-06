@@ -111,7 +111,18 @@ public class SendRest {
 		return response;
 	}
 
+  public Response SendPut(String URL, String path, InputStream f) {
 
+                Client client =  ignoreSSLClient();
+                WebTarget target = client.target(URL).path(path);
+
+                Entity<InputStream> entity = Entity.entity(f,MediaType.APPLICATION_XML);
+
+                Response response =  target.request().put(entity);
+
+
+                return response;
+        }
 
 
 }
