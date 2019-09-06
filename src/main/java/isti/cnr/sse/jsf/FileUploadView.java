@@ -89,7 +89,12 @@ public class FileUploadView {
 	public void send(ActionEvent actionEvent) throws IOException {
 		addMessage("send"+url);
 		SendRest r = new SendRest();
-		Response response  = r.SendPost(url, path,  file.getInputstream());
+		Response response = null;
+		if(path.contains("corrispettivi")){
+		response  = r.SendPost(url, path,  file.getInputstream());
+		}else{
+		response  = r.SendPut(url, path,  file.getInputstream());
+		}
 		response.getHeaders();
 		String re = response.readEntity(String.class);
 		if(re.isEmpty()) {
