@@ -45,7 +45,7 @@ public class APIEventImpl {
 
 	
 	@Path("/")
-	@POST
+	@PUT
 	public String putEventMisuratoriFiscale2(String event, @Context HttpServletRequest request, @Context HttpServletResponse response)
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		// @Context HttpServletRequest request){
