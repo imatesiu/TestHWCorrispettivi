@@ -31,6 +31,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.security.auth.x500.X500Principal;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -44,6 +45,8 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.io.IOUtils;
+import org.bouncycastle.asn1.x500.style.BCStyle;
+import org.bouncycastle.asn1.x500.style.IETFUtils;
 import org.glassfish.grizzly.utils.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -253,6 +256,12 @@ public class Utility {
 				if(common_name.length()==14) {
 					matricola = common_name.substring(3, 14);
 				}
+				X500Principal principals = cert.getSubjectX500Principal();
+
+			    X500Name x500name = new X500Name( principals.getName() );
+			    
+				 String org = IETFUtils.valueToString(x500name.getRDNs(BCStyle.O)[0].getFirst().getValue());
+		            log.info("ORG  : " + org);
 
 			} catch (Exception e) {
 				System.err.println("Signature VUOTA interrompere prova");
