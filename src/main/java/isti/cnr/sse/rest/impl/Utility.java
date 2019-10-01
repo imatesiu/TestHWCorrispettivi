@@ -248,8 +248,11 @@ public class Utility {
 				}
 
 				Principal principal = cert.getSubjectDN();
-				String name = principal.getName();
-				matricola = name.substring(3, 14);
+				String common_name = principal.getName();
+				matricola = common_name;
+				if(common_name.length()==14) {
+					matricola = common_name.substring(3, 14);
+				}
 
 			} catch (Exception e) {
 				System.err.println("Signature VUOTA interrompere prova");

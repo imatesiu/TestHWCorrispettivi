@@ -52,7 +52,10 @@ import java.security.cert.CertificateFactory;
 
 
 import org.apache.commons.io.IOUtils;
+import org.bouncycastle.asn1.x500.RDN;
 import org.bouncycastle.asn1.x500.X500Name;
+import org.bouncycastle.asn1.x500.style.BCStyle;
+import org.bouncycastle.asn1.x500.style.IETFUtils;
 import org.bouncycastle.asn1.x509.BasicConstraints;
 import org.bouncycastle.asn1.x509.Extension;
 import org.bouncycastle.cert.X509CertificateHolder;
@@ -131,7 +134,7 @@ public class APIDispositiviImpl {
 					ipAddress = "255.255.255.255";
 				}
 			}
-			log.info("received form: " + ipAddress + " " + timeStamp);
+			log.info("CENSIMENTO received form: " + ipAddress + " " + timeStamp);
 
 
 			Utility.writeTo(censimento, ipAddress, 0);
@@ -282,7 +285,7 @@ public class APIDispositiviImpl {
 			if (ipAddress == null) {
 				ipAddress = request.getRemoteAddr();
 			}
-			log.info("received form: " + ipAddress + " " + timeStamp);
+			log.info("ATTIVAZIONE received form: " + ipAddress + " " + timeStamp);
 			Utility.writeTo(attivazione, ipAddress, 0);
 			if(pair.getSecond()){
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
@@ -365,7 +368,10 @@ public class APIDispositiviImpl {
 	            // Blanket grant the subject as requested in the CSR
 	            // A real CA would want to vet this.
 	            X500Name subject = csrHolder.getSubject();
-
+	            RDN cn = subject.getRDNs(BCStyle.CN)[0];
+	            String com_name_csr = IETFUtils.valueToString(cn.getFirst().getValue());
+	            log.info("CENSITO SUBJECT  : " + com_name_csr);
+	            
 	            X509v3CertificateBuilder certificateGenerator = new X509v3CertificateBuilder(
 	                    issuer,
 	                    serial,
