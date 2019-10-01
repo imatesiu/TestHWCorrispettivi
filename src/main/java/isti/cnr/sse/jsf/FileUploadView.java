@@ -27,10 +27,19 @@ public class FileUploadView {
     
     private String url;
     private String path;
+    private boolean value1;  
 
  
     
-    public String getResp() {
+    public boolean isValue1() {
+		return value1;
+	}
+
+	public void setValue1(boolean value1) {
+		this.value1 = value1;
+	}
+
+	public String getResp() {
 		return resp;
 	}
 
@@ -91,9 +100,12 @@ public class FileUploadView {
 		SendRest r = new SendRest();
 		Response response = null;
 		if(path.contains("corrispettivi")){
-		response  = r.SendPost(url, path,  file.getInputstream());
+			response  = r.SendPost(url, path,  file.getInputstream());
 		}else{
-		response  = r.SendPut(url, path,  file.getInputstream());
+			if(value1)
+				response  = r.SendPut(url, path,  file.getInputstream());
+			else
+				response  = r.SendPost(url, path,  file.getInputstream());
 		}
 		response.getHeaders();
 		String re = response.readEntity(String.class);
@@ -101,8 +113,8 @@ public class FileUploadView {
 			re = "Status Response: "+ new Integer(response.getStatus()).toString();
 		}
 		setResp(re);
-		
-    }
+
+	}
 	
 	public void addMessage(String summary) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);

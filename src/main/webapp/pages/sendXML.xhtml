@@ -35,6 +35,8 @@
             <f:selectItem itemLabel="CNR" itemValue="https://localhost" />
         </p:selectOneMenu> 
         
+        
+        
         <p:outputLabel value="Set Path:" for="consolep" />
         <p:selectOneMenu id="consolep" value="#{fileUploadView.path}" style="width:125px">
             <f:selectItem itemLabel="corrispettivi" itemValue="/v1/dispositivi/corrispettivi/" />
@@ -42,6 +44,9 @@
             <f:selectItem itemLabel="eventi" itemValue="/v1/dispositivi/evento/" />
             <f:selectItem itemLabel="documenticommerciali" itemValue="/v1/dispositivi/documenticommerciali/" />
         </p:selectOneMenu> 
+        
+                <p:selectBooleanCheckbox value="#{fileUploadView.value1}" itemLabel="Attivazione"/>
+        
         
          <h:form enctype="multipart/form-data">
        <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}"   mode="advanced" dragDropSupport="true"
