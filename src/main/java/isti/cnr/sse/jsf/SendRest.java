@@ -110,6 +110,19 @@ public class SendRest {
 		
 		return response;
 	}
+	
+	public Response SendPost(String URL, String path, String f) {
+		
+		Client client =  ignoreSSLClient();
+		WebTarget target = client.target(URL).path(path);
+
+		Entity<String> entity = Entity.entity(f,MediaType.APPLICATION_XML);
+
+		Response response =  target.request().post(entity);
+		
+		
+		return response;
+	}
 
   public Response SendPut(String URL, String path, InputStream f) {
 
@@ -123,6 +136,19 @@ public class SendRest {
 
                 return response;
         }
+  
+  public Response SendPut(String URL, String path, String f) {
+
+      Client client =  ignoreSSLClient();
+      WebTarget target = client.target(URL).path(path);
+
+      Entity<String> entity = Entity.entity(f,MediaType.APPLICATION_XML);
+
+      Response response =  target.request().put(entity);
+
+
+      return response;
+}
 
 
 }

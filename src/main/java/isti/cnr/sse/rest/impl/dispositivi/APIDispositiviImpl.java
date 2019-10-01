@@ -79,6 +79,7 @@ import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoRichiestaCertificatoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.RichiestaCertificatoDispositivoType;
+import isti.cnr.sse.jsf.SendRest;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
 import isti.cnr.sse.rest.impl.ErrorHttp;
 import isti.cnr.sse.rest.impl.Utility;
@@ -99,28 +100,27 @@ public class APIDispositiviImpl {
 	private static ErrorHttp flag = ErrorHttp.Null;
 
 	
-	private Response sendAdE_c(String stringa, String ipAddress, int i) {
+	private String sendAdE_c(String stringa, String ipAddress, int i) {
 		try {
 
 			Client client = ClientBuilder.newClient();
-			String url = "https://v-apid-ivaservizi.agenziaentrate.gov.it/v1/dispositivi/";
-			String contenttype = "application/xml";
-			Entity<String> entity = Entity.entity(stringa, MediaType.APPLICATION_XML);
-			Builder builder = client.target(url).request().header("Content-Type", contenttype);
+			String url = "https://v-apid-ivaservizi.agenziaentrate.gov.it";
+			SendRest r = new SendRest();
+			
 			Response response = null;
 			if(i<1) {
-				 response = builder.post(entity);
+				response  = r.SendPost(url, "/v1/dispositivi/",  stringa);
 
 			}else {
-				 response = builder.put(entity);
-
+				response  = r.SendPut(url, "/v1/dispositivi/",  stringa);
+				
 			}
 			
 
 
 			String responseAsString = response.readEntity(String.class);
-			Utility.writeTo(responseAsString, "ADE_"+ipAddress+"_ADE", 0);
-			return response;
+			Utility.writeTo(responseAsString, "Resp_"+ipAddress+"_ADE", 0);
+			return responseAsString;
 			/*response.setStatus(response.SC_MOVED_TEMPORARILY);
 			response.setHeader("Location", url);
 			response.sendRedirect(url);*/
@@ -187,15 +187,22 @@ public class APIDispositiviImpl {
 
 		
 			Utility.writeTo(censimento, ipAddress, 0);
-			sendAdE_c(censimento, ipAddress,0);
-			
+			String responseAsString = sendAdE_c(censimento, ipAddress,0);
 			X509Certificate cert = createCertificate(CensimentoDispositivo.getCsr());
-			
-			String pem = convertToPem(cert);
+
+			if(responseAsString!=null) {
+				if(responseAsString.length()>0) {
+					log.info("CENSIMENTO PRESSO ADE");
+					return Response.status(201).entity(responseAsString).build();
+				}
+			}
+			String pem = "";
+			if(cert!=null)
+				 pem = convertToPem(cert);
 			
 			
 
-			if(true){
+			if(cert!=null && pem.length()>0){
 				EsitoRichiestaCertificatoDispositivoType esito = new EsitoRichiestaCertificatoDispositivoType();
 				int x = (int) Math.random() * 10;
 				esito.setIdOperazione(String.valueOf(x));
@@ -340,7 +347,15 @@ public class APIDispositiviImpl {
 			
 			Utility.writeTo(attivazione, ipAddress, 0);
 			
-			sendAdE_c(attivazione, ipAddress,1);
+			String responseAsString = sendAdE_c(attivazione, ipAddress,1);
+			
+			
+			if(responseAsString!=null) {
+				if(!responseAsString.contains("00100") && responseAsString.length()>0) {
+					log.info("ATTIVAZIONE PRESSO ADE");
+					return responseAsString;
+				}
+			}
 			
 			if(pair.getSecond()){
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
@@ -424,9 +439,11 @@ public class APIDispositiviImpl {
 	            // A real CA would want to vet this.
 	            X500Name subject = csrHolder.getSubject();
 	            RDN cn = subject.getRDNs(BCStyle.CN)[0];
+
 	            String com_name_csr = IETFUtils.valueToString(cn.getFirst().getValue());
 	            log.info("CENSITO SUBJECT  : " + com_name_csr);
-	            
+
+
 	            String org = IETFUtils.valueToString(subject.getRDNs(BCStyle.O)[0].getFirst().getValue());
 	            log.info("CENSITO ORG  : " + org);
 	            
@@ -458,13 +475,13 @@ public class APIDispositiviImpl {
 	                NoSuchAlgorithmException |
 	                NoSuchProviderException |
 	                IOException e) {
-	            throw new RuntimeException(e);
+	            
 	        }
 	        
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return null; 
 
