@@ -263,8 +263,10 @@ public class Utility {
 			    
 				 String org = IETFUtils.valueToString(x500name.getRDNs(BCStyle.O)[0].getFirst().getValue());
 				 String cn = IETFUtils.valueToString(x500name.getRDNs(BCStyle.CN)[0].getFirst().getValue());
-		            log.info("ORG  : " + org);
-		            matricola = cn;
+				 matricola = cn;
+				 if(!org.contains("Agenzia"))
+					 log.info("ORG  : " + org);
+		         
 
 			} catch (Exception e) {
 				System.err.println("Signature VUOTA interrompere prova");
