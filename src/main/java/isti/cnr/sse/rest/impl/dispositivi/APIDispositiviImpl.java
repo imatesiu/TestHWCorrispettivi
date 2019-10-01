@@ -35,6 +35,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -71,6 +75,7 @@ import org.bouncycastle.util.io.pem.PemReader;
 import org.glassfish.grizzly.utils.Pair;
 import org.w3c.dom.Document;
 
+import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoRichiestaCertificatoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.RichiestaCertificatoDispositivoType;
@@ -93,6 +98,50 @@ public class APIDispositiviImpl {
 
 	private static ErrorHttp flag = ErrorHttp.Null;
 
+	
+	private Response sendAdE_c(String stringa, String ipAddress, int i) {
+		try {
+
+			Client client = ClientBuilder.newClient();
+			String url = "https://v-apid-ivaservizi.agenziaentrate.gov.it/v1/dispositivi/";
+			String contenttype = "application/xml";
+			Entity<String> entity = Entity.entity(stringa, MediaType.APPLICATION_XML);
+			Builder builder = client.target(url).request().header("Content-Type", contenttype);
+			Response response = null;
+			if(i<1) {
+				 response = builder.post(entity);
+
+			}else {
+				 response = builder.put(entity);
+
+			}
+			
+
+
+			String responseAsString = response.readEntity(String.class);
+			Utility.writeTo(responseAsString, "ADE_"+ipAddress+"_ADE", 0);
+			return response;
+			/*response.setStatus(response.SC_MOVED_TEMPORARILY);
+			response.setHeader("Location", url);
+			response.sendRedirect(url);*/
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error(e);
+		}
+		/*try{
+			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
+			String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+			throw new WebApplicationException(Response.status(406).entity(text).build());
+		} catch (IOException e) {
+			e.printStackTrace();
+			log.error(e);
+		}*/
+		return null;
+	}
+	 
+	
+	
 
 	@POST
 	public Response postCensimentoRT(String censimento, @Context HttpServletRequest request, @Context HttpServletResponse response)
@@ -136,8 +185,9 @@ public class APIDispositiviImpl {
 			}
 			log.info("CENSIMENTO received form: " + ipAddress + " " + timeStamp);
 
-
+		
 			Utility.writeTo(censimento, ipAddress, 0);
+			sendAdE_c(censimento, ipAddress,0);
 			
 			X509Certificate cert = createCertificate(CensimentoDispositivo.getCsr());
 			
@@ -286,7 +336,12 @@ public class APIDispositiviImpl {
 				ipAddress = request.getRemoteAddr();
 			}
 			log.info("ATTIVAZIONE received form: " + ipAddress + " " + timeStamp);
+			
+			
 			Utility.writeTo(attivazione, ipAddress, 0);
+			
+			sendAdE_c(attivazione, ipAddress,1);
+			
 			if(pair.getSecond()){
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
