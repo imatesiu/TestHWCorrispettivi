@@ -4,15 +4,12 @@ package isti.cnr.sse.jsf;
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.StatusType;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;

@@ -58,7 +58,6 @@ import cnr.isti.sse.data.corrispettivi.IVAType;
 
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
 
-import cnr.isti.sse.data.corrispettivi.messaggi.CensimentoDispositivoType;
 
 import cnr.isti.sse.data.corrispettivi.messaggi.EventoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.signature.SignatureType;
