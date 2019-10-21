@@ -146,11 +146,7 @@
 			<scope>test</scope>
 		</dependency>
 	
-<dependency>
-    <groupId>org.bouncycastle</groupId>
-    <artifactId>bcprov-jdk15</artifactId>
-    <version>1.46</version>
-</dependency>
+
 				<!-- JSF -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -184,12 +180,12 @@
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk15on</artifactId>
-			<version>1.50</version>
+			<version>1.60</version>
 		</dependency>
 		<dependency>
     <groupId>org.bouncycastle</groupId>
     <artifactId>bcpkix-jdk15on</artifactId>
-    <version>1.50</version>
+    <version>1.60</version>
 </dependency>
 
 	</dependencies>
