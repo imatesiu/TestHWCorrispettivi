@@ -119,6 +119,12 @@ public class APIDispositiviImpl {
 
 
 			String responseAsString = response.readEntity(String.class);
+			if(responseAsString==null) {
+					responseAsString = String.valueOf(response.getStatus());
+			}
+			if(responseAsString.length()==0) {
+				responseAsString = String.valueOf(response.getStatus());
+			}
 			Utility.writeTo(responseAsString, "Resp_"+ipAddress+"_ADE", 0);
 			return responseAsString;
 			/*response.setStatus(response.SC_MOVED_TEMPORARILY);
