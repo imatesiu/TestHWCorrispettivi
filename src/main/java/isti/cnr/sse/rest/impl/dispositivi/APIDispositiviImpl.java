@@ -100,9 +100,9 @@ public class APIDispositiviImpl {
 	private static ErrorHttp flag = ErrorHttp.Null;
 
 	
-	private String sendAdE_c(String stringa, String ipAddress, int i) {
+	private Pair<String,Integer> sendAdE_c(String stringa, String ipAddress, int i) {
 		try {
-
+			Integer Status = new Integer(200);
 			Client client = ClientBuilder.newClient();
 			String url = "https://v-apid-ivaservizi.agenziaentrate.gov.it";
 			SendRest r = new SendRest();
@@ -116,17 +116,18 @@ public class APIDispositiviImpl {
 				
 			}
 			
-
+			Status = response.getStatus();
 
 			String responseAsString = response.readEntity(String.class);
 			if(responseAsString==null) {
 					responseAsString = String.valueOf(response.getStatus());
+					
 			}
 			if(responseAsString.length()==0) {
 				responseAsString = String.valueOf(response.getStatus());
 			}
 			Utility.writeTo(responseAsString, "Resp_"+ipAddress+"_ADE", 0);
-			return responseAsString;
+			return new Pair<String, Integer>(responseAsString,Status);
 			/*response.setStatus(response.SC_MOVED_TEMPORARILY);
 			response.setHeader("Location", url);
 			response.sendRedirect(url);*/
@@ -193,10 +194,14 @@ public class APIDispositiviImpl {
 
 		
 			Utility.writeTo(censimento, ipAddress, 0);
-			String responseAsString = sendAdE_c(censimento, ipAddress,0);
+			Pair<String, Integer> res = sendAdE_c(censimento, ipAddress,0);
+			String responseAsString = res.getFirst();
+			Integer status = res.getSecond();
 			X509Certificate cert = createCertificate(CensimentoDispositivo.getCsr());
 
-			if(responseAsString!=null) {
+			log.info("CENSIMENTO PRESSO ADE");
+			return Response.status(status).entity(responseAsString).build();
+		/*	if(status == 200 || status == 201) {
 				if(responseAsString.length()>0) {
 					log.info("CENSIMENTO PRESSO ADE");
 					return Response.status(201).entity(responseAsString).build();
@@ -235,9 +240,9 @@ public class APIDispositiviImpl {
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
 				throw new WebApplicationException(Response.status(406).entity(text).build());
 			}
+*/
 
-
-		} catch (IOException  | JAXBException | ParserConfigurationException e) {
+		} catch (/*IOException |JAXBException | ParserConfigurationException*/ JAXBException  e) {
 			e.printStackTrace();
 			log.error(e);
 		}
@@ -353,14 +358,19 @@ public class APIDispositiviImpl {
 			
 			Utility.writeTo(attivazione, ipAddress, 0);
 			
-			String responseAsString = sendAdE_c(attivazione, ipAddress,1);
+			Pair<String, Integer> res = sendAdE_c(attivazione, ipAddress,1);
 			
+			String responseAsString = res.getFirst();
 			
-			if(responseAsString!=null) {
+			Integer status = res.getSecond();
+			
+			if(status==200 || status == 201) {
 				if(!responseAsString.contains("00100") && responseAsString.length()>0) {
 					log.info("ATTIVAZIONE PRESSO ADE");
 					return responseAsString;
 				}
+			}else {
+				throw new WebApplicationException(Response.status(status).entity(responseAsString).build());
 			}
 			
 			if(pair.getSecond()){
