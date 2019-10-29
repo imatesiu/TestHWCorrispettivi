@@ -69,7 +69,7 @@ public class SendRest {
 	public Response sendGet(String path, String... args){
 		Client client = ignoreSSLClient();
 		Config config = new Config();
-		String url = "https://"+config.getUrl()+":"+config.getServerPortSecure();
+		String url = "https://"+config.getUrl()+":"+config.getSecureport();
 		WebTarget target = null;
 		if(args!=null){
 			 target = client.target(url).path("/v1/dispositivi/corrispettivi/"+path).queryParam(args[0], args[1]).queryParam(args[2], args[3]).queryParam(args[4], args[5]);
