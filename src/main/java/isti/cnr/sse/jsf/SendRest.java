@@ -68,11 +68,13 @@ public class SendRest {
 
 	public Response sendGet(String path, String... args){
 		Client client = ignoreSSLClient();
+		Config config = new Config();
+		String url = "https://"+config.getUrl()+":"+config.getServerPortSecure();
 		WebTarget target = null;
 		if(args!=null){
-			 target = client.target("https://127.0.0.1").path("/v1/dispositivi/corrispettivi/"+path).queryParam(args[0], args[1]).queryParam(args[2], args[3]).queryParam(args[4], args[5]);
+			 target = client.target(url).path("/v1/dispositivi/corrispettivi/"+path).queryParam(args[0], args[1]).queryParam(args[2], args[3]).queryParam(args[4], args[5]);
 		}else{
-			 target = client.target("https://127.0.0.1").path("/v1/dispositivi/corrispettivi/"+path);
+			 target = client.target(url).path("/v1/dispositivi/corrispettivi/"+path);
 		}
 			
 		Response allID =  target.request(MediaType.APPLICATION_XML).get();
@@ -81,7 +83,7 @@ public class SendRest {
 	}
 
 
-	public String post(String content, String path){
+	/*public String post(String content, String path){
 
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost").path("/v1/corrispettivi/"+path);
@@ -96,7 +98,7 @@ public class SendRest {
 		//FacesContext context = FacesContext.getCurrentInstance();
 		//context.getExternalContext().getRequestMap().put("rest", id);
 
-	}
+	}*/
 	
 	public Response SendPost(String URL, String path, InputStream f) {
 		
