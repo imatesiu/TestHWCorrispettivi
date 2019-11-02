@@ -13,13 +13,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import javax.net.ssl.X509TrustManager;
-
-
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -39,12 +37,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 
+import cnr.isti.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
+import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.DocCommercialiLotteriaEsitoType;
+import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.EsitoType;
+import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.ErroriType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
-import cnr.isti.sse.data.corrispettivi.messaggi.EsitoRichiestaCertificatoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EventoDispositivoType;
-import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 
 public class CreateError {
 	
@@ -65,21 +65,17 @@ String url = "dispositivi/corrispettivi/";
 				"            <IdDispositivo>BBBB0002</IdDispositivo>\n" + 
 				"        </Dispositivo>\n" + 
 				"    </Trasmissione>\n" + 
-				" <PeriodoInattivo>\n" + 
-				"    <Dal>2018-03-03T15:56:00</Dal>\n" + 
-				"    <Al>2018-03-08T15:59:00</Al>\n" + 
-				"  </PeriodoInattivo>"+
-				"    <DataOraRilevazione>2017-10-23T08:47:43</DataOraRilevazione>\n" + 
+				"    <DataOraRilevazione>2018-10-23T08:47:43</DataOraRilevazione>\n" + 
 				"    <DatiRT>\n" + 
 				"        <Riepilogo>\n" + 
 				"            <Natura>N4</Natura>\n" + 
-				"            <Ammontare>0.00</Ammontare>\n" + 
-				"            <TotaleAmmontareResi>0.00</TotaleAmmontareResi>\n" + 
-				"            <TotaleAmmontareAnnulli>0.00</TotaleAmmontareAnnulli>\n" + 
+				"            <Ammontare>100.00</Ammontare>\n" + 
+				"            <TotaleAmmontareResi>10.00</TotaleAmmontareResi>\n" + 
+				"            <TotaleAmmontareAnnulli>10.00</TotaleAmmontareAnnulli>\n" + 
 				"        </Riepilogo>\n" + 
 				"    </DatiRT>\n" + 
 				"<Segnalazione><Matricola>0001ab01</Matricola><DataOra>2017-11-06T10:17:26</DataOra>"
-				+ "<Codice>02</Codice><Note>errore quadratura contatori</Note></Segnalazione>"+
+				+ "<Codice>06</Codice><Note>errore quadratura contatori</Note></Segnalazione>"+
 				"<InterventoTecnico><CFTecnico>SCNDNL89D06E253J</CFTecnico>\n" + 
 				"<IdIVALaboratorio><IdPaese>IT</IdPaese><IdCodice>02566448514</IdCodice>\n" + 
 				"</IdIVALaboratorio><DataOra>2017-11-10T12:43:26</DataOra><Codice>06</Codice>\n" + 
@@ -102,8 +98,8 @@ String url = "dispositivi/corrispettivi/";
 	        marshaller.marshal(AttivaDispositivo, dosigndocument);
 	        
 
-			String result = SignReply.Sign(dosigndocument, "dispositivo");
-			
+			String result = SignReply.Sign(dosigndocument, "sogei");
+			String invio = result.substring(0, 1694)+result.substring(result.length()-79, result.length());
 			String EsitoOperazione = this.post(result, url);
 			
 			jaxbContext = JAXBContext.newInstance(EsitoOperazioneType.class);
@@ -133,6 +129,8 @@ String url = "dispositivi/corrispettivi/";
 			bw.write(EsitoOperazione);
 			bw.close();
 		
+			
+			System.out.println();
 		} catch (JAXBException | ParserConfigurationException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -144,7 +142,7 @@ String url = "dispositivi/corrispettivi/";
 		String url = "dispositivi/evento/";
 				
 				String evento = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><r:EventoDispositivo xmlns:r=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\" versione=\"1.0\">\n" + 
-						"<Evento>DISATTIVAZIONE</Evento><DataOra>2017-09-26T12:00:54</DataOra><Dettaglio><Codice>00603</Codice></Dettaglio>\n" + 
+						"<Evento>DISMISSIONE</Evento><DataOra>2017-09-26T12:00:54</DataOra><Dettaglio><Codice>00606</Codice></Dettaglio>\n" + 
 						"</r:EventoDispositivo>";		 
 				try {
 					JAXBContext jaxbContext = JAXBContext.newInstance(EventoDispositivoType.class);
@@ -163,7 +161,7 @@ String url = "dispositivi/corrispettivi/";
 			        marshaller.marshal(EventoDispositivo, dosigndocument);
 			        
 
-					String result = SignReply.Sign(dosigndocument, "dispositivo");
+					String result = SignReply.Sign(dosigndocument, "sogei");
 					
 					String EsitoOperazione = this.put(result, url);
 					
@@ -282,7 +280,85 @@ String url = "dispositivi/corrispettivi/";
 		
 	}
 	
+	public void Lotteria() {
+		String url = "dispositivi/lotteria/corrispettivi/";
+		
+		String lotteria = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + 
+				"<r:DocCommercialiLotteria xmlns:r=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/v1.0\" versione=\"1.0\">" + 
+				"<DatiTrasmissione>" + 
+				"<Formato>DCL10</Formato>" + 
+				"<Denominazione>str111</Denominazione>" + 
+				"</DatiTrasmissione>" + 
+				"<DocumentoCommerciale>" + 
+				"<IdCliente>str1234</IdCliente>" + 
+				"<DataOra>2019-11-01T12:12:12</DataOra>" + 
+				"<NumeroProgressivo>0001-0001</NumeroProgressivo>" + 
+				"<Ammontare>123</Ammontare>" + 
+				"<Vendita>" + 
+				"<DatiPagamento>" + 
+				"<Tipo>PE</Tipo>" + 
+				"<Importo>123</Importo>" + 
+				"</DatiPagamento>" + 
+				"</Vendita>" + 
+				"</DocumentoCommerciale>" + 
+				"</r:DocCommercialiLotteria>";
+		
+		try {
+		JAXBContext jaxbContext = JAXBContext.newInstance(DocCommercialiLotteriaType.class);
+		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		StringReader reader = new StringReader(lotteria);
+		DocCommercialiLotteriaType CommercialiLotteria = (DocCommercialiLotteriaType) unmarshaller.unmarshal(reader);
+
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        Document dosigndocument = db.newDocument();
+        
+        // Marshal the Object to a Document
+        JAXBContext jc = JAXBContext.newInstance(DocCommercialiLotteriaType.class);
+        Marshaller marshaller = jc.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        marshaller.marshal(CommercialiLotteria, dosigndocument);
+        
+
+		String result = SignReply.Sign(dosigndocument, "sogei");
+		System.out.println(result);
+		String EsitoOperazione = this.post(result, url);
+		
+		jaxbContext = JAXBContext.newInstance(DocCommercialiLotteriaEsitoType.class);
+		unmarshaller = jaxbContext.createUnmarshaller();
+		reader = new StringReader(EsitoOperazione);
+		
+		DocCommercialiLotteriaEsitoType TEsitoOperazione = (DocCommercialiLotteriaEsitoType) unmarshaller.unmarshal(reader);
+		
+		System.out.println(EsitoOperazione);
+		
+		File theDir = new File("received_error_response2");
+
+		// if the directory does not exist, create it
+		if (!theDir.exists()) {
+			theDir.mkdir();
+		}
+		EsitoType error = TEsitoOperazione.getEsito();
+		String FILENAME = "";
+		if(error!=null) 
+			FILENAME = "received_error_response2/RT_corrispettivi_Error"+error+".xml";
+		else
+			 FILENAME = "received_error_response2/RT_corrispettivi_noError.xml";
+
+		BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME));
+		
+
+		bw.write(EsitoOperazione);
+		bw.close();
 	
+		
+		System.out.println();
+		
+		}catch (JAXBException | ParserConfigurationException | IOException  e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public static Client ignoreSSLClient()  {
 		try{
 			SSLContext sslcontext = SSLContext.getInstance("TLS");

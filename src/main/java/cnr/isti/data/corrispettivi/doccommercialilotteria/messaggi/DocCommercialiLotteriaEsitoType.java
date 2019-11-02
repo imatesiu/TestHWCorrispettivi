@@ -56,7 +56,8 @@ import cnr.isti.sse.data.corrispettivi.messaggi.signature.SignatureType;
     "numElementi",
     "esito",
     "listaErrori",
-    "segnalazioniDocComm"
+    "segnalazioniDocComm",
+    "signature"
 })
 public class DocCommercialiLotteriaEsitoType {
 

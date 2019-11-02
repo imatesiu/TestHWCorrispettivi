@@ -47,7 +47,8 @@ import cnr.isti.sse.data.corrispettivi.messaggi.signature.SignatureType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DocCommercialiLotteriaType", propOrder = {
     "datiTrasmissione",
-    "documentoCommerciale"
+    "documentoCommerciale",
+    "signature"
 })
 public class DocCommercialiLotteriaType {
 
