@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+	xmlns="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/esito/v1.0"
+	targetNamespace="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/esito/v1.0"
+	version="1.0">
+    <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd" />
+	
+	<!-- =================================================================== -->
+	<!--  ESITO DOCUMENTI COMMERCIALI LOTTERIA                					 -->
+	<!-- =================================================================== -->
+	
+	<xs:element name="DocCommercialiLotteriaEsito" type="DocCommercialiLotteriaEsitoType">
+		<xs:annotation>
+			<xs:documentation>Elemento di esito per la trasmissione di un documento commerciale valido per la lotteria</xs:documentation>
+		</xs:annotation>
+	</xs:element>   
+
+	<xs:complexType name="DocCommercialiLotteriaEsitoType">
+		<xs:sequence>
+			<xs:element name="IdOperazione"			   type="xs:string"								/>
+			<xs:element name="DataOra"				   type="xs:dateTime"							/>
+			<xs:element name="NumElementi"			   type="xs:integer"							/>
+			<xs:element name="Esito"			   	   type="EsitoType" 							/>
+			<xs:choice minOccurs="0">
+				<xs:element name="ListaErrori" 		   type="ErroriType"			  />
+				<xs:element name="SegnalazioniDocComm" type="SegnalazioniDocCommType" />
+			</xs:choice>
+			<xs:element ref="ds:Signature" />
+		</xs:sequence>
+		<xs:attribute name="versione" type="VersioneType" use="required" fixed="1.0"/>	
+	</xs:complexType>
+	<xs:complexType name="ErroriType">
+		<xs:sequence>
+			<xs:element name="Errore" type="ErroreType" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErroreType">
+		<xs:sequence>
+			<xs:element name="Codice"      type="CodiceType"         />
+			<xs:element name="Descrizione" type="String500LatinType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SegnalazioniDocCommType">
+		<xs:sequence>
+			<xs:element name="Segnalazione" type="SegnalazioneType" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SegnalazioneType">
+		<xs:sequence>
+			<xs:element name="Posizione" 		 type="xs:integer"		/>
+			<xs:element name="NumeroProgressivo" type="ProgressivoType" />
+			<xs:element name="DataOra" 			 type="xs:dateTime" 	/>
+			<xs:element name="Errori"			 type="ErroriType" 		/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ProgressivoType">
+		<xs:restriction base="xs:normalizedString">
+			<xs:pattern value="[0-9]{4}\-[0-9]{4}" />
+		</xs:restriction>
+	</xs:simpleType>	
+	<xs:simpleType name="CodiceType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="5" />
+			<xs:maxLength value="5" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String500LatinType">
+		<xs:restriction base="xs:normalizedString">
+			<xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}]{1,500}" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EsitoType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2" />
+			<xs:enumeration value="SC">
+				<xs:annotation>
+					<xs:documentation>Fornitura interamente scartata</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SE">
+				<xs:annotation>
+					<xs:documentation>Fornituta accolta con segnalazione su almeno un documento commerciale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AC">
+				<xs:annotation>
+					<xs:documentation>Fornituta acquisita correttamente</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>			
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VersioneType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

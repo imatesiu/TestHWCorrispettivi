@@ -52,6 +52,7 @@ import org.glassfish.grizzly.utils.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+import cnr.isti.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.DatiRegistratoriTelematiciType;
 import cnr.isti.sse.data.corrispettivi.IVAType;
@@ -432,6 +433,12 @@ public class Utility {
 
 
 		return text;
+	}
+
+
+	public static Pair<String, Boolean> getMatricola(DocCommercialiLotteriaType docLotteria, String event) {
+		SignatureType signa = docLotteria.getSignature();
+		return getMatricola(signa, event);
 	}
 
 

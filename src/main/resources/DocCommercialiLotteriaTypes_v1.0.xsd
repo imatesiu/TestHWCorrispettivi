@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+	xmlns="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/v1.0"
+	targetNamespace="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/v1.0"
+	version="1.0">
+    <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd" />
+
+	<!-- =================================================================== -->
+	<!--  DOCUMENTI COMMERCIALI LOTTERIA                					 -->
+	<!-- =================================================================== -->
+	
+	<xs:element name="DocCommercialiLotteria" type="DocCommercialiLotteriaType">
+		<xs:annotation>
+			<xs:documentation>Elemento per la trasmissione di documenti commerciali validi per lotteria dei corrispettivi 1.0</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:complexType name="DocCommercialiLotteriaType">
+		<xs:sequence>
+			<xs:element name="DatiTrasmissione"     type="DatiTrasmissioneType" 					/>
+			<xs:element name="DocumentoCommerciale" type="DocumentoCommercialeType" maxOccurs="100" />
+			<xs:element ref="ds:Signature"/>
+		</xs:sequence>
+		<xs:attribute name="simulazione" type="xs:string" fixed="true" />
+		<xs:attribute name="versione" type="VersioneType" use="required" fixed="1.0"/>		
+	</xs:complexType>
+	<xs:complexType name="DatiTrasmissioneType">
+		<xs:sequence>
+			<xs:element name="Formato" 		 type="FormatoType" 			  />
+			<xs:element name="Denominazione" type="String200LatinType" />
+			<xs:element name="IdCassa" 		 type="IdCassaType" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="FormatoType">
+		<xs:restriction base="xs:string">
+			<xs:length value="5" />
+			<xs:enumeration value="DCL10">
+				<xs:annotation>
+					<xs:documentation>Documenti commerciali ai fini della lotteria</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IdCassaType">
+		<xs:restriction base="xs:string">
+			<xs:length value="8" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DocumentoCommercialeType">
+		<xs:sequence>
+			<xs:element name="IdCliente" 		 type="IdClienteType"  />
+			<xs:element name="DataOra"           type="xs:dateTime"        />
+			<xs:element name="NumeroProgressivo" type="ProgressivoType"    />
+			<xs:element name="Ammontare"		 type="Amount2DecimalType" />
+			<xs:choice>
+				<xs:element name="ResoAnnullo" type="ResoAnnulloType" />
+				<xs:element name="Vendita" 	   type="VenditaType" />
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResoAnnulloType">
+		<xs:sequence>
+			<xs:element name="Tipologia"   type="TipologiaResoAnnulloType" />
+			<xs:element name="DataOra"     type="xs:dateTime"              />
+			<xs:element name="Progressivo" type="ProgressivoType"          />
+			<xs:element name="Dispositivo" type="DispositivoType"          />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TipologiaResoAnnulloType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1" />
+			<xs:enumeration value="R">
+				<xs:annotation>
+					<xs:documentation>Reso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A">
+				<xs:annotation>
+					<xs:documentation>Annullo</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="VenditaType">
+		<xs:sequence>
+			<xs:element name="DatiPagamento" type="DatiPagamentoType" maxOccurs="3" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatiPagamentoType">
+		<xs:sequence>
+			<xs:element name="Tipo"    type="TipoPagamentoType"  />
+			<xs:element name="Importo" type="Amount2DecimalType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TipoPagamentoType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2" />
+			<xs:enumeration value="PC">
+				<xs:annotation>
+					<xs:documentation>Pagamento in contanti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PE">
+				<xs:annotation>
+					<xs:documentation>Pagamento con strumenti elettronici</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NR">
+				<xs:annotation>
+					<xs:documentation>Corrispettivi non riscossi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DispositivoType">
+		<xs:sequence>
+			<xs:element name="MatrTrasm" type="MatrTrasmType"               />
+			<xs:element name="MatrCassa" type="MatrCassaType" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="MatrTrasmType">
+		<xs:restriction base="xs:string">
+			<xs:length value="11"></xs:length>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MatrCassaType">
+		<xs:restriction base="xs:string">
+			<xs:length value="8"></xs:length>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProgressivoType">
+		<xs:restriction base="xs:normalizedString">
+			<xs:pattern value="[0-9]{4}\-[0-9]{4}" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IdClienteType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Za-z0-9]{1,16}" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Amount2DecimalType">
+		<xs:restriction base="xs:decimal">
+			<xs:pattern value="[\-]?[0-9]{1,11}\.[0-9]{2}" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String200LatinType">
+		<xs:restriction base="xs:normalizedString">
+			<xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}]{1,200}" />
+		</xs:restriction>
+	</xs:simpleType>	
+	<xs:simpleType name="VersioneType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
