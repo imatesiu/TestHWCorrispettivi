@@ -283,24 +283,32 @@ String url = "dispositivi/corrispettivi/";
 	public void Lotteria() {
 		String url = "dispositivi/lotteria/corrispettivi/";
 		
-		String lotteria = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + 
-				"<r:DocCommercialiLotteria xmlns:r=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/v1.0\" versione=\"1.0\">" + 
-				"<DatiTrasmissione>" + 
-				"<Formato>DCL10</Formato>" + 
-				"<Denominazione>str111</Denominazione>" + 
-				"</DatiTrasmissione>" + 
-				"<DocumentoCommerciale>" + 
-				"<IdCliente>str1234</IdCliente>" + 
-				"<DataOra>2019-11-01T12:12:12</DataOra>" + 
-				"<NumeroProgressivo>0001-0001</NumeroProgressivo>" + 
-				"<Ammontare>123</Ammontare>" + 
-				"<Vendita>" + 
-				"<DatiPagamento>" + 
-				"<Tipo>PE</Tipo>" + 
-				"<Importo>123</Importo>" + 
-				"</DatiPagamento>" + 
-				"</Vendita>" + 
-				"</DocumentoCommerciale>" + 
+		String lotteria = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + 
+				"<r:DocCommercialiLotteria xmlns:r=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/v1.0\" versione=\"1.0\">\n" + 
+				"  <DatiTrasmissione>\n" + 
+				"    <Formato>DCL10</Formato>\n" + 
+				"    <Denominazione>str111</Denominazione>\n" + 
+				"  </DatiTrasmissione>\n" + 
+				"  <DocumentoCommerciale>\n" + 
+				"    <IdCliente>str1234</IdCliente>\n" + 
+				"    <DataOra>2012-12-13T12:12:12</DataOra>\n" + 
+				"    <NumeroProgressivo>str111</NumeroProgressivo>\n" + 
+				"    <Ammontare>15.00</Ammontare>\n" + 
+				"    <Vendita>\n" + 
+				"      <DatiPagamento>\n" + 
+				"        <Tipo>PC</Tipo>\n" + 
+				"        <Importo>5.00</Importo>\n" + 
+				"      </DatiPagamento>\n" + 
+				"      <DatiPagamento>\n" + 
+				"        <Tipo>PE</Tipo>\n" + 
+				"        <Importo>5.00</Importo>\n" + 
+				"      </DatiPagamento>\n" + 
+				"      <DatiPagamento>\n" + 
+				"        <Tipo>NR</Tipo>\n" + 
+				"        <Importo>5.00</Importo>\n" + 
+				"      </DatiPagamento>\n" + 
+				"    </Vendita>\n" + 
+				"  </DocumentoCommerciale>\n" + 
 				"</r:DocCommercialiLotteria>";
 		
 		try {
