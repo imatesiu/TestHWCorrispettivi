@@ -355,18 +355,19 @@ String url = "dispositivi/corrispettivi/";
 		String codice = "";
 		EsitoType error = TEsitoOperazione.getEsito();
 		if(TEsitoOperazione.getListaErrori()!=null) {
-		List<ErroreType> list = TEsitoOperazione.getListaErrori().getErrore();
-		
-		if(list!=null) {
-			 codice = list.get(0).getCodice();
+			List<ErroreType> list = TEsitoOperazione.getListaErrori().getErrore();
 
-		}
+			if(list!=null) {
+				if(!list.isEmpty())
+					codice = list.get(0).getCodice();
+
+			}
 		}
 		String FILENAME = "";
 		if(error!=null) 
 			FILENAME = "received_error_response2/RT_corrispettivi_Error"+error+"."+codice+".xml";
 		else
-			 FILENAME = "received_error_response2/RT_corrispettivi_noError.xml";
+			 FILENAME = "received_error_response2/RT_corrispettiviLotteria_noError.xml";
 
 		BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME));
 		
