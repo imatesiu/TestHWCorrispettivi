@@ -13,7 +13,10 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.NormalizedStringAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -37,12 +40,20 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ErroriType", propOrder = {
-    "errore"
+    "codice",
+    "descrizione"
 })
 public class ErroriType {
 
-    @XmlElement(name = "Errore", required = true)
-    protected List<ErroreType> errore;
+    
+    
+    @XmlElement(name = "Codice", required = true)
+    protected String codice;
+    
+    @XmlElement(name = "Descrizione", required = true)
+    @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
+    @XmlSchemaType(name = "normalizedString")
+    protected String descrizione;
 
     /**
      * Gets the value of the errore property.
@@ -66,11 +77,44 @@ public class ErroriType {
      * 
      * 
      */
-    public List<ErroreType> getErrore() {
-        if (errore == null) {
-            errore = new ArrayList<ErroreType>();
-        }
-        return this.errore;
+    public String getCodice() {
+        return codice;
+    }
+
+    /**
+     * Imposta il valore della proprietà codice.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCodice(String value) {
+        this.codice = value;
+    }
+
+    /**
+     * Recupera il valore della proprietà descrizione.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    /**
+     * Imposta il valore della proprietà descrizione.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDescrizione(String value) {
+        this.descrizione = value;
     }
 
 }

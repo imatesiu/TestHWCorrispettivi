@@ -9,6 +9,9 @@
 package cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -72,7 +75,7 @@ public class DocCommercialiLotteriaEsitoType {
     @XmlSchemaType(name = "string")
     protected EsitoType esito;
     @XmlElement(name = "ListaErrori")
-    protected ErroriType listaErrori;
+    protected List<ErroriType> listaErrori;
     @XmlElement(name = "SegnalazioniDocComm")
     protected SegnalazioniDocCommType segnalazioniDocComm;
     @XmlElement(name = "Signature", namespace = "http://www.w3.org/2000/09/xmldsig#")
@@ -184,7 +187,9 @@ public class DocCommercialiLotteriaEsitoType {
      *     {@link ErroriType }
      *     
      */
-    public ErroriType getListaErrori() {
+    public List<ErroriType> getListaErrori() {
+    	if(listaErrori==null)
+    		listaErrori = new ArrayList<ErroriType>();
         return listaErrori;
     }
 
@@ -196,7 +201,7 @@ public class DocCommercialiLotteriaEsitoType {
      *     {@link ErroriType }
      *     
      */
-    public void setListaErrori(ErroriType value) {
+    public void setListaErrori(List<ErroriType> value) {
         this.listaErrori = value;
     }
 

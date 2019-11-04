@@ -355,7 +355,7 @@ String url = "dispositivi/corrispettivi/";
 		String codice = "";
 		EsitoType error = TEsitoOperazione.getEsito();
 		if(TEsitoOperazione.getListaErrori()!=null) {
-			List<ErroreType> list = TEsitoOperazione.getListaErrori().getErrore();
+			List<cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.ErroriType> list = TEsitoOperazione.getListaErrori();
 
 			if(list!=null) {
 				if(!list.isEmpty())
