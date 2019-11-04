@@ -298,12 +298,12 @@ String url = "dispositivi/corrispettivi/";
 				"  <DocumentoCommerciale>\n" + 
 				"    <IdCliente>12345678</IdCliente>\n" + 
 				"    <DataOra>2019-09-13T12:12:12</DataOra>\n" + 
-				"    <NumeroProgressivo>1234-4321</NumeroProgressivo>\n" + 
+				"    <NumeroProgressivo>1234-4323</NumeroProgressivo>\n" + 
 				"    <Ammontare>15.00</Ammontare>\n" + 
 				"    <Vendita>\n" + 
 				"      <DatiPagamento>\n" + 
 				"        <Tipo>PC</Tipo>\n" + 
-				"        <Importo>5.00</Importo>\n" + 
+				"        <Importo>5,00</Importo>\n" + 
 				"      </DatiPagamento>\n" + 
 				"      <DatiPagamento>\n" + 
 				"        <Tipo>PE</Tipo>\n" + 

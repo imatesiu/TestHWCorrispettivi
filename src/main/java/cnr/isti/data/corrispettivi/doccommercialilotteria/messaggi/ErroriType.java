@@ -40,11 +40,15 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ErroriType", propOrder = {
+		"errore",
     "codice",
     "descrizione"
 })
 public class ErroriType {
 
+	
+	@XmlElement(name = "Errore")
+    protected List<ErroreType> errore;
     
     
     @XmlElement(name = "Codice", required = true)
@@ -117,4 +121,17 @@ public class ErroriType {
         this.descrizione = value;
     }
 
+    
+    public List<ErroreType> getErrore() {
+        if (errore == null) {
+            errore = new ArrayList<ErroreType>();
+        }
+        return this.errore;
+    }
+
+	public void setErrore(List<ErroreType> errore) {
+		this.errore = errore;
+	}
+    
+    
 }
