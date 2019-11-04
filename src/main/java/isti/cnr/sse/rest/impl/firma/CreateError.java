@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -39,6 +40,7 @@ import org.w3c.dom.Document;
 
 import cnr.isti.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
 import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.DocCommercialiLotteriaEsitoType;
+import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.ErroreType;
 import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.EsitoType;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
@@ -98,7 +100,7 @@ String url = "dispositivi/corrispettivi/";
 	        marshaller.marshal(AttivaDispositivo, dosigndocument);
 	        
 
-			String result = SignReply.Sign(dosigndocument, "sogei");
+			String result = SignReply.Sign(dosigndocument, "sogei4p");
 			String invio = result.substring(0, 1694)+result.substring(result.length()-79, result.length());
 			String EsitoOperazione = this.post(result, url);
 			
@@ -142,7 +144,7 @@ String url = "dispositivi/corrispettivi/";
 		String url = "dispositivi/evento/";
 				
 				String evento = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><r:EventoDispositivo xmlns:r=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\" versione=\"1.0\">\n" + 
-						"<Evento>DISMISSIONE</Evento><DataOra>2017-09-26T12:00:54</DataOra><Dettaglio><Codice>00606</Codice></Dettaglio>\n" + 
+						"<Evento>DISATTIVAZIONE</Evento><DataOra>2017-09-26T12:00:54</DataOra><Dettaglio><Codice>00606</Codice></Dettaglio>\n" + 
 						"</r:EventoDispositivo>";		 
 				try {
 					JAXBContext jaxbContext = JAXBContext.newInstance(EventoDispositivoType.class);
@@ -161,7 +163,7 @@ String url = "dispositivi/corrispettivi/";
 			        marshaller.marshal(EventoDispositivo, dosigndocument);
 			        
 
-					String result = SignReply.Sign(dosigndocument, "sogei");
+					String result = SignReply.Sign(dosigndocument, "sogei4p");
 					
 					String EsitoOperazione = this.put(result, url);
 					
@@ -287,12 +289,16 @@ String url = "dispositivi/corrispettivi/";
 				"<r:DocCommercialiLotteria xmlns:r=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/v1.0\" versione=\"1.0\">\n" + 
 				"  <DatiTrasmissione>\n" + 
 				"    <Formato>DCL10</Formato>\n" + 
-				"    <Denominazione>str111</Denominazione>\n" + 
+				" <Intestazione>\n"
+				+ "<Denominazione>str111</Denominazione>\n"
+				+ "<Comune>Pisa</Comune>\n"
+				+ "</Intestazione> \n" +
+				//" <IdCassa></IdCassa>"+
 				"  </DatiTrasmissione>\n" + 
 				"  <DocumentoCommerciale>\n" + 
-				"    <IdCliente>str1234</IdCliente>\n" + 
-				"    <DataOra>2012-12-13T12:12:12</DataOra>\n" + 
-				"    <NumeroProgressivo>str111</NumeroProgressivo>\n" + 
+				"    <IdCliente>12345678</IdCliente>\n" + 
+				"    <DataOra>2019-09-13T12:12:12</DataOra>\n" + 
+				"    <NumeroProgressivo>1234-4321</NumeroProgressivo>\n" + 
 				"    <Ammontare>15.00</Ammontare>\n" + 
 				"    <Vendita>\n" + 
 				"      <DatiPagamento>\n" + 
@@ -307,8 +313,8 @@ String url = "dispositivi/corrispettivi/";
 				"        <Tipo>NR</Tipo>\n" + 
 				"        <Importo>5.00</Importo>\n" + 
 				"      </DatiPagamento>\n" + 
-				"    </Vendita>\n" + 
-				"  </DocumentoCommerciale>\n" + 
+				"    </Vendita>\n" +   
+				"  </DocumentoCommerciale>\n" +
 				"</r:DocCommercialiLotteria>";
 		
 		try {
@@ -328,7 +334,7 @@ String url = "dispositivi/corrispettivi/";
         marshaller.marshal(CommercialiLotteria, dosigndocument);
         
 
-		String result = SignReply.Sign(dosigndocument, "sogei");
+		String result = SignReply.Sign(dosigndocument, "sogei4p");
 		System.out.println(result);
 		String EsitoOperazione = this.post(result, url);
 		
@@ -346,10 +352,19 @@ String url = "dispositivi/corrispettivi/";
 		if (!theDir.exists()) {
 			theDir.mkdir();
 		}
+		String codice = "";
 		EsitoType error = TEsitoOperazione.getEsito();
+		if(TEsitoOperazione.getListaErrori()!=null) {
+		List<ErroreType> list = TEsitoOperazione.getListaErrori().getErrore();
+		
+		if(list!=null) {
+			 codice = list.get(0).getCodice();
+
+		}
+		}
 		String FILENAME = "";
 		if(error!=null) 
-			FILENAME = "received_error_response2/RT_corrispettivi_Error"+error+".xml";
+			FILENAME = "received_error_response2/RT_corrispettivi_Error"+error+"."+codice+".xml";
 		else
 			 FILENAME = "received_error_response2/RT_corrispettivi_noError.xml";
 
