@@ -42,6 +42,7 @@ import cnr.isti.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteria
 import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.DocCommercialiLotteriaEsitoType;
 import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.ErroreType;
 import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.EsitoType;
+import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.SegnalazioniDocCommType;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.ErroriType;
@@ -144,7 +145,7 @@ String url = "dispositivi/corrispettivi/";
 		String url = "dispositivi/evento/";
 				
 				String evento = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><r:EventoDispositivo xmlns:r=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0\" versione=\"1.0\">\n" + 
-						"<Evento>DISATTIVAZIONE</Evento><DataOra>2017-09-26T12:00:54</DataOra><Dettaglio><Codice>00606</Codice></Dettaglio>\n" + 
+						"<Evento>FUORI_SERVIZIO</Evento><DataOra>2019-09-26T12:00:54</DataOra><Dettaglio><Codice>00600</Codice></Dettaglio>\n" + 
 						"</r:EventoDispositivo>";		 
 				try {
 					JAXBContext jaxbContext = JAXBContext.newInstance(EventoDispositivoType.class);
@@ -285,6 +286,37 @@ String url = "dispositivi/corrispettivi/";
 	public void Lotteria() {
 		String url = "dispositivi/lotteria/corrispettivi/";
 		
+		
+		String docs = "";
+		
+		for(int i=1; i<=99; i++) {
+			
+			String padded = String.format("%04d" , i);
+			String doc = "  <DocumentoCommerciale>\n" + 
+					"    <IdCliente>12345678</IdCliente>\n" + 
+					"    <DataOra>2019-09-13T12:12:12</DataOra>\n" + 
+					"    <NumeroProgressivo>1239-"+padded+"</NumeroProgressivo>\n" + 
+					"    <Ammontare>15.00</Ammontare>\n" + 
+					"    <Vendita>\n" + 
+					"      <DatiPagamento>\n" + 
+					"        <Tipo>PC</Tipo>\n" + 
+					"        <Importo>5.00</Importo>\n" + 
+					"      </DatiPagamento>\n" + 
+					"      <DatiPagamento>\n" + 
+					"        <Tipo>PE</Tipo>\n" + 
+					"        <Importo>5.00</Importo>\n" + 
+					"      </DatiPagamento>\n" + 
+					"      <DatiPagamento>\n" + 
+					"        <Tipo>NR</Tipo>\n" + 
+					"        <Importo>5.00</Importo>\n" + 
+					"      </DatiPagamento>\n" + 
+					"    </Vendita>\n" +   
+					"  </DocumentoCommerciale>\n" ;
+			
+			docs +=doc ;
+			
+		}
+		
 		String lotteria = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + 
 				"<r:DocCommercialiLotteria xmlns:r=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/v1.0\" versione=\"1.0\">\n" + 
 				"  <DatiTrasmissione>\n" + 
@@ -295,27 +327,12 @@ String url = "dispositivi/corrispettivi/";
 				+ "</Intestazione> \n" +
 				//" <IdCassa></IdCassa>"+
 				"  </DatiTrasmissione>\n" + 
-				"  <DocumentoCommerciale>\n" + 
-				"    <IdCliente>12345678</IdCliente>\n" + 
-				"    <DataOra>2019-09-13T12:12:12</DataOra>\n" + 
-				"    <NumeroProgressivo>1234-4323</NumeroProgressivo>\n" + 
-				"    <Ammontare>15.00</Ammontare>\n" + 
-				"    <Vendita>\n" + 
-				"      <DatiPagamento>\n" + 
-				"        <Tipo>PC</Tipo>\n" + 
-				"        <Importo>5,00</Importo>\n" + 
-				"      </DatiPagamento>\n" + 
-				"      <DatiPagamento>\n" + 
-				"        <Tipo>PE</Tipo>\n" + 
-				"        <Importo>5.00</Importo>\n" + 
-				"      </DatiPagamento>\n" + 
-				"      <DatiPagamento>\n" + 
-				"        <Tipo>NR</Tipo>\n" + 
-				"        <Importo>5.00</Importo>\n" + 
-				"      </DatiPagamento>\n" + 
-				"    </Vendita>\n" +   
-				"  </DocumentoCommerciale>\n" +
+				docs+
+				
 				"</r:DocCommercialiLotteria>";
+		
+		
+		
 		
 		try {
 		JAXBContext jaxbContext = JAXBContext.newInstance(DocCommercialiLotteriaType.class);
@@ -342,6 +359,9 @@ String url = "dispositivi/corrispettivi/";
 		unmarshaller = jaxbContext.createUnmarshaller();
 		reader = new StringReader(EsitoOperazione);
 		
+		byte[] utf8Bytes = result.getBytes("UTF-8");
+		System.out.println("Dimesione File: "+utf8Bytes.length);
+		
 		DocCommercialiLotteriaEsitoType TEsitoOperazione = (DocCommercialiLotteriaEsitoType) unmarshaller.unmarshal(reader);
 		
 		System.out.println(EsitoOperazione);
@@ -358,11 +378,25 @@ String url = "dispositivi/corrispettivi/";
 			List<cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.ErroriType> list = TEsitoOperazione.getListaErrori();
 
 			if(list!=null) {
-				if(!list.isEmpty())
+				if(!list.isEmpty()) {
 					codice = list.get(0).getCodice();
+					if(list.get(0).getErrore()!=null)
+						codice = list.get(0).getErrore().get(0).getCodice();
+				}
 
 			}
 		}
+		if(TEsitoOperazione.getSegnalazioniDocComm()!=null) {
+			SegnalazioniDocCommType lists = TEsitoOperazione.getSegnalazioniDocComm();
+			if(lists.getSegnalazione()!=null) {
+				if(!lists.getSegnalazione().isEmpty())
+					codice =  lists.getSegnalazione().get(0).getErrori().getCodice();
+			}
+		}
+		
+		if(codice!="")
+		System.out.println("Errore: " +codice);
+
 		String FILENAME = "";
 		if(error!=null) 
 			FILENAME = "received_error_response2/RT_corrispettivi_Error"+error+"."+codice+".xml";
