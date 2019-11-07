@@ -289,26 +289,26 @@ String url = "dispositivi/corrispettivi/";
 		
 		String docs = "";
 		
-		for(int i=1; i<=99; i++) {
+		for(int i=1; i<=1; i++) {
 			
 			String padded = String.format("%04d" , i);
 			String doc = "  <DocumentoCommerciale>\n" + 
-					"    <IdCliente>12345678</IdCliente>\n" + 
+					"    <IdCliente>1234567890123456</IdCliente>\n" + 
 					"    <DataOra>2019-09-13T12:12:12</DataOra>\n" + 
-					"    <NumeroProgressivo>1239-"+padded+"</NumeroProgressivo>\n" + 
-					"    <Ammontare>15.00</Ammontare>\n" + 
+					"    <NumeroProgressivo>1272-"+padded+"</NumeroProgressivo>\n" + 
+					"    <Ammontare>99999999999.99</Ammontare>\n" + 
 					"    <Vendita>\n" + 
 					"      <DatiPagamento>\n" + 
 					"        <Tipo>PC</Tipo>\n" + 
-					"        <Importo>5.00</Importo>\n" + 
+					"        <Importo>33333333333.33</Importo>\n" + 
 					"      </DatiPagamento>\n" + 
 					"      <DatiPagamento>\n" + 
 					"        <Tipo>PE</Tipo>\n" + 
-					"        <Importo>5.00</Importo>\n" + 
+					"        <Importo>33333333333.33</Importo>\n" + 
 					"      </DatiPagamento>\n" + 
 					"      <DatiPagamento>\n" + 
 					"        <Tipo>NR</Tipo>\n" + 
-					"        <Importo>5.00</Importo>\n" + 
+					"        <Importo>33333333333.33</Importo>\n" + 
 					"      </DatiPagamento>\n" + 
 					"    </Vendita>\n" +   
 					"  </DocumentoCommerciale>\n" ;
@@ -325,7 +325,7 @@ String url = "dispositivi/corrispettivi/";
 				+ "<Denominazione>str111</Denominazione>\n"
 				+ "<Comune>Pisa</Comune>\n"
 				+ "</Intestazione> \n" +
-				//" <IdCassa></IdCassa>"+
+				" <IdCassa>33331234</IdCassa>"+
 				"  </DatiTrasmissione>\n" + 
 				docs+
 				
@@ -337,7 +337,7 @@ String url = "dispositivi/corrispettivi/";
 		try {
 		JAXBContext jaxbContext = JAXBContext.newInstance(DocCommercialiLotteriaType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-		StringReader reader = new StringReader(lotteria);
+		StringReader reader = new StringReader(lotteria.replaceAll("\\n", "").trim());
 		DocCommercialiLotteriaType CommercialiLotteria = (DocCommercialiLotteriaType) unmarshaller.unmarshal(reader);
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -381,6 +381,7 @@ String url = "dispositivi/corrispettivi/";
 				if(!list.isEmpty()) {
 					codice = list.get(0).getCodice();
 					if(list.get(0).getErrore()!=null)
+						if(!list.get(0).getErrore().isEmpty())
 						codice = list.get(0).getErrore().get(0).getCodice();
 				}
 
@@ -396,6 +397,8 @@ String url = "dispositivi/corrispettivi/";
 		
 		if(codice!="")
 		System.out.println("Errore: " +codice);
+		
+		System.out.println("Esito: " +error);
 
 		String FILENAME = "";
 		if(error!=null) 

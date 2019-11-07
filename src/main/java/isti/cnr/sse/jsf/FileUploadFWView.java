@@ -21,6 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.naming.InvalidNameException;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.bouncycastle.cert.X509CertificateHolder;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter;
@@ -35,7 +36,6 @@ import org.bouncycastle.util.Store;
 import org.bouncycastle.util.StoreException;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
-import org.primefaces.util.Base64;
 
 @ManagedBean
 @ViewScoped 
@@ -179,7 +179,7 @@ public class FileUploadFWView {
            // byte[ ] decode = Base64.decode(getFirma());
             byte[ ] decode = new byte[] { 0, 1, 2 };
             if(firma!=null)
-            	decode = Base64.decode(getFirma());
+            	decode = Base64.decodeBase64(getFirma().getBytes());//Base64.decode(getFirma());
             if(fileFirma!=null)		
             	decode =	IOUtils.toByteArray(fileFirma.getInputstream());
             

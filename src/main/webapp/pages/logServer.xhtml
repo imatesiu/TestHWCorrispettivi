@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="/templates/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	
+	  <ui:define name="title">
+        Log server
+    </ui:define>
+
+    <ui:define name="description">
+        Log server
+    </ui:define>
+	
+	<ui:define name="content">
+<h:body>
+
+     
+     
+  
+        <h:form id="form" >
+       
+            <p:growl id="growl" showDetail="true" sticky="true" />
+
+            <h:commandButton value="Show next #{glassfishLogFile.pageSize} lines" 
+                                 action="#{glassfishLogFile.actionNextPage}" />
+            <h:commandButton value="Clear offset" 
+                                 action="#{glassfishLogFile.actionClearOffset}" />
+                                 
+            <h:inputTextarea rows="30" cols="1000" value="#{glassfishLogFile.data}" /> 
+        
+        </h:form>                    
+  
+    
+   
+
+</h:body>
+</ui:define>
+
+</ui:composition>
