@@ -200,8 +200,8 @@ public class APIDispositiviImpl {
 			X509Certificate cert = createCertificate(CensimentoDispositivo.getCsr());
 
 			log.info("CENSIMENTO PRESSO ADE");
-			return Response.status(status).entity(responseAsString).build();
-		/*	if(status == 200 || status == 201) {
+			//return Response.status(status).entity(responseAsString).build();
+			if(status == 200 || status == 201) {
 				if(responseAsString.length()>0) {
 					log.info("CENSIMENTO PRESSO ADE");
 					return Response.status(201).entity(responseAsString).build();
@@ -240,9 +240,9 @@ public class APIDispositiviImpl {
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
 				throw new WebApplicationException(Response.status(406).entity(text).build());
 			}
-*/
 
-		} catch (/*IOException |JAXBException | ParserConfigurationException*/ JAXBException  e) {
+
+		} catch (IOException |JAXBException | ParserConfigurationException   e) {
 			e.printStackTrace();
 			log.error(e);
 		}
