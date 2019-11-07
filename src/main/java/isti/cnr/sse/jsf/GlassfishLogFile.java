@@ -26,7 +26,7 @@ public class GlassfishLogFile implements Serializable {
 	private int offset = 0;
 	private int pageSize = 100;
 	// Path for Glassfish directory with log files
-	String path = "/Users/spagnolo/github/TestHWCorrispettivi/logs/TestHWCorrispettivi.log"; //"/Users/spagnolo/github/TestHWCorrispettivi/logs" + this.id;
+	String path = "logs/TestHWCorrispettivi.log"; //"/Users/spagnolo/github/TestHWCorrispettivi/logs" + this.id;
 
 	// Constructor
 	public GlassfishLogFile() {
@@ -56,7 +56,7 @@ public class GlassfishLogFile implements Serializable {
 			if (line == null) {
 				break;
 			}
-			System.out.println(this.offset);
+			//System.out.println(this.offset);
 			this.offset += line.length() + 2;
 			page.append(line).append(System.getProperty("line.separator"));
 		}
@@ -88,7 +88,7 @@ public class GlassfishLogFile implements Serializable {
 			strLine = br.readLine();
 			// Close the input stream
 		} catch (Exception e) {// Catch exception if any
-			System.err.println("Error: " + e.getMessage());
+		//	System.err.println("Error: " + e.getMessage());
 		} finally {
 			try {
 				in.close();
@@ -107,7 +107,7 @@ public class GlassfishLogFile implements Serializable {
 		try {
 			// Open the file that is the first
 			// command line parameter
-			File f = new File(this.path);
+			//File f = new File(this.path);
 			FileInputStream fstream = new FileInputStream(new File(this.path));
 			// Get the object of DataInputStream
 			in = new DataInputStream(fstream);
@@ -124,7 +124,7 @@ public class GlassfishLogFile implements Serializable {
 			
 			// Close the input stream
 		} catch (Exception e) {// Catch exception if any
-			System.err.println("Error: " + e.getMessage());
+			//System.err.println("Error: " + e.getMessage());
 		} finally {
 			try {
 				in.close();
