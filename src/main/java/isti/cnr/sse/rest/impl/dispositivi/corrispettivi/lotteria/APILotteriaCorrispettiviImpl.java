@@ -120,11 +120,11 @@ public class APILotteriaCorrispettiviImpl {
 			
 			if(pair.getSecond()){
 				// TODO cambiare risporta
-				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
+				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response/lotteria/Lotteria_AC.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
 				return text;
 			}else{
-				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.firma.xml");
+				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response/lotteria/Lotteria_Error.SC.99999.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
 				throw new WebApplicationException(Response.status(406).entity(text).build());
 			}
@@ -136,7 +136,7 @@ public class APILotteriaCorrispettiviImpl {
 		}
 		try{
 			// TODO
-			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
+			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response/lotteria/Lotteria_Error.SC.00000.xml");
 			String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
 			throw new WebApplicationException(Response.status(406).entity(text).build());
 		} catch (IOException e) {

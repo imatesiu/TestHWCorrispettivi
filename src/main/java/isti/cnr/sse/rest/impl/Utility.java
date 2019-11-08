@@ -426,6 +426,10 @@ public class Utility {
 			nameFile+="Attivazione_00"+codeerror+".xml";
 		if(codeerror>=700 && codeerror<=799)
 			nameFile+="Eventi_00"+codeerror+".xml";
+		if(codeerror>=300 && codeerror<=306)
+			nameFile+="lotteria/Lotteria_Error.SC.00"+codeerror+".xml";
+		if(codeerror==99999)
+			nameFile+="lotteria/Lotteria_Error.SC.99999.xml";
 
 
 		InputStream is = Utility.class.getClassLoader().getResourceAsStream(nameFile);
