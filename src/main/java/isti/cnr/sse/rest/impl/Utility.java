@@ -230,15 +230,15 @@ public class Utility {
 					Beep.tone(1000, 300,1600);
 					Beep.tone(1000, 300,1600);
 					Beep.tone(1000, 300,1600);
-					System.err.println("Signature failed core validation");
+					log.error("Signature failed core validation");
 					boolean sv = signature.getSignatureValue().validate(valContext);
-					System.out.println("signature validation status: " + sv);
+					log.trace("signature validation status: " + sv);
 					if (sv == false) {
 						// Check the validation status of each Reference.
 						Iterator i = signature.getSignedInfo().getReferences().iterator();
 						for (int j = 0; i.hasNext(); j++) {
 							boolean refValid = ((Reference) i.next()).validate(valContext);
-							System.out.println("ref[" + j + "] validity status: " + refValid);
+							log.trace("ref[" + j + "] validity status: " + refValid);
 							if(refValid==true){
 								validFlag = true;
 							}
@@ -248,7 +248,7 @@ public class Utility {
 						validFlag = true;
 					}
 				} else {
-					System.out.println("Signature passed core validation");
+					log.trace("Signature passed core validation");
 				}
 
 				Principal principal = cert.getSubjectDN();
@@ -269,7 +269,7 @@ public class Utility {
 		         
 
 			} catch (Exception e) {
-				System.err.println("Signature VUOTA interrompere prova");
+				log.error("Signature VUOTA interrompere prova");
 				Pair <String,Boolean> pair = new Pair<>();
 				pair.setFirst("0.0.0.0");
 				pair.setSecond(false);
