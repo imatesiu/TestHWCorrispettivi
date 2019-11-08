@@ -289,13 +289,36 @@ String url = "dispositivi/corrispettivi/";
 		
 		String docs = "";
 		
-		for(int i=1; i<=100; i++) {
+		
+		
+		for(int i=1; i<=50; i++) {
+		String rpadded = String.format("%04d" , i);
+		String reso = "  <DocumentoCommerciale>\n" + 
+				"    <IdCliente>1234567890123456</IdCliente>\n" + 
+				"    <DataOra>2019-11-07T12:12:12</DataOra>\n" + 
+				"    <NumeroProgressivo>1279-"+rpadded+"</NumeroProgressivo>\n" + 
+				"    <Ammontare>123.45</Ammontare>\n" + 
+				"    <ResoAnnullo>\n" + 
+				"      <Tipologia>R</Tipologia>\n" + 
+				"      <DataOra>2019-11-07T12:12:12</DataOra>\n" + 
+				"      <Progressivo>1278-"+rpadded+"</Progressivo>\n" + 
+				"      <Dispositivo>\n" + 
+				"        <MatrTrasm>str12340000</MatrTrasm>\n" + 
+				"        <MatrCassa>str12340</MatrCassa>\n" + 
+				"      </Dispositivo>\n" + 
+				"    </ResoAnnullo>\n" + 
+				"  </DocumentoCommerciale>";
+		
+			docs += reso;
+		
+		}
+		for(int i=1; i<=50; i++) {
 			
 			String padded = String.format("%04d" , i);
 			String doc = "  <DocumentoCommerciale>\n" + 
 					"    <IdCliente>1234567890123456</IdCliente>\n" + 
 					"    <DataOra>2019-09-13T12:12:12</DataOra>\n" + 
-					"    <NumeroProgressivo>1276-"+padded+"</NumeroProgressivo>\n" + 
+					"    <NumeroProgressivo>1280-"+padded+"</NumeroProgressivo>\n" + 
 					"    <Ammontare>99999999999.99</Ammontare>\n" + 
 					"    <Vendita>\n" + 
 					"      <DatiPagamento>\n" + 
