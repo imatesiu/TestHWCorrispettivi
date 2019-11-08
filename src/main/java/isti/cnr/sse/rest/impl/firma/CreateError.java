@@ -289,13 +289,13 @@ String url = "dispositivi/corrispettivi/";
 		
 		String docs = "";
 		
-		for(int i=1; i<=1; i++) {
+		for(int i=1; i<=100; i++) {
 			
 			String padded = String.format("%04d" , i);
 			String doc = "  <DocumentoCommerciale>\n" + 
 					"    <IdCliente>1234567890123456</IdCliente>\n" + 
 					"    <DataOra>2019-09-13T12:12:12</DataOra>\n" + 
-					"    <NumeroProgressivo>1272-"+padded+"</NumeroProgressivo>\n" + 
+					"    <NumeroProgressivo>1276-"+padded+"</NumeroProgressivo>\n" + 
 					"    <Ammontare>99999999999.99</Ammontare>\n" + 
 					"    <Vendita>\n" + 
 					"      <DatiPagamento>\n" + 
@@ -321,11 +321,12 @@ String url = "dispositivi/corrispettivi/";
 				"<r:DocCommercialiLotteria xmlns:r=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/v1.0\" versione=\"1.0\">\n" + 
 				"  <DatiTrasmissione>\n" + 
 				"    <Formato>DCL10</Formato>\n" + 
-				" <Intestazione>\n"
-				+ "<Denominazione>str111</Denominazione>\n"
-				+ "<Comune>Pisa</Comune>\n"
-				+ "</Intestazione> \n" +
-				" <IdCassa>33331234</IdCassa>"+
+				//" <Intestazione>\n"
+				 "<Denominazione>123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"
+				 + "12345678901234567890123456789012345678901234567890123456789012345678901234567890</Denominazione>\n"
+				//+ "<Comune>Pisa</Comune>\n"
+				//+ "</Intestazione> \n" +
+				+" <IdCassa>33331234</IdCassa>"+
 				"  </DatiTrasmissione>\n" + 
 				docs+
 				
@@ -337,7 +338,7 @@ String url = "dispositivi/corrispettivi/";
 		try {
 		JAXBContext jaxbContext = JAXBContext.newInstance(DocCommercialiLotteriaType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-		StringReader reader = new StringReader(lotteria.replaceAll("\\n", "").trim());
+		StringReader reader = new StringReader(lotteria);//.replaceAll("\\n", "").trim());
 		DocCommercialiLotteriaType CommercialiLotteria = (DocCommercialiLotteriaType) unmarshaller.unmarshal(reader);
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

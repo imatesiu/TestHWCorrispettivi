@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DatiTrasmissioneType", propOrder = {
     "formato",
-    "intestazione",
+    "denominazione",
     "idCassa"
 })
 public class DatiTrasmissioneType {
@@ -49,8 +49,8 @@ public class DatiTrasmissioneType {
     @XmlElement(name = "Formato", required = true)
     @XmlSchemaType(name = "string")
     protected FormatoType formato;
-    @XmlElement(name = "Intestazione", required = true)
-    protected Intestazione intestazione;
+    @XmlElement(name = "Denominazione", required = true)
+    protected String denominazione;
     @XmlElement(name = "IdCassa")
     protected String idCassa;
 
@@ -86,8 +86,8 @@ public class DatiTrasmissioneType {
      *     {@link String }
      *     
      */
-    public Intestazione getDenominazione() {
-        return intestazione;
+    public String getDenominazione() {
+        return denominazione;
     }
 
     /**
@@ -98,8 +98,8 @@ public class DatiTrasmissioneType {
      *     {@link String }
      *     
      */
-    public void setDenominazione(Intestazione value) {
-        this.intestazione = value;
+    public void setDenominazione(String value) {
+        this.denominazione = value;
     }
 
     /**
