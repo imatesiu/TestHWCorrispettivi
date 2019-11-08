@@ -52,7 +52,7 @@ public class APILotteriaCorrispettiviImpl {
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		// @Context HttpServletRequest request){
 		response.setHeader("Connection", "Close");
-		JAXBContext jaxbContext = JAXBContext.newInstance(EventoDispositivoType.class);
+		JAXBContext jaxbContext = JAXBContext.newInstance(DocCommercialiLotteriaType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		
 		if(!flag.equals(ErrorHttp.Null)){
