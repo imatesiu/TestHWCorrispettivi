@@ -55,10 +55,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
-<context-param>
-    <param-name>primefaces.MOVE_SCRIPTS_TO_BOTTOM</param-name>
-    <param-value>true</param-value>
-</context-param>
+
  
 		<context-param>
 		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
