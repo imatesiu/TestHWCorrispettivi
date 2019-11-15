@@ -99,7 +99,7 @@ public class FileUploadView {
 		if(path.contains("corrispettivi")){
 			response  = r.SendPost(url, path,  file.getInputstream());
 		}else{
-			if(value1)
+			if(value1 | path.contains("evento"))
 				response  = r.SendPut(url, path,  file.getInputstream());
 			else
 				response  = r.SendPost(url, path,  file.getInputstream());
