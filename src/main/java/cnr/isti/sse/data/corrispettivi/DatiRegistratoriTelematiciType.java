@@ -53,8 +53,17 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "ventilazioneIVA",
     "ammontare",
     "rifNormativo",
+    "importoParziale",
+    
     "totaleAmmontareResi",
-    "totaleAmmontareAnnulli"
+    "totaleAmmontareAnnulli",
+    "beniInSospeso",
+    "nonRiscossoServizi",
+    "nonRiscossoFatture",
+    "totaleDaFattureRT",
+    "nonRiscossoDCRaSSN",
+    "nonRiscossoOmaggio",
+    "codiceAttivita"
 })
 public class DatiRegistratoriTelematiciType {
 
@@ -69,11 +78,27 @@ public class DatiRegistratoriTelematiciType {
     @XmlElement(name = "RifNormativo")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String rifNormativo;
+    @XmlElement(name = "ImportoParziale")
+    protected BigDecimal importoParziale;
     @XmlElement(name = "TotaleAmmontareResi")
     protected BigDecimal totaleAmmontareResi;
     @XmlElement(name = "TotaleAmmontareAnnulli")
     protected BigDecimal totaleAmmontareAnnulli;
-
+    @XmlElement(name = "BeniInSospeso")
+    protected BigDecimal beniInSospeso;
+    
+    @XmlElement(name = "NonRiscossoServizi")
+    protected BigDecimal nonRiscossoServizi;
+    @XmlElement(name = "NonRiscossoFatture")
+    protected BigDecimal nonRiscossoFatture;
+    @XmlElement(name = "TotaleDaFattureRT")
+    protected BigDecimal totaleDaFattureRT;
+    @XmlElement(name = "NonRiscossoDCRaSSN")
+    protected BigDecimal nonRiscossoDCRaSSN;
+    @XmlElement(name = "NonRiscossoOmaggio")
+    protected BigDecimal nonRiscossoOmaggio;
+    @XmlElement(name = "CodiceAttivita")
+    protected BigDecimal codiceAttivita;
     /**
      * Gets the value of the iva property.
      * 
@@ -245,5 +270,79 @@ public class DatiRegistratoriTelematiciType {
     public void setTotaleAmmontareAnnulli(BigDecimal value) {
         this.totaleAmmontareAnnulli = value;
     }
+
+	public IVAType getIva() {
+		return iva;
+	}
+
+	public void setIva(IVAType iva) {
+		this.iva = iva;
+	}
+
+	public BigDecimal getImportoParziale() {
+		return importoParziale;
+	}
+
+	public void setImportoParziale(BigDecimal importoParziale) {
+		this.importoParziale = importoParziale;
+	}
+
+	public BigDecimal getBeniInSospeso() {
+		return beniInSospeso;
+	}
+
+	public void setBeniInSospeso(BigDecimal beniInSospeso) {
+		this.beniInSospeso = beniInSospeso;
+	}
+
+	public BigDecimal getNonRiscossoServizi() {
+		return nonRiscossoServizi;
+	}
+
+	public void setNonRiscossoServizi(BigDecimal nonRiscossoServizi) {
+		this.nonRiscossoServizi = nonRiscossoServizi;
+	}
+
+	public BigDecimal getNonRiscossoFatture() {
+		return nonRiscossoFatture;
+	}
+
+	public void setNonRiscossoFatture(BigDecimal nonRiscossoFatture) {
+		this.nonRiscossoFatture = nonRiscossoFatture;
+	}
+
+	public BigDecimal getTotaleDaFattureRT() {
+		return totaleDaFattureRT;
+	}
+
+	public void setTotaleDaFattureRT(BigDecimal totaleDaFattureRT) {
+		this.totaleDaFattureRT = totaleDaFattureRT;
+	}
+
+	public BigDecimal getNonRiscossoDCRaSSN() {
+		return nonRiscossoDCRaSSN;
+	}
+
+	public void setNonRiscossoDCRaSSN(BigDecimal nonRiscossoDCRaSSN) {
+		this.nonRiscossoDCRaSSN = nonRiscossoDCRaSSN;
+	}
+
+	public BigDecimal getNonRiscossoOmaggio() {
+		return nonRiscossoOmaggio;
+	}
+
+	public void setNonRiscossoOmaggio(BigDecimal nonRiscossoOmaggio) {
+		this.nonRiscossoOmaggio = nonRiscossoOmaggio;
+	}
+
+	public BigDecimal getCodiceAttivita() {
+		return codiceAttivita;
+	}
+
+	public void setCodiceAttivita(BigDecimal codiceAttivita) {
+		this.codiceAttivita = codiceAttivita;
+	}
+    
+    
 
 }

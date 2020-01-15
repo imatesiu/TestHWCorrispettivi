@@ -8,6 +8,7 @@
 
 package cnr.isti.sse.data.corrispettivi;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -37,13 +38,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ElencoCorrispettiviType", namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0", propOrder = {
-    "riepilogo"
+    "riepilogo",
+    "totali"
 })
 public class ElencoCorrispettiviType {
 
     @XmlElement(name = "Riepilogo", required = true)
     protected List<DatiRegistratoriTelematiciType> riepilogo;
 
+    @XmlElement(name = "Totali")
+    protected TotaliType totali;
     /**
      * Gets the value of the riepilogo property.
      * 

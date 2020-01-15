@@ -57,7 +57,7 @@ import cnr.isti.sse.data.corrispettivi.messaggi.signature.SignatureType;
     "periodoInattivo",
     "dataOraRilevazione",
     "datiRT",
-    "datiDA",
+
     "interventoTecnico",
     "segnalazione",
     "signature"
@@ -73,8 +73,7 @@ public class DatiCorrispettiviType {
     protected XMLGregorianCalendar dataOraRilevazione;
     @XmlElement(name = "DatiRT")
     protected ElencoCorrispettiviType datiRT;
-    @XmlElement(name = "DatiDA")
-    protected DatiDistributoriAutomaticiType datiDA;
+   
     @XmlElement(name = "InterventoTecnico")
     protected List<InterventoTecnicoType> interventoTecnico;
     @XmlElement(name = "Segnalazione")
@@ -182,29 +181,6 @@ public class DatiCorrispettiviType {
         this.datiRT = value;
     }
 
-    /**
-     * Gets the value of the datiDA property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DatiDistributoriAutomaticiType }
-     *     
-     */
-    public DatiDistributoriAutomaticiType getDatiDA() {
-        return datiDA;
-    }
-
-    /**
-     * Sets the value of the datiDA property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DatiDistributoriAutomaticiType }
-     *     
-     */
-    public void setDatiDA(DatiDistributoriAutomaticiType value) {
-        this.datiDA = value;
-    }
 
     /**
      * Gets the value of the interventoTecnico property.
