@@ -113,7 +113,8 @@ public class Utility {
 						RT rt = map.get(key);
 						BigDecimal old = rt.getTotaleRicevuto();
 						BigDecimal res = old.add(lordo);
-						log.info("Ricevuto per "+key+": "+lordo);
+						String info = "IVA"+iva.getAliquotaIVA()+"% -> Ammont:"+ammontare+" Impo: "+impostaiva;
+						log.info("Ricevuto per "+key+": Lordo "+lordo +"-->"+info);
 						log.info("totale per "+key+": "+res);
 						rt.setTotaleRicevuto(res );
 					}/*else{
