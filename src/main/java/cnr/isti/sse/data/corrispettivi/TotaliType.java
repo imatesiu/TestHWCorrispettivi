@@ -29,4 +29,36 @@ public class TotaliType {
 	   protected BigDecimal scontoApagare;
 	 @XmlElement(name = "Ticket")
 	     protected TicketType ticket;
+	public Integer getNumeroDocCommerciali() {
+		return numeroDocCommerciali;
+	}
+	public void setNumeroDocCommerciali(Integer numeroDocCommerciali) {
+		this.numeroDocCommerciali = numeroDocCommerciali;
+	}
+	public BigDecimal getPagatoContanti() {
+		return pagatoContanti;
+	}
+	public void setPagatoContanti(BigDecimal pagatoContanti) {
+		this.pagatoContanti = pagatoContanti;
+	}
+	public BigDecimal getPagatoElettronico() {
+		return pagatoElettronico;
+	}
+	public void setPagatoElettronico(BigDecimal pagatoElettronico) {
+		this.pagatoElettronico = pagatoElettronico;
+	}
+	public BigDecimal getScontoApagare() {
+		return scontoApagare;
+	}
+	public void setScontoApagare(BigDecimal scontoApagare) {
+		this.scontoApagare = scontoApagare;
+	}
+	public TicketType getTicket() {
+		return ticket;
+	}
+	public void setTicket(TicketType ticket) {
+		this.ticket = ticket;
+	}
+	 
+	 
 }

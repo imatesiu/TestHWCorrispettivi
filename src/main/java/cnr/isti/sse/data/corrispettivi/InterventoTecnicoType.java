@@ -52,6 +52,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "idIVALaboratorio",
     "dataOra",
     "codice",
+    "numeroSw",
+    "dataRelease",
     "note"
 })
 public class InterventoTecnicoType {
@@ -67,6 +69,11 @@ public class InterventoTecnicoType {
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     @XmlSchemaType(name = "normalizedString")
     protected String codice;
+    @XmlElement(name = "NumeroSw")
+    @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
+    protected String numeroSw;
+    @XmlElement(name = "DataRelease")
+    protected XMLGregorianCalendar dataRelease;
     @XmlElement(name = "Note")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String note;
@@ -190,5 +197,31 @@ public class InterventoTecnicoType {
     public void setNote(String value) {
         this.note = value;
     }
+
+	public String getCfTecnico() {
+		return cfTecnico;
+	}
+
+	public void setCfTecnico(String cfTecnico) {
+		this.cfTecnico = cfTecnico;
+	}
+
+	public String getNumeroSw() {
+		return numeroSw;
+	}
+
+	public void setNumeroSw(String numeroSw) {
+		this.numeroSw = numeroSw;
+	}
+
+	public XMLGregorianCalendar getDataRelease() {
+		return dataRelease;
+	}
+
+	public void setDataRelease(XMLGregorianCalendar dataRelease) {
+		this.dataRelease = dataRelease;
+	}
+    
+    
 
 }

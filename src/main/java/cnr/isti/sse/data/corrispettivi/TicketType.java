@@ -18,5 +18,20 @@ public class TicketType {
 	    protected BigDecimal pagatoTicket;
 	 @XmlElement(name = "NumeroTicket")
 	    protected Integer numeroTicket;
+	public BigDecimal getPagatoTicket() {
+		return pagatoTicket;
+	}
+	public void setPagatoTicket(BigDecimal pagatoTicket) {
+		this.pagatoTicket = pagatoTicket;
+	}
+	public Integer getNumeroTicket() {
+		return numeroTicket;
+	}
+	public void setNumeroTicket(Integer numeroTicket) {
+		this.numeroTicket = numeroTicket;
+	}
 
+	 
+	 
+	 
 }
