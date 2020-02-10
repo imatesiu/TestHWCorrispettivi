@@ -76,5 +76,10 @@ public class ElencoCorrispettiviType {
         }
         return this.riepilogo;
     }
+	public TotaliType getTotali() {
+		return totali;
+	}
+    
+    
 
 }

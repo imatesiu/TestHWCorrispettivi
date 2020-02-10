@@ -180,6 +180,8 @@ public class DatiRegistratoriTelematiciType {
      *     
      */
     public BigDecimal getAmmontare() {
+    	if(ammontare==null)
+    		return new BigDecimal(0);
         return ammontare;
     }
 
@@ -280,6 +282,8 @@ public class DatiRegistratoriTelematiciType {
 	}
 
 	public BigDecimal getImportoParziale() {
+		if(importoParziale==null)
+    		return new BigDecimal(0);
 		return importoParziale;
 	}
 
@@ -288,6 +292,8 @@ public class DatiRegistratoriTelematiciType {
 	}
 
 	public BigDecimal getBeniInSospeso() {
+		if(beniInSospeso==null)
+    		return new BigDecimal(0);
 		return beniInSospeso;
 	}
 
@@ -296,6 +302,8 @@ public class DatiRegistratoriTelematiciType {
 	}
 
 	public BigDecimal getNonRiscossoServizi() {
+		if(nonRiscossoServizi==null)
+    		return new BigDecimal(0);
 		return nonRiscossoServizi;
 	}
 
@@ -304,6 +312,8 @@ public class DatiRegistratoriTelematiciType {
 	}
 
 	public BigDecimal getNonRiscossoFatture() {
+		if(nonRiscossoFatture==null)
+    		return new BigDecimal(0);
 		return nonRiscossoFatture;
 	}
 
@@ -312,6 +322,8 @@ public class DatiRegistratoriTelematiciType {
 	}
 
 	public BigDecimal getTotaleDaFattureRT() {
+		if(totaleDaFattureRT==null)
+    		return new BigDecimal(0);
 		return totaleDaFattureRT;
 	}
 
@@ -320,6 +332,8 @@ public class DatiRegistratoriTelematiciType {
 	}
 
 	public BigDecimal getNonRiscossoDCRaSSN() {
+		if(nonRiscossoDCRaSSN==null)
+    		return new BigDecimal(0);
 		return nonRiscossoDCRaSSN;
 	}
 
@@ -328,6 +342,8 @@ public class DatiRegistratoriTelematiciType {
 	}
 
 	public BigDecimal getNonRiscossoOmaggio() {
+		if(nonRiscossoOmaggio==null)
+    		return new BigDecimal(0);
 		return nonRiscossoOmaggio;
 	}
 
@@ -336,6 +352,8 @@ public class DatiRegistratoriTelematiciType {
 	}
 
 	public BigDecimal getCodiceAttivita() {
+		if(codiceAttivita==null)
+    		return new BigDecimal(0);
 		return codiceAttivita;
 	}
 

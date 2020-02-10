@@ -55,8 +55,10 @@ import org.w3c.dom.NodeList;
 import cnr.isti.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.DatiRegistratoriTelematiciType;
+import cnr.isti.sse.data.corrispettivi.ElencoCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.IVAType;
-
+import cnr.isti.sse.data.corrispettivi.NaturaType;
+import cnr.isti.sse.data.corrispettivi.TotaliType;
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
 
 
@@ -444,6 +446,81 @@ public class Utility {
 	public static Pair<String, Boolean> getMatricola(DocCommercialiLotteriaType docLotteria, String event) {
 		SignatureType signa = docLotteria.getSignature();
 		return getMatricola(signa, event);
+	}
+
+
+	public static void testInfoCorri(DatiCorrispettiviType corrispettivi) {
+		try {
+			if(corrispettivi!=null) {
+				boolean Simu = corrispettivi.isSimulazione();
+				if(Simu) {
+					log.info("**** ATTENZIONE ****");
+					log.info("**** Simulazione ATTIVA ****");
+					log.info("**** ********** ****");
+				}
+				TotaliType Totali = corrispettivi.getDatiRT().getTotali();
+				if(Totali==null) {
+					log.error("**** ATTENZIONE ****");
+					log.error("Corrispettivi v6");
+					log.error("Passare a corrispettivi v7");
+					log.error("**** ********** ****");
+					return;
+				}
+				List<DatiRegistratoriTelematiciType> Riepilogo = corrispettivi.getDatiRT().getRiepilogo();
+				BigDecimal Tot = checkRiepilogo(Riepilogo);
+
+				BigDecimal sum = Totali.getPagatoContanti().add(Totali.getPagatoElettronico()).add(Totali.getScontoApagare());
+				if(Tot.compareTo(sum)!=0) {
+					log.error("Totali non congruenti");
+				}
+
+			}
+		}catch (Exception e) {
+			log.error(e);
+		}
+
+	}
+
+
+	private static BigDecimal checkRiepilogo(List<DatiRegistratoriTelematiciType> riepilogo) {
+		
+		BigDecimal totale = new BigDecimal(0);
+		
+		for (DatiRegistratoriTelematiciType datiRegistratoriTelematiciType : riepilogo) {
+			
+			IVAType ivat = datiRegistratoriTelematiciType.getIva();
+			
+			NaturaType naturat = datiRegistratoriTelematiciType.getNatura();
+			
+			BigDecimal ammontare = datiRegistratoriTelematiciType.getAmmontare();
+			
+			BigDecimal parziale = datiRegistratoriTelematiciType.getImportoParziale();		
+			BigDecimal beniinsonp = datiRegistratoriTelematiciType.getBeniInSospeso();
+			BigDecimal nonriscoSSN = datiRegistratoriTelematiciType.getNonRiscossoDCRaSSN();
+			BigDecimal nonriscoFAT = datiRegistratoriTelematiciType.getNonRiscossoFatture();
+			BigDecimal nonriscoOmg = datiRegistratoriTelematiciType.getNonRiscossoOmaggio();
+			BigDecimal nonriscoServ = datiRegistratoriTelematiciType.getNonRiscossoServizi();
+			BigDecimal resi = datiRegistratoriTelematiciType.getTotaleAmmontareResi();
+			BigDecimal annulli = datiRegistratoriTelematiciType.getTotaleAmmontareAnnulli();
+
+			BigDecimal sum = parziale.add(beniinsonp)
+					.add(nonriscoSSN).add(nonriscoFAT).add(nonriscoServ)
+					.add(nonriscoOmg).add(resi).add(annulli); 
+			
+			if(ammontare.compareTo(sum)!=0) {
+				log.error("Il valore nel campo Ammontare non Corretto");
+			}
+			
+			if(ivat!=null) {
+				BigDecimal aliq = ivat.getAliquotaIVA();
+				totale = totale.add(ammontare.multiply(aliq));
+			}else {
+				totale = totale.add(ammontare);
+			}
+
+		}
+		
+		return totale;
 	}
 
 

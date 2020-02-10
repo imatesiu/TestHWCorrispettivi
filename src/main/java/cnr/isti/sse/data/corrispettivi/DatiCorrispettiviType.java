@@ -298,10 +298,18 @@ public class DatiCorrispettiviType {
      */
     public String getSimulazione() {
         if (simulazione == null) {
-            return "true";
+            return "";
         } else {
             return simulazione;
         }
+    }
+    
+    public boolean isSimulazione() {
+    	if(simulazione!=null) {
+    		if(simulazione=="true")
+    			return true;
+    	}
+    	return false;
     }
 
     /**

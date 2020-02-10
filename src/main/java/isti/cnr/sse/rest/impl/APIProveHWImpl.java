@@ -1,26 +1,17 @@
 package isti.cnr.sse.rest.impl;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
-import java.security.Principal;
-import java.security.PublicKey;
-import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -36,31 +27,17 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.crypto.dsig.Reference;
-import javax.xml.crypto.dsig.XMLSignature;
-import javax.xml.crypto.dsig.XMLSignatureFactory;
-import javax.xml.crypto.dsig.dom.DOMValidateContext;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMResult;
-import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.io.IOUtils;
 import org.glassfish.grizzly.utils.Pair;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
-
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @Consumes(MediaType.APPLICATION_XML)
 // @Produces(MediaType.APPLICATION_XML)
@@ -346,6 +323,7 @@ public class APIProveHWImpl {
 
 			// is client behind something?
 			aggiornadiff(now, ipAddress, Corrispettivi.getTrasmissione().getProgressivo());
+			Utility.testInfoCorri(Corrispettivi);
 			testProgressivo(Corrispettivi, ipAddress, map);
 
 			int num = aggiornaricevuti(ipAddress);
@@ -531,7 +509,7 @@ private void testProgressivo(DatiCorrispettiviType corrispettivi, String key, Ma
 	 */
 
 
-	private Pair<String,Boolean> getMatricola(DatiCorrispettiviType d, String corri) {
+/*	private Pair<String,Boolean> getMatricola(DatiCorrispettiviType d, String corri) {
 		String matricola = null;
 		boolean validFlag = false;
 		if (d.getSignature() != null) {
@@ -634,5 +612,5 @@ private void testProgressivo(DatiCorrispettiviType corrispettivi, String key, Ma
 			throw new RuntimeException("Unable to marshall JAXB SAML object to DOM for signing.", e);
 		}
 	}
-
+*/
 }

@@ -243,7 +243,7 @@ public class APIDispositiviImpl {
 */
 
 		} catch (/*IOException |JAXBException | ParserConfigurationException*/ JAXBException  e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			log.error(e);
 		}
 		try{
