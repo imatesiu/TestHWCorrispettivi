@@ -1,9 +1,6 @@
 package isti.cnr.sse.rest.impl.dispositivi;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -18,6 +15,7 @@ import java.security.PrivateKey;
 import java.security.SecureRandom;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPrivateCrtKey;
 import java.text.SimpleDateFormat;
@@ -37,8 +35,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -48,12 +44,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import java.security.cert.CertificateFactory;
-
 
 import org.apache.commons.io.IOUtils;
 import org.bouncycastle.asn1.x500.RDN;
@@ -66,16 +56,12 @@ import org.bouncycastle.cert.X509CertificateHolder;
 import org.bouncycastle.cert.X509v3CertificateBuilder;
 import org.bouncycastle.cert.jcajce.JcaX509ExtensionUtils;
 import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.bouncycastle.pkcs.PKCS10CertificationRequest;
-import org.bouncycastle.util.io.pem.PemReader;
 import org.glassfish.grizzly.utils.Pair;
-import org.w3c.dom.Document;
 
-import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoRichiestaCertificatoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.RichiestaCertificatoDispositivoType;
@@ -83,8 +69,6 @@ import isti.cnr.sse.jsf.SendRest;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
 import isti.cnr.sse.rest.impl.ErrorHttp;
 import isti.cnr.sse.rest.impl.Utility;
-import isti.cnr.sse.rest.impl.firma.SignReply;
-import sun.misc.BASE64Decoder;
 
 @Consumes(MediaType.APPLICATION_XML)
 //@Produces(MediaType.APPLICATION_XML)
@@ -447,8 +431,8 @@ public class APIDispositiviImpl {
 	        	else{
 	        		String localCSR = stringcsr.replace("-----BEGIN CERTIFICATE REQUEST-----", "")
 	        				.replace("-----END CERTIFICATE REQUEST-----", "").trim();
-	        		BASE64Decoder decoder = new BASE64Decoder();
-	        		csrHolder = new PKCS10CertificationRequest(decoder.decodeBuffer(localCSR));
+	        		
+	        		csrHolder = new PKCS10CertificationRequest(Base64.getDecoder().decode(localCSR));
 	        	}
 
 	            // Blanket grant the subject as requested in the CSR
