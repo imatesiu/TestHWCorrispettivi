@@ -257,6 +257,18 @@ public class APIProveHWImpl {
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		// @Context HttpServletRequest request){
 		response.setHeader("Connection", "Close");
+		
+		
+		log.info("Message from: "+request.getRemoteAddr());
+		
+		if(request.getRequestURL().lastIndexOf("https")==-1) {
+			log.error("**** CONESSIONE NON SSL ***** ");
+			if(request.getRequestURL().indexOf("9090")>-1) {
+				log.error("**** USATA PORTA 9090 ***** ");
+			}
+			log.error("**** *** *** *** ***** ");
+		}
+		
 		JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		
