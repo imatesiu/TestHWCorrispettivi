@@ -505,7 +505,7 @@ public class Utility {
 
 			BigDecimal sum = parziale.add(beniinsonp)
 					.add(nonriscoSSN).add(nonriscoFAT).add(nonriscoServ)
-					.add(nonriscoOmg).add(resi).add(annulli); 
+					.add(resi).add(annulli); 
 			
 			if(ammontare.compareTo(sum)!=0) {
 				log.error("Il valore nel campo Ammontare non Corretto");
