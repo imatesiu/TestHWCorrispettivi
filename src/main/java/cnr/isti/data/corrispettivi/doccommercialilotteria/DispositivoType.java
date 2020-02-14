@@ -94,4 +94,11 @@ public class DispositivoType {
         this.matrCassa = value;
     }
 
+	@Override
+	public String toString() {
+		return "matrTrasm: " + matrTrasm + ";  \\n matrCassa: " + matrCassa;
+	}
+    
+    
+
 }

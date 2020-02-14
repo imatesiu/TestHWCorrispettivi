@@ -3,9 +3,11 @@ package isti.cnr.sse.rest.impl.dispositivi.corrispettivi.lotteria;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +29,12 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.io.IOUtils;
 import org.glassfish.grizzly.utils.Pair;
 
+import cnr.isti.data.corrispettivi.doccommercialilotteria.DatiPagamentoType;
 import cnr.isti.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
+import cnr.isti.data.corrispettivi.doccommercialilotteria.DocumentoCommercialeType;
+import cnr.isti.data.corrispettivi.doccommercialilotteria.ResoAnnulloType;
+import cnr.isti.data.corrispettivi.doccommercialilotteria.TipologiaResoAnnulloType;
+import cnr.isti.data.corrispettivi.doccommercialilotteria.VenditaType;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EventoDispositivoType;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
@@ -52,6 +59,18 @@ public class APILotteriaCorrispettiviImpl {
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		// @Context HttpServletRequest request){
 		response.setHeader("Connection", "Close");
+		
+		log.info("Message from: "+request.getRemoteAddr());
+		int len = request.getContentLength();
+		if(request.getRequestURL().lastIndexOf("https")==-1) {
+			log.error("**** CONESSIONE NON SSL ***** ");
+			if(request.getRequestURL().indexOf("9090")>-1) {
+				log.error("**** USATA PORTA 9090 ***** ");
+			}
+			log.error("**** *** *** *** ***** ");
+		}
+		
+		
 		JAXBContext jaxbContext = JAXBContext.newInstance(DocCommercialiLotteriaType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		
@@ -118,6 +137,8 @@ public class APILotteriaCorrispettiviImpl {
 			}
 			log.info("received form: " + ipAddress + " " + timeStamp);
 			
+			int error = checkDatiLotteria(len, docLotteria);
+			
 			if(pair.getSecond()){
 				// TODO cambiare risporta
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response/lotteria/Lotteria_AC.xml");
@@ -148,6 +169,54 @@ public class APILotteriaCorrispettiviImpl {
 	}
 	
 	
+	private int checkDatiLotteria(int len, DocCommercialiLotteriaType docLotteria) {
+		
+		if(docLotteria.getDocumentoCommerciale().size()>100 ){
+			log.error("Error "+ 300);
+
+			return 300;
+		}
+		if(len>60000){
+			log.error("Error "+ 301);
+
+			return 301;
+		}
+		
+		 List<DocumentoCommercialeType> list = docLotteria.getDocumentoCommerciale();
+		for (DocumentoCommercialeType documentoCommerciale : list) {
+			log.info("Progressivo Lotteria: "+documentoCommerciale.getNumeroProgressivo());
+			BigDecimal ammontare = documentoCommerciale.getAmmontare();
+			log.info("Ricevuto Ammontare lotteria: "+ammontare);
+			ResoAnnulloType resoannullo = documentoCommerciale.getResoAnnullo();
+			if(resoannullo!=null){
+				log.info("*****DATI RESO/ANNULLO*****");
+				log.info(resoannullo.getTipologia());
+				log.info(resoannullo.getDispositivo());
+				log.info(resoannullo.getProgressivo());
+				log.info(resoannullo.getDataOra());
+				log.info("*********");
+			}
+			
+			
+			VenditaType vendita = documentoCommerciale.getVendita();
+			if(vendita!=null){
+				BigDecimal totpagamenti = new BigDecimal(0);
+				for(DatiPagamentoType pagamenti : vendita.getDatiPagamento()){
+					totpagamenti = totpagamenti.add(pagamenti.getImporto());
+				}
+				log.info("Somma Pagamenti Calcolata: "+totpagamenti);
+				if(ammontare.compareTo(totpagamenti)!=0){
+					log.error("Error "+ 308);
+					return 308;
+				}
+			}
+		}
+		
+		log.info("****END*****");
+		return 0;
+	}
+
+
 	@Path("/setxml/{key:.*}")
 	@GET
 	public String setXml(@PathParam("key") Integer key) {
