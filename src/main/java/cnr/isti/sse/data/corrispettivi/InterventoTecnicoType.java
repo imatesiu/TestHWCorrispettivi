@@ -52,9 +52,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "idIVALaboratorio",
     "dataOra",
     "codice",
+    "note",
     "numeroSw",
-    "dataRelease",
-    "note"
+    "dataRelease"
+    
 })
 public class InterventoTecnicoType {
 
@@ -69,14 +70,15 @@ public class InterventoTecnicoType {
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     @XmlSchemaType(name = "normalizedString")
     protected String codice;
+    @XmlElement(name = "Note")
+    @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
+    protected String note;
     @XmlElement(name = "NumeroSw")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String numeroSw;
     @XmlElement(name = "DataRelease")
     protected XMLGregorianCalendar dataRelease;
-    @XmlElement(name = "Note")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
-    protected String note;
+
 
     /**
      * Gets the value of the cfTecnico property.
