@@ -57,7 +57,7 @@ public class GlassfishLogFile implements Serializable {
 				break;
 			}
 			//System.out.println(this.offset);
-			this.offset += line.length() + 2;
+			this.offset += line.length() + 4;
 			page.append(line).append(System.getProperty("line.separator"));
 		}
 		this.data = page.toString();
