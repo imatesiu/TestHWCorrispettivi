@@ -8,25 +8,27 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-import java.io.InputStream;
-
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.security.PublicKey;
+import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -55,19 +57,14 @@ import org.w3c.dom.NodeList;
 import cnr.isti.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.DatiRegistratoriTelematiciType;
-import cnr.isti.sse.data.corrispettivi.ElencoCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.IVAType;
 import cnr.isti.sse.data.corrispettivi.NaturaType;
 import cnr.isti.sse.data.corrispettivi.TotaliType;
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
-
-
 import cnr.isti.sse.data.corrispettivi.messaggi.EventoDispositivoType;
+import cnr.isti.sse.data.corrispettivi.messaggi.RichiestaCertificatoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.signature.SignatureType;
 import isti.cnr.sse.rest.impl.util.CSVUtils;
-
-
-import cnr.isti.sse.data.corrispettivi.messaggi.RichiestaCertificatoDispositivoType;
 
 
 public class Utility {
@@ -521,6 +518,55 @@ public class Utility {
 		}
 		
 		return totale;
+	}
+
+
+	public static boolean checkCA(DatiCorrispettiviType corrispettivi) {
+		SignatureType segnature = corrispettivi.getSignature();
+		byte[] certbyte = segnature.getKeyInfo().getX509Data().getX509Certificate();
+		CertificateFactory fact;
+		boolean test = true;
+		try {
+			fact = CertificateFactory.getInstance("X.509");
+			X509Certificate certificate = (X509Certificate) fact
+					.generateCertificate(new ByteArrayInputStream(certbyte));
+			
+		     InputStream jskfile = Utility.class.getClassLoader().getResourceAsStream("CAAde.jks");
+	           
+	            KeyStore ks = KeyStore.getInstance("JKS");
+	            String p12pass = "jetty8";
+	            ks.load(jskfile, p12pass.toCharArray());
+	            ks.aliases();
+	            Enumeration<String> en = ks.aliases();
+	            
+	            while (en.hasMoreElements()) {
+	                String alias = (String) en.nextElement();
+	                X509Certificate CACert = (X509Certificate) ks.getCertificate(alias);
+	                try {
+						certificate.verify(CACert.getPublicKey());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						//e.printStackTrace();
+						test = false;
+						continue;
+					}
+	                log.info("Alias CA che ha emesso il certificato del dispo: " + alias);
+	                test = true;
+	                break;
+	            }
+			
+			
+		} catch (CertificateException | KeyStoreException | NoSuchAlgorithmException | IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return false;
+
+		}
+		if(!test) {
+            log.error("CA che ha emesso il certificato del dispo NON trovata");
+		}
+		return test;
+		
 	}
 
 

@@ -318,6 +318,7 @@ public class APIProveHWImpl {
 			Date now = new Date();
 			String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(now);
 			Pair<String, Boolean> pair = Utility.getMatricola(Corrispettivi, Corri);
+			boolean flagCA = Utility.checkCA(Corrispettivi);
 			String ipAddress = pair.getFirst();
 			if (ipAddress == null) {
 				ipAddress = request.getHeader("X-FORWARDED-FOR");
@@ -347,7 +348,7 @@ public class APIProveHWImpl {
 			esito.setVersione("1.0");
 			Beep.tone(1000, 300, ipAddress);
 
-			if(pair.getSecond()){
+			if(pair.getSecond() & flagCA){
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
 				return text;
