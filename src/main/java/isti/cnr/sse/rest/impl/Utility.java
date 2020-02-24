@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import java.io.StringReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -29,22 +30,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.security.auth.x500.X500Principal;
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.crypto.dsig.Reference;
 import javax.xml.crypto.dsig.XMLSignature;
 import javax.xml.crypto.dsig.XMLSignatureFactory;
 import javax.xml.crypto.dsig.dom.DOMValidateContext;
+import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.io.IOUtils;
 import org.bouncycastle.asn1.x500.X500Name;
@@ -53,6 +60,7 @@ import org.bouncycastle.asn1.x500.style.IETFUtils;
 import org.glassfish.grizzly.utils.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import cnr.isti.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
@@ -70,7 +78,28 @@ import isti.cnr.sse.rest.impl.util.CSVUtils;
 public class Utility {
 
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Utility.class);
+	
 
+	static final Map<String, String> Produttori = new HashMap<String , String>() {{
+		put("72","RCH Italia SpA");
+		put("88","DIEBOLD NIXDORF");
+		put("76","SHS srl");
+		put("1B","ITALRETAIL");
+		put("96","CUSTOM");
+		put("53","NCR");
+		put("99","EPSON Italia SpA");
+		put("8A","AP.esse SpA");
+		put("4C","dtr Italy Srl");
+		put("3C","3I Reatail Solutions");
+		put("80","Olivetti SpA");
+		put("7B","4P srl");
+		put("6C","VDS spa");
+		put("94","LABWARE SpA");
+		put("17","K.S. SRL");
+		put("7C","VANDONI tech");
+		put("8C","MARKETINO S.R.L.");
+	}};
+	
 	public static void calc(DatiCorrispettiviType corrispettivi, String key, Map<String, RT> map) {
 
 
@@ -263,6 +292,14 @@ public class Utility {
 			    
 				 String org = IETFUtils.valueToString(x500name.getRDNs(BCStyle.O)[0].getFirst().getValue());
 				 String cn = IETFUtils.valueToString(x500name.getRDNs(BCStyle.CN)[0].getFirst().getValue());
+				 String prod = (String) cn.subSequence(0, 2);
+				 String produ = Produttori.get(prod);
+				 if(produ!=null)
+					 log.info("Produttore  : " + produ);
+				 else {
+					 log.info("Produttore  Sconosciuto ");
+					 validFlag = false;
+				 }
 				 matricola = cn;
 				 if(!org.contains("Agenzia"))
 					 log.info("ORG  : " + org);
@@ -566,6 +603,45 @@ public class Utility {
             log.error("CA che ha emesso il certificato del dispo NON trovata");
 		}
 		return test;
+		
+	}
+
+
+	public static void validateXmlCorr(Unmarshaller unmarshaller)  {
+		try {
+		 //Setup schema validator
+        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+	     InputStream xsdcorr = Utility.class.getClassLoader().getResourceAsStream("CorrispettiviTypes_v1.0.xsd");
+	     Source schemaSource = new StreamSource(xsdcorr);
+
+      //  Schema corrispettiviSchema = sf.newSchema(schemaSource);
+        
+        URL xsdUrlB = Utility.class.getClassLoader().getResource("xmldsig-core-schema.xsd");
+
+        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        //---
+        String W3C_XSD_TOP_ELEMENT =
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
+        "<xs:schema\n" + 
+        "	xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" + 
+        "	xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"\n" + 
+        "	xmlns=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0\"\n" + 
+        "	targetNamespace=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0\"\n" + 
+        "	version=\"1.0\">"
+       +"	<xs:import namespace=\"http://www.w3.org/2000/09/xmldsig#\" schemaLocation=\""+xsdUrlB.getPath() +"\" />\n" 
+       // + "<xs:include schemaLocation=\"" +xsdUrlB.getPath() +"\"/>\n"
+        +"</xs:schema>";
+        Schema schema = schemaFactory.newSchema(new StreamSource(new StringReader(W3C_XSD_TOP_ELEMENT), "xsdTop"));
+        
+        
+        
+        
+        unmarshaller.setSchema(schema);
+        log.info("XML  valido per xsd");
+		} catch (SAXException e) {
+			// TODO: handle exception
+            log.error("XML non valido per xsd"+e.getMessage());
+		}
 		
 	}
 
