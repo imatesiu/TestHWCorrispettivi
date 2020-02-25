@@ -56,6 +56,7 @@
     <Array type="String">
       <Item>TLS_DHE_RSA.*</Item>
       <Item>TLS_ECDHE.*</Item>
+      <Item>TLS_RSA_WITH_AES.*</Item>
     </Array>
   </Set>
   <!-- =========================================================== -->
