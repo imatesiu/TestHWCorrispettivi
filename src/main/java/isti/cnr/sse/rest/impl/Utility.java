@@ -638,7 +638,7 @@ public class Utility {
         
         unmarshaller.setSchema(schema);
         log.info("XML  valido per xsd");
-		} catch (SAXException e) {
+		} catch (Exception e) {
 			// TODO: handle exception
             log.error("XML non valido per xsd"+e.getMessage());
 		}
