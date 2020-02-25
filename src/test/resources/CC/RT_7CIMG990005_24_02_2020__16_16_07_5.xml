@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><p:DatiCorrispettivi xmlns:p="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" versione="COR10" xsi:schemaLocation="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0/CorrispettiviTypes_v1.0.xsd  http://www.w3.org/2000/09/xmldsig#  xmldsig-core-schema.xsd">
+	<Trasmissione>
+		<Progressivo>23</Progressivo>
+		<Formato>COR10</Formato>
+	</Trasmissione>
+	<DataOraRilevazione>2019-12-03T16:13:57</DataOraRilevazione>
+	<DatiRT>
+		<Riepilogo>
+			<Natura>N4</Natura>
+			<Ammontare>3.00</Ammontare>
+			<TotaleAmmontareResi>0.00</TotaleAmmontareResi>
+			<TotaleAmmontareAnnulli>0.00</TotaleAmmontareAnnulli>
+		</Riepilogo>
+		<Riepilogo>
+			<IVA>
+				<AliquotaIVA>22.00</AliquotaIVA>
+				<Imposta>1.80</Imposta>
+			</IVA>
+			<Ammontare>8.20</Ammontare>
+			<TotaleAmmontareResi>0.00</TotaleAmmontareResi>
+			<TotaleAmmontareAnnulli>0.00</TotaleAmmontareAnnulli>
+		</Riepilogo>
+	</DatiRT>
+<ds:Signature><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/><ds:Reference URI=""><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>YeBjqv+FmSqC9fLlznQh62rmRZj0V+t4JIpWlczVwsg=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>bagmjK7NS7gaMfKuSaAWYtrZ383zwgZNrfpY6FzWOQqB5MJJq+FyMy2m7bcyNsQXqb0bx2IzB02V
+enfPUamxMi6HMgHyeKMNRIiwbIIEIKtC1I1aFoUG39rnWy//tifLQ40AnTDgVhtp+g1R7YUQLyXS
+QunIKkYcYX6jLKmr45f8ISVcp1NqB6MfEb2PkMLW8XBDXDPF45arFljElfNFzmhXISvzGVqf+crr
+fGv+ZACkK/YCir15tAqXKWJRsVjWBuc6XibIzVw+ekYx1A/p4jxNif3Nl+pXScLbytqxV4cF2Bc6
+RLvigQpR2eSKRzNHyakOh8Xawqa+c3nx+Dw7WA==</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIEwDCCAqigAwIBAgIIcIn6NOqghE4wDQYJKoZIhvcNAQELBQAwgYAxCzAJBgNVBAYTAklUMR4w
+HAYDVQQKDBVBZ2VuemlhIGRlbGxlIEVudHJhdGUxJjAkBgNVBAsMHVNlcnZpemlvIEFFIENvcnJp
+c3BldHRpdmkgSVZBMSkwJwYDVQQDDCBDQSBTZXJ2aXppbyBBRSBDb3JyaXNwZXR0aXZpIElWQTAe
+Fw0yMDAyMjAwODU1MzRaFw0yODAyMjAwODU1MzRaMGsxCzAJBgNVBAYTAklUMR4wHAYDVQQKDBVB
+Z2VuemlhIGRlbGxlIEVudHJhdGUxJjAkBgNVBAsMHVNlcnZpemlvIEFFIENvcnJpc3BldHRpdmkg
+SVZBMRQwEgYDVQQDDAs3Q0lNRzk5MDAwNTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
+ANW3F75Ej3EoNY93OD/q/b0P82OfnoOhymeBb9KvAyKhPcoh3bMBp81UKTRQVnmQ5OlgtCSA6wdq
+rGAj4s/zQPXz8m50qGH0IzEytFc5eJJl41oLNbKJXsjvfpVTK7k++LbtAardDVc+JxEFWAudoMxa
+ahz72V15YsBDFv8dumcO1439IMGDNL0p4P0B94/XuyoPuqAnLm+rHBQbXhLzqelVodRb48eqWiKD
+h8fXWsENiFPi9JnoxMqThxCVGIiS9WJLbnAh9VxHv0musVJ3kUVWBjba/ufsjITxbhKQxLcrdNC7
+10bYgnzWEreKV7nYuemI08inp++wyUvsZaNKDXkCAwEAAaNSMFAwHwYDVR0jBBgwFoAUi7cVjwa/
+Yu+xv0v/BGNkizHeE0YwHQYDVR0OBBYEFGkxS/7X/Vjaj8g5Y135r3ODBhnhMA4GA1UdDwEB/wQE
+AwIGQDANBgkqhkiG9w0BAQsFAAOCAgEAhlAGkqwr9lKJnFGcaCPAFVpOJbrLbVRX+/f0p6JxHNyD
+dUbuxI7qx1I1p7aNDBCXGxB68ILK9wmT9i6m7QXW39lWebPzMgQqJBnMpooemFYeAgG7LGV+I8rn
+ZSw9gsjkatCfEM/vx835Syg6z9+l+sIW6YHxqY8uJwe1CemcB2i9Ka/2iqEuOJaLKAWrkJ5/4rtP
+a6xzyTys5qYpifIQ6eKTA0984Flmo9o4/iOW9V+tuo/3f2asKp7KlJeO8IM/BUTA+PwXeu4+WVb9
+9Ol36hmu6FYyS57NRJ1Wldp7Z6F1WeewDV16by8vzbzfDWsvWV+XHzlp+oC9+cv5GuW+SKR/1TaT
+fSzMQPMn+9gAC1XTR+DEHlf4VW3r9Ou2dGID3GmTApA50Fuuf9kUkijsr8IURSLkwtIegobD7tnc
+xxhEdErSvLt0RhJy1UHNE9i2RWnOt0cV6r/mI/N4hiNN/ofexdfHtL/Z3LCtFEkVrQjJQ2qoPqTX
+ct2LGQaI0DTq6KwKJh5RRYEEbDQMqoi2SFNUbOcHHDoeNqQefyBCWA88SSKFfREzMZLXvFFrbcKK
+2oarnsGpun3xJq+GWzxojHq+et0cYf1fCzDg1wNPnae22aVQI44HfxrxIiriufxQzfbt1uS3/jZ6
+pOxUBumEP8vCUvi64PUiApLNWhP1bQg=</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></p:DatiCorrispettivi>

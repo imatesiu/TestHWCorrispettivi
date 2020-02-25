@@ -607,42 +607,45 @@ public class Utility {
 	}
 
 
-	public static void validateXmlCorr(Unmarshaller unmarshaller)  {
+	public static void validateXmlCorr()  {
 		try {
-		 //Setup schema validator
-        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-	     InputStream xsdcorr = Utility.class.getClassLoader().getResourceAsStream("CorrispettiviTypes_v1.0.xsd");
-	     Source schemaSource = new StreamSource(xsdcorr);
+			JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
-      //  Schema corrispettiviSchema = sf.newSchema(schemaSource);
-        
-        URL xsdUrlB = Utility.class.getClassLoader().getResource("xmldsig-core-schema.xsd");
+			//Setup schema validator
+			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			InputStream xsdcorr = Utility.class.getClassLoader().getResourceAsStream("CorrispettiviTypes_v1.0.xsd");
+			Source schemaSource = new StreamSource(xsdcorr);
 
-        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        //---
-        String W3C_XSD_TOP_ELEMENT =
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
-        "<xs:schema\n" + 
-        "	xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" + 
-        "	xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"\n" + 
-        "	xmlns=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0\"\n" + 
-        "	targetNamespace=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0\"\n" + 
-        "	version=\"1.0\">"
-       +"	<xs:import namespace=\"http://www.w3.org/2000/09/xmldsig#\" schemaLocation=\""+xsdUrlB.getPath() +"\" />\n" 
-       // + "<xs:include schemaLocation=\"" +xsdUrlB.getPath() +"\"/>\n"
-        +"</xs:schema>";
-        Schema schema = schemaFactory.newSchema(new StreamSource(new StringReader(W3C_XSD_TOP_ELEMENT), "xsdTop"));
-        
-        
-        
-        
-        unmarshaller.setSchema(schema);
-        log.info("XML  valido per xsd");
+			//  Schema corrispettiviSchema = sf.newSchema(schemaSource);
+
+			URL xsdUrlB = Utility.class.getClassLoader().getResource("xmldsig-core-schema.xsd");
+
+			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			//---
+			String W3C_XSD_TOP_ELEMENT =
+					"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
+							"<xs:schema\n" + 
+							"	xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" + 
+							"	xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"\n" + 
+							"	xmlns=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0\"\n" + 
+							"	targetNamespace=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0\"\n" + 
+							"	version=\"1.0\">"
+							+"	<xs:import namespace=\"http://www.w3.org/2000/09/xmldsig#\" schemaLocation=\""+xsdUrlB.getPath() +"\" />\n" 
+							// + "<xs:include schemaLocation=\"" +xsdUrlB.getPath() +"\"/>\n"
+							+"</xs:schema>";
+			Schema schema = schemaFactory.newSchema(new StreamSource(new StringReader(W3C_XSD_TOP_ELEMENT), "xsdTop"));
+
+
+
+
+			unmarshaller.setSchema(schema);
+			log.info("XML  valido per xsd");
 		} catch (Exception e) {
 			// TODO: handle exception
-            log.error("XML non valido per xsd"+e.getMessage());
+			log.error("XML non valido per xsd"+e.getMessage());
 		}
-		
+
 	}
 
 
