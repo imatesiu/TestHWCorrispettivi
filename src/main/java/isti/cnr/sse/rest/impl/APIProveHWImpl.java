@@ -318,7 +318,9 @@ public class APIProveHWImpl {
 			Date now = new Date();
 			String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(now);
 			Pair<String, Boolean> pair = Utility.getMatricola(Corrispettivi, Corri);
-			boolean flagCA = Utility.checkCA(Corrispettivi);
+			boolean flagCA = Utility.checkCASpe(Corrispettivi);
+			if(!flagCA)
+				Utility.checkCAProd(Corrispettivi);
 			String ipAddress = pair.getFirst();
 			if (ipAddress == null) {
 				ipAddress = request.getHeader("X-FORWARDED-FOR");

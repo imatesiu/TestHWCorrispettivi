@@ -557,8 +557,25 @@ public class Utility {
 		return totale;
 	}
 
+	
+	public static boolean checkCASpe(DatiCorrispettiviType corrispettivi) {
+		boolean test = checkCA(corrispettivi,"CAAdeSperimentazione.jks");
+		
+		if(!test) {
+            log.error("CA che ha emesso il certificato del dispo NON è quella di sperimentazione");
+		}
+		return test;
+	}
+	
+	public static boolean checkCAProd(DatiCorrispettiviType corrispettivi) {
+		boolean test =  checkCA(corrispettivi,"CAAdeProduzione.jks");
+		if(!test) {
+            log.error("CA che ha emesso il certificato del dispo NON è quella di Produzione");
+		}
+		return test;
+	}
 
-	public static boolean checkCA(DatiCorrispettiviType corrispettivi) {
+	public static boolean checkCA(DatiCorrispettiviType corrispettivi, String jks) {
 		SignatureType segnature = corrispettivi.getSignature();
 		byte[] certbyte = segnature.getKeyInfo().getX509Data().getX509Certificate();
 		CertificateFactory fact;
@@ -568,7 +585,7 @@ public class Utility {
 			X509Certificate certificate = (X509Certificate) fact
 					.generateCertificate(new ByteArrayInputStream(certbyte));
 			
-		     InputStream jskfile = Utility.class.getClassLoader().getResourceAsStream("CAAde.jks");
+		     InputStream jskfile = Utility.class.getClassLoader().getResourceAsStream(jks);
 	           
 	            KeyStore ks = KeyStore.getInstance("JKS");
 	            String p12pass = "jetty8";
@@ -598,9 +615,6 @@ public class Utility {
 			//e.printStackTrace();
 			return false;
 
-		}
-		if(!test) {
-            log.error("CA che ha emesso il certificato del dispo NON trovata");
 		}
 		return test;
 		
