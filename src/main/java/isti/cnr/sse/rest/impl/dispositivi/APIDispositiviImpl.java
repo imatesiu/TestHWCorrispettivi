@@ -3,6 +3,7 @@ package isti.cnr.sse.rest.impl.dispositivi;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.math.BigInteger;
@@ -21,7 +22,6 @@ import java.security.interfaces.RSAPrivateCrtKey;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Base64;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,6 +60,8 @@ import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.bouncycastle.pkcs.PKCS10CertificationRequest;
+import org.bouncycastle.util.io.pem.PemObject;
+import org.bouncycastle.util.io.pem.PemReader;
 import org.glassfish.grizzly.utils.Pair;
 
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
@@ -141,6 +143,7 @@ public class APIDispositiviImpl {
 		response.setHeader("Connection", "Close");
 		JAXBContext jaxbContext = JAXBContext.newInstance(RichiestaCertificatoDispositivoType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		Utility.validateXmlMessaggi(unmarshaller);
 		if(censimento.length()==0){
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
@@ -275,7 +278,7 @@ public class APIDispositiviImpl {
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(AttivaDispositivoType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-		
+		Utility.validateXmlMessaggi(unmarshaller);
 		if(!flag.equals(ErrorHttp.Null)){
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
@@ -432,7 +435,7 @@ public class APIDispositiviImpl {
 	        		String localCSR = stringcsr.replace("-----BEGIN CERTIFICATE REQUEST-----", "")
 	        				.replace("-----END CERTIFICATE REQUEST-----", "").trim();
 	        		
-	        		csrHolder = new PKCS10CertificationRequest(Base64.getDecoder().decode(localCSR));
+	        		csrHolder = getPKCS10CertRequest(stringcsr);
 	        	}
 
 	            // Blanket grant the subject as requested in the CSR
@@ -475,16 +478,41 @@ public class APIDispositiviImpl {
 	                NoSuchAlgorithmException |
 	                NoSuchProviderException |
 	                IOException e) {
-	            
+	            log.error(e);
 	        }
 	        
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
+			log.error(e);
 		}
 		return null; 
 
+	}
+	
+	public static PKCS10CertificationRequest getPKCS10CertRequest(String csr) {
+	    
+	    if (csr == null || csr.isEmpty()) {
+	        log.error("getPKCS10CertRequest: CSR is null or empty");
+	    }
+	    
+	    try {
+	        Reader csrReader = new StringReader(csr);
+	        try (PemReader pemParser = new PemReader(csrReader)) {
+	        	PemObject pemObj = pemParser.readPemObject();
+	            if (pemObj!=null) {
+	            	byte[] pembytes = pemObj.getContent();
+	    			// Create the PKCS10
+	    			return new PKCS10CertificationRequest(pembytes);
+	            }
+	        }
+	    } catch (IOException ex) {
+	        log.error("getPKCS10CertRequest: unable to parse csr: " + ex.getMessage());
+	        
+	    }
+
+	    return null;
 	}
 	
 	private static String jaxbObjectToXML(EsitoRichiestaCertificatoDispositivoType customer) {

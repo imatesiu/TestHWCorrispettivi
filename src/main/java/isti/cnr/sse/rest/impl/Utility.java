@@ -36,6 +36,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.security.auth.x500.X500Principal;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -625,11 +627,8 @@ public class Utility {
 
 	public static void validateXmlCorr(Unmarshaller unmarshaller)  {
 		try {
-			//JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
-			//Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-
+		
 			//Setup schema validator
-			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			InputStream xsdcorr = Utility.class.getClassLoader().getResourceAsStream("CorrispettiviTypes_v1.0.xsd");
 			String text = IOUtils.toString(xsdcorr, StandardCharsets.UTF_8.name());
 			
@@ -638,7 +637,7 @@ public class Utility {
 
 			String xsd = text.replace("./xmldsig-core-schema.xsd", xsdUrlB.getPath());
 			
-			Source schemaSource = new StreamSource(xsdcorr);
+		//	Source schemaSource = new StreamSource(xsdcorr);
 
 		//	 Schema corrispettiviSchema = sf.newSchema(schemaSource);
 
@@ -663,23 +662,17 @@ public class Utility {
 	public static void validateXmlLotteria(Unmarshaller unmarshaller)  {
 		try {
 			
-			//JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
-			//Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-
+	
 			//Setup schema validator
-			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			InputStream xsdcorr = Utility.class.getClassLoader().getResourceAsStream("DocCommercialiLotteriaTypes_v1.0.xsd");
 			String text = IOUtils.toString(xsdcorr, StandardCharsets.UTF_8.name());
 			
 			URL xsdUrlB = Utility.class.getClassLoader().getResource("xmldsig-core-schema.xsd");
 
 
-			String xsd = text.replace("./xmldsig-core-schema.xsd", xsdUrlB.getPath());
+			String xsd = text.replace("xmldsig-core-schema.xsd", xsdUrlB.getPath());
 			
-			Source schemaSource = new StreamSource(xsdcorr);
-
-		//	 Schema corrispettiviSchema = sf.newSchema(schemaSource);
-
+	
 
 			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			//---
@@ -701,19 +694,15 @@ public class Utility {
 	public static void validateXmlMessaggi(Unmarshaller unmarshaller)  {
 		try {
 			//Setup schema validator
-			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			InputStream xsdcorr = Utility.class.getClassLoader().getResourceAsStream("CorrispettiviTypes_v1.0.xsd");
+			InputStream xsdcorr = Utility.class.getClassLoader().getResourceAsStream("CorrispettiviMessaggiTypes_v1.0.xsd");
 			String text = IOUtils.toString(xsdcorr, StandardCharsets.UTF_8.name());
 			
 			URL xsdUrlB = Utility.class.getClassLoader().getResource("xmldsig-core-schema.xsd");
 
 
-			String xsd = text.replace("./xmldsig-core-schema.xsd", xsdUrlB.getPath());
+			String xsd = text.replace("xmldsig-core-schema.xsd", xsdUrlB.getPath());
 			
-			Source schemaSource = new StreamSource(xsdcorr);
-
-		//	 Schema corrispettiviSchema = sf.newSchema(schemaSource);
-
+	
 
 			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			//---
@@ -748,6 +737,8 @@ class XmlValidationEventHandler implements ValidationEventHandler {
    //         System.out.println("    OBJECT:  " + event.getLocator().getObject());
    //         System.out.println("    NODE:  " + event.getLocator().getNode());
    //         System.out.println("    URL:  " + event.getLocator().getURL());
-            return true;
+		//throw new WebApplicationException(Response.status(406).entity("").build());
+
+        return true;
     }
 }

@@ -73,7 +73,7 @@ public class APILotteriaCorrispettiviImpl {
 		
 		JAXBContext jaxbContext = JAXBContext.newInstance(DocCommercialiLotteriaType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-		
+		Utility.validateXmlLotteria(unmarshaller);
 		if(!flag.equals(ErrorHttp.Null)){
 			try{
 				// @Todo

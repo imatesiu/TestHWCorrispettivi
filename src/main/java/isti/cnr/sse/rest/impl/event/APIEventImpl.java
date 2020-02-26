@@ -53,7 +53,7 @@ public class APIEventImpl {
 		response.setHeader("Connection", "Close");
 		JAXBContext jaxbContext = JAXBContext.newInstance(EventoDispositivoType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-		
+		Utility.validateXmlMessaggi(unmarshaller);
 		if(!flag.equals(ErrorHttp.Null)){
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
