@@ -41,6 +41,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.ValidationEvent;
+import javax.xml.bind.ValidationEventHandler;
 import javax.xml.crypto.dsig.Reference;
 import javax.xml.crypto.dsig.XMLSignature;
 import javax.xml.crypto.dsig.XMLSignatureFactory;
@@ -621,40 +623,74 @@ public class Utility {
 	}
 
 
-	public static void validateXmlCorr()  {
+	public static void validateXmlCorr(Unmarshaller unmarshaller)  {
 		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
-			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+			//JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
+			//Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
 			//Setup schema validator
 			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			InputStream xsdcorr = Utility.class.getClassLoader().getResourceAsStream("CorrispettiviTypes_v1.0.xsd");
+			String text = IOUtils.toString(xsdcorr, StandardCharsets.UTF_8.name());
+			
+			URL xsdUrlB = Utility.class.getClassLoader().getResource("xmldsig-core-schema.xsd");
+
+
+			String xsd = text.replace("./xmldsig-core-schema.xsd", xsdUrlB.getPath());
+			
 			Source schemaSource = new StreamSource(xsdcorr);
 
-			//  Schema corrispettiviSchema = sf.newSchema(schemaSource);
+		//	 Schema corrispettiviSchema = sf.newSchema(schemaSource);
 
-			URL xsdUrlB = Utility.class.getClassLoader().getResource("xmldsig-core-schema.xsd");
 
 			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			//---
-			String W3C_XSD_TOP_ELEMENT =
-					"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
-							"<xs:schema\n" + 
-							"	xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" + 
-							"	xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"\n" + 
-							"	xmlns=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0\"\n" + 
-							"	targetNamespace=\"http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/dati/v1.0\"\n" + 
-							"	version=\"1.0\">"
-							+"	<xs:import namespace=\"http://www.w3.org/2000/09/xmldsig#\" schemaLocation=\""+xsdUrlB.getPath() +"\" />\n" 
-							// + "<xs:include schemaLocation=\"" +xsdUrlB.getPath() +"\"/>\n"
-							+"</xs:schema>";
-			Schema schema = schemaFactory.newSchema(new StreamSource(new StringReader(W3C_XSD_TOP_ELEMENT), "xsdTop"));
+	
+			Schema schema = schemaFactory.newSchema(new StreamSource(new StringReader(xsd), "xsdTop"));
 
 
 
 
 			unmarshaller.setSchema(schema);
-			log.info("XML  valido per xsd");
+			unmarshaller.setEventHandler(new XmlValidationEventHandler());
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.error("XML non valido per xsd"+e.getMessage());
+		}
+
+	}
+	
+	public static void validateXmlLotteria(Unmarshaller unmarshaller)  {
+		try {
+			
+			//JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
+			//Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+			//Setup schema validator
+			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			InputStream xsdcorr = Utility.class.getClassLoader().getResourceAsStream("DocCommercialiLotteriaTypes_v1.0.xsd");
+			String text = IOUtils.toString(xsdcorr, StandardCharsets.UTF_8.name());
+			
+			URL xsdUrlB = Utility.class.getClassLoader().getResource("xmldsig-core-schema.xsd");
+
+
+			String xsd = text.replace("./xmldsig-core-schema.xsd", xsdUrlB.getPath());
+			
+			Source schemaSource = new StreamSource(xsdcorr);
+
+		//	 Schema corrispettiviSchema = sf.newSchema(schemaSource);
+
+
+			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			//---
+			Schema schema = schemaFactory.newSchema(new StreamSource(new StringReader(xsd), "xsdTop"));
+
+
+
+
+			unmarshaller.setSchema(schema);
+			unmarshaller.setEventHandler(new XmlValidationEventHandler());
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			log.error("XML non valido per xsd"+e.getMessage());
@@ -662,5 +698,54 @@ public class Utility {
 
 	}
 
+	public static void validateXmlMessaggi(Unmarshaller unmarshaller)  {
+		try {
+			//Setup schema validator
+			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			InputStream xsdcorr = Utility.class.getClassLoader().getResourceAsStream("CorrispettiviTypes_v1.0.xsd");
+			String text = IOUtils.toString(xsdcorr, StandardCharsets.UTF_8.name());
+			
+			URL xsdUrlB = Utility.class.getClassLoader().getResource("xmldsig-core-schema.xsd");
 
+
+			String xsd = text.replace("./xmldsig-core-schema.xsd", xsdUrlB.getPath());
+			
+			Source schemaSource = new StreamSource(xsdcorr);
+
+		//	 Schema corrispettiviSchema = sf.newSchema(schemaSource);
+
+
+			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			//---
+		Schema schema = schemaFactory.newSchema(new StreamSource(new StringReader(xsd), "xsdTop"));
+
+
+
+
+			unmarshaller.setSchema(schema);
+			unmarshaller.setEventHandler(new XmlValidationEventHandler());
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.error("XML non valido per xsd"+e.getMessage());
+		}
+
+	}
+
+}
+class XmlValidationEventHandler implements ValidationEventHandler {
+    @Override
+    public boolean handleEvent(ValidationEvent event) {
+         System.out.println("\nEVENT");
+            System.out.println("SEVERITY:  " + event.getSeverity());
+            System.out.println("MESSAGE:  " + event.getMessage());
+            System.out.println("LINKED EXCEPTION:  " + event.getLinkedException());
+            System.out.println("LOCATOR");
+            System.out.println("    LINE NUMBER:  " + event.getLocator().getLineNumber());
+            System.out.println("    COLUMN NUMBER:  " + event.getLocator().getColumnNumber());
+   //         System.out.println("    OFFSET:  " + event.getLocator().getOffset());
+   //         System.out.println("    OBJECT:  " + event.getLocator().getObject());
+   //         System.out.println("    NODE:  " + event.getLocator().getNode());
+   //         System.out.println("    URL:  " + event.getLocator().getURL());
+            return true;
+    }
 }

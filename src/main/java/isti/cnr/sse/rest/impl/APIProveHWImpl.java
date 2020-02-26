@@ -271,7 +271,7 @@ public class APIProveHWImpl {
 		
 		JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-		Utility.validateXmlCorr();	
+		Utility.validateXmlCorr(unmarshaller);	
 		if(!flag.equals(ErrorHttp.Null)){
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
