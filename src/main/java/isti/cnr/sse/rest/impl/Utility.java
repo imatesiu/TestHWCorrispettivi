@@ -733,15 +733,17 @@ public class Utility {
 
 }
 class XmlValidationEventHandler implements ValidationEventHandler {
+	
+	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(XmlValidationEventHandler.class);
     @Override
     public boolean handleEvent(ValidationEvent event) {
-         System.out.println("\nEVENT");
-            System.out.println("SEVERITY:  " + event.getSeverity());
-            System.out.println("MESSAGE:  " + event.getMessage());
-            System.out.println("LINKED EXCEPTION:  " + event.getLinkedException());
-            System.out.println("LOCATOR");
-            System.out.println("    LINE NUMBER:  " + event.getLocator().getLineNumber());
-            System.out.println("    COLUMN NUMBER:  " + event.getLocator().getColumnNumber());
+    	log.error("\nEVENT");
+    	log.error("SEVERITY:  " + event.getSeverity());
+    	log.error("MESSAGE:  " + event.getMessage());
+    	log.error("LINKED EXCEPTION:  " + event.getLinkedException());
+    	log.error("LOCATOR");
+    	log.error("    LINE NUMBER:  " + event.getLocator().getLineNumber());
+    	log.error("    COLUMN NUMBER:  " + event.getLocator().getColumnNumber());
    //         System.out.println("    OFFSET:  " + event.getLocator().getOffset());
    //         System.out.println("    OBJECT:  " + event.getLocator().getObject());
    //         System.out.println("    NODE:  " + event.getLocator().getNode());
