@@ -59,7 +59,7 @@ public class APILotteriaCorrispettiviImpl {
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		// @Context HttpServletRequest request){
 		response.setHeader("Connection", "Close");
-		
+		log.info("****************LotteriaCorrispettivi********************");
 		log.info("Message from: "+request.getRemoteAddr());
 		int len = request.getContentLength();
 		if(request.getRequestURL().lastIndexOf("https")==-1) {
@@ -138,7 +138,7 @@ public class APILotteriaCorrispettiviImpl {
 			log.info("received form: " + ipAddress + " " + timeStamp);
 			
 			int error = checkDatiLotteria(len, docLotteria);
-			
+			log.info("************************************");
 			if(pair.getSecond()){
 				// TODO cambiare risporta
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response/lotteria/Lotteria_AC.xml");

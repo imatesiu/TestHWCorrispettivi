@@ -141,6 +141,8 @@ public class APIDispositiviImpl {
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		// @Context HttpServletRequest request){
 		response.setHeader("Connection", "Close");
+		log.info("***************Censimento***************");
+
 		JAXBContext jaxbContext = JAXBContext.newInstance(RichiestaCertificatoDispositivoType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		Utility.validateXmlMessaggi(unmarshaller);
@@ -187,6 +189,7 @@ public class APIDispositiviImpl {
 			X509Certificate cert = createCertificate(CensimentoDispositivo.getCsr());
 
 			log.info("CENSIMENTO PRESSO ADE");
+			log.info("************************************");
 			return Response.status(status).entity(responseAsString).build();
 		/*	if(status == 200 || status == 201) {
 				if(responseAsString.length()>0) {
@@ -275,6 +278,7 @@ public class APIDispositiviImpl {
 	public String putAttivazioneRT(String attivazione, @Context HttpServletRequest request, @Context HttpServletResponse response)
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		response.setHeader("Connection", "Close");
+		log.info("***************Attivazione***************");
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(AttivaDispositivoType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -350,7 +354,7 @@ public class APIDispositiviImpl {
 			String responseAsString = res.getFirst();
 			
 			Integer status = res.getSecond();
-			
+			log.info("************************************");
 			if(status==200 || status == 201) {
 				if(!responseAsString.contains("00100") && responseAsString.length()>0) {
 					log.info("ATTIVAZIONE PRESSO ADE");

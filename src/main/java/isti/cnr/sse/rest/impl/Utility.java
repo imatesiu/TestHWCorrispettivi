@@ -104,6 +104,26 @@ public class Utility {
 		put("8C","MARKETINO S.R.L.");
 	}};
 	
+	static final Map<String, String> ProduttoriPIVA = new HashMap<String , String>() {{
+		put("01033470251","RCH Italia SpA");
+		put("12794610159","DIEBOLD NIXDORF");
+		put("01636300699","SHS srl");
+		put("01382910352","ITALRETAIL");
+		put("02498250345","CUSTOM");
+		put("09856490157","NCR");
+		put("07511580156","EPSON Italia SpA");
+		put("02709990275","AP.esse SpA");
+		put("10244350962","dtr Italy Srl");
+		put("04086780618","3I Reatail Solutions");
+		put("02298700010","Olivetti SpA");
+		put("02168560288","4P srl");
+		put("00857400287","VDS spa");
+		put("01424730438","LABWARE SpA");
+		put("06383500961","K.S. SRL");
+		put("08656790964","VANDONI tech");
+		put("00000000000","MARKETINO S.R.L.");
+	}};
+	
 	public static void calc(DatiCorrispettiviType corrispettivi, String key, Map<String, RT> map) {
 
 
@@ -301,8 +321,10 @@ public class Utility {
 				 if(produ!=null)
 					 log.info("Produttore  : " + produ);
 				 else {
-					 log.info("Produttore  Sconosciuto ");
-					 validFlag = false;
+					 if(ProduttoriPIVA.get(cn)==null) {
+						 log.info("Produttore  Sconosciuto ");
+						 validFlag = false;
+					 }
 				 }
 				 matricola = cn;
 				 if(!org.contains("Agenzia"))
@@ -492,16 +514,16 @@ public class Utility {
 			if(corrispettivi!=null) {
 				boolean Simu = corrispettivi.isSimulazione();
 				if(Simu) {
-					log.info("**** ATTENZIONE ****");
-					log.info("**** Simulazione ATTIVA ****");
-					log.info("**** ********** ****");
+					log.warn("**** ATTENZIONE ****");
+					log.warn("**** Simulazione ATTIVA ****");
+					log.warn("**** ********** ****");
 				}
 				TotaliType Totali = corrispettivi.getDatiRT().getTotali();
 				if(Totali==null) {
-					log.error("**** ATTENZIONE ****");
-					log.error("Corrispettivi v6");
-					log.error("Passare a corrispettivi v7");
-					log.error("**** ********** ****");
+					log.warn("**** ATTENZIONE ****");
+					log.warn("Corrispettivi v6");
+					log.warn("Passare a corrispettivi v7");
+					log.warn("**** ********** ****");
 					return;
 				}
 				List<DatiRegistratoriTelematiciType> Riepilogo = corrispettivi.getDatiRT().getRiepilogo();

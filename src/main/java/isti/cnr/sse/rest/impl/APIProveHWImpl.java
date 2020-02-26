@@ -257,7 +257,7 @@ public class APIProveHWImpl {
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		// @Context HttpServletRequest request){
 		response.setHeader("Connection", "Close");
-		
+		log.info("****************Corrispettivi********************");
 		
 		log.info("Message from: "+request.getRemoteAddr());
 		
@@ -272,6 +272,7 @@ public class APIProveHWImpl {
 		JAXBContext jaxbContext = JAXBContext.newInstance(DatiCorrispettiviType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		Utility.validateXmlCorr(unmarshaller);	
+		
 		if(!flag.equals(ErrorHttp.Null)){
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");

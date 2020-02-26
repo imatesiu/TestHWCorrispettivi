@@ -28,6 +28,7 @@ import org.apache.commons.io.IOUtils;
 import org.glassfish.grizzly.utils.Pair;
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
+import cnr.isti.sse.data.corrispettivi.messaggi.DettaglioEventoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EventoDispositivoType;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
 import isti.cnr.sse.rest.impl.ErrorHttp;
@@ -51,6 +52,7 @@ public class APIEventImpl {
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		// @Context HttpServletRequest request){
 		response.setHeader("Connection", "Close");
+		log.info("***************Evento***************");
 		JAXBContext jaxbContext = JAXBContext.newInstance(EventoDispositivoType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		Utility.validateXmlMessaggi(unmarshaller);
@@ -115,7 +117,12 @@ public class APIEventImpl {
 				ipAddress = request.getRemoteAddr();
 			}
 			log.info("received form: " + ipAddress + " " + timeStamp);
-			
+			DettaglioEventoDispositivoType dettaglio = EventoDispositivo.getDettaglio();
+			log.info("Evento Codice: " +dettaglio.getCodice());
+			log.info("Evento Descrizione: " +dettaglio.getDescrizione());
+			log.info("Evento: " +EventoDispositivo.getEvento());
+			log.info("************************************");
+
 			if(pair.getSecond()){
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
