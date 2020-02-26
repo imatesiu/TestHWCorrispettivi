@@ -99,7 +99,7 @@
 	<xs:complexType name="ElencoCorrispettiviType">
 		<xs:sequence>
 			<xs:element name="Riepilogo" type="DatiRegistratoriTelematiciType" maxOccurs="40" />
-			<xs:element name="Totali"  type="TotaliType" />
+			<xs:element name="Totali"  type="TotaliType" minOccurs="0" />
 		</xs:sequence>
 
 	</xs:complexType>
@@ -115,7 +115,7 @@
 			
 			<xs:element name="Ammontare"              type="Amount2DecimalType"               />
 			<xs:element name="RifNormativo"           type="String100LatinType" minOccurs="0" />
-			<xs:element name="ImportoParziale"  	  type="Amount2DecimalType" 			  />	
+			<xs:element name="ImportoParziale"  	  type="Amount2DecimalType" minOccurs="0"			  />	
 			<xs:element name="TotaleAmmontareResi"    type="Amount2DecimalType" minOccurs="0" />
 			<xs:element name="TotaleAmmontareAnnulli" type="Amount2DecimalType" minOccurs="0" />
 			<xs:element name="BeniInSospeso"		  type="Amount2DecimalType" minOccurs="0" />
