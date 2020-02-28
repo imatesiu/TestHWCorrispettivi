@@ -81,6 +81,19 @@ public class TotaliType  {
 				&& Objects.equals(pagatoElettronico, other.pagatoElettronico)
 				&& Objects.equals(scontoApagare, other.scontoApagare) && Objects.equals(ticket, other.ticket);
 	}
+	@Override
+	public String toString() {
+		String totali = "NumeroDocCommerciali: " + numeroDocCommerciali;
+		if(pagatoContanti!=null)
+		totali += " PagatoContanti: " + pagatoContanti;
+		if(pagatoElettronico!=null)
+		totali += " PagatoElettronico: " + pagatoElettronico;
+		if(scontoApagare!=null)
+		totali	+= " ScontoApagare: " + scontoApagare;
+		if(ticket!=null)
+		totali +=" Ticket: " + ticket;
+		return totali;
+	}
 	
 	 
 	

@@ -95,4 +95,11 @@ public class IVAType {
         this.imposta = value;
     }
 
+	@Override
+	public String toString() {
+		return "AliquotaIVA: " + aliquotaIVA + ", Imposta: " + imposta;
+	}
+    
+    
+
 }

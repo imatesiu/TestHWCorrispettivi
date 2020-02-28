@@ -30,6 +30,10 @@ public class TicketType {
 	public void setNumeroTicket(Integer numeroTicket) {
 		this.numeroTicket = numeroTicket;
 	}
+	@Override
+	public String toString() {
+		return "PagatoTicket: " + pagatoTicket + ", NumeroTicket: " + numeroTicket;
+	}
 
 	 
 	 

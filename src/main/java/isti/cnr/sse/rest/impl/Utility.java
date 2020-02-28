@@ -139,58 +139,67 @@ public class Utility {
 			IVAType iva = datiRegistratoriTelematici.getIVA();
 			if(datiRegistratoriTelematici.getTotaleAmmontareResi()!=null)
 				if (datiRegistratoriTelematici.getTotaleAmmontareResi().compareTo(new BigDecimal(0))!=0){
-					log.error("dovevano esser 0 i resi");
+					log.warn("dovevano esser 0 i resi");
 				}
 			if(datiRegistratoriTelematici.getTotaleAmmontareAnnulli()!=null)
 				if (datiRegistratoriTelematici.getTotaleAmmontareAnnulli().compareTo(new BigDecimal(0))!=0){
-					log.error("dovevano esser 0 gli annulli");
+					log.warn("dovevano esser 0 gli annulli");
 				}
 			if(iva!=null){
 
 				BigDecimal lordo = ammontare.multiply((iva.getAliquotaIVA().add(new BigDecimal(100)).divide(new BigDecimal(100)))).setScale(2, RoundingMode.HALF_UP);
 				BigDecimal impostaiva = ammontare.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
 				if(importoparziale!=null)
-					impostaiva = importoparziale.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
+					if(importoparziale.compareTo(new BigDecimal(0))!=0)
+						impostaiva = importoparziale.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
 
 				
 				BigDecimal ammAnn = datiRegistratoriTelematici.getTotaleAmmontareAnnulli();
+				if(ammAnn.compareTo(new BigDecimal(0))!=0)
+					log.info("Ammontare Annulli: "+ammAnn);
 				BigDecimal ammResi = datiRegistratoriTelematici.getTotaleAmmontareResi();
-
+				if(ammResi.compareTo(new BigDecimal(0))!=0)
+					log.info("Ammontare Resi: "+ammResi);
 
 				BigDecimal ivaann = ammAnn.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
 				BigDecimal ivaresi= ammResi.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
 
-				if(importoparziale==null)
+				if(importoparziale==null | importoparziale.compareTo(new BigDecimal(0))==0)
 					impostaiva = impostaiva.subtract(ivaann).subtract(ivaresi);
 
 				if(!impostaiva.equals(iva.getImposta())){
 					log.error("imposta Errata!! per imponibile "+ammontare+" aliquota iva "+iva.getAliquotaIVA());	
 					log.error("imposta Errata!! mi aspettavo iva "+impostaiva+" trovo "+iva.getImposta());			
 				}
-				if(lordo.compareTo(new BigDecimal(0))!=0)
-					if(map.containsKey(key)){
-						RT rt = map.get(key);
-						BigDecimal old = rt.getTotaleRicevuto();
-						BigDecimal res = old.add(lordo);
-						String info = "IVA"+iva.getAliquotaIVA()+"% -> Ammont:"+ammontare+" Impo: "+impostaiva;
-						log.info("Ricevuto per "+key+": Lordo "+lordo +"-->"+info);
-						log.info("totale per "+key+": "+res);
-						rt.setTotaleRicevuto(res );
-					}/*else{
-						RT rt = map.get(key);
-						rt.setGT(lordo);
-						//map.put(key, lordo);
-						log.info("Ricevuto per "+key+": "+lordo);
-						log.info("totale per "+key+": "+lordo);
-					}*/
+				
+				boolean flag = (lordo.compareTo(new BigDecimal(0))!=0 |
+						ammontare.compareTo(new BigDecimal(0))!=0 |
+						impostaiva.compareTo(new BigDecimal(0))!=0 |
+						importoparziale.compareTo(new BigDecimal(0))!=0);
+				if(flag) {
+					String info = "IVA "+iva.getAliquotaIVA()+"% -> Ammontare: "+ammontare+" Imponibile: "+impostaiva;
+
+					log.info("Ricevuto per "+key+": Lordo "+lordo +" ImportoParziale: "+importoparziale +"-->"+info);
+				}
+				if(map.containsKey(key)){
+					RT rt = map.get(key);
+					BigDecimal old = rt.getTotaleRicevuto();
+					BigDecimal res = old.add(lordo);
+
+					log.info("Totale per "+key+": "+res);
+					rt.setTotaleRicevuto(res );
+				}
+				
 			}else{
 				if(ammontare.compareTo(new BigDecimal(0))!=0)
 					if(map.containsKey(key)){
 						RT rt = map.get(key);
 						BigDecimal old = rt.getTotaleRicevuto();
 						BigDecimal res = old.add(ammontare);
-						log.info("Ricevuto per "+key+": "+ammontare);
-						log.info("totale per "+key+": "+res);
+						log.info("Ricevuto Ammontare per "+key+": "+ammontare);
+						log.info("Ricevuto Importo Parziale per "+key+": "+importoparziale);
+
+						log.info("Totale per "+key+": "+res);
 						rt.setTotaleRicevuto(res );
 					}/*else{
 						map.put(key, ammontare);
@@ -198,7 +207,13 @@ public class Utility {
 						log.info("totale per "+key+": "+ammontare);
 					}*/
 			}
+			log.info(datiRegistratoriTelematici);
 		}
+		TotaliType totali = corrispettivi.getDatiRT().getTotali();
+		if(totali!=null) {
+			log.info(totali);
+		}
+		
 
 		System.out.println();
 

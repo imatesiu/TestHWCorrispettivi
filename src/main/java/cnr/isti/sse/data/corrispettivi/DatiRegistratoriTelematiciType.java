@@ -360,6 +360,24 @@ public class DatiRegistratoriTelematiciType {
 	public void setCodiceAttivita(BigDecimal codiceAttivita) {
 		this.codiceAttivita = codiceAttivita;
 	}
+
+	@Override
+	public String toString() {
+		return (iva != null ? iva + ", " : "") + (natura != null ? "Natura: " + natura + ", " : "")
+				+ (ventilazioneIVA != null ? "VentilazioneIVA: " + ventilazioneIVA + ", " : "")
+				+ (ammontare != null ? "Ammontare: " + ammontare + ", " : "")
+				+ (rifNormativo != null ? "rifNormativo: " + rifNormativo + ", " : "")
+				+ (importoParziale != null ? "ImportoParziale: " + importoParziale + ", " : "")
+				+ (totaleAmmontareResi != null ? "TotaleAmmontareResi: " + totaleAmmontareResi + ", " : "")
+				+ (totaleAmmontareAnnulli != null ? "TotaleAmmontareAnnulli: " + totaleAmmontareAnnulli + ", " : "")
+				+ (beniInSospeso != null ? "BeniInSospeso: " + beniInSospeso + ", " : "")
+				+ (nonRiscossoServizi != null ? "nonRiscossoServizi: " + nonRiscossoServizi + ", " : "")
+				+ (nonRiscossoFatture != null ? "nonRiscossoFatture: " + nonRiscossoFatture + ", " : "")
+				+ (totaleDaFattureRT != null ? "TotaleDaFattureRT: " + totaleDaFattureRT + ", " : "")
+				+ (nonRiscossoDCRaSSN != null ? "nonRiscossoDCRaSSN: " + nonRiscossoDCRaSSN + ", " : "")
+				+ (nonRiscossoOmaggio != null ? "nonRiscossoOmaggio: " + nonRiscossoOmaggio + ", " : "")
+				+ (codiceAttivita != null ? "codiceAttivita: " + codiceAttivita : "");
+	}
     
     
 
