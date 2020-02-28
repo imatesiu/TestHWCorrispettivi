@@ -133,6 +133,9 @@ public class Utility {
 		List<DatiRegistratoriTelematiciType> riepilogo = corrispettivi.getDatiRT().getRiepilogo();
 		for (DatiRegistratoriTelematiciType datiRegistratoriTelematici : riepilogo) {
 			BigDecimal ammontare = datiRegistratoriTelematici.getAmmontare();
+			
+			BigDecimal importoparziale = datiRegistratoriTelematici.getImportoParziale();
+
 			IVAType iva = datiRegistratoriTelematici.getIVA();
 			if(datiRegistratoriTelematici.getTotaleAmmontareResi()!=null)
 				if (datiRegistratoriTelematici.getTotaleAmmontareResi().compareTo(new BigDecimal(0))!=0){
@@ -146,7 +149,10 @@ public class Utility {
 
 				BigDecimal lordo = ammontare.multiply((iva.getAliquotaIVA().add(new BigDecimal(100)).divide(new BigDecimal(100)))).setScale(2, RoundingMode.HALF_UP);
 				BigDecimal impostaiva = ammontare.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
+				if(importoparziale!=null)
+					impostaiva = importoparziale.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
 
+				
 				BigDecimal ammAnn = datiRegistratoriTelematici.getTotaleAmmontareAnnulli();
 				BigDecimal ammResi = datiRegistratoriTelematici.getTotaleAmmontareResi();
 
@@ -154,7 +160,8 @@ public class Utility {
 				BigDecimal ivaann = ammAnn.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
 				BigDecimal ivaresi= ammResi.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
 
-				impostaiva = impostaiva.subtract(ivaann).subtract(ivaresi);
+				if(importoparziale==null)
+					impostaiva = impostaiva.subtract(ivaann).subtract(ivaresi);
 
 				if(!impostaiva.equals(iva.getImposta())){
 					log.error("imposta Errata!! per imponibile "+ammontare+" aliquota iva "+iva.getAliquotaIVA());	
