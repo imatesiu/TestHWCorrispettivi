@@ -172,14 +172,10 @@ public class Utility {
 					log.error("imposta Errata!! mi aspettavo iva "+impostaiva+" trovo "+iva.getImposta());			
 				}
 				
-				boolean flag = (lordo.compareTo(new BigDecimal(0))!=0 |
-						ammontare.compareTo(new BigDecimal(0))!=0 |
-						impostaiva.compareTo(new BigDecimal(0))!=0 |
-						importoparziale.compareTo(new BigDecimal(0))!=0);
-				if(flag) {
-					String info = "IVA "+iva.getAliquotaIVA()+"% -> Ammontare: "+ammontare+" Imponibile: "+impostaiva;
+				log.info(datiRegistratoriTelematici);
+				if(lordo.compareTo(new BigDecimal(0))!=0 ) {
 
-					log.info("Ricevuto per "+key+": Lordo "+lordo +" ImportoParziale: "+importoparziale +"-->"+info);
+					log.info("Ricevuto per "+key+": Lordo "+lordo);
 				}
 				if(map.containsKey(key)){
 					RT rt = map.get(key);
@@ -207,7 +203,7 @@ public class Utility {
 						log.info("totale per "+key+": "+ammontare);
 					}*/
 			}
-			log.info(datiRegistratoriTelematici);
+			
 		}
 		TotaliType totali = corrispettivi.getDatiRT().getTotali();
 		if(totali!=null) {
