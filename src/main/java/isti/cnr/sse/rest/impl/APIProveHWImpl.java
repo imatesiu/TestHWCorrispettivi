@@ -36,9 +36,9 @@ import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.servers.Server;
 
@@ -253,12 +253,15 @@ public class APIProveHWImpl {
 	        responseCode = "200",
 	        content = @Content(
 	            mediaType = "application/xml",
-	            array = @ArraySchema(
-	                schema = @Schema(implementation = String.class)
-	            )
+	            		schema = @Schema(implementation = EsitoOperazioneType.class)
 	        ),
 	        description = "."
 	    )
+	@RequestBody(content = @Content(
+			mediaType = "application/xml",
+			schema = @Schema(implementation = DatiCorrispettiviType.class)
+			),
+	description = "." )
 	public String putListMisuratoriFiscale2(String Corri, @Context HttpServletRequest request, @Context HttpServletResponse response)
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
 		// @Context HttpServletRequest request){

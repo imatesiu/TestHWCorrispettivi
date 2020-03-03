@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
@@ -33,10 +32,12 @@ import cnr.isti.data.corrispettivi.doccommercialilotteria.DatiPagamentoType;
 import cnr.isti.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
 import cnr.isti.data.corrispettivi.doccommercialilotteria.DocumentoCommercialeType;
 import cnr.isti.data.corrispettivi.doccommercialilotteria.ResoAnnulloType;
-import cnr.isti.data.corrispettivi.doccommercialilotteria.TipologiaResoAnnulloType;
 import cnr.isti.data.corrispettivi.doccommercialilotteria.VenditaType;
-import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
-import cnr.isti.sse.data.corrispettivi.messaggi.EventoDispositivoType;
+import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.DocCommercialiLotteriaEsitoType;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
 import isti.cnr.sse.rest.impl.ErrorHttp;
 import isti.cnr.sse.rest.impl.Utility;
@@ -52,7 +53,19 @@ public class APILotteriaCorrispettiviImpl {
 
 	private static ErrorHttp flag = ErrorHttp.Null;
 
-	
+	@ApiResponse(
+	        responseCode = "200",
+	        content = @Content(
+	            mediaType = "application/xml",
+	            		schema = @Schema(implementation = DocCommercialiLotteriaEsitoType.class)
+	        ),
+	        description = "."
+	    )
+	@RequestBody(content = @Content(
+			mediaType = "application/xml",
+			schema = @Schema(implementation = DocCommercialiLotteriaType.class)
+			),
+	description = "." )
 	@Path("/corrispettivi")
 	@POST
 	public String postLotteriaCorrispettivi(String lotteria, @Context HttpServletRequest request, @Context HttpServletResponse response)

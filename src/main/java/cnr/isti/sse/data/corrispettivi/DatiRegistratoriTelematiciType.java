@@ -273,13 +273,8 @@ public class DatiRegistratoriTelematiciType {
         this.totaleAmmontareAnnulli = value;
     }
 
-	public IVAType getIva() {
-		return iva;
-	}
+	
 
-	public void setIva(IVAType iva) {
-		this.iva = iva;
-	}
 
 	public BigDecimal getImportoParziale() {
 		if(importoParziale==null)

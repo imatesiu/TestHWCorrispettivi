@@ -479,7 +479,7 @@ public class Utility {
 		return;
 	}
 
-	public static Map<String,RT> deserialize()
+	/*public static Map<String,RT> deserialize()
 	{
 		String file = "database.ser";
 		Map<String,RT> map = null;
@@ -496,7 +496,7 @@ public class Utility {
 			return null;
 		}
 		return map;
-	}
+	}*/
 
 	public static String getResource(int codeerror) throws IOException {
 
@@ -566,7 +566,7 @@ public class Utility {
 		
 		for (DatiRegistratoriTelematiciType datiRegistratoriTelematiciType : riepilogo) {
 			
-			IVAType ivat = datiRegistratoriTelematiciType.getIva();
+			IVAType ivat = datiRegistratoriTelematiciType.getIVA();
 			
 			NaturaType naturat = datiRegistratoriTelematiciType.getNatura();
 			

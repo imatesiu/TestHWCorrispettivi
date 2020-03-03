@@ -65,8 +65,13 @@ import org.bouncycastle.util.io.pem.PemReader;
 import org.glassfish.grizzly.utils.Pair;
 
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
+import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoRichiestaCertificatoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.RichiestaCertificatoDispositivoType;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import isti.cnr.sse.jsf.SendRest;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
 import isti.cnr.sse.rest.impl.ErrorHttp;
@@ -134,8 +139,19 @@ public class APIDispositiviImpl {
 	}
 	 
 	
-	
-
+	@ApiResponse(
+	        responseCode = "200",
+	        content = @Content(
+	            mediaType = "application/xml",
+	            		schema = @Schema(implementation = EsitoRichiestaCertificatoDispositivoType.class)
+	        ),
+	        description = "."
+	    )
+	@RequestBody(content = @Content(
+			mediaType = "application/xml",
+			schema = @Schema(implementation = RichiestaCertificatoDispositivoType.class)
+			),
+	description = "." )
 	@POST
 	public Response postCensimentoRT(String censimento, @Context HttpServletRequest request, @Context HttpServletResponse response)
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,
@@ -273,6 +289,19 @@ public class APIDispositiviImpl {
 
 	}
 
+	@ApiResponse(
+	        responseCode = "200",
+	        content = @Content(
+	            mediaType = "application/xml",
+	            		schema = @Schema(implementation = EsitoOperazioneType.class)
+	        ),
+	        description = "."
+	    )
+	@RequestBody(content = @Content(
+			mediaType = "application/xml",
+			schema = @Schema(implementation = AttivaDispositivoType.class)
+			),
+	description = "." )
 	@Consumes(MediaType.APPLICATION_XML)
 	@PUT
 	public String putAttivazioneRT(String attivazione, @Context HttpServletRequest request, @Context HttpServletResponse response)

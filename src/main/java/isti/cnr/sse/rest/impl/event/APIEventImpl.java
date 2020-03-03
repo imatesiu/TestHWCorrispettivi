@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -27,9 +26,11 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.io.IOUtils;
 import org.glassfish.grizzly.utils.Pair;
 
-import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.DettaglioEventoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EventoDispositivoType;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
 import isti.cnr.sse.rest.impl.ErrorHttp;
 import isti.cnr.sse.rest.impl.Utility;
@@ -45,7 +46,11 @@ public class APIEventImpl {
 
 	private static ErrorHttp flag = ErrorHttp.Null;
 
-	
+	@RequestBody(content = @Content(
+			mediaType = "application/xml",
+			schema = @Schema(implementation = EventoDispositivoType.class)
+			),
+	description = "." )
 	@Path("/")
 	@PUT
 	public String putEventMisuratoriFiscale2(String event, @Context HttpServletRequest request, @Context HttpServletResponse response)
