@@ -34,11 +34,17 @@ import org.glassfish.grizzly.utils.Pair;
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.servers.Server;
 
+
+@OpenAPIDefinition(info = @Info(title = "APID Service", version = "0.1"), servers = {@Server(url="/v1/dispositivi")
+})
 @Consumes(MediaType.APPLICATION_XML)
 // @Produces(MediaType.APPLICATION_XML)
 @Path("/corrispettivi")
@@ -246,12 +252,12 @@ public class APIProveHWImpl {
 	@ApiResponse(
 	        responseCode = "200",
 	        content = @Content(
-	            mediaType = "application/json",
+	            mediaType = "application/xml",
 	            array = @ArraySchema(
 	                schema = @Schema(implementation = String.class)
 	            )
 	        ),
-	        description = "List of \"Hello, world!\"-messages."
+	        description = "."
 	    )
 	public String putListMisuratoriFiscale2(String Corri, @Context HttpServletRequest request, @Context HttpServletResponse response)
 			throws JAXBException {// DatiCorrispettiviType Corrispettivi,

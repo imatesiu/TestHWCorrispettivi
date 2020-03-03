@@ -19,17 +19,17 @@ import org.glassfish.jersey.server.mvc.Viewable;
 
 
 
-@Path("/")
+//@Path("/")
 public class Pages {
 	
 	
 	
-	
+/*	
 	@GET
 	@Produces(MediaType.TEXT_HTML)
 	public Response getPickListItems(@QueryParam("name") String name) {
 	    // business logic
 	    return Response.ok(new Viewable("/index.jsp", "Test")).build();
 	}
-
+*/
 }
