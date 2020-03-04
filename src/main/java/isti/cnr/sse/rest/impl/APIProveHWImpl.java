@@ -145,10 +145,11 @@ public class APIProveHWImpl {
 	
 	@Path("/setxml/{key:.*}")
 	@GET
-	public String setXml(@Parameter(schema = @Schema(implementation = ErrorXML.class))@PathParam("key") Integer key) {
+	public String setXml(@Parameter(schema = @Schema(implementation = ErrorXML.class))@PathParam("key") String key) {
 		
+		ErrorXML err = ErrorXML.get(key);
 			if(key!=null)
-				ErrorType = key;
+				ErrorType = err.getValue();
 			else
 				ErrorType = 9999;
 			
