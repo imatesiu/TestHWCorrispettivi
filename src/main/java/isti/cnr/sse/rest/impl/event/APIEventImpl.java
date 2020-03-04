@@ -32,8 +32,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
-import isti.cnr.sse.rest.impl.ErrorHttp;
-import isti.cnr.sse.rest.impl.Utility;
+import isti.cnr.sse.rest.impl.error.ErrorHttp;
+import isti.cnr.sse.rest.util.Utility;
 
 @Consumes(MediaType.APPLICATION_XML)
 //@Produces(MediaType.APPLICATION_XML)

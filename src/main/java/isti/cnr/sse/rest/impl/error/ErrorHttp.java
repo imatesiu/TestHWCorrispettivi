@@ -1,4 +1,4 @@
-package isti.cnr.sse.rest.impl;
+package isti.cnr.sse.rest.impl.error;
 
 import javax.ws.rs.core.Response.Status;
 

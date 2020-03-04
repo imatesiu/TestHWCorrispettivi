@@ -1,4 +1,4 @@
-package isti.cnr.sse.rest.impl;
+package isti.cnr.sse.rest.util;
 
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
@@ -76,7 +76,7 @@ import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EventoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.RichiestaCertificatoDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.signature.SignatureType;
-import isti.cnr.sse.rest.impl.util.CSVUtils;
+import isti.cnr.sse.rest.impl.RT;
 
 
 public class Utility {

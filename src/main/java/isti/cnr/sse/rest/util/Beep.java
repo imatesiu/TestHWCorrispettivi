@@ -1,4 +1,4 @@
-package isti.cnr.sse.rest.impl;
+package isti.cnr.sse.rest.util;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;

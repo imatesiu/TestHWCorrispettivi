@@ -54,7 +54,7 @@ import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
 import isti.cnr.sse.rest.impl.APIProveHWImplTest;
-import isti.cnr.sse.rest.impl.Beep;
+import isti.cnr.sse.rest.util.Beep;
 
 public class APILotteriaCorrispettiviImplTest extends JerseyTest {
 

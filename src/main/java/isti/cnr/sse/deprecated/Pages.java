@@ -1,4 +1,4 @@
-package isti.cnr.sse.rest.impl;
+package isti.cnr.sse.deprecated;
 
 
 import javax.ws.rs.Path;

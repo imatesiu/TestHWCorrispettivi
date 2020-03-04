@@ -34,13 +34,19 @@ import org.glassfish.grizzly.utils.Pair;
 
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.servers.Server;
+import isti.cnr.sse.rest.impl.error.ErrorHttp;
+import isti.cnr.sse.rest.impl.error.ErrorXML;
+import isti.cnr.sse.rest.util.Beep;
+import isti.cnr.sse.rest.util.Utility;
 
 
 @OpenAPIDefinition(info = @Info(title = "APID Service", version = "0.1"), servers = {@Server(url="/v1/dispositivi")
@@ -69,7 +75,7 @@ public class APIProveHWImpl {
 	private static Integer ErrorType = 9999;
 
 
-
+	@Hidden
 	@Path("/clearall")
 	@GET
 	public String clearall() {
@@ -79,7 +85,7 @@ public class APIProveHWImpl {
 		log.info("Clear All\n\r");
 		return "<html><body>OK</body></html>";
 	}
-
+	@Hidden
 	@Path("/clear/{key:.*}")
 	@GET
 	public String clear(@PathParam("key") String key) {
@@ -91,7 +97,7 @@ public class APIProveHWImpl {
 		} else
 			return "<html><body>Elemento non presente</body></html>";
 	}
-
+	@Hidden
 	@Path("/init/{key}")
 	@GET
 	public String init(@PathParam("key") String key, @QueryParam("grantot") BigDecimal grantotale, 
@@ -127,7 +133,7 @@ public class APIProveHWImpl {
 	
 	@Path("/set/{key:.*}")
 	@GET
-	public String fuoriorario(@PathParam("key") String key) {
+	public String fuoriorario( @Parameter(schema = @Schema(implementation = ErrorHttp.class))@PathParam("key") String key) {
 		
 			
 			flag = ErrorHttp.get(key);
@@ -139,7 +145,7 @@ public class APIProveHWImpl {
 	
 	@Path("/setxml/{key:.*}")
 	@GET
-	public String setXml(@PathParam("key") Integer key) {
+	public String setXml(@Parameter(schema = @Schema(implementation = ErrorXML.class))@PathParam("key") Integer key) {
 		
 			if(key!=null)
 				ErrorType = key;
@@ -150,7 +156,7 @@ public class APIProveHWImpl {
 		
 
 	}
-
+	@Hidden
 	@Path("/info/{key:.*}")
 	@GET
 	public String info(@PathParam("key") String key) {
@@ -175,7 +181,7 @@ public class APIProveHWImpl {
 
 	}
 
-	
+	@Hidden
 	@Path("/rt/{key:.*}")
 	@GET
 	public RT rtinfo(@PathParam("key") String key) {
@@ -197,7 +203,7 @@ public class APIProveHWImpl {
 		}
 
 	}
-	
+	@Hidden
 	@Path("/allrt/")
 	@GET
 	public Collection<RT> allrtinfo() {
@@ -207,7 +213,7 @@ public class APIProveHWImpl {
 		
 
 	}
-	
+	@Hidden
 	@Path("/allrtopen/")
 	@GET
 	public Collection<RT> allrtopen() {
@@ -223,7 +229,7 @@ public class APIProveHWImpl {
 
 
 	}
-	
+	@Hidden
 	@Path("/stop/{key:.*}")
 	@GET
 	public String rtstop(@PathParam("key") String key) {
@@ -252,13 +258,13 @@ public class APIProveHWImpl {
 	@ApiResponse(
 	        responseCode = "200",
 	        content = @Content(
-	            mediaType = "application/xml",
+	            mediaType = MediaType.APPLICATION_XML,
 	            		schema = @Schema(implementation = EsitoOperazioneType.class)
 	        ),
 	        description = "."
 	    )
 	@RequestBody(content = @Content(
-			mediaType = "application/xml",
+			mediaType = MediaType.APPLICATION_XML,
 			schema = @Schema(implementation = DatiCorrispettiviType.class)
 			),
 	description = "." )

@@ -1,4 +1,4 @@
-package isti.cnr.sse.rest.impl.util;
+package isti.cnr.sse.rest.util;
 
 import java.io.IOException;
 import java.io.Writer;
