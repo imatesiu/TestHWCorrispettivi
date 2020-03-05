@@ -37,7 +37,7 @@ import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.info.*;
+import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -49,11 +49,7 @@ import isti.cnr.sse.rest.util.Beep;
 import isti.cnr.sse.rest.util.Utility;
 
 
-@OpenAPIDefinition(info = @Info(title = "APID Service", version = "0.7.0", description = "APID API di Corrispettivi e Lotteria per debug e Prove HW"
-		+ " XMLv7",
-
-contact = @Contact(name = "Giorgio O. Spagnolo", email = "spagnolo@isti.cnr.it")), 
-servers = {@Server(url="/v1/dispositivi")
+@OpenAPIDefinition(info = @Info(title = "APID Service", version = "0.1"), servers = {@Server(url="/v1/dispositivi")
 })
 @Consumes(MediaType.APPLICATION_XML)
 // @Produces(MediaType.APPLICATION_XML)
