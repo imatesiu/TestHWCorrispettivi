@@ -110,7 +110,7 @@ public class APIProveHWImplTest extends JerseyTest {
 		//sendinit();sendrtall();
 		// for(int i = 0 ; i<10; i++){
 	//String nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";//
-		String nameFilexml = "CC/rt_lug_2020.xml";//
+		String nameFilexml = "rt_lug_2020.xml";//
 
 		runTest(nameFilexml);
 		sendgetinfo();sendgetstop();
