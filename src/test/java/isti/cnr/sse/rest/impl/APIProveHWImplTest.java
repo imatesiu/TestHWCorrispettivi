@@ -2,10 +2,8 @@ package isti.cnr.sse.rest.impl;
 
 import static org.junit.Assert.*;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,8 +21,7 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
@@ -46,9 +43,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.glassfish.jersey.media.multipart.FormDataMultiPart;
-import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
-import org.glassfish.jersey.media.multipart.file.StreamDataBodyPart;
+
 import org.glassfish.jersey.message.internal.ReaderWriter;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
@@ -179,17 +174,17 @@ public class APIProveHWImplTest extends JerseyTest {
 
 	private void runTest(String nameFilexml) throws JAXBException, IOException, URISyntaxException {
 		
-		String nameFilexmlresp = "resp.txt";//
-		InputStream is2 = APIProveHWImplTest.class.getClassLoader().getResourceAsStream(nameFilexmlresp);
+		//String nameFilexmlresp = "resp.txt";//
+		//InputStream is2 = APIProveHWImplTest.class.getClassLoader().getResourceAsStream(nameFilexmlresp);
 		
-		JAXBContext jaxbContextr = JAXBContext.newInstance(EsitoOperazioneType.class);
-		Unmarshaller jaxbUnmarshaller12 = jaxbContextr.createUnmarshaller();
-		EsitoOperazioneType collaborativeContentInput2 = (EsitoOperazioneType) jaxbUnmarshaller12.unmarshal(is2);
-		byte[] certificate2 = collaborativeContentInput2.getSignature().getKeyInfo().getX509Data().getX509Certificate();
+	//	JAXBContext jaxbContextr = JAXBContext.newInstance(EsitoOperazioneType.class);
+	//	Unmarshaller jaxbUnmarshaller12 = jaxbContextr.createUnmarshaller();
+	//	EsitoOperazioneType collaborativeContentInput2 = (EsitoOperazioneType) jaxbUnmarshaller12.unmarshal(is2);
+	//	byte[] certificate2 = collaborativeContentInput2.getSignature().getKeyInfo().getX509Data().getX509Certificate();
 		
-		String theString2 = IOUtils.toString(new FileInputStream(new File(APIProveHWImplTest.class.getClassLoader().getResource(nameFilexmlresp).toURI())), "UTF-8");
+	//	String theString2 = IOUtils.toString(new FileInputStream(new File(APIProveHWImplTest.class.getClassLoader().getResource(nameFilexmlresp).toURI())), "UTF-8");
 		
-		statusCertificateAndSignature(certificate2,theString2);
+	//	statusCertificateAndSignature(certificate2,theString2);
 		
 		InputStream is = APIProveHWImplTest.class.getClassLoader().getResourceAsStream(nameFilexml);
 		assertNotNull(is);

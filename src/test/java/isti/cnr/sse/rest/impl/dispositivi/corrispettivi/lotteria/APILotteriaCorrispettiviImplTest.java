@@ -52,8 +52,6 @@ import cnr.isti.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteria
 import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.DocCommercialiLotteriaEsitoType;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
-import isti.cnr.sse.rest.impl.APIProveHWImpl;
-import isti.cnr.sse.rest.impl.APIProveHWImplTest;
 import isti.cnr.sse.rest.util.Beep;
 
 public class APILotteriaCorrispettiviImplTest extends JerseyTest {
@@ -73,7 +71,7 @@ public class APILotteriaCorrispettiviImplTest extends JerseyTest {
 
 	@Override
 	protected Application configure() {
-		return new ResourceConfig(APIProveHWImpl.class);
+		return new ResourceConfig(APILotteriaCorrispettiviImplTest.class);
 	}
 
 	@Test
@@ -86,7 +84,7 @@ public class APILotteriaCorrispettiviImplTest extends JerseyTest {
 private void runTest(String nameFilexml) throws JAXBException, IOException, URISyntaxException {
 		
 	
-		InputStream is = APIProveHWImplTest.class.getClassLoader().getResourceAsStream(nameFilexml);
+		InputStream is = APILotteriaCorrispettiviImplTest.class.getClassLoader().getResourceAsStream(nameFilexml);
 		assertNotNull(is);
 		JAXBContext jaxbContexti = JAXBContext.newInstance(DocCommercialiLotteriaType.class);
 
@@ -96,7 +94,7 @@ private void runTest(String nameFilexml) throws JAXBException, IOException, URIS
 		Entity<DocCommercialiLotteriaType> entity = Entity.entity(collaborativeContentInput, MediaType.APPLICATION_XML);
 
 
-		File f = FileUtils.toFile( APIProveHWImplTest.class.getClassLoader().getResource(nameFilexml));
+		File f = FileUtils.toFile( APILotteriaCorrispettiviImplTest.class.getClassLoader().getResource(nameFilexml));
 		InputStream content = new FileInputStream(f);
 		final String read = ReaderWriter.readFromAsString(content, MediaType.APPLICATION_XML_TYPE);
 
