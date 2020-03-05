@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><ns3:EventoDispositivo xmlns:ns3="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0" xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" versione="1.0"><Evento>FUORI_SERVIZIO</Evento><DataOra>2019-09-26T12:00:54</DataOra><Dettaglio><Codice>00600</Codice></Dettaglio><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/><ds:Reference URI=""><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>QDuPavtvwvd0q0nbQQeeTKIsrYGNjBDl/D4DWUFUOX4=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>VRHAnKSdM5R2e293Rbbto4ZffOc930XwY9jDX07ohrUdu3dqsBG3AydBX7B4xVBlQ9oHIH/bKXv+
+TSGrCUyQ7r+1m+Bcazwr0pgL/6sbj46de08+1UovB+5ZNw5RHv/2tDG9d4QJhCHyXKnSypaD0bRF
+B0ESeXa26+K4Bh2ojxDrHS5Uw7MMexpq0EI+Nn1Afp8sGLReLryE522CIsOafZi4P3sAHZTgoklj
+LcAJovPAth5eT6K9OqQFvQeQsl3pmXZi0RymKdhKs/R1zV8SsWrk17SCLfWeQZ5xZztQO1QkRXJ0
+6FISdp2RK+PjFqVIaH4by8lZXtSpbwj1HOeFPA==</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIID5zCCAs+gAwIBAgIIJLDF6r91o/MwDQYJKoZIhvcNAQELBQAwNTELMAkGA1UEBhMCSVQxDjAM
+BgNVBAoTBVNvZ2VpMRYwFAYDVQQDEw1DQSBTb2dlaSBUZXN0MB4XDTE4MDUxMjEyNDAyMFoXDTIx
+MDUxMjEyNDAyMFowazELMAkGA1UEBhMCSVQxHjAcBgNVBAoMFUFnZW56aWEgZGVsbGUgRW50cmF0
+ZTEmMCQGA1UECwwdU2Vydml6aW8gQUUgQ29ycmlzcGV0dGl2aSBJVkExFDASBgNVBAMMCzg4UzI1
+MDAwMTk4MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAngaYqc1j+8sunjDHtPyoRhsJ
+8TMyPAzroLfMj0VCD0yX8esN2NZVR+nQmmc37CoHqneg3rj0ruHnH2vFLNZTRtDxPIO/epmdTawi
+QMG3o7Gw91SPipNS4KWHDgGNIXtcq1wk/TRq8RtARAqZdqhtYymdMFGAoCbBijHhywqmm7SznIIP
+r+3ZDW2M6t8CHXIaV5xDa4SRt1P5p9iGdiELBrToYb9TcDol/xg05TjJRqLbFxA2NjZLX+GFi2wL
+aL/7iJD/WUCjH0D9s3EGJ21JD9tmprF7XTWZyuq+edsw18l4i4NN/Rv4Hvf0yFuf4vFRxNg2J8IH
+bQEeE8hD//mGWwIDAQABo4HEMIHBMB8GA1UdIwQYMBaAFFfDfM0VomETCms+4cZJ7E5DH8OHMG8G
+A1UdHwRoMGYwZKBioGCGXmxkYXA6Ly9jYWRzLnNvZ2VpLmZpbmFuemUuaXQvY24lM2RDQSUyMFNv
+Z2VpJTIwVGVzdCxvJTNkU29nZWksYyUzZGl0P2NlcnRpZmljYXRlUmV2b2NhdGlvbkxpc3QwHQYD
+VR0OBBYEFDzTWzZbhaYonddzZu8eGt454g+hMA4GA1UdDwEB/wQEAwIGQDANBgkqhkiG9w0BAQsF
+AAOCAQEAUmuTTp+GkjHtOO3mXAk7Br/EIGf2IF43EjNDf5r0P+IG4q0fmuf6w7x6cAVuUlys5dRw
+TIuOw56ExIXy+QTrBwE7NwAfbib++Yz0TKOQeUU4QtvB+/7VSCDnFc6UdYcbFLCt0h9sakUhk7QX
+lr96+OOnTHEInl5lRZ9n1uij/HnQ3vPWoUGrUy1S0GARvyLHQY2ocSt0ILbnPfVXiCBP8xPo1dMX
+mwD9ahWvzvTkb4n4j924QtVoOvBaVPYOWFIRRUUkH18QxSe9M0rhFfwpO4hH2T9pwgmN1ZLFpj7T
+XpZSLD8bBlZ/FEKrkPK122zboX4bOJ99XxJ3Y9uRwXC2kw==</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></ns3:EventoDispositivo>

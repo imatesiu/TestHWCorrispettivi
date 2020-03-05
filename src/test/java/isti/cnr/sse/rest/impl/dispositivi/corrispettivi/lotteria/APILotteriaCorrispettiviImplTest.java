@@ -81,9 +81,9 @@ public class APILotteriaCorrispettiviImplTest extends JerseyTest {
 	}
 	
 	
-private void runTest(String nameFilexml) throws JAXBException, IOException, URISyntaxException {
-		
-	
+	private void runTest(String nameFilexml) throws JAXBException, IOException, URISyntaxException {
+
+
 		InputStream is = APILotteriaCorrispettiviImplTest.class.getClassLoader().getResourceAsStream(nameFilexml);
 		assertNotNull(is);
 		JAXBContext jaxbContexti = JAXBContext.newInstance(DocCommercialiLotteriaType.class);

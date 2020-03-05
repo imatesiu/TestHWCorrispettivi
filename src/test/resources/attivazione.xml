@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><ns3:AttivaDispositivo xmlns:ns3="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/corrispettivi/v1.0" xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" versione="1.0"><Gestore><IdPaese>IT</IdPaese><IdCodice>07511580156</IdCodice></Gestore><TecnicoVerificatore><CodiceFiscale>CHCFNC64E01L117X</CodiceFiscale><PIvaSocieta><IdPaese>IT</IdPaese><IdCodice>04210780963</IdCodice></PIvaSocieta></TecnicoVerificatore><InformazioniAddizionali><RT><MatricolaRegistratoreDiCassa>EA99000102</MatricolaRegistratoreDiCassa></RT></InformazioniAddizionali><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/><ds:Reference URI=""><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>4D7HT2IDiC02SCAFZ6DSzrfadYT+iKCsdSLAScS+l+Y=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>fMucia5Zqv8ZxYrOVhiXmxoWVNR8UAq5cU2MjnswuZDLw8KBBgP1IqnmF7yEUY+NL98XvqVEVBzm
+HFGnJ8fau4jz2c6hdpwFapVxYfX0sgk5K4pxAurNiqK5L4WWlHpwUuS/0rq9IH1L/z7TbciV2Gtk
+7hcDKndrgOsglJ0+AHEOyxXdTf/fT4T0iW+B8JhlqwDc+7srXzdc53cdwji1OJjOe04OltKIbSv7
+j5hhmeovsUJ2eUhw+23XF2iPTrd1v7w4zvytfPW6fLtRKzc5VuJ9zd44f6gvXk8o8nait98VsCf1
+26X7Pvx3gsachaQOyehtkfDK5z7ZpWgtp2kvdg==</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIFBzCCAu+gAwIBAgIIQxu5v655UCAwDQYJKoZIhvcNAQELBQAwSjELMAkGA1UEBhMCSVQxDjAM
+BgNVBAoMBVNvZ2VpMSswKQYDVQQDDCJTb2dlaSBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eSBUZXN0
+MB4XDTE5MTEyMTE1MTQyOFoXDTIyMTEyMTE1MTQyOFowazELMAkGA1UEBhMCSVQxHjAcBgNVBAoM
+FUFnZW56aWEgZGVsbGUgRW50cmF0ZTEmMCQGA1UECwwdU2Vydml6aW8gQUUgQ29ycmlzcGV0dGl2
+aSBJVkExFDASBgNVBAMMCzcyTUFBMDAwMDAxMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+AQEAvnUEM0yj7F+7XDBXOloVMkIcB4yDvZZDmtuboGHtJ1WcV/GTFa6MyAL7KVvYOEOvd+wm+0+U
+39stckmN+xQXcoO+kd81TRAfU/E6z4JZ+fKdvruVsZX1OdY26dZNjW1p7Bl/lvk+Gw1Oyf5GLjwT
+iQsTIMwUjAjiGA+uUpcUAiK5QlKV6DNKK2YyvQKclIlRPrx8wjOvQUgVD9kmXq8fi+Y2W02SO0F3
+hus2TXM7nnNlesZYRSxw18DlYmCNxgHtXT64WuHEzuykZ59wpP4Tl2nfkJnHEG/nS1MIdPK7/tw6
+hvoHphj71LDQmz0n0QLYrVgfts32+QXEdmH8fDND7QIDAQABo4HPMIHMMB8GA1UdIwQYMBaAFMaW
+UxWzFxt5oxJm7crW9EFVNPEhMHoGA1UdHwRzMHEwb6BtoGuGaWxkYXA6Ly9jYWRzLmZpbmFuemUu
+aXQvQ049U29nZWklMjBDZXJ0aWZpY2F0aW9uJTIwQXV0aG9yaXR5JTIwVGVzdCxPPVNvZ2VpLEM9
+SVQ/Y2VydGlmaWNhdGVSZXZvY2F0aW9uTGlzdDAdBgNVHQ4EFgQURq1KffHojOooMXeCBkOYVFL/
+NhYwDgYDVR0PAQH/BAQDAgZAMA0GCSqGSIb3DQEBCwUAA4ICAQCL/g7O8pQb63Jf0In7R7zUm07V
+OVHv+TIZMtIqpBkLM/pcmgj3SxOMOMbe2GxB+lhDUsztBls8jDhS5KHzQlKMNi477eXRdzmT33xM
+HjyqrbWZwGWd5PnYWNJK8fcgzb1cQx2eogAiQUApgEWgpn8ndyvngzcQdcqGveJAzmc1ayaD++J5
+SOQ4Q+eciXtazvBxFw7381S9lj2wCvbrPWvVWz+GIWjsv5DY04M6l0BEGR2ODfQjtDkNiV58/uLJ
+nKzQ4N7qpYGF0Omcjd9AUZsFQuzR+UCQVh8MGUiGQtVukkkz+XpWOwDKslbcQNq3kXOYEPFkROTS
+3wczg7yZrIJCm0KNXvQnQX6DZi2pPijDMXg96D6s1SjE1qKjK9DtqgLyhOb6O3agf/XLW8sGZF0b
+iW29JduHF3+NeCMONhjY+/f7sBY9ko1LWqIMLnd7ITftsrDGQ4gtcmebnOtel5O6vQKp6/a7r/U2
+auzWLk07KOUOyUH5m9+eldUS2+W+Q2y9YXL81F1lhH79c28imePUP5CmY17n8eTmbkf0mkv2/J5R
+gsMS2nunKJdMH18C3yQfkAWRrwMXT/jdyXxHDXArhXyc9naZl7dzBfunxLZe/1bw1hd5rNB2gDWv
+XmpQQH1r48tIWn6+WNNkTS0Fz3Bx5mNHwEgRglKx8hvc2zft0A==</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></ns3:AttivaDispositivo>

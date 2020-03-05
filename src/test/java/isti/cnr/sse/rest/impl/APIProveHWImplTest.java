@@ -87,7 +87,7 @@ public class APIProveHWImplTest extends JerseyTest {
 	public void test() throws JAXBException, IOException, URISyntaxException {
 		
 		
-		//CreateError err = new CreateError();
+		CreateError err = new CreateError();
 		//err.Evento();
 		
 		//
@@ -95,7 +95,7 @@ public class APIProveHWImplTest extends JerseyTest {
 		//err.Corrispettivi();
 		//err.Lotteria();
 		//err.Lotteria();
-		//err.Censimento();
+		err.Censimento();
 		//err.Evento();
 		//err.Evento();
 		//err.Attivazione();
@@ -107,9 +107,9 @@ public class APIProveHWImplTest extends JerseyTest {
 	//String nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";//
 		String nameFilexml = "rt_lug_2020.xml";//
 
-		runTest(nameFilexml);
-		sendgetinfo();sendgetstop();
-		sendgetclear();
+		//runTest(nameFilexml);
+		//sendgetinfo();sendgetstop();
+		//sendgetclear();
 
 	/*	nameFilexml = "CC/c1.xml";
 		runTest(nameFilexml);
