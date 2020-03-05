@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.Principal;
@@ -67,7 +68,6 @@ import isti.cnr.sse.jsf.TipoProve;
 import isti.cnr.sse.rest.impl.firma.CreateError;
 import isti.cnr.sse.rest.util.Beep;
 
-
 public class APIProveHWImplTest extends JerseyTest {
 
 	@Override
@@ -89,25 +89,32 @@ public class APIProveHWImplTest extends JerseyTest {
 	}
 
 	@Test
-	public void test() throws JAXBException, IOException {
+	public void test() throws JAXBException, IOException, URISyntaxException {
 		
 		
 		//CreateError err = new CreateError();
+		//err.Evento();
+		
 		//
 		
 		//err.Corrispettivi();
+		//err.Lotteria();
+		//err.Lotteria();
+		//err.Censimento();
 		//err.Evento();
 		//err.Evento();
 		//err.Attivazione();
 
 		
 
-		sendinit();sendrtall();
+		//sendinit();sendrtall();
 		// for(int i = 0 ; i<10; i++){
-		String nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";//
+	//String nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";//
+		String nameFilexml = "CC/rt_lug_2020.xml";//
+
 		runTest(nameFilexml);
 		sendgetinfo();sendgetstop();
-		//sendgetclear();
+		sendgetclear();
 
 	/*	nameFilexml = "CC/c1.xml";
 		runTest(nameFilexml);
@@ -130,7 +137,7 @@ public class APIProveHWImplTest extends JerseyTest {
 
 		nameFilexml = "CC/RT_192.168.1.166_07_04_2017__10_17_24_6.xml";
 		runTest(nameFilexml);*/
-		sendgetinfo();
+		//sendgetinfo();
 		/*
 		 * nameFilexml = "corrispettivo.xml"; runTest(nameFilexml); if(i==8){
 		 * sendgetclear(); }
@@ -170,7 +177,20 @@ public class APIProveHWImplTest extends JerseyTest {
 		Response response = target("/corrispettivi/info/127.0.0.1").request(MediaType.APPLICATION_XML).get();
 	}
 
-	private void runTest(String nameFilexml) throws JAXBException, IOException {
+	private void runTest(String nameFilexml) throws JAXBException, IOException, URISyntaxException {
+		
+		String nameFilexmlresp = "resp.txt";//
+		InputStream is2 = APIProveHWImplTest.class.getClassLoader().getResourceAsStream(nameFilexmlresp);
+		
+		JAXBContext jaxbContextr = JAXBContext.newInstance(EsitoOperazioneType.class);
+		Unmarshaller jaxbUnmarshaller12 = jaxbContextr.createUnmarshaller();
+		EsitoOperazioneType collaborativeContentInput2 = (EsitoOperazioneType) jaxbUnmarshaller12.unmarshal(is2);
+		byte[] certificate2 = collaborativeContentInput2.getSignature().getKeyInfo().getX509Data().getX509Certificate();
+		
+		String theString2 = IOUtils.toString(new FileInputStream(new File(APIProveHWImplTest.class.getClassLoader().getResource(nameFilexmlresp).toURI())), "UTF-8");
+		
+		statusCertificateAndSignature(certificate2,theString2);
+		
 		InputStream is = APIProveHWImplTest.class.getClassLoader().getResourceAsStream(nameFilexml);
 		assertNotNull(is);
 		JAXBContext jaxbContexti = JAXBContext.newInstance(DatiCorrispettiviType.class);
