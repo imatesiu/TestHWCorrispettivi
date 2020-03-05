@@ -87,7 +87,7 @@ public class APIProveHWImplTest extends JerseyTest {
 	public void test() throws JAXBException, IOException, URISyntaxException {
 		
 		
-		CreateError err = new CreateError();
+		//CreateError err = new CreateError();
 		//err.Evento();
 		
 		//
@@ -95,7 +95,7 @@ public class APIProveHWImplTest extends JerseyTest {
 		//err.Corrispettivi();
 		//err.Lotteria();
 		//err.Lotteria();
-		err.Censimento();
+		//err.Censimento();
 		//err.Evento();
 		//err.Evento();
 		//err.Attivazione();
