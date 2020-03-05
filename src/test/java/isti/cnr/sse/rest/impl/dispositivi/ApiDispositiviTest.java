@@ -155,8 +155,8 @@ private void runTestCens(String nameFilexml) throws JAXBException, IOException, 
 		marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
 		marshaller.marshal( esito, System.out );
-		*/
-		assertNotNull(response);
+		
+		assertNotNull(response);*/
 	}
 
 }

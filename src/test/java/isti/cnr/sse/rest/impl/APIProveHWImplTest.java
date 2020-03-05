@@ -107,9 +107,9 @@ public class APIProveHWImplTest extends JerseyTest {
 	//String nameFilexml = "CC/RT_192.168.1.133_13_04_2017__15_54_46_16.xml";//
 		String nameFilexml = "rt_lug_2020.xml";//
 
-		//runTest(nameFilexml);
-		//sendgetinfo();sendgetstop();
-		//sendgetclear();
+		runTest(nameFilexml);
+		sendgetinfo();sendgetstop();
+		sendgetclear();
 
 	/*	nameFilexml = "CC/c1.xml";
 		runTest(nameFilexml);
