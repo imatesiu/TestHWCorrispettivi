@@ -65,6 +65,8 @@ import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
 import isti.cnr.sse.jsf.TipoProve;
 import isti.cnr.sse.rest.impl.firma.CreateError;
+import isti.cnr.sse.rest.util.Beep;
+
 
 public class APIProveHWImplTest extends JerseyTest {
 
