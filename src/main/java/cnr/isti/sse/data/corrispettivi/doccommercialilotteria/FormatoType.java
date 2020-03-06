@@ -6,51 +6,56 @@
 //
 
 
-package cnr.isti.data.corrispettivi.doccommercialilotteria;
+package cnr.isti.sse.data.corrispettivi.doccommercialilotteria;
 
 import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per TipologiaResoAnnulloType.
+ * <p>Classe Java per FormatoType.
  * 
  * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * <p>
  * <pre>
- * &lt;simpleType name="TipologiaResoAnnulloType">
+ * &lt;simpleType name="FormatoType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;length value="1"/>
- *     &lt;enumeration value="R"/>
- *     &lt;enumeration value="A"/>
+ *     &lt;length value="5"/>
+ *     &lt;enumeration value="DCL10"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
  * 
  */
-@XmlType(name = "TipologiaResoAnnulloType")
+@XmlType(name = "FormatoType")
 @XmlEnum
-public enum TipologiaResoAnnulloType {
+public enum FormatoType {
 
 
     /**
-     * Reso
+     * Documenti commerciali ai fini della lotteria
      * 
      */
-    R,
+    @XmlEnumValue("DCL10")
+    DCL_10("DCL10");
+    private final String value;
 
-    /**
-     * Annullo
-     * 
-     */
-    A;
-
-    public String value() {
-        return name();
+    FormatoType(String v) {
+        value = v;
     }
 
-    public static TipologiaResoAnnulloType fromValue(String v) {
-        return valueOf(v);
+    public String value() {
+        return value;
+    }
+
+    public static FormatoType fromValue(String v) {
+        for (FormatoType c: FormatoType.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
     }
 
 }

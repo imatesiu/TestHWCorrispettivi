@@ -28,12 +28,12 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.io.IOUtils;
 import org.glassfish.grizzly.utils.Pair;
 
-import cnr.isti.data.corrispettivi.doccommercialilotteria.DatiPagamentoType;
-import cnr.isti.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
-import cnr.isti.data.corrispettivi.doccommercialilotteria.DocumentoCommercialeType;
-import cnr.isti.data.corrispettivi.doccommercialilotteria.ResoAnnulloType;
-import cnr.isti.data.corrispettivi.doccommercialilotteria.VenditaType;
-import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.DocCommercialiLotteriaEsitoType;
+import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.DatiPagamentoType;
+import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
+import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.DocumentoCommercialeType;
+import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.ResoAnnulloType;
+import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.VenditaType;
+import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.messaggi.DocCommercialiLotteriaEsitoType;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;

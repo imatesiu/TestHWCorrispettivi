@@ -44,12 +44,12 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 
-import cnr.isti.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
-import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.DocCommercialiLotteriaEsitoType;
-import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.ErroreType;
-import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.EsitoType;
-import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.SegnalazioniDocCommType;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
+import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
+import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.messaggi.DocCommercialiLotteriaEsitoType;
+import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.messaggi.ErroreType;
+import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.messaggi.EsitoType;
+import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.messaggi.SegnalazioniDocCommType;
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.ErroriType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
@@ -599,7 +599,7 @@ String url = "dispositivi/";
 		EsitoType error = TEsitoOperazione.getEsito();
 		
 		if(TEsitoOperazione.getListaErrori()!=null) {
-			List<cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.ErroriType> list = TEsitoOperazione.getListaErrori();
+			List<cnr.isti.sse.data.corrispettivi.doccommercialilotteria.messaggi.ErroriType> list = TEsitoOperazione.getListaErrori();
 
 			if(list!=null) {
 				if(!list.isEmpty()) {

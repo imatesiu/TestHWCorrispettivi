@@ -1,4 +1,4 @@
-package cnr.isti.data.corrispettivi.doccommercialilotteria;
+package cnr.isti.sse.data.corrispettivi.doccommercialilotteria;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

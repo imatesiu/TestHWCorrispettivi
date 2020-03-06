@@ -48,9 +48,9 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import cnr.isti.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
-import cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi.DocCommercialiLotteriaEsitoType;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
+import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
+import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.messaggi.DocCommercialiLotteriaEsitoType;
 import cnr.isti.sse.data.corrispettivi.messaggi.EsitoOperazioneType;
 import isti.cnr.sse.rest.util.Beep;
 

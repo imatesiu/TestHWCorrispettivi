@@ -6,7 +6,7 @@
 //
 
 
-package cnr.isti.data.corrispettivi.doccommercialilotteria;
+package cnr.isti.sse.data.corrispettivi.doccommercialilotteria;
 
 import java.util.ArrayList;
 import java.util.List;

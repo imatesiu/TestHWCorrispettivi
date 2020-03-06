@@ -6,8 +6,10 @@
 //
 
 
-package cnr.isti.data.corrispettivi.doccommercialilotteria.messaggi;
+package cnr.isti.sse.data.corrispettivi.doccommercialilotteria.messaggi;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -18,17 +20,16 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * <p>Classe Java per ErroreType complex type.
+ * <p>Classe Java per ErroriType complex type.
  * 
  * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * 
  * <pre>
- * &lt;complexType name="ErroreType">
+ * &lt;complexType name="ErroriType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Codice" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/esito/v1.0}CodiceType"/>
- *         &lt;element name="Descrizione" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/esito/v1.0}String500LatinType"/>
+ *         &lt;element name="Errore" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/esito/v1.0}ErroreType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,26 +39,47 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ErroreType", propOrder = {
+@XmlType(name = "ErroriType", propOrder = {
+		"errore",
     "codice",
     "descrizione"
 })
-public class ErroreType {
+public class ErroriType {
 
+	
+	@XmlElement(name = "Errore")
+    protected List<ErroreType> errore;
+    
+    
     @XmlElement(name = "Codice", required = true)
     protected String codice;
+    
     @XmlElement(name = "Descrizione", required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     @XmlSchemaType(name = "normalizedString")
     protected String descrizione;
 
     /**
-     * Recupera il valore della proprietà codice.
+     * Gets the value of the errore property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the errore property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getErrore().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ErroreType }
+     * 
+     * 
      */
     public String getCodice() {
         return codice;
@@ -99,4 +121,17 @@ public class ErroreType {
         this.descrizione = value;
     }
 
+    
+    public List<ErroreType> getErrore() {
+        if (errore == null) {
+            errore = new ArrayList<ErroreType>();
+        }
+        return this.errore;
+    }
+
+	public void setErrore(List<ErroreType> errore) {
+		this.errore = errore;
+	}
+    
+    
 }

@@ -2,11 +2,11 @@
 // Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2019.11.02 alle 09:28:26 PM CET 
+// Generato il: 2019.11.02 alle 09:34:26 PM CET 
 //
 
 
-package cnr.isti.data.corrispettivi.doccommercialilotteria;
+package cnr.isti.sse.data.corrispettivi.doccommercialilotteria.messaggi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +17,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per VenditaType complex type.
+ * <p>Classe Java per SegnalazioniDocCommType complex type.
  * 
  * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * 
  * <pre>
- * &lt;complexType name="VenditaType">
+ * &lt;complexType name="SegnalazioniDocCommType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="DatiPagamento" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/v1.0}DatiPagamentoType" maxOccurs="3"/>
+ *         &lt;element name="Segnalazione" type="{http://ivaservizi.agenziaentrate.gov.it/docs/xsd/doccommercialilotteria/esito/v1.0}SegnalazioneType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,41 +36,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "VenditaType", propOrder = {
-    "datiPagamento"
+@XmlType(name = "SegnalazioniDocCommType", propOrder = {
+    "segnalazione"
 })
-public class VenditaType {
+public class SegnalazioniDocCommType {
 
-    @XmlElement(name = "DatiPagamento", required = true)
-    protected List<DatiPagamentoType> datiPagamento;
+    @XmlElement(name = "Segnalazione", required = true)
+    protected List<SegnalazioneType> segnalazione;
 
     /**
-     * Gets the value of the datiPagamento property.
+     * Gets the value of the segnalazione property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the datiPagamento property.
+     * This is why there is not a <CODE>set</CODE> method for the segnalazione property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDatiPagamento().add(newItem);
+     *    getSegnalazione().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link DatiPagamentoType }
+     * {@link SegnalazioneType }
      * 
      * 
      */
-    public List<DatiPagamentoType> getDatiPagamento() {
-        if (datiPagamento == null) {
-            datiPagamento = new ArrayList<DatiPagamentoType>();
+    public List<SegnalazioneType> getSegnalazione() {
+        if (segnalazione == null) {
+            segnalazione = new ArrayList<SegnalazioneType>();
         }
-        return this.datiPagamento;
+        return this.segnalazione;
     }
 
 }

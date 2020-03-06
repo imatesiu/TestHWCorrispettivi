@@ -9,8 +9,7 @@ Information   | Value
 Component     | Server Corrispettivi per Test HW RT
 Istitution    | ISTI-CNR
 Responsible   | Giorgio O. Spagnolo <spagnolo at isti.cnr.it>
-Status project| [![Build Status](https://travis-ci.org/imatesiu/TestHWCorrispettivi.svg?branch=2.4.2_C10)](https://github.com/imatesiu/TestHWCorrispettivi/) [![Coverage Status](https://coveralls.io/repos/github/imatesiu/TestHWCorrispettivi/badge.svg)](https://coveralls.io/github/imatesiu/TestHWCorrispettivi)
-
+Status project| [![Build Status](https://travis-ci.org/imatesiu/TestHWCorrispettivi.svg?branch=corrispettiviV7)](https://github.com/imatesiu/TestHWCorrispettivi/) [![Coverage Status](https://coveralls.io/repos/github/imatesiu/TestHWCorrispettivi/badge.svg?branch=corrispettiviV7)](https://coveralls.io/github/imatesiu/TestHWCorrispettivi?branch=corrispettiviV7)
 
 
 
