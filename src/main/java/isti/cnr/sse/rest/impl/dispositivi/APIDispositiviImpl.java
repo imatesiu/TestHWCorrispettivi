@@ -312,26 +312,8 @@ public class APIDispositiviImpl {
 		JAXBContext jaxbContext = JAXBContext.newInstance(AttivaDispositivoType.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		Utility.validateXmlMessaggi(unmarshaller);
-		if(!flag.equals(ErrorHttp.Null)){
-			try{
-				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
-				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-				
-				if(ErrorType!=9999) {
-					text = Utility.getResource(ErrorType);
-					
-				}			
-				
-					throw new WebApplicationException(Response.status(flag.getValue()).entity(text).build());
-
-			} catch (IOException e) {
-				e.printStackTrace();
-				log.error(e);
-			}
-			
-		}
 		
-		if(attivazione.length()==0){
+		if(attivazione.length()==0 | (!flag.equals(ErrorHttp.Null))){
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());

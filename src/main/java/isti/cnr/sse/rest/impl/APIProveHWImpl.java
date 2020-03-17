@@ -289,7 +289,7 @@ public class APIProveHWImpl {
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		Utility.validateXmlCorr(unmarshaller);	
 		
-		if(!flag.equals(ErrorHttp.Null)){
+		if(!flag.equals(ErrorHttp.Null) | (Corri.length()==0)){
 			try{
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
@@ -318,16 +318,7 @@ public class APIProveHWImpl {
 				log.error("codice errore sconosciuto");
 			}
 		}
-		if(Corri.length()==0){
-			try{
-				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
-				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
-				throw new WebApplicationException(Response.status(406).entity(text).build());
-			} catch (IOException e) {
-				e.printStackTrace();
-				log.error(e);
-			}
-		}
+		
 		try {
 			StringReader reader = new StringReader(Corri);
 			DatiCorrispettiviType Corrispettivi = (DatiCorrispettiviType) unmarshaller.unmarshal(reader);

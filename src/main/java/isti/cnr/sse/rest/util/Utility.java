@@ -70,6 +70,7 @@ import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.DatiRegistratoriTelematiciType;
 import cnr.isti.sse.data.corrispettivi.IVAType;
 import cnr.isti.sse.data.corrispettivi.NaturaType;
+import cnr.isti.sse.data.corrispettivi.TicketType;
 import cnr.isti.sse.data.corrispettivi.TotaliType;
 import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
 import cnr.isti.sse.data.corrispettivi.messaggi.AttivaDispositivoType;
@@ -548,8 +549,14 @@ public class Utility {
 				BigDecimal Tot = checkRiepilogo(Riepilogo);
 
 				BigDecimal sum = Totali.getPagatoContanti().add(Totali.getPagatoElettronico()).add(Totali.getScontoApagare());
+				TicketType ticks = Totali.getTicket();
+				if(ticks != null) {
+					sum = sum.add(ticks.getPagatoTicket());
+				}
 				if(Tot.compareTo(sum)!=0) {
 					log.error("Totali non congruenti");
+					log.error("Ho Calcolato "+Tot);
+					log.error("Ho Trovato: "+sum);
 				}
 
 			}
@@ -586,12 +593,17 @@ public class Utility {
 					.add(resi).add(annulli); 
 			
 			if(ammontare.compareTo(sum)!=0) {
+				if(ivat != null)
+					log.error("Per Iva"+ivat ) ;
+				if(naturat != null)
+					log.error("Per Natura"+naturat ) ;
 				log.error("Il valore nel campo Ammontare non Corretto");
 			}
 			
 			if(ivat!=null) {
-				BigDecimal aliq = ivat.getAliquotaIVA();
-				totale = totale.add(ammontare.multiply(aliq));
+				BigDecimal aliq = ivat.getAliquotaIVA().add(new BigDecimal(100));
+				BigDecimal totaleimperfetto = totale.add(ammontare.multiply(aliq).divide(new BigDecimal(100)));
+				totale = totaleimperfetto.setScale(2, RoundingMode.HALF_DOWN);
 			}else {
 				totale = totale.add(ammontare);
 			}
