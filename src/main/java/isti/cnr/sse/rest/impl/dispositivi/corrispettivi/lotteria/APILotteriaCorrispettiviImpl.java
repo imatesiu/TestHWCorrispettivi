@@ -141,6 +141,8 @@ public class APILotteriaCorrispettiviImpl {
 			String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss").format(now);
 			Pair<String, Boolean> pair = Utility.getMatricola(docLotteria, lotteria);
 			String ipAddress = pair.getFirst();
+			Utility.writeTo(lotteria, ipAddress+"_LOT", 0);
+
 			if (ipAddress == null) {
 				ipAddress = request.getHeader("X-FORWARDED-FOR");
 			}
@@ -183,7 +185,7 @@ public class APILotteriaCorrispettiviImpl {
 	
 	
 	private int checkDatiLotteria(int len, DocCommercialiLotteriaType docLotteria) {
-		
+		int error = 0;
 		if(docLotteria.getDocumentoCommerciale().size()>100 ){
 			log.error("Error "+ 300);
 
@@ -220,13 +222,13 @@ public class APILotteriaCorrispettiviImpl {
 				log.info("Somma Pagamenti Calcolata: "+totpagamenti);
 				if(ammontare.compareTo(totpagamenti)!=0){
 					log.error("Error "+ 308);
-					return 308;
+					error = 308;
 				}
 			}
 		}
 		
-		log.info("****END*****");
-		return 0;
+		log.info("****END-Sum##Lotteria*****");
+		return error;
 	}
 
 
