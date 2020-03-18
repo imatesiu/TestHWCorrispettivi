@@ -280,7 +280,7 @@
 	
 	<xs:complexType name="TotaliType">
 		<xs:sequence>
-			<xs:element name="NumeroDocCommerciali"   type="Integer15Type" 					 />
+			<xs:element name="NumeroDocCommerciali"   type="ProgressivoPrelievoType" 					 />
 			<xs:element name="PagatoContanti"		  type="Amount2DecimalType" minOccurs="0" />
 			<xs:element name="PagatoElettronico" 	  type="Amount2DecimalType" minOccurs="0" />
 			<xs:element name="ScontoApagare"		  type="Amount2DecimalType" minOccurs="0" />
