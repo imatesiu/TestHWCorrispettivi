@@ -346,13 +346,13 @@ public class APIProveHWImpl {
 
 			// is client behind something?
 			aggiornadiff(now, ipAddress, Corrispettivi.getTrasmissione().getProgressivo());
-			Utility.testInfoCorri(Corrispettivi);
+			
 			testProgressivo(Corrispettivi, ipAddress, map);
 
 			int num = aggiornaricevuti(ipAddress);
 			Utility.writeTo(Corri, ipAddress, num);
 			Utility.calc(Corrispettivi, ipAddress, map);
-
+			Utility.testInfoCorri(Corrispettivi);
 			EsitoOperazioneType esito = new EsitoOperazioneType();
 			esito.setIdOperazione(String.valueOf(num));
 			esito.setVersione("1.0");

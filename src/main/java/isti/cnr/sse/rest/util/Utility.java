@@ -560,6 +560,14 @@ public class Utility {
 					log.error("Ho Trovato: "+sum );
 				}
 
+				Integer numticket = ticks.getNumeroTicket();
+				BigDecimal pagatotic = ticks.getPagatoTicket();
+				if(numticket>0) {
+					if(pagatotic.compareTo(new BigDecimal(0))==0) {
+						log.error("Ticket Incongruenti ");
+					}
+				}
+				
 			}
 		}catch (Exception e) {
 			log.error(e);
