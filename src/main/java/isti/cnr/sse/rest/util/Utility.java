@@ -546,17 +546,18 @@ public class Utility {
 					return;
 				}
 				List<DatiRegistratoriTelematiciType> Riepilogo = corrispettivi.getDatiRT().getRiepilogo();
-				BigDecimal Tot = checkRiepilogo(Riepilogo);
-
+				Pair<BigDecimal, BigDecimal> pairTot = checkRiepilogo(Riepilogo);
+				BigDecimal Tot = pairTot.getFirst();
+				BigDecimal TotNC = pairTot.getSecond();
 				BigDecimal sum = Totali.getPagatoContanti().add(Totali.getPagatoElettronico()).add(Totali.getScontoApagare());
 				TicketType ticks = Totali.getTicket();
 				if(ticks != null) {
 					sum = sum.add(ticks.getPagatoTicket());
 				}
-				if(Tot.compareTo(sum)!=0) {
+				if(Tot.compareTo(sum.add(TotNC))!=0) {
 					log.error("Totali non congruenti");
-					log.error("Ho Calcolato "+Tot);
-					log.error("Ho Trovato: "+sum);
+					log.error("Ho Calcolato "+Tot+" di NC "+ TotNC);
+					log.error("Ho Trovato: "+sum );
 				}
 
 			}
@@ -567,9 +568,10 @@ public class Utility {
 	}
 
 
-	private static BigDecimal checkRiepilogo(List<DatiRegistratoriTelematiciType> riepilogo) {
+	private static Pair<BigDecimal,BigDecimal> checkRiepilogo(List<DatiRegistratoriTelematiciType> riepilogo) {
 		
 		BigDecimal totale = new BigDecimal(0);
+		BigDecimal totalenc = new BigDecimal(0);
 		
 		for (DatiRegistratoriTelematiciType datiRegistratoriTelematiciType : riepilogo) {
 			
@@ -592,6 +594,8 @@ public class Utility {
 					.add(nonriscoSSN).add(nonriscoFAT).add(nonriscoServ)
 					.add(resi).add(annulli); 
 			
+			BigDecimal nnric = beniinsonp.add(nonriscoSSN).add(nonriscoFAT).add(nonriscoServ).add(nonriscoOmg); 
+			
 			if(ammontare.compareTo(sum)!=0) {
 				if(ivat != null)
 					log.error("Per Iva"+ivat ) ;
@@ -603,14 +607,17 @@ public class Utility {
 			if(ivat!=null) {
 				BigDecimal aliq = ivat.getAliquotaIVA().add(new BigDecimal(100));
 				BigDecimal totaleimperfetto = totale.add(ammontare.multiply(aliq).divide(new BigDecimal(100)));
+				BigDecimal totalencimperfetto = totalenc.add(nnric.multiply(aliq).divide(new BigDecimal(100)));
 				totale = totaleimperfetto.setScale(2, RoundingMode.HALF_DOWN);
+				totalenc = totalencimperfetto.setScale(2, RoundingMode.HALF_DOWN);
 			}else {
 				totale = totale.add(ammontare);
+				totalenc = totalenc.add(nnric);
 			}
 
 		}
 		
-		return totale;
+		return new Pair<BigDecimal,BigDecimal>(totale,totalenc);
 	}
 
 	
