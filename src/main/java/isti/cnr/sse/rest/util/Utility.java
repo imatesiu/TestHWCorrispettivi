@@ -647,11 +647,13 @@ public class Utility {
 	}
 
 	public static boolean checkCA(DatiCorrispettiviType corrispettivi, String jks) {
+		boolean test = false;
+		try {
 		SignatureType segnature = corrispettivi.getSignature();
 		byte[] certbyte = segnature.getKeyInfo().getX509Data().getX509Certificate();
 		CertificateFactory fact;
-		boolean test = true;
-		try {
+		
+		
 			fact = CertificateFactory.getInstance("X.509");
 			X509Certificate certificate = (X509Certificate) fact
 					.generateCertificate(new ByteArrayInputStream(certbyte));
