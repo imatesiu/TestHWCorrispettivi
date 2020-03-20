@@ -18,6 +18,8 @@ import javax.inject.Named;
 @ManagedBean
 @ViewScoped
 public class GlassfishLogFile implements Serializable {
+	
+	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(GlassfishLogFile.class);
 
 	String data;
 
@@ -79,6 +81,7 @@ public class GlassfishLogFile implements Serializable {
 			// Open the file that is the first
 			// command line parameter
 			FileInputStream fstream = new FileInputStream(new File(this.path));
+			log.info("Stream Log: " + fstream != null ? "OK" : "KO" );
 			// Get the object of DataInputStream
 			in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
