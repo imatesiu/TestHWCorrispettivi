@@ -223,6 +223,16 @@ public class InterventoTecnicoType {
 	public void setDataRelease(XMLGregorianCalendar dataRelease) {
 		this.dataRelease = dataRelease;
 	}
+
+	@Override
+	public String toString() {
+		return (cfTecnico != null ? "CFTecnico: " + cfTecnico + ", " : "")
+				+ (idIVALaboratorio != null ? "IdIVALaboratorio: " + idIVALaboratorio + ", " : "")
+				+ (dataOra != null ? "DataOra: " + dataOra + ", " : "")
+				+ (codice != null ? "Codice: " + codice + ", " : "") + (note != null ? "Note: " + note + ", " : "")
+				+ (numeroSw != null ? "NumeroSw: " + numeroSw + ", " : "")
+				+ (dataRelease != null ? "dataRelease: " + dataRelease : "");
+	}
     
     
 

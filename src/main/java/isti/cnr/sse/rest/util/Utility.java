@@ -573,7 +573,10 @@ public class Utility {
 		}catch (Exception e) {
 			log.error(e);
 		}
-
+		log.info("");
+		log.info(corrispettivi.getPeriodoInattivo());
+		log.info(corrispettivi.getInterventoTecnico());
+		log.info("");
 	}
 
 
