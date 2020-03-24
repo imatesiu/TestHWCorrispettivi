@@ -69,7 +69,9 @@ import org.xml.sax.SAXException;
 import cnr.isti.sse.data.corrispettivi.DatiCorrispettiviType;
 import cnr.isti.sse.data.corrispettivi.DatiRegistratoriTelematiciType;
 import cnr.isti.sse.data.corrispettivi.IVAType;
+import cnr.isti.sse.data.corrispettivi.InterventoTecnicoType;
 import cnr.isti.sse.data.corrispettivi.NaturaType;
+import cnr.isti.sse.data.corrispettivi.PeriodoInattivoType;
 import cnr.isti.sse.data.corrispettivi.TicketType;
 import cnr.isti.sse.data.corrispettivi.TotaliType;
 import cnr.isti.sse.data.corrispettivi.doccommercialilotteria.DocCommercialiLotteriaType;
@@ -161,12 +163,25 @@ public class Utility {
 				BigDecimal ammResi = datiRegistratoriTelematici.getTotaleAmmontareResi();
 				if(ammResi.compareTo(new BigDecimal(0))!=0)
 					log.info("Ammontare Resi: "+ammResi);
+				
+				BigDecimal beniinsonp = datiRegistratoriTelematici.getBeniInSospeso();
+				BigDecimal nonriscoSSN = datiRegistratoriTelematici.getNonRiscossoDCRaSSN();
+				BigDecimal nonriscoFAT = datiRegistratoriTelematici.getNonRiscossoFatture();
+				BigDecimal nonriscoServ = datiRegistratoriTelematici.getNonRiscossoServizi();
 
 				BigDecimal ivaann = ammAnn.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
 				BigDecimal ivaresi= ammResi.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
+				
+				BigDecimal ivabeniinsonp= beniinsonp.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
+				BigDecimal ivanonriscoSSN = nonriscoSSN.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
+				BigDecimal ivanonriscoFAT= nonriscoFAT.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
+				BigDecimal ivanonriscoServ= nonriscoServ.multiply(iva.getAliquotaIVA()).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
 
+				
 				if(importoparziale==null | importoparziale.compareTo(new BigDecimal(0))==0)
-					impostaiva = impostaiva.subtract(ivaann).subtract(ivaresi);
+					impostaiva = impostaiva.subtract(ivaann).subtract(ivaresi)
+					.subtract(ivabeniinsonp).subtract(ivanonriscoSSN)
+					.subtract(ivanonriscoFAT).subtract(ivanonriscoServ);
 
 				if(!impostaiva.equals(iva.getImposta())){
 					log.error("imposta Errata!! per imponibile "+ammontare+" aliquota iva "+iva.getAliquotaIVA());	
@@ -573,10 +588,12 @@ public class Utility {
 		}catch (Exception e) {
 			log.error(e);
 		}
-		log.info("");
-		log.info(corrispettivi.getPeriodoInattivo());
-		log.info(corrispettivi.getInterventoTecnico());
-		log.info("");
+		PeriodoInattivoType pi = corrispettivi.getPeriodoInattivo();
+		if(pi!=null)
+			log.info(pi);
+		List<InterventoTecnicoType> it = corrispettivi.getInterventoTecnico();
+		if(!it.isEmpty())
+			log.info(it);
 	}
 
 

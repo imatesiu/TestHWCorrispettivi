@@ -94,4 +94,13 @@ public class IdFiscaleType {
         this.idCodice = value;
     }
 
+	@Override
+	public String toString() {
+		return (idPaese != null ? "idPaese: " + idPaese + ", " : "")
+				+ (idCodice != null ? "idCodice: " + idCodice : "");
+	}
+
+    
+    
+    
 }
