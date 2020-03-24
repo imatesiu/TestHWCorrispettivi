@@ -553,20 +553,21 @@ public class Utility {
 				TicketType ticks = Totali.getTicket();
 				if(ticks != null) {
 					sum = sum.add(ticks.getPagatoTicket());
+					Integer numticket = ticks.getNumeroTicket();
+					BigDecimal pagatotic = ticks.getPagatoTicket();
+					if(numticket>0) {
+						if(pagatotic.compareTo(new BigDecimal(0))==0) {
+							log.error("Ticket Incongruenti ");
+						}
+					}
 				}
 				if(Tot.compareTo(sum.add(TotNC))!=0) {
 					log.error("Totali non congruenti");
 					log.error("Ho Calcolato "+Tot+" di NC "+ TotNC);
 					log.error("Ho Trovato: "+sum );
 				}
-
-				Integer numticket = ticks.getNumeroTicket();
-				BigDecimal pagatotic = ticks.getPagatoTicket();
-				if(numticket>0) {
-					if(pagatotic.compareTo(new BigDecimal(0))==0) {
-						log.error("Ticket Incongruenti ");
-					}
-				}
+				
+				
 				
 			}
 		}catch (Exception e) {
