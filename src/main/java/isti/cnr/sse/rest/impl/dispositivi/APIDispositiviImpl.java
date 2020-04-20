@@ -460,10 +460,15 @@ public class APIDispositiviImpl {
 
 	            String com_name_csr = IETFUtils.valueToString(cn.getFirst().getValue());
 	            log.info("CENSITO SUBJECT  : " + com_name_csr);
-
-
-	            String org = IETFUtils.valueToString(subject.getRDNs(BCStyle.O)[0].getFirst().getValue());
+	            String org = "Sconosciuto";
+	            try {
+	             org = IETFUtils.valueToString(subject.getRDNs(BCStyle.O)[0].getFirst().getValue());
 	            log.info("CENSITO ORG  : " + org);
+	            
+	            }catch(ArrayIndexOutOfBoundsException e) {
+	            	log.error("Impossibile estrarre ORG da CSR");
+	            	log.info("CENSITO ORG  : " + org);
+	            }
 	            
 	            X509v3CertificateBuilder certificateGenerator = new X509v3CertificateBuilder(
 	                    issuer,
