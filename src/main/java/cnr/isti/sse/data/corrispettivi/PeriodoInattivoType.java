@@ -102,4 +102,9 @@ public class PeriodoInattivoType {
         this.al = value;
     }
 
+	@Override
+	public String toString() {
+		return (dal != null ? "dal: " + dal + ", " : "") + (al != null ? "al: " + al : "");
+	}
+    
 }
