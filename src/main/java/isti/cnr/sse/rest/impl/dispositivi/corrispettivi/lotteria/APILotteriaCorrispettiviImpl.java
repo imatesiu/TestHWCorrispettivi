@@ -218,6 +218,8 @@ public class APILotteriaCorrispettiviImpl {
 				BigDecimal totpagamenti = new BigDecimal(0);
 				for(DatiPagamentoType pagamenti : vendita.getDatiPagamento()){
 					totpagamenti = totpagamenti.add(pagamenti.getImporto());
+					log.info("Tipo: "+pagamenti.getTipo());
+					log.info("Importo: "+pagamenti.getImporto());
 				}
 				log.info("Somma Pagamenti Calcolata: "+totpagamenti);
 				if(ammontare.compareTo(totpagamenti)!=0){
