@@ -203,6 +203,7 @@ public class Utility {
 				}
 				
 			}else{
+				log.info(datiRegistratoriTelematici);
 				if(ammontare.compareTo(new BigDecimal(0))!=0)
 					if(map.containsKey(key)){
 						RT rt = map.get(key);
