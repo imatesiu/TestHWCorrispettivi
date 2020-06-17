@@ -45,14 +45,14 @@ public enum NaturaType {
      * 
      */
     @XmlEnumValue("N1")
-    N_1("N1"),
+    N1("N1"),
 
     /**
      * Non soggette
      * 
      */
     @XmlEnumValue("N2")
-    N_2("N2"),
+    N2("N2"),
 
     /**
      * 
@@ -61,7 +61,7 @@ public enum NaturaType {
      * 
      */
     @XmlEnumValue("N2a")
-    N_2_A("N2a"),
+    N2A("N2a"),
 
     /**
      * 
@@ -70,7 +70,7 @@ public enum NaturaType {
      * 
      */
     @XmlEnumValue("N2b")
-    N_2_B("N2b"),
+    N2B("N2b"),
 
     /**
      * Non soggette ex art. 74 DPR 633/72
@@ -78,28 +78,28 @@ public enum NaturaType {
      * 
      */
     @XmlEnumValue("N2c")
-    N_2_C("N2c"),
+    N2C("N2c"),
 
     /**
      * Non imponibili
      * 
      */
     @XmlEnumValue("N3")
-    N_3("N3"),
+    N3("N3"),
 
     /**
      * Esenti
      * 
      */
     @XmlEnumValue("N4")
-    N_4("N4"),
+    N4("N4"),
 
     /**
      * Regime del margine
      * 
      */
     @XmlEnumValue("N5")
-    N_5("N5"),
+    N5("N5"),
 
     /**
      * Inversione contabile (reverse charge)
@@ -107,7 +107,7 @@ public enum NaturaType {
      * 
      */
     @XmlEnumValue("N6")
-    N_6("N6");
+    N6("N6");
     private final String value;
 
     NaturaType(String v) {
