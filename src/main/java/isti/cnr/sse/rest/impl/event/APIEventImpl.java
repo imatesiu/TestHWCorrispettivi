@@ -103,6 +103,7 @@ public class APIEventImpl {
 			if (ipAddress == null) {
 				ipAddress = request.getRemoteAddr();
 			}
+			Utility.writeTo(event, ipAddress, 0);
 			log.info("received form: " + ipAddress + " " + timeStamp);
 			DettaglioEventoDispositivoType dettaglio = EventoDispositivo.getDettaglio();
 			log.info("Evento Codice: " +dettaglio.getCodice());

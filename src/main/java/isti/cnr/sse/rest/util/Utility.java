@@ -120,11 +120,11 @@ public class Utility {
 		put("04086780618","3I Reatail Solutions");
 		put("02298700010","Olivetti SpA");
 		put("02168560288","4P srl");
-		put("00857400287","VDS spa");
+		put("00857400287","VDS spa/srl");
 		put("01424730438","LABWARE SpA");
 		put("06383500961","K.S. SRL");
 		put("08656790964","VANDONI tech");
-		put("00000000000","MARKETINO S.R.L.");
+		put("01873110934","MARKETINO S.R.L.");
 	}};
 	
 	public static void calc(DatiCorrispettiviType corrispettivi, String key, Map<String, RT> map) {
