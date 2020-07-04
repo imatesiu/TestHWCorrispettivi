@@ -15,6 +15,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -31,6 +33,7 @@ import cnr.isti.sse.data.corrispettivi.messaggi.EventoDispositivoType;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import isti.cnr.sse.jsf.SendRest;
 import isti.cnr.sse.rest.impl.APIProveHWImpl;
 import isti.cnr.sse.rest.impl.error.ErrorHttp;
 import isti.cnr.sse.rest.util.Utility;
@@ -110,7 +113,14 @@ public class APIEventImpl {
 			log.info("Evento Descrizione: " +dettaglio.getDescrizione());
 			log.info("Evento: " +EventoDispositivo.getEvento());
 			log.info("************************************");
-
+			if(dettaglio.getCodice()=="603" | dettaglio.getCodice()=="604") {
+			Pair<String, Integer> res = sendAdE_event(event, ipAddress);
+			String responseAsString = res.getFirst();
+			Integer status = res.getSecond();
+			throw new WebApplicationException(Response.status(status).entity(responseAsString).build());
+			//return Response.status(status).entity(responseAsString).build();
+			}
+			
 			if(pair.getSecond()){
 				InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.xml");
 				String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
@@ -163,6 +173,48 @@ public class APIEventImpl {
 			return "<html><body>OK, "+flag+"</body></html>";
 		
 
+	}
+	
+	private Pair<String,Integer> sendAdE_event(String stringa, String ipAddress) {
+		try {
+			Integer Status = new Integer(200);
+			Client client = ClientBuilder.newClient();
+			String url = "https://v-apid-ivaservizi.agenziaentrate.gov.it";
+			SendRest r = new SendRest();
+			
+			Response response = r.SendPut(url, "/v1/dispositivi/evento/",  stringa);
+				
+
+			
+			Status = response.getStatus();
+
+			String responseAsString = response.readEntity(String.class);
+			if(responseAsString==null) {
+					responseAsString = String.valueOf(response.getStatus());
+					
+			}
+			if(responseAsString.length()==0) {
+				responseAsString = String.valueOf(response.getStatus());
+			}
+			Utility.writeTo(responseAsString, "Resp_"+ipAddress+"_ADE", 0);
+			return new Pair<String, Integer>(responseAsString,Status);
+			/*response.setStatus(response.SC_MOVED_TEMPORARILY);
+			response.setHeader("Location", url);
+			response.sendRedirect(url);*/
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error(e);
+		}
+		/*try{
+			InputStream is = APIProveHWImpl.class.getClassLoader().getResourceAsStream("response.err.tracciato.xml");
+			String text = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+			throw new WebApplicationException(Response.status(406).entity(text).build());
+		} catch (IOException e) {
+			e.printStackTrace();
+			log.error(e);
+		}*/
+		return null;
 	}
 	
 	
