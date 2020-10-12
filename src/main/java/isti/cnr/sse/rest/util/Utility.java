@@ -565,10 +565,10 @@ public class Utility {
 				Pair<BigDecimal, BigDecimal> pairTot = checkRiepilogo(Riepilogo);
 				BigDecimal Tot = pairTot.getFirst();
 				BigDecimal TotNC = pairTot.getSecond();
-				BigDecimal sum = Totali.getPagatoContanti().add(Totali.getPagatoElettronico()).add(Totali.getScontoApagare());
+				BigDecimal sumPag = Totali.getPagatoContanti().add(Totali.getPagatoElettronico()).add(Totali.getScontoApagare());
 				TicketType ticks = Totali.getTicket();
 				if(ticks != null) {
-					sum = sum.add(ticks.getPagatoTicket());
+					sumPag = sumPag.add(ticks.getPagatoTicket());
 					Integer numticket = ticks.getNumeroTicket();
 					BigDecimal pagatotic = ticks.getPagatoTicket();
 					if(numticket>0) {
@@ -577,9 +577,10 @@ public class Utility {
 						}
 					}
 				}
-				if(Tot.compareTo(sum.add(TotNC))!=0) {
+				BigDecimal sum = sumPag.add(TotNC);
+				if(Tot.compareTo(sum)!=0) {
 					log.error("Totali non congruenti");
-					log.error("Ho Calcolato "+Tot+" di NC "+ TotNC);
+					log.error("Ho Calcolato "+Tot+" di NC "+ TotNC + "di pagato:"+ sumPag);
 					log.error("Ho Trovato: "+sum );
 				}
 				
@@ -632,6 +633,8 @@ public class Utility {
 				if(naturat != null)
 					log.error("Per Natura"+naturat ) ;
 				log.error("Il valore nel campo Ammontare non Corretto");
+				log.error("Il valore Ammontare: "+ammontare);
+				log.error("Il valore Somma Ammontare: "+sum);
 			}
 			
 			if(ivat!=null) {
